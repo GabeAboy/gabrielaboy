@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Transactions · StackFlow</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand-mark">
+      <div class="brand-glyph">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 17l5-5 5 5 6-8"/></svg>
+      </div>
+      <div class="brand-name">StackFlow</div>
+    </div>
+    <div class="nav-section">Overview</div>
+    <nav class="nav">
+      <a href="dashboard.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Dashboard</a>
+      <a href="accounts.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/></svg>Accounts</a>
+      <a href="transactions.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 17l10-10"/><path d="M17 10V7h-3"/><path d="M7 14v3h3"/></svg>Transactions</a>
+    </nav>
+    <div class="nav-section">Plan</div>
+    <nav class="nav">
+      <a href="buckets.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16l-1.5 12a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>Buckets<span class="nav-badge">8</span></a>
+      <a href="automations.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2L4.5 13.5h6L11 22l8.5-11.5h-6L13 2z"/></svg>Automations<span class="nav-badge">5</span></a>
+      <a href="calendar.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4M16 3v4"/></svg>Calendar</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="user-card" href="profile.html">
+        <div class="avatar">AM</div>
+        <div class="user-meta"><div class="user-name">Alex Morgan</div><div class="user-plan">Pro plan</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="color: var(--text-3)"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <div>
+    <header class="topbar">
+      <div class="crumbs"><span>Home</span><span>›</span><strong>Transactions</strong></div>
+      <div class="search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        Search transactions…
+        <kbd>⌘K</kbd>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></button>
+        <button class="btn btn-secondary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Export</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Transactions</div>
+          <div class="page-sub">Every move across all 6 accounts</div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="card flush mb-16">
+        <div class="card-section row gap-12 wrap">
+          <div class="chip-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg>
+            May 1–15
+          </div>
+          <div class="chip-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="2"/></svg>
+            All accounts
+          </div>
+          <div class="chip-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+            All categories
+          </div>
+          <div class="chip-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Add filter
+          </div>
+          <div style="margin-left: auto;" class="row gap-8 center">
+            <span class="caption">Show:</span>
+            <div class="tab-row" style="margin-bottom: 0; border: 1px solid var(--border); border-radius: var(--r-sm); padding: 2px;">
+              <div class="tab active" style="padding: 4px 10px; border-bottom: 0; background: var(--surface); font-size: 12px;">All</div>
+              <div class="tab" style="padding: 4px 10px; border-bottom: 0; font-size: 12px;">Income</div>
+              <div class="tab" style="padding: 4px 10px; border-bottom: 0; font-size: 12px;">Direct deposits</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary cards -->
+      <div class="grid cols-4 mb-24">
+        <div class="card">
+          <div class="eyebrow">In</div>
+          <div class="stat-value pos">$4,200</div>
+          <div class="caption" style="margin-top: 4px;">1 deposit</div>
+        </div>
+        <div class="card">
+          <div class="eyebrow">Out</div>
+          <div class="stat-value neg">$2,164</div>
+          <div class="caption" style="margin-top: 4px;">14 transactions</div>
+        </div>
+        <div class="card">
+          <div class="eyebrow">Net</div>
+          <div class="stat-value">$2,036</div>
+          <div class="stat-delta pos">↑ 8% vs prev. period</div>
+        </div>
+        <div class="card">
+          <div class="eyebrow">Auto-allocated</div>
+          <div class="stat-value">$1,660</div>
+          <div class="caption" style="margin-top: 4px;">via 3 rules</div>
+        </div>
+      </div>
+
+      <!-- Transactions table -->
+      <div class="card flush">
+
+        <!-- Today -->
+        <div class="card-section" style="background: var(--surface-2); padding: 10px 20px;">
+          <div class="row between">
+            <div class="eyebrow">Today · May 15</div>
+            <div class="caption">3 transactions</div>
+          </div>
+        </div>
+
+        <div class="event-row">
+          <div class="event-icon" style="background: var(--surface-3); color: var(--text);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12h6"/></svg>
+          </div>
+          <div class="event-meta">
+            <div class="event-title">Whole Foods Market</div>
+            <div class="event-sub row gap-6 center">
+              <span>Chase Checking · ··· 4218</span>
+              <span class="dot-sep">·</span>
+              <span>Groceries</span>
+              <span class="dot-sep">·</span>
+              <span class="brand">→ +$0.58 to Vacation</span>
+            </div>
+          </div>
+          <div class="event-amount neg">−$67.42</div>
+        </div>
+
+        <div class="event-row">
+          <div class="event-icon" style="background: var(--info-soft); color: var(--info);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4.5 13.5h6L11 22l8.5-11.5h-6L13 2z"/></svg>
+          </div>
+          <div class="event-meta">
+            <div class="event-title row gap-6 center">
+              <span>Transfer to Emergency fund</span>
+              <span class="chip info" style="font-size: 10px;">automation</span>
+            </div>
+            <div class="event-sub">Chase Checking → Ally Savings · Auto-sweep rule · 9:00 AM</div>
+          </div>
+          <div class="event-amount">$200.00</div>
+        </div>
+
+        <div class="event-row">
+          <div class="event-icon" style="background: var(--positive-soft); color: var(--positive);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 14l5-5 5 5"/></svg>
+          </div>
+          <div class="event-meta">
+            <div class="event-title row gap-6 center">
+              <span>ACME Co. Payroll</span>
+              <span class="chip pos" style="font-size: 10px;">direct deposit</span>
+            </div>
+            <div class="event-sub">Chase Checking · 3 automations fired · routed $1,660 to savings</div>
+          </div>
+          <div class="event-amount pos">+$4,200.00</div>
+        </div>
+
+        <!-- Yesterday -->
+        <div class="card-section" style="background: var(--surface-2); padding: 10px 20px;">
+          <div class="row between">
+            <div class="eyebrow">Yesterday · May 14</div>
+            <div class="caption">2 transactions</div>
+          </div>
+        </div>
+
+        <div class="event-row">
+          <div class="event-icon" style="background: var(--surface-3); color: var(--text);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/></svg>
+          </div>
+          <div class="event-meta">
+            <div class="event-title">Shell Gas Station</div>
+            <div class="event-sub">Chase Checking · Auto & transport · → +$0.65 to Vacation</div>
+          </div>
+          <div class="event-amount neg">−$48.35</div>
+        </div>
+
+        <div class="event-row">
+          <div class="event-icon" style="background: var(--surface-3); color: var(--text);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <div class="event-meta">
+            <div class="event-title">Spotify</div>
+            <div class="event-sub">Amex Blue Cash · Subscription · monthly</div>
+          </div>
+          <div class="event-amount neg">−$11.99</div>
+        </div>
+
+        <!-- May 12 -->
+        <div class="card-section" style="background: var(--surface-2); padding: 10px 20px;">
+          <div class="row between">
+            <div class="eyebrow">Tuesday · May 12</div>
+            <div class="caption">4 transactions</div>
+          </div>
+        </div>
+
+        <div class="event-row">
+          <div class="event-icon" style="background: var(--surface-3); color: var(--text);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14M5 12h14M5 16h10"/></svg>
+          </div>
+          <div class="event-meta">
+            <div class="event-title">Trader Joe's</div>
+            <div class="event-sub">Chase Checking · Groceries</div>
+          </div>
+          <div class="event-amount neg">−$53.18</div>
+        </div>
+
+        <div class="event-row">
+          <div class="event-icon" style="background: var(--surface-3); color: var(--text);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12h6"/></svg>
+          </div>
+          <div class="event-meta">
+            <div class="event-title">Blue Bottle Coffee</div>
+            <div class="event-sub">Amex Blue Cash · Food & drink · → +$0.45 to Vacation</div>
+          </div>
+          <div class="event-amount neg">−$6.55</div>
+        </div>
+
+        <div class="event-row">
+          <div class="event-icon" style="background: var(--surface-3); color: var(--text);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+          </div>
+          <div class="event-meta">
+            <div class="event-title">Amazon</div>
+            <div class="event-sub">Amex Blue Cash · Shopping</div>
+          </div>
+          <div class="event-amount neg">−$84.99</div>
+        </div>
+
+        <div class="event-row">
+          <div class="event-icon" style="background: var(--surface-3); color: var(--text);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </div>
+          <div class="event-meta">
+            <div class="event-title">Uber</div>
+            <div class="event-sub">Amex Blue Cash · Auto & transport</div>
+          </div>
+          <div class="event-amount neg">−$18.40</div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="card-section row between">
+          <div class="caption">Showing 1–10 of 124</div>
+          <div class="row gap-8">
+            <button class="btn btn-secondary btn-sm">Previous</button>
+            <button class="btn btn-secondary btn-sm">Next</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+</div>
+</body>
+</html>

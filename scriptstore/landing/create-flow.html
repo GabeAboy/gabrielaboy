@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Publish a script · I Need A Script</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:          #ffffff;
+      --bg-alt:      #fafafa;
+      --bg-soft:     #f4f4f6;
+      --ink:         #1f1e24;
+      --ink-2:       #2f2e33;
+      --body:        #4b4a55;
+      --muted:       #898792;
+      --line:        #e5e5ea;
+      --line-strong: #c3c3cb;
+      --orange:      #fc6d26;
+      --orange-2:    #e24329;
+      --orange-deep: #c93a14;
+      --orange-soft: #fff1ea;
+      --purple:      #6b4fbb;
+      --purple-soft: #f0eaff;
+      --green:       #1aaa55;
+      --green-soft:  #e7f8ee;
+      --code-bg:     #1c1a23;
+      --code-fg:     #e6e3ec;
+      --code-kw:     #ff8c5a;
+      --code-str:    #9ae6b4;
+      --code-com:    #6c6878;
+      --code-fn:     #b4a7ff;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg-alt);
+      color: var(--ink);
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      font-size: 14px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+
+    /* ===== NAV ===== */
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 28px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
+    .brand-mark {
+      width: 24px; height: 24px;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%);
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 700; font-size: 11px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .nav-right { display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: var(--body); }
+    .nav-right .draft-pill {
+      padding: 4px 10px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; color: var(--muted);
+    }
+    .nav-right .draft-pill .dot {
+      display: inline-block; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--muted);
+      margin-right: 5px; vertical-align: 1px;
+    }
+    .nav-publish {
+      padding: 7px 16px;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%);
+      color: white; border-radius: 6px;
+      font-weight: 500; font-size: 13px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05), 0 2px 4px rgba(252,109,38,0.25);
+    }
+    .nav-cancel {
+      padding: 7px 14px;
+      background: white;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      color: var(--body); font-size: 13px;
+    }
+
+    /* ===== STEPPER ===== */
+    .stepper {
+      display: flex; align-items: center; justify-content: center;
+      gap: 24px; flex-wrap: wrap;
+      padding: 22px 28px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .step {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: var(--muted);
+    }
+    .step .num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--bg-soft); color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
+      border: 1px solid var(--line);
+    }
+    .step.done .num {
+      background: var(--green); color: white; border-color: var(--green);
+    }
+    .step.done { color: var(--ink-2); }
+    .step.on .num {
+      background: var(--ink); color: white; border-color: var(--ink);
+    }
+    .step.on { color: var(--ink); font-weight: 500; }
+    .step-sep {
+      width: 36px; height: 1px;
+      background: var(--line);
+    }
+    @media (max-width: 720px) {
+      .step-sep { display: none; }
+      .stepper { gap: 12px; padding: 18px; }
+    }
+
+    /* ===== LAYOUT ===== */
+    .shell {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 0;
+      max-width: 1280px; margin: 0 auto;
+    }
+    @media (max-width: 980px) { .shell { grid-template-columns: 1fr; } }
+
+    .form-col {
+      padding: 32px 36px;
+      background: var(--bg);
+      border-right: 1px solid var(--line);
+      min-height: calc(100vh - 117px);
+    }
+    .preview-col {
+      padding: 32px 32px;
+      background: var(--bg-alt);
+      min-height: calc(100vh - 117px);
+    }
+    @media (max-width: 980px) {
+      .form-col { border-right: 0; border-bottom: 1px solid var(--line); }
+      .form-col, .preview-col { min-height: auto; padding: 28px 22px; }
+    }
+
+    .form-title {
+      font-size: 20px; font-weight: 600; letter-spacing: -0.014em;
+      margin: 0 0 4px;
+    }
+    .form-sub {
+      font-size: 13.5px; color: var(--muted);
+      margin: 0 0 28px;
+    }
+
+    .field { margin-bottom: 22px; }
+    .field-label {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; font-weight: 500; color: var(--ink-2);
+      letter-spacing: 0.01em;
+      margin-bottom: 8px;
+    }
+    .field-label .req {
+      color: var(--orange-2); font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    }
+    .field-label .helper {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px; color: var(--muted);
+    }
+    .input, .textarea, .select {
+      width: 100%;
+      padding: 10px 12px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .input:focus, .textarea:focus, .select:focus {
+      outline: none; border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(252,109,38,0.12);
+    }
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .input-row { grid-template-columns: 1fr; } }
+    .textarea { min-height: 84px; resize: vertical; font-family: 'IBM Plex Sans', sans-serif; }
+    .input-help {
+      font-size: 11.5px; color: var(--muted);
+      margin-top: 6px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* tags */
+    .tag-input {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      padding: 7px 10px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      min-height: 42px;
+      align-items: center;
+    }
+    .tag-input .tg {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 4px 3px 9px;
+      background: var(--bg-soft);
+      border-radius: 100px;
+      font-size: 12px; color: var(--ink-2);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .tag-input .tg .x {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--line-strong);
+      color: white;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 9px; line-height: 1;
+    }
+    .tag-input .tg-input {
+      border: 0; outline: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--body);
+      background: transparent;
+      flex: 1; min-width: 80px;
+    }
+
+    /* code editor */
+    .editor {
+      background: var(--code-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--code-bg);
+    }
+    .editor-chrome {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px;
+      background: #2a2731;
+      border-bottom: 1px solid #3a3741;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px; color: #948f9e;
+    }
+    .editor-chrome .file { color: var(--code-fg); }
+    .editor-chrome .dots { display: flex; gap: 5px; }
+    .editor-chrome .dots span { width: 10px; height: 10px; border-radius: 50%; background: #46424e; }
+    .editor-body {
+      display: grid; grid-template-columns: 36px 1fr;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12.5px; line-height: 1.7;
+      color: var(--code-fg);
+      padding: 12px 0;
+    }
+    .gutter {
+      color: #57525f; text-align: right;
+      padding-right: 12px;
+      user-select: none;
+    }
+    .gutter div { height: 1.7em; }
+    .code { padding-right: 16px; overflow-x: auto; white-space: pre; }
+    .kw  { color: var(--code-kw); }
+    .str { color: var(--code-str); }
+    .com { color: var(--code-com); font-style: italic; }
+    .fn  { color: var(--code-fn); }
+
+    /* preview pane */
+    .preview-h {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 14px;
+    }
+    .preview-h .lbl {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .preview-h .live {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; color: var(--green);
+    }
+    .preview-h .live .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 3px rgba(26,170,85,0.18);
+    }
+
+    .preview-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 20px 22px;
+      box-shadow: 0 4px 12px -6px rgba(31,30,36,0.08);
+    }
+    .pc-head {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 6px;
+    }
+    .pc-lang {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
+      padding: 2px 7px; border-radius: 4px;
+      background: var(--bg-soft); color: var(--ink);
+      text-transform: uppercase;
+    }
+    .pc-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; color: var(--muted);
+    }
+    .pc-title { font-size: 16px; font-weight: 500; margin: 8px 0 4px; }
+    .pc-desc { font-size: 13px; color: var(--body); line-height: 1.5; margin-bottom: 14px; }
+    .pc-install {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 9px 11px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px; color: var(--ink-2);
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 14px;
+    }
+    .pc-install .copy {
+      padding: 2px 8px; border: 1px solid var(--line);
+      background: white; border-radius: 4px;
+      color: var(--muted); font-size: 10.5px;
+    }
+    .pc-tags {
+      display: flex; flex-wrap: wrap; gap: 5px;
+      margin-bottom: 14px;
+    }
+    .pc-tags .t {
+      padding: 3px 9px;
+      background: var(--bg-soft);
+      border-radius: 100px;
+      font-size: 11px; color: var(--body);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .pc-foot {
+      display: flex; justify-content: space-between;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; color: var(--muted);
+    }
+    .pc-foot .author strong { color: var(--ink-2); font-weight: 500; }
+
+    /* checks panel */
+    .checks {
+      margin-top: 22px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+    .checks-h {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+    .checks ul { list-style: none; padding: 0; margin: 0; }
+    .checks li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: var(--body);
+      padding: 6px 0;
+    }
+    .checks li .ic {
+      width: 16px; height: 16px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .checks li.pass .ic { background: var(--green-soft); color: var(--green); }
+    .checks li.pass .ic::before { content: "✓"; }
+    .checks li.pending .ic { background: var(--bg-soft); color: var(--muted); border: 1px dashed var(--line-strong); }
+    .checks li.pending .ic::before { content: "·"; }
+    .checks li .det {
+      margin-left: auto;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="brand">
+      <div class="brand-mark">{}</div>
+      I Need A Script
+    </div>
+    <div class="nav-right">
+      <span class="draft-pill"><span class="dot"></span>Draft · autosaved 14s ago</span>
+      <a href="#" class="nav-cancel">Cancel</a>
+      <a href="#" class="nav-publish">Publish</a>
+    </div>
+  </header>
+
+  <div class="stepper">
+    <div class="step done"><div class="num">1</div> Details</div>
+    <div class="step-sep"></div>
+    <div class="step on"><div class="num">2</div> Source</div>
+    <div class="step-sep"></div>
+    <div class="step"><div class="num">3</div> Tags & license</div>
+    <div class="step-sep"></div>
+    <div class="step"><div class="num">4</div> Review</div>
+  </div>
+
+  <div class="shell">
+
+    <section class="form-col">
+      <h1 class="form-title">Publish a new script</h1>
+      <p class="form-sub">Free, public, MIT by default. Everything below is editable after publishing.</p>
+
+      <div class="field">
+        <div class="field-label">
+          <span>Slug <span class="req">*</span></span>
+          <span class="helper">kebab-case · 3–48 chars</span>
+        </div>
+        <input class="input mono" type="text" value="git-stash-diff" />
+        <div class="input-help">→ ins install <span style="color: var(--ink-2)">git-stash-diff</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">
+          <span>Title <span class="req">*</span></span>
+          <span class="helper">38 / 80</span>
+        </div>
+        <input class="input" type="text" value="git-stash-diff — preview a stash without applying it" />
+      </div>
+
+      <div class="field">
+        <div class="field-label">
+          <span>One-line description <span class="req">*</span></span>
+          <span class="helper">112 / 160</span>
+        </div>
+        <textarea class="textarea">Color-diffs any stash against current HEAD without touching the working tree — useful when you forgot what you stashed.</textarea>
+      </div>
+
+      <div class="input-row">
+        <div class="field">
+          <div class="field-label"><span>Language <span class="req">*</span></span></div>
+          <select class="select">
+            <option>Bash</option>
+            <option>Python</option>
+            <option>Go</option>
+            <option>TypeScript</option>
+          </select>
+        </div>
+        <div class="field">
+          <div class="field-label"><span>Surface</span></div>
+          <select class="select">
+            <option>CLI script</option>
+            <option>Claude skill</option>
+            <option>MCP server</option>
+            <option>System prompt</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">
+          <span>Source <span class="req">*</span></span>
+          <span class="helper">git-stash-diff.sh · 38 lines</span>
+        </div>
+        <div class="editor">
+          <div class="editor-chrome">
+            <div class="dots"><span></span><span></span><span></span></div>
+            <span class="file">git-stash-diff.sh</span>
+          </div>
+          <div class="editor-body">
+            <div class="gutter">
+              <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div>
+              <div>6</div><div>7</div><div>8</div><div>9</div><div>10</div>
+              <div>11</div><div>12</div><div>13</div><div>14</div><div>15</div>
+            </div>
+            <div class="code"><span class="com">#!/usr/bin/env bash</span>
+<span class="com"># git-stash-diff: show a stash diff without applying it</span>
+
+<span class="kw">set</span> -euo pipefail
+
+stash_ref=<span class="str">"${1:-stash@{0}}"</span>
+
+<span class="kw">if</span> ! git rev-parse --verify <span class="str">"$stash_ref"</span> &gt;/dev/null 2&gt;&amp;1; <span class="kw">then</span>
+  <span class="fn">echo</span> <span class="str">"no stash matching $stash_ref"</span> &gt;&amp;2
+  <span class="kw">exit</span> 1
+<span class="kw">fi</span>
+
+git --no-pager diff --color=always <span class="str">"$stash_ref"</span>^! \
+  | <span class="fn">less</span> -R --no-init --quit-if-one-screen
+</div>
+          </div>
+        </div>
+        <div class="input-help">tip: drag-and-drop a file or paste from clipboard</div>
+      </div>
+    </section>
+
+    <aside class="preview-col">
+      <div class="preview-h">
+        <span class="lbl">Live preview</span>
+        <span class="live"><span class="dot"></span>updating</span>
+      </div>
+
+      <article class="preview-card">
+        <div class="pc-head">
+          <span class="pc-lang">bash</span>
+          <span class="pc-meta">v0.1.0 · just now · MIT</span>
+        </div>
+        <h3 class="pc-title">git-stash-diff — preview a stash without applying it</h3>
+        <p class="pc-desc">Color-diffs any stash against current HEAD without touching the working tree — useful when you forgot what you stashed.</p>
+        <div class="pc-install">
+          <code>$ ins install git-stash-diff</code>
+          <span class="copy">copy</span>
+        </div>
+        <div class="pc-tags">
+          <span class="t">git</span>
+          <span class="t">stash</span>
+          <span class="t">workflow</span>
+        </div>
+        <div class="pc-foot">
+          <span class="author">by <strong>@gabrielaboy</strong></span>
+          <span>0 installs · 0 ★</span>
+        </div>
+      </article>
+
+      <div class="checks">
+        <p class="checks-h">Publish checks</p>
+        <ul>
+          <li class="pass"><span class="ic"></span>Slug is available <span class="det">git-stash-diff</span></li>
+          <li class="pass"><span class="ic"></span>Shellcheck — no warnings <span class="det">0 / 0</span></li>
+          <li class="pass"><span class="ic"></span>Shebang detected <span class="det">bash</span></li>
+          <li class="pass"><span class="ic"></span>License header present <span class="det">MIT</span></li>
+          <li class="pending"><span class="ic"></span>Add at least one usage example <span class="det">optional</span></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+
+</body>
+</html>

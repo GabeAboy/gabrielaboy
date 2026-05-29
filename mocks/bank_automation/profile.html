@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Profile · StackFlow</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* Profile-specific */
+  .profile-hero {
+    background:
+      radial-gradient(ellipse 60% 80% at 100% 0%, rgba(192, 138, 58, 0.18), transparent 60%),
+      radial-gradient(ellipse 80% 100% at 0% 100%, rgba(15, 107, 74, 0.12), transparent 60%),
+      linear-gradient(135deg, #faf7f1 0%, #f3ede1 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    padding: 36px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .big-avatar {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--c-teal) 0%, var(--c-sage) 100%);
+    color: white;
+    display: grid;
+    place-items: center;
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    box-shadow: 0 0 0 4px white, 0 0 0 5px var(--border-strong), 0 12px 28px -10px rgba(20,16,10,0.15);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .big-avatar .edit {
+    position: absolute;
+    bottom: -2px; right: -2px;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid var(--border-strong);
+    display: grid; place-items: center;
+    color: var(--text-2);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+  }
+  .big-avatar .edit:hover { color: var(--brand); border-color: var(--brand); }
+  .hero-stat {
+    border-left: 1px solid var(--border);
+    padding: 4px 24px;
+  }
+  .hero-stat:first-child { border-left: 0; padding-left: 0; }
+  .hero-stat .v { font-size: 28px; font-weight: 600; letter-spacing: -0.015em; font-variant-numeric: tabular-nums; }
+  .hero-stat .l { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--border);
+    border-radius: 1px;
+  }
+  .milestone {
+    position: relative;
+    padding: 10px 0;
+  }
+  .milestone::before {
+    content: '';
+    position: absolute;
+    left: -22px;
+    top: 16px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--c-sage);
+  }
+  .milestone.major::before {
+    background: var(--c-sage);
+    box-shadow: 0 0 0 3px var(--brand-soft);
+  }
+  .milestone .date {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-3);
+  }
+  .milestone .label {
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .milestone .sub {
+    font-size: 13px;
+    color: var(--text-2);
+    margin-top: 2px;
+  }
+
+  /* Badges */
+  .badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 18px 16px;
+    text-align: center;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .badge:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+  .badge-glyph {
+    width: 56px; height: 56px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 26px;
+    background: linear-gradient(135deg, var(--brand-soft), white);
+    box-shadow: inset 0 0 0 1px var(--border), 0 4px 12px -4px rgba(15, 107, 74, 0.18);
+  }
+  .badge.locked { opacity: 0.55; }
+  .badge.locked .badge-glyph {
+    background: var(--surface-3);
+    box-shadow: inset 0 0 0 1px var(--border);
+    filter: grayscale(0.6);
+  }
+  .badge .title { font-size: 13px; font-weight: 600; }
+  .badge .desc { font-size: 11px; color: var(--text-3); margin-top: 4px; line-height: 1.4; }
+
+  /* Records */
+  .record-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .record-row:last-child { border-bottom: 0; }
+  .record-row .ico {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: grid; place-items: center;
+    background: var(--surface-2);
+    font-size: 16px;
+  }
+  .record-row .label { font-size: 13px; color: var(--text-3); }
+  .record-row .value { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  /* Completed goal card */
+  .completed-goal {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    background: var(--surface);
+  }
+  .completed-goal .ribbon {
+    background: var(--positive-soft);
+    color: var(--positive);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: var(--r-pill);
+    margin-left: auto;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ========== Sidebar ========== -->
+  <aside class="sidebar">
+    <div class="brand-mark">
+      <div class="brand-glyph">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 5 5 6-8"/></svg>
+      </div>
+      <div class="brand-name">StackFlow</div>
+    </div>
+    <div class="nav-section">Overview</div>
+    <nav class="nav">
+      <a href="dashboard.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Dashboard</a>
+      <a href="accounts.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/></svg>Accounts</a>
+      <a href="transactions.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 17l10-10"/><path d="M17 10V7h-3"/><path d="M7 14v3h3"/></svg>Transactions</a>
+    </nav>
+    <div class="nav-section">Plan</div>
+    <nav class="nav">
+      <a href="buckets.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16l-1.5 12a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>Buckets<span class="nav-badge">8</span></a>
+      <a href="automations.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2L4.5 13.5h6L11 22l8.5-11.5h-6L13 2z"/></svg>Automations<span class="nav-badge">5</span></a>
+      <a href="calendar.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4M16 3v4"/></svg>Calendar</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="user-card" href="profile.html" style="background: var(--brand-soft);">
+        <div class="avatar">AM</div>
+        <div class="user-meta"><div class="user-name">Alex Morgan</div><div class="user-plan">View profile</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="color: var(--brand);"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========== Main ========== -->
+  <div>
+    <header class="topbar">
+      <div class="crumbs"><a href="dashboard.html">Home</a><span>›</span><strong>Profile</strong></div>
+      <div class="topbar-right">
+        <a href="settings.html" class="btn btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+          Edit profile
+        </a>
+        <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></button>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <!-- ========== Hero ========== -->
+      <div class="profile-hero mb-24">
+        <div class="row gap-24" style="align-items: flex-start;">
+
+          <div class="big-avatar">
+            GA
+            <div class="edit" title="Change photo">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 4.5l5 5L8 21l-5 1 1-5L14.5 4.5z"/></svg>
+            </div>
+          </div>
+
+          <div style="flex: 1; min-width: 0;">
+            <div class="row gap-8 center">
+              <h1 style="font-size: 32px; font-weight: 600; letter-spacing: -0.015em; margin: 0;">Alex Morgan</h1>
+              <span class="chip brand"><span class="chip-dot"></span>Pro</span>
+            </div>
+            <div class="row gap-12 wrap mt-8" style="color: var(--text-2); font-size: 14px;">
+              <span>@amorgan</span>
+              <span class="dot-sep">·</span>
+              <span>alex.morgan@example.com</span>
+              <span class="dot-sep">·</span>
+              <span>Brooklyn, NY</span>
+            </div>
+            <div class="row gap-12 wrap mt-8" style="color: var(--text-3); font-size: 13px;">
+              <span class="row gap-4 center">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg>
+                Member since Aug 12, 2024
+              </span>
+              <span class="dot-sep">·</span>
+              <span>21 months on StackFlow</span>
+              <span class="dot-sep">·</span>
+              <span class="row gap-4 center">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--c-terracotta)" stroke-width="1.8"><path d="M12 2C8 6 6 9 6 13a6 6 0 0 0 12 0c0-2-1-4-2-5 0 1-1 2-2 2 1-3 0-6-2-8z"/></svg>
+                <strong style="color: var(--text);">47-day</strong> active streak
+              </span>
+            </div>
+
+            <p style="color: var(--text-2); font-size: 14px; line-height: 1.5; margin: 16px 0 0; max-width: 540px;">
+              Trying to save like a person who doesn't have to think about saving. Currently working toward 6 months of emergency runway and a 2027 trip to Portugal.
+            </p>
+          </div>
+
+          <!-- Right-side stats -->
+          <div class="row" style="align-items: stretch; flex-shrink: 0;">
+            <div class="hero-stat">
+              <div class="l">Lifetime saved</div>
+              <div class="v">$24,860</div>
+            </div>
+            <div class="hero-stat">
+              <div class="l">Goals completed</div>
+              <div class="v">4<span style="font-weight: 500; color: var(--text-3); font-size: 18px;"> / 8</span></div>
+            </div>
+            <div class="hero-stat">
+              <div class="l">Day streak</div>
+              <div class="v">47</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Activity heatmap ========== -->
+      <div class="card padded mb-24">
+        <div class="row between mb-16">
+          <div>
+            <div class="card-title">Savings activity</div>
+            <div class="card-sub mt-4">Every day a deposit, automation firing, or contribution touched a bucket</div>
+          </div>
+          <div class="row gap-12">
+            <span class="chip-tag" style="font-size: 12px;">12 months</span>
+            <span class="chip-tag" style="font-size: 12px;">All time</span>
+          </div>
+        </div>
+
+        <svg class="heatmap-svg" data-heatmap viewBox="0 0 820 132" preserveAspectRatio="xMinYMid meet"></svg>
+
+        <div class="row between mt-16 wrap gap-12">
+          <div class="row gap-16 wrap">
+            <div class="row gap-6 center">
+              <strong style="font-size: 20px; font-variant-numeric: tabular-nums;">287</strong>
+              <span class="caption">active days · 79%</span>
+            </div>
+            <div class="row gap-6 center">
+              <strong style="font-size: 20px; font-variant-numeric: tabular-nums;">$820</strong>
+              <span class="caption">best day · Apr 2 bonus split</span>
+            </div>
+            <div class="row gap-6 center">
+              <strong style="font-size: 20px; font-variant-numeric: tabular-nums;">47</strong>
+              <span class="caption">current streak (longest 89)</span>
+            </div>
+          </div>
+          <div class="row gap-8 center">
+            <span class="caption">Less</span>
+            <span class="legend-sq" style="background: var(--surface-3);"></span>
+            <span class="legend-sq" style="background: rgba(111, 140, 94, 0.28);"></span>
+            <span class="legend-sq" style="background: rgba(111, 140, 94, 0.55);"></span>
+            <span class="legend-sq" style="background: rgba(111, 140, 94, 0.8);"></span>
+            <span class="legend-sq" style="background: var(--c-sage);"></span>
+            <span class="caption">More</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== KPI strip ========== -->
+      <div class="card flush mb-24">
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="eyebrow">Lifetime saved</div>
+            <div class="stat-value">$24,860</div>
+            <div class="stat-delta pos">↑ $1,820 this month</div>
+          </div>
+          <div class="kpi">
+            <div class="eyebrow">Goals completed</div>
+            <div class="stat-value">4</div>
+            <div class="caption" style="margin-top: 4px;">+4 in progress</div>
+          </div>
+          <div class="kpi">
+            <div class="eyebrow">Automations fired</div>
+            <div class="stat-value">274</div>
+            <div class="caption" style="margin-top: 4px;">across 7 rules</div>
+          </div>
+          <div class="kpi">
+            <div class="eyebrow">Avg monthly save</div>
+            <div class="stat-value">$1,184</div>
+            <div class="stat-delta pos">↑ 38% YoY</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Completed goals + Timeline ========== -->
+      <div class="grid cols-2 mb-24">
+
+        <!-- Completed goals -->
+        <div class="card padded">
+          <div class="card-header no-border">
+            <div>
+              <div class="card-title">Hall of completed goals</div>
+              <div class="card-sub">Every bucket you've taken to 100%</div>
+            </div>
+            <a href="buckets.html" class="card-link">All buckets →</a>
+          </div>
+
+          <div class="col gap-12">
+            <div class="completed-goal">
+              <div class="bucket-icon teal" style="width: 36px; height: 36px; font-size: 18px;">🎄</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-weight: 600;">Holiday Fund 2024</div>
+                <div class="caption">$1,200 saved over 4 months · finished Dec 18, 2024</div>
+              </div>
+              <span class="ribbon">100%</span>
+            </div>
+
+            <div class="completed-goal">
+              <div class="bucket-icon rose" style="width: 36px; height: 36px; font-size: 18px;">💍</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-weight: 600;">Engagement ring</div>
+                <div class="caption">$3,500 saved over 7 months · finished Apr 6, 2025</div>
+              </div>
+              <span class="ribbon">100%</span>
+            </div>
+
+            <div class="completed-goal">
+              <div class="bucket-icon ochre" style="width: 36px; height: 36px; font-size: 18px;">💻</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-weight: 600;">New MacBook</div>
+                <div class="caption">$2,400 saved over 6 months · finished Sep 14, 2025</div>
+              </div>
+              <span class="ribbon">100%</span>
+            </div>
+
+            <div class="completed-goal">
+              <div class="bucket-icon moss" style="width: 36px; height: 36px; font-size: 18px;">🚲</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-weight: 600;">New road bike</div>
+                <div class="caption">$1,850 saved over 5 months · finished Feb 22, 2026</div>
+              </div>
+              <span class="ribbon">100%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="card padded">
+          <div class="card-header no-border">
+            <div>
+              <div class="card-title">Milestones</div>
+              <div class="card-sub">Your StackFlow journey</div>
+            </div>
+          </div>
+
+          <div class="timeline">
+            <div class="milestone major">
+              <div class="date">Aug 12, 2024</div>
+              <div class="label">Joined StackFlow</div>
+              <div class="sub">Connected Chase Checking via Plaid</div>
+            </div>
+
+            <div class="milestone">
+              <div class="date">Aug 28, 2024</div>
+              <div class="label">First automation created</div>
+              <div class="sub">"Save 10% of paycheck" — fires biweekly</div>
+            </div>
+
+            <div class="milestone">
+              <div class="date">Nov 6, 2024</div>
+              <div class="label">$1,000 milestone</div>
+              <div class="sub">First grand saved · 86 days in</div>
+            </div>
+
+            <div class="milestone major">
+              <div class="date">Dec 18, 2024</div>
+              <div class="label">First goal completed</div>
+              <div class="sub">Holiday Fund hit $1,200</div>
+            </div>
+
+            <div class="milestone">
+              <div class="date">Mar 4, 2025</div>
+              <div class="label">Linked Ally Savings</div>
+              <div class="sub">Started using buckets at 4.20% APY</div>
+            </div>
+
+            <div class="milestone major">
+              <div class="date">Aug 9, 2025</div>
+              <div class="label">$10,000 lifetime saved</div>
+              <div class="sub">Crossed the five-figure line</div>
+            </div>
+
+            <div class="milestone">
+              <div class="date">Feb 22, 2026</div>
+              <div class="label">4 goals completed</div>
+              <div class="sub">Latest: New road bike</div>
+            </div>
+
+            <div class="milestone major" style="opacity: 0.85;">
+              <div class="date">Today</div>
+              <div class="label">$24,860 saved · 47-day streak</div>
+              <div class="sub">Working toward $25k milestone and 6-month emergency runway</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Badges ========== -->
+      <div class="card padded mb-24">
+        <div class="card-header no-border">
+          <div>
+            <div class="card-title">Achievements</div>
+            <div class="card-sub">9 earned · 4 to unlock</div>
+          </div>
+          <a href="#" class="card-link">How they work →</a>
+        </div>
+
+        <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px;">
+          <div class="badge">
+            <div class="badge-glyph">🌱</div>
+            <div class="title">First steps</div>
+            <div class="desc">Connect your first bank account</div>
+          </div>
+          <div class="badge">
+            <div class="badge-glyph">⚡</div>
+            <div class="title">Wired up</div>
+            <div class="desc">Build your first automation</div>
+          </div>
+          <div class="badge">
+            <div class="badge-glyph">💰</div>
+            <div class="title">First grand</div>
+            <div class="desc">Save $1,000 lifetime</div>
+          </div>
+          <div class="badge">
+            <div class="badge-glyph">🎯</div>
+            <div class="title">Goal getter</div>
+            <div class="desc">Complete your first goal</div>
+          </div>
+          <div class="badge">
+            <div class="badge-glyph">🪙</div>
+            <div class="title">Penny pincher</div>
+            <div class="desc">Save $100 in round-ups</div>
+          </div>
+          <div class="badge">
+            <div class="badge-glyph">🔁</div>
+            <div class="title">Workhorse</div>
+            <div class="desc">100 automations fired</div>
+          </div>
+          <div class="badge">
+            <div class="badge-glyph">📈</div>
+            <div class="title">Five figures</div>
+            <div class="desc">Save $10,000 lifetime</div>
+          </div>
+          <div class="badge">
+            <div class="badge-glyph">🏆</div>
+            <div class="title">Quadruple threat</div>
+            <div class="desc">Complete 4 goals</div>
+          </div>
+          <div class="badge">
+            <div class="badge-glyph">🔥</div>
+            <div class="title">On a streak</div>
+            <div class="desc">Save daily for 30 days</div>
+          </div>
+
+          <!-- Locked -->
+          <div class="badge locked">
+            <div class="badge-glyph">💎</div>
+            <div class="title">Quarter mil</div>
+            <div class="desc">$25,000 lifetime · 99% there</div>
+          </div>
+          <div class="badge locked">
+            <div class="badge-glyph">🛡️</div>
+            <div class="title">Bunker built</div>
+            <div class="desc">6-month emergency fund</div>
+          </div>
+          <div class="badge locked">
+            <div class="badge-glyph">🌍</div>
+            <div class="title">Departure lounge</div>
+            <div class="desc">Fund a vacation goal in full</div>
+          </div>
+          <div class="badge locked">
+            <div class="badge-glyph">⛰️</div>
+            <div class="title">Hundred days</div>
+            <div class="desc">100-day savings streak</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Top rules + Personal records ========== -->
+      <div class="grid cols-2 mb-24">
+
+        <!-- Top rules -->
+        <div class="card padded">
+          <div class="card-header no-border">
+            <div>
+              <div class="card-title">Top contributing rules</div>
+              <div class="card-sub">By lifetime money moved</div>
+            </div>
+            <a href="automations.html" class="card-link">All rules →</a>
+          </div>
+
+          <div class="col gap-16 mt-12">
+            <div>
+              <div class="row between mb-8">
+                <div>
+                  <div style="font-weight: 600;">Paycheck → savings split</div>
+                  <div class="caption">42 firings · biweekly direct deposit</div>
+                </div>
+                <div class="num" style="font-weight: 600; font-size: 16px;">$18,640</div>
+              </div>
+              <div class="progress"><div class="bar sage" style="width: 100%;"></div></div>
+            </div>
+
+            <div>
+              <div class="row between mb-8">
+                <div>
+                  <div style="font-weight: 600;">Monthly auto-sweep to Emergency</div>
+                  <div class="caption">18 firings · scheduled 5th & 20th</div>
+                </div>
+                <div class="num" style="font-weight: 600; font-size: 16px;">$3,600</div>
+              </div>
+              <div class="progress"><div class="bar teal" style="width: 19%;"></div></div>
+            </div>
+
+            <div>
+              <div class="row between mb-8">
+                <div>
+                  <div style="font-weight: 600;">Quarterly tax reserve</div>
+                  <div class="caption">8 firings · scheduled quarterly</div>
+                </div>
+                <div class="num" style="font-weight: 600; font-size: 16px;">$2,335</div>
+              </div>
+              <div class="progress"><div class="bar slate" style="width: 12%;"></div></div>
+            </div>
+
+            <div>
+              <div class="row between mb-8">
+                <div>
+                  <div style="font-weight: 600;">Round-up coffee runs</div>
+                  <div class="caption">214 firings · per Chase purchase</div>
+                </div>
+                <div class="num" style="font-weight: 600; font-size: 16px;">$284.16</div>
+              </div>
+              <div class="progress"><div class="bar ochre" style="width: 2%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personal records -->
+        <div class="card padded">
+          <div class="card-header no-border">
+            <div>
+              <div class="card-title">Personal records</div>
+              <div class="card-sub">Your highs since joining</div>
+            </div>
+          </div>
+
+          <div class="record-row">
+            <div class="ico">💵</div>
+            <div style="flex: 1;">
+              <div class="label">Largest single deposit</div>
+              <div class="caption">Apr 2, 2026 · annual bonus from ACME Co.</div>
+            </div>
+            <div class="value pos">+$4,800</div>
+          </div>
+
+          <div class="record-row">
+            <div class="ico">📅</div>
+            <div style="flex: 1;">
+              <div class="label">Best saving month</div>
+              <div class="caption">March 2026 · paycheck + bonus rules</div>
+            </div>
+            <div class="value">$2,140</div>
+          </div>
+
+          <div class="record-row">
+            <div class="ico">🔥</div>
+            <div style="flex: 1;">
+              <div class="label">Longest streak</div>
+              <div class="caption">Jul 14 – Oct 10, 2025</div>
+            </div>
+            <div class="value">89 days</div>
+          </div>
+
+          <div class="record-row">
+            <div class="ico">⚡</div>
+            <div style="flex: 1;">
+              <div class="label">Fastest goal</div>
+              <div class="caption">New road bike · Oct 2025 – Feb 2026</div>
+            </div>
+            <div class="value">4 months</div>
+          </div>
+
+          <div class="record-row">
+            <div class="ico">🌳</div>
+            <div style="flex: 1;">
+              <div class="label">Oldest active bucket</div>
+              <div class="caption">Emergency fund · since Sep 4, 2024</div>
+            </div>
+            <div class="value">20 mo</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings teaser -->
+      <div class="help">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5"/></svg>
+        <div style="flex: 1;">
+          Need to update your email, change notifications, or manage connected banks?
+          <a href="settings.html" style="font-weight: 600; text-decoration: underline; margin-left: 2px;">Open settings</a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+</div>
+
+<script src="heatmap.js" defer></script>
+
+</body>
+</html>

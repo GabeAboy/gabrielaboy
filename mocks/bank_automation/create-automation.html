@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>New automation · StackFlow</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .stepper {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 32px;
+  }
+  .step {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--text-3);
+    font-size: 13px;
+  }
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--surface-3);
+    color: var(--text-3);
+    display: grid; place-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+  }
+  .step.active { color: var(--text); font-weight: 600; }
+  .step.active .step-num {
+    background: var(--brand);
+    color: white;
+    border-color: var(--brand);
+  }
+  .step.done .step-num {
+    background: var(--brand-soft);
+    color: var(--brand);
+    border-color: var(--brand-soft);
+  }
+  .step-line {
+    width: 40px; height: 1px;
+    background: var(--border);
+  }
+  .opt-card {
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.12s;
+    background: var(--surface);
+  }
+  .opt-card:hover { border-color: var(--border-strong); background: var(--surface-2); }
+  .opt-card.selected {
+    border-color: var(--brand);
+    background: var(--brand-soft);
+    box-shadow: 0 0 0 3px rgba(15, 107, 74, 0.08);
+  }
+  .opt-card.selected .opt-mark {
+    background: var(--brand); color: white; border-color: var(--brand);
+  }
+  .opt-mark {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    display: grid; place-items: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .preview {
+    background: linear-gradient(135deg, #f7f5f2, #ebe7e0);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--r-md);
+    padding: 18px;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand-mark">
+      <div class="brand-glyph">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 17l5-5 5 5 6-8"/></svg>
+      </div>
+      <div class="brand-name">StackFlow</div>
+    </div>
+    <div class="nav-section">Overview</div>
+    <nav class="nav">
+      <a href="dashboard.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Dashboard</a>
+      <a href="accounts.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="14" rx="2"/></svg>Accounts</a>
+      <a href="transactions.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 17l10-10"/></svg>Transactions</a>
+    </nav>
+    <div class="nav-section">Plan</div>
+    <nav class="nav">
+      <a href="buckets.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16l-1.5 12a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"/></svg>Buckets<span class="nav-badge">8</span></a>
+      <a href="automations.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2L4.5 13.5h6L11 22l8.5-11.5h-6L13 2z"/></svg>Automations<span class="nav-badge">5</span></a>
+      <a href="calendar.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/></svg>Calendar</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="user-card" href="profile.html">
+        <div class="avatar">AM</div>
+        <div class="user-meta"><div class="user-name">Alex Morgan</div><div class="user-plan">Pro plan</div></div>
+      </a>
+    </div>
+  </aside>
+
+  <div>
+    <header class="topbar">
+      <div class="crumbs">
+        <a href="dashboard.html">Home</a>
+        <span>›</span>
+        <a href="automations.html">Automations</a>
+        <span>›</span>
+        <strong>New rule</strong>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-ghost">Cancel</button>
+      </div>
+    </header>
+
+    <main class="main" style="max-width: 860px;">
+
+      <div class="page-header">
+        <div>
+          <div class="page-title">Create an automation</div>
+          <div class="page-sub">Pick a trigger and an action — we'll do the rest</div>
+        </div>
+      </div>
+
+      <!-- Stepper -->
+      <div class="stepper">
+        <div class="step active"><div class="step-num">1</div>Trigger</div>
+        <div class="step-line"></div>
+        <div class="step"><div class="step-num">2</div>Action</div>
+        <div class="step-line"></div>
+        <div class="step"><div class="step-num">3</div>Review</div>
+      </div>
+
+      <!-- Step 1: Trigger -->
+      <div class="card padded mb-24">
+        <div class="title mb-8">When should this rule fire?</div>
+        <div class="caption mb-16">Pick the event that kicks off the automation</div>
+
+        <div class="grid cols-3">
+          <div class="opt-card selected">
+            <div class="opt-mark">📥</div>
+            <div style="font-weight: 600;">Direct deposit</div>
+            <div class="caption mt-4">When my paycheck lands in a checking account</div>
+          </div>
+
+          <div class="opt-card">
+            <div class="opt-mark">📅</div>
+            <div style="font-weight: 600;">On a schedule</div>
+            <div class="caption mt-4">Daily, weekly, or specific days of the month</div>
+          </div>
+
+          <div class="opt-card">
+            <div class="opt-mark">⚖️</div>
+            <div style="font-weight: 600;">Balance threshold</div>
+            <div class="caption mt-4">When an account goes above or below a value</div>
+          </div>
+
+          <div class="opt-card">
+            <div class="opt-mark">🪙</div>
+            <div style="font-weight: 600;">Round-up</div>
+            <div class="caption mt-4">Round up each purchase, save the change</div>
+          </div>
+
+          <div class="opt-card">
+            <div class="opt-mark">🏷️</div>
+            <div style="font-weight: 600;">Transaction match</div>
+            <div class="caption mt-4">When a transaction matches a merchant or category</div>
+          </div>
+
+          <div class="opt-card" style="background: var(--surface-2); opacity: 0.7;">
+            <div class="opt-mark">⏳</div>
+            <div style="font-weight: 600;">Custom event <span class="chip outline" style="font-size: 10px; margin-left: 4px;">soon</span></div>
+            <div class="caption mt-4">Webhooks, calendar dates, and more</div>
+          </div>
+        </div>
+
+        <!-- Sub-config for selected trigger -->
+        <div class="divider"></div>
+
+        <div class="grid cols-2">
+          <div>
+            <label class="label">Watch this account</label>
+            <select class="input">
+              <option>Chase Total Checking (··· 4218)</option>
+              <option>Ally Online Savings (··· 9921)</option>
+              <option>Any checking account</option>
+            </select>
+          </div>
+          <div>
+            <label class="label">Only deposits ≥</label>
+            <div class="row gap-8">
+              <input class="input" value="$1,000.00" />
+              <select class="input" style="width: 130px;">
+                <option>per deposit</option>
+                <option>per month</option>
+              </select>
+            </div>
+            <div class="helper">Ignore small refunds and Venmo cash-ins</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 preview: Action (collapsed-style) -->
+      <div class="card padded mb-24" style="opacity: 0.7;">
+        <div class="row between">
+          <div>
+            <div class="title">Then what should happen?</div>
+            <div class="caption mt-4">Transfer money, allocate to a bucket, or send a notification</div>
+          </div>
+          <div class="caption">Next step →</div>
+        </div>
+      </div>
+
+      <!-- Live preview -->
+      <div class="card padded mb-24">
+        <div class="eyebrow mb-8">Preview</div>
+        <div class="preview">
+          <div class="row gap-8 wrap" style="font-size: 15px;">
+            <span style="color: var(--text-3); font-weight: 500;">When</span>
+            <span class="chip info">📥 a direct deposit ≥ $1,000</span>
+            <span style="color: var(--text-3); font-weight: 500;">lands in</span>
+            <span class="chip">🏦 Chase Total Checking</span>
+            <span style="color: var(--text-3); font-weight: 500;">then…</span>
+            <span class="caption" style="font-style: italic;">(pick an action next)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer actions -->
+      <div class="row gap-8 between">
+        <button class="btn btn-ghost">← Back</button>
+        <div class="row gap-8">
+          <button class="btn btn-secondary">Save draft</button>
+          <button class="btn btn-primary">Continue → Action</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+</div>
+</body>
+</html>

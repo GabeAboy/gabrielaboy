@@ -1,0 +1,1385 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GitHired · Business Plan</title>
+  <meta name="description" content="GitHired is the AI-tailored job-application pipeline that shows its work. A solo-founder SaaS targeting active job seekers with a freemium model — Free, Base $5/mo, Premium $10/mo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:              #FAF7F0;
+      --surface-base:    #FBF8F1;
+      --surface-raised:  #FFFFFF;
+      --surface-draft:   #FBF7EA;
+      --surface-quote:   #F4EED9;
+      --rule-hairline:   #E5E0D5;
+      --rule-strong:     #C9C2B0;
+      --text-primary:    #1C1A14;
+      --text-secondary:  #5F5A4E;
+      --text-muted:      #8E897C;
+      --accent:          #9B7825;
+      --accent-soft:     #F2E8CC;
+      --accent-deep:     #6F5417;
+      --positive:        #557A3A;
+      --warn:            #A05A00;
+      --danger:          #B1431C;
+
+      --serif:  'Source Serif 4', Iowan Old Style, Georgia, serif;
+      --sans:   'Inter', ui-sans-serif, system-ui, sans-serif;
+      --mono:   'JetBrains Mono', ui-monospace, monospace;
+
+      --shadow-2: 0 20px 40px -16px rgba(28, 26, 20, 0.16);
+      --gutter:   clamp(20px, 4vw, 56px);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--text-primary); }
+    body {
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "ss01", "kern";
+    }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    code {
+      font-family: var(--mono);
+      font-size: 0.86em;
+      background: var(--surface-base);
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--rule-hairline);
+      color: var(--text-primary);
+    }
+
+    /* ─── App header ──────────────────────────────────────── */
+    header.app {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250, 247, 240, 0.92);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--rule-hairline);
+    }
+    .app-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 14px var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .crumb {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .crumb .sep { color: var(--rule-strong); }
+    .crumb .here { color: var(--text-primary); }
+    .crumb .home {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--text-primary);
+    }
+    .crumb .home .badge {
+      width: 22px; height: 22px;
+      background: var(--accent);
+      color: var(--bg);
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 5px;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 11px;
+    }
+    .header-meta {
+      display: flex; gap: 18px; align-items: center;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .header-meta .v { color: var(--accent); }
+    @media (max-width: 640px) { .header-meta { display: none; } }
+
+    /* ─── Title block ──────────────────────────────────── */
+    section.title-block {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: clamp(56px, 7vw, 96px) var(--gutter) clamp(36px, 5vw, 64px);
+    }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 1px;
+      background: var(--accent);
+    }
+    h1.doc-title {
+      font-family: var(--serif);
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+      font-variation-settings: 'opsz' 60;
+    }
+    h1.doc-title em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .doc-lede {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.2vw, 24px);
+      line-height: 1.45;
+      color: var(--text-secondary);
+      max-width: 64ch;
+      font-weight: 400;
+      font-variation-settings: 'opsz' 24;
+    }
+    .doc-lede strong { color: var(--text-primary); font-weight: 600; }
+
+    .doc-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px 36px;
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule-hairline);
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+    .doc-meta-row .pair { display: flex; align-items: baseline; gap: 8px; }
+    .doc-meta-row .pair .k { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.12em; font-size: 10.5px; }
+    .doc-meta-row .pair .v { color: var(--text-primary); }
+    .doc-meta-row .pair .v.live { color: var(--accent); }
+    .doc-meta-row .pair .v.live::before {
+      content: '';
+      display: inline-block;
+      width: 7px; height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-right: 7px;
+      vertical-align: middle;
+      box-shadow: 0 0 0 0 rgba(155,120,37,0.5);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(155,120,37,0.45); }
+      70%     { box-shadow: 0 0 0 9px rgba(155,120,37,0); }
+    }
+
+    /* ─── Layout: TOC + content ────────────────────────── */
+    main.body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--gutter) 80px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: clamp(28px, 4vw, 64px);
+    }
+    @media (max-width: 880px) {
+      main.body { grid-template-columns: 1fr; }
+      aside.toc { position: static; max-height: none; }
+    }
+
+    aside.toc {
+      position: sticky;
+      top: 84px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      padding-top: 6px;
+    }
+    aside.toc .toc-label {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    aside.toc ol { list-style: none; counter-reset: tocnum; }
+    aside.toc li { counter-increment: tocnum; padding: 2px 0; }
+    aside.toc a {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding: 4px 0;
+      display: block;
+      border-left: 2px solid transparent;
+      padding-left: 12px;
+      margin-left: -14px;
+      transition: color .2s, border-color .2s;
+    }
+    aside.toc a::before {
+      content: counter(tocnum, decimal-leading-zero) " · ";
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      margin-right: 4px;
+    }
+    aside.toc a:hover { color: var(--accent); border-left-color: var(--accent); }
+
+    /* ─── Sections ──────────────────────────────────────── */
+    section.doc-section {
+      padding: clamp(40px, 5vw, 64px) 0;
+      border-top: 1px solid var(--rule-hairline);
+    }
+    section.doc-section:first-of-type { border-top: 0; padding-top: clamp(16px, 2vw, 28px); }
+
+    .sec-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .sec-num::before {
+      content: '§';
+      color: var(--text-muted);
+    }
+    h2.sec-h {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.6vw, 40px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+      font-weight: 600;
+      font-variation-settings: 'opsz' 40;
+    }
+    h2.sec-h em { font-style: italic; color: var(--accent); }
+
+    h3.sub-h {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+
+    p.prose {
+      font-family: var(--serif);
+      font-size: 17.5px;
+      line-height: 1.62;
+      color: var(--text-secondary);
+      max-width: 68ch;
+      margin-bottom: 16px;
+      font-variation-settings: 'opsz' 18;
+    }
+    p.prose strong { color: var(--text-primary); font-weight: 600; }
+    p.prose em { font-style: italic; }
+    p.prose a { color: var(--accent); border-bottom: 1px solid var(--accent-soft); }
+    p.prose a:hover { border-bottom-color: var(--accent); }
+
+    ul.tight, ol.tight {
+      list-style: none;
+      max-width: 68ch;
+    }
+    ul.tight li, ol.tight li {
+      font-family: var(--serif);
+      font-size: 16.5px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      padding: 6px 0 6px 28px;
+      position: relative;
+    }
+    ul.tight li::before {
+      content: '';
+      position: absolute;
+      left: 8px; top: 17px;
+      width: 8px; height: 1px;
+      background: var(--accent);
+    }
+    ol.tight { counter-reset: oltight; }
+    ol.tight li {
+      counter-increment: oltight;
+      padding-left: 36px;
+    }
+    ol.tight li::before {
+      content: counter(oltight, decimal-leading-zero);
+      position: absolute;
+      left: 0; top: 8px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--accent);
+    }
+    ul.tight li strong, ol.tight li strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ─── Pull-quotes ─────────────────────────────────── */
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .pull-quote {
+      background: var(--surface-quote);
+      border-left: 3px solid var(--accent);
+      padding: 18px 20px;
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.45;
+      color: var(--text-primary);
+      font-style: italic;
+      position: relative;
+    }
+    .pull-quote::before {
+      content: '"';
+      font-family: var(--serif);
+      font-size: 38px;
+      color: var(--accent);
+      position: absolute;
+      top: 4px; left: 12px;
+      opacity: 0.25;
+      line-height: 1;
+    }
+
+    /* ─── Tables ──────────────────────────────────────── */
+    .tbl-wrap {
+      border: 1px solid var(--rule-strong);
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--surface-raised);
+      margin: 18px 0 6px;
+      box-shadow: var(--shadow-2);
+    }
+    table.doc-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--sans);
+      font-size: 14px;
+    }
+    table.doc-tbl thead th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--surface-base);
+      border-bottom: 1px solid var(--rule-strong);
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    table.doc-tbl tbody td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--rule-hairline);
+      vertical-align: top;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    table.doc-tbl tbody tr:last-child td { border-bottom: 0; }
+    table.doc-tbl tbody td.role {
+      font-family: var(--sans);
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+    table.doc-tbl tbody td.example {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--text-primary);
+    }
+    table.doc-tbl tbody tr.us td { background: var(--accent-soft); }
+    table.doc-tbl tbody tr.us td.role { color: var(--accent-deep); }
+    table.doc-tbl td .yes { color: var(--accent); font-weight: 600; }
+    table.doc-tbl td .no  { color: var(--text-muted); }
+    table.doc-tbl td .partial { color: var(--warn); }
+    table.doc-tbl td.center { text-align: center; }
+    table.doc-tbl .footnote { color: var(--text-muted); font-size: 11.5px; display: block; margin-top: 2px; }
+
+    /* ─── Pricing tiers ───────────────────────────────── */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 18px 0 6px;
+    }
+    @media (max-width: 880px) { .tier-grid { grid-template-columns: 1fr; } }
+    .tier {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 8px;
+      padding: 22px 22px;
+      box-shadow: var(--shadow-2);
+    }
+    .tier.featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-soft), var(--shadow-2);
+    }
+    .tier .tier-name {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .tier .tier-price {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .tier .tier-price .per {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+    .tier .tier-tag {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed var(--rule-hairline);
+    }
+    .tier ul { list-style: none; }
+    .tier ul li {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      padding: 5px 0 5px 20px;
+      position: relative;
+    }
+    .tier ul li::before {
+      content: '✓';
+      position: absolute; left: 0; top: 5px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .tier ul li.off { color: var(--text-muted); }
+    .tier ul li.off::before { content: '—'; color: var(--text-muted); }
+
+    /* ─── Channel mix tiers ───────────────────────────── */
+    .channel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 18px 0;
+    }
+    @media (max-width: 880px) { .channel-grid { grid-template-columns: 1fr; } }
+    .channel-tier {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 8px;
+      padding: 20px 22px;
+    }
+    .channel-tier.is-featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-soft);
+    }
+    .channel-tier .ct-name {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .channel-tier .ct-title {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-top: 4px;
+      margin-bottom: 14px;
+    }
+    .channel-tier .ch {
+      padding: 12px 0;
+      border-top: 1px solid var(--rule-hairline);
+    }
+    .channel-tier .ch:first-of-type { border-top: 0; padding-top: 0; }
+    .channel-tier .ch-name {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .channel-tier .ch-desc {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+    .channel-tier .ch-time {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 2px 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 10.5px;
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── Roadmap phase blocks ───────────────────────── */
+    .phase {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 8px;
+      padding: 22px 24px;
+      margin: 14px 0;
+      box-shadow: var(--shadow-2);
+    }
+    .phase .phase-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .phase .phase-head .v {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+    .phase .phase-head h4 {
+      font-family: var(--serif);
+      font-size: 22px;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .phase .phase-head h4 em { font-style: italic; color: var(--accent); }
+    .phase ul.tight li { font-size: 16px; padding-top: 4px; padding-bottom: 4px; }
+
+    .gate {
+      margin: 8px 0 22px;
+      padding: 14px 18px;
+      border-left: 3px solid var(--positive);
+      background: linear-gradient(90deg, var(--accent-soft), transparent 80%);
+      font-family: var(--sans);
+      font-size: 13.5px;
+      color: var(--text-primary);
+      border-radius: 0 6px 6px 0;
+    }
+    .gate .label {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--positive);
+      margin-right: 8px;
+      font-weight: 600;
+    }
+    .gate .gate-text { color: var(--text-secondary); }
+    .gate .gate-text b { color: var(--text-primary); font-weight: 600; }
+
+    /* ─── Metrics ─────────────────────────────────────── */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin: 18px 0;
+    }
+    @media (max-width: 980px) { .metric-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .metric-grid { grid-template-columns: 1fr; } }
+    .metric {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 8px;
+      padding: 18px 18px;
+    }
+    .metric-label {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .metric-value {
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    .metric-why {
+      margin-top: 6px;
+      font-family: var(--sans);
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--text-secondary);
+    }
+
+    /* ─── Risk register ─────────────────────────────── */
+    .risk-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 10px;
+    }
+    @media (max-width: 760px) { .risk-grid { grid-template-columns: 1fr; } }
+    .risk {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 6px;
+      padding: 18px 20px;
+    }
+    .risk .risk-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 8px; gap: 12px; flex-wrap: wrap;
+    }
+    .risk .risk-head h5 {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .risk .risk-head .sev {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+    .risk .risk-head .sev.high { background: rgba(177,67,28,0.1); color: var(--danger); }
+    .risk .risk-head .sev.med  { background: rgba(160,90,0,0.12); color: var(--warn); }
+    .risk .risk-head .sev.low  { background: var(--accent-soft); color: var(--accent); }
+    .risk p {
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .risk .mit {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      color: var(--text-muted);
+      padding-top: 8px;
+      border-top: 1px dashed var(--rule-hairline);
+    }
+    .risk .mit b { color: var(--text-primary); font-weight: 600; }
+
+    /* ─── Final summary ─────────────────────────────── */
+    .one-sentence {
+      margin: 28px 0 12px;
+      padding: 32px 30px;
+      background: var(--text-primary);
+      color: var(--bg);
+      border-radius: 8px;
+      box-shadow: var(--shadow-2);
+      position: relative;
+    }
+    .one-sentence::before {
+      content: 'TL;DR';
+      position: absolute;
+      top: 16px; right: 22px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+    }
+    .one-sentence p {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.4vw, 26px);
+      line-height: 1.35;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      max-width: 56ch;
+    }
+    .one-sentence p em { font-style: italic; color: var(--accent); font-weight: 500; }
+    .one-sentence p strong { font-weight: 600; color: #fff; }
+
+    /* ─── Footer ────────────────────────────────────── */
+    footer.colo {
+      border-top: 1px solid var(--rule-hairline);
+      padding: 28px var(--gutter) 56px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    footer.colo a { color: var(--accent); }
+    footer.colo a:hover { color: var(--accent-deep); border-bottom: 1px solid var(--accent); padding-bottom: 1px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ APP HEADER ============ -->
+<header class="app">
+  <div class="app-inner">
+    <div class="crumb">
+      <a href="/" class="home"><span class="badge">GH</span> GitHired</a>
+      <span class="sep">/</span>
+      <span class="here">Business Plan</span>
+    </div>
+    <div class="header-meta">
+      <span>Rev. <span class="v">v0.1</span></span>
+      <span>Updated 27 May 2026</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ TITLE BLOCK ============ -->
+<section class="title-block">
+  <div class="eyebrow">Business Plan · Job-application SaaS</div>
+  <h1 class="doc-title">GitHired — the job-search workflow that <em>tailors every application</em>.</h1>
+  <p class="doc-lede">
+    A Trello-style pipeline paired with an AI that produces a <strong>tailored resume and cover
+    letter for every posting</strong> — and shows the user, line by line, exactly which CV detail
+    answers which requirement. The product takes the part of the job search that is invisible
+    drudgery and makes it 5 minutes per application.
+  </p>
+  <div class="doc-meta-row">
+    <div class="pair"><span class="k">Stage</span> <span class="v">Pre-launch · MVP build</span></div>
+    <div class="pair"><span class="k">Status</span> <span class="v live">Active development</span></div>
+    <div class="pair"><span class="k">Author</span> <span class="v">Gabriel Aboy</span></div>
+    <div class="pair"><span class="k">Codename</span> <span class="v">GitHired</span></div>
+    <div class="pair"><span class="k">Target MRR</span> <span class="v">$500 by day 90</span></div>
+  </div>
+</section>
+
+<!-- ============ BODY ============ -->
+<main class="body">
+
+  <!-- TOC -->
+  <aside class="toc" aria-label="Table of contents">
+    <div class="toc-label">Contents</div>
+    <ol>
+      <li><a href="#premise">The premise</a></li>
+      <li><a href="#pain">The user, in their words</a></li>
+      <li><a href="#mechanic">The mechanic — tailoring + transparency</a></li>
+      <li><a href="#not">What it is not</a></li>
+      <li><a href="#competitive">Competitive shape</a></li>
+      <li><a href="#model">Business model &amp; pricing</a></li>
+      <li><a href="#gtm">Go-to-market</a></li>
+      <li><a href="#metrics">North-star metrics</a></li>
+      <li><a href="#stack">Stack &amp; rails</a></li>
+      <li><a href="#roadmap">Roadmap, by signal</a></li>
+      <li><a href="#risk">Risk register</a></li>
+      <li><a href="#one">One sentence</a></li>
+    </ol>
+  </aside>
+
+  <!-- Article -->
+  <article>
+
+    <!-- §01 Premise -->
+    <section class="doc-section" id="premise">
+      <div class="sec-num">Section 01</div>
+      <h2 class="sec-h">The <em>premise</em></h2>
+      <p class="prose">
+        Job-search tools today split clean between two failure modes. <strong>Trackers</strong>
+        (spreadsheets, Notion, Huntr) organise the pipeline but leave you re-formatting documents
+        by hand. <strong>One-click appliers</strong> (Simplify, LazyApply) automate volume but spray
+        identical resumes at every posting — and recruiters can tell. GitHired's bet is that
+        candidates don't want either: they want a tool that <em>tracks the pipeline</em>
+        <em>and</em> <em>tailors each application</em> — without lying on the resume to do it.
+      </p>
+      <p class="prose">
+        The unlock is the <strong>transparency report</strong>: every line of the generated resume
+        and cover letter is annotated with the posting requirement it answers and the CV detail it
+        sourced. If a requirement has no match, the report says so — it does <em>not</em>
+        fabricate. That single behavior is the moat: it turns the AI from a hallucination risk
+        into a tool the candidate can actually defend in the interview.
+      </p>
+    </section>
+
+    <!-- §02 Pain -->
+    <section class="doc-section" id="pain">
+      <div class="sec-num">Section 02</div>
+      <h2 class="sec-h">The user, in their <em>own words</em></h2>
+      <p class="prose">
+        The target user is the <strong>active job seeker</strong> applying to 10–50+ roles —
+        engineering, product, design, ops. They're financially competent, technically literate,
+        and tired. They've already tried the spreadsheet, the doc folder, and at least one
+        AI-resume tool that produced something they had to edit back into reality.
+      </p>
+
+      <div class="quote-grid">
+        <div class="pull-quote">I'm on application 87. I have no idea what I sent where, and every cover letter looks like the last one with the company name swapped in.</div>
+        <div class="pull-quote">I pasted my resume into ChatGPT and it confidently gave me skills I don't have. I had to fact-check my own resume.</div>
+        <div class="pull-quote">My spreadsheet is fine for 10 jobs. At 50 it's a graveyard of half-filled rows.</div>
+        <div class="pull-quote">Teal looks great but I want to know <em>why</em> it picked those bullets, not just trust the algorithm.</div>
+        <div class="pull-quote">I'd pay $10 a month if I never had to rewrite "skilled communicator" again.</div>
+      </div>
+    </section>
+
+    <!-- §03 Mechanic -->
+    <section class="doc-section" id="mechanic">
+      <div class="sec-num">Section 03 · The differentiator</div>
+      <h2 class="sec-h">Tailoring <em>that shows its work</em></h2>
+      <p class="prose">
+        Three primitives, composed. Each one is table-stakes in isolation; together they're
+        the product.
+      </p>
+
+      <div class="tbl-wrap">
+        <table class="doc-tbl">
+          <thead>
+            <tr>
+              <th style="width: 200px;">Primitive</th>
+              <th>What it does</th>
+              <th>Why it matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="role">Kanban pipeline</td>
+              <td>Trello-style board: Backlog → Pending → Applied → Interviewing → Completed. Cards drag, columns are user-editable.</td>
+              <td>The user's mental model is already a pipeline. Match it.</td>
+            </tr>
+            <tr>
+              <td class="role">Scrape + normalise</td>
+              <td>Paste a URL; backend extracts title, company, salary, requirements (categorised as hard / soft), responsibilities, nice-to-haves.</td>
+              <td>Cuts 80% of the data-entry friction. Time-to-first-tailored-resume goes from hours to minutes.</td>
+            </tr>
+            <tr>
+              <td class="role">Annotated tailoring</td>
+              <td>AI tailors resume + cover letter against the normalised posting. Every inclusion has a posting-requirement tag and a relevance label. Every exclusion has a reason. Nothing is invented.</td>
+              <td>The only AI-resume tool the user can defend in the interview, line by line.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- §04 Not -->
+    <section class="doc-section" id="not">
+      <div class="sec-num">Section 04</div>
+      <h2 class="sec-h">What it is <em>not</em></h2>
+      <ul class="tight">
+        <li><strong>Not a one-click applier.</strong> GitHired does not submit applications for the user. The act of clicking <em>Apply</em> on the actual job board is intentional — it forces the candidate to read what's been generated before it leaves their hands.</li>
+        <li><strong>Not a recruiter tool.</strong> No "candidate marketplace," no resume bank for HR. The product sits squarely on the candidate's side of the table.</li>
+        <li><strong>Not an AI hype piece.</strong> The AI is invisible plumbing. The product is the workflow; the AI is one component of it. If a better model ships next month, the user notices nothing except better output.</li>
+        <li><strong>Not a "career coach."</strong> No chat agents giving career advice. The product is operational — it tailors and tracks. Coaching, salary negotiation, interview prep are explicit non-goals for v1.</li>
+      </ul>
+    </section>
+
+    <!-- §05 Competitive -->
+    <section class="doc-section" id="competitive">
+      <div class="sec-num">Section 05</div>
+      <h2 class="sec-h">Competitive <em>shape</em></h2>
+      <p class="prose">
+        Teal has the pipeline and a good editor; its AI is opaque and the free tier is heavily
+        gated. Huntr has the cleanest tracker on the market; no resume tailoring. Simplify is
+        a one-click applier — fast but uniform output. Jobscan is a keyword-matcher bolted to
+        the side of LinkedIn. Resume.io and Rezi are document tools, not workflows.
+        GitHired's slot is the union of <em>pipeline tracker</em> and <em>defensible tailoring</em>,
+        with the transparency report as the explicit differentiator.
+      </p>
+
+      <div class="tbl-wrap">
+        <table class="doc-tbl">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="center">Pipeline tracker</th>
+              <th class="center">AI tailoring</th>
+              <th class="center">Per-line transparency</th>
+              <th class="center">Editable output</th>
+              <th class="center">Solo-founder pricing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="role">Teal</td>
+              <td class="center"><span class="yes">✓</span></td>
+              <td class="center"><span class="yes">✓ <span class="footnote">opaque</span></span></td>
+              <td class="center"><span class="no">—</span></td>
+              <td class="center"><span class="yes">✓</span></td>
+              <td class="center"><span class="no">$29/mo</span></td>
+            </tr>
+            <tr>
+              <td class="role">Huntr</td>
+              <td class="center"><span class="yes">✓</span></td>
+              <td class="center"><span class="partial">partial</span></td>
+              <td class="center"><span class="no">—</span></td>
+              <td class="center"><span class="yes">✓</span></td>
+              <td class="center"><span class="no">$20/mo</span></td>
+            </tr>
+            <tr>
+              <td class="role">Simplify</td>
+              <td class="center"><span class="partial">partial</span></td>
+              <td class="center"><span class="partial">one-shot</span></td>
+              <td class="center"><span class="no">—</span></td>
+              <td class="center"><span class="no">—</span></td>
+              <td class="center"><span class="yes">free + paid</span></td>
+            </tr>
+            <tr>
+              <td class="role">Jobscan</td>
+              <td class="center"><span class="no">—</span></td>
+              <td class="center"><span class="partial">keyword scan</span></td>
+              <td class="center"><span class="partial">keyword only</span></td>
+              <td class="center"><span class="no">—</span></td>
+              <td class="center"><span class="no">$50/mo</span></td>
+            </tr>
+            <tr>
+              <td class="role">Rezi / Resume.io</td>
+              <td class="center"><span class="no">—</span></td>
+              <td class="center"><span class="partial">generic</span></td>
+              <td class="center"><span class="no">—</span></td>
+              <td class="center"><span class="yes">✓</span></td>
+              <td class="center"><span class="partial">$15/mo</span></td>
+            </tr>
+            <tr class="us">
+              <td class="role">GitHired</td>
+              <td class="center"><span class="yes">✓</span></td>
+              <td class="center"><span class="yes">✓</span></td>
+              <td class="center"><span class="yes">✓</span></td>
+              <td class="center"><span class="yes">✓</span></td>
+              <td class="center"><span class="yes">$10/mo</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- §06 Model -->
+    <section class="doc-section" id="model">
+      <div class="sec-num">Section 06</div>
+      <h2 class="sec-h">Business <em>model</em> &amp; pricing</h2>
+      <p class="prose">
+        Three tiers — kept simple on purpose. The Base tier is on probation; if its conversion
+        is &lt;10% vs. Premium after 90 days, fold its features into Free or Premium and drop it.
+        The job search is intermittent; the pricing has to feel like a tool the user picks up
+        for two months, not a perpetual subscription they forget to cancel.
+      </p>
+
+      <div class="tier-grid">
+        <div class="tier">
+          <div class="tier-name">Free</div>
+          <div class="tier-price">$0<span class="per"> · forever</span></div>
+          <div class="tier-tag">Try the pipeline.</div>
+          <ul>
+            <li>Up to 10 active applications</li>
+            <li>Kanban board, columns, comments</li>
+            <li>URL scrape &amp; normalise</li>
+            <li class="off">AI resume tailoring</li>
+            <li class="off">AI cover letter generation</li>
+            <li class="off">PDF download</li>
+            <li>Interview tracker</li>
+          </ul>
+        </div>
+
+        <div class="tier">
+          <div class="tier-name">Base</div>
+          <div class="tier-price">$5<span class="per"> / mo · $50 / yr</span></div>
+          <div class="tier-tag">Unlock the workflow, not the AI.</div>
+          <ul>
+            <li>Unlimited active applications</li>
+            <li>Kanban board, columns, comments</li>
+            <li>URL scrape &amp; normalise</li>
+            <li class="off">AI resume tailoring</li>
+            <li class="off">AI cover letter generation</li>
+            <li>PDF download (uploaded resume)</li>
+            <li>Interview tracker</li>
+          </ul>
+        </div>
+
+        <div class="tier featured">
+          <div class="tier-name">Premium</div>
+          <div class="tier-price">$10<span class="per"> / mo · $100 / yr</span></div>
+          <div class="tier-tag">The whole product. <em>This is the one.</em></div>
+          <ul>
+            <li>Unlimited everything</li>
+            <li>AI resume tailoring (with transparency report)</li>
+            <li>AI cover letter generation (with transparency report)</li>
+            <li>PDF download &amp; combined export</li>
+            <li>Snapshot lock + version history</li>
+            <li>BYO OpenAI / Anthropic key option</li>
+            <li>Browser extension (v2)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub-h">Revenue lines, in priority order</h3>
+      <ol class="tight">
+        <li><strong>Subscription</strong> — the entire business until ~$10k MRR. Two-month average tenure is the working assumption for the active job seeker; LTV ≈ $20.</li>
+        <li><strong>Annual plans</strong> — 17% discount. Materially smoothes cash flow; the user finishes their job search but the renewal isn't a monthly decision they re-evaluate.</li>
+        <li><strong>BYO-key tier</strong> — for power users who want to pay OpenAI directly. Same monthly subscription, no per-generation cost on GitHired's side. Margin protector.</li>
+        <li><strong>Career-coach / bootcamp partnerships</strong> — affiliate or co-branded boards. Higher-touch but loyal; v1.5 question.</li>
+      </ol>
+      <p class="prose">
+        <strong>Explicitly rejected:</strong> selling resume data, recruiter-side products,
+        "personalised job alerts" funded by sponsored postings. The user's CV is the most
+        sensitive PII the product holds; the moment it becomes a product input on the other side
+        of the table, trust evaporates.
+      </p>
+    </section>
+
+    <!-- §07 GTM -->
+    <section class="doc-section" id="gtm">
+      <div class="sec-num">Section 07</div>
+      <h2 class="sec-h">Go-to-<em>market</em></h2>
+      <p class="prose">
+        Organic before paid. Each Reddit comment, LinkedIn reply, and HN thread teaches which
+        words the user actually uses to describe the pain — and that language becomes the
+        landing-page copy, the ad copy, the onboarding microcopy. Paid is fast but expensive
+        <em>without that language</em>: $500 in Google Ads with generic copy = 0 conversions
+        and 0 learning.
+      </p>
+      <p class="prose">
+        <strong>Rule of thumb:</strong> don't spend a dollar on paid until ~100 organic signups
+        and the founder can recite the top 3 reasons people sign up without looking at notes.
+      </p>
+
+      <div class="channel-grid">
+        <div class="channel-tier is-featured">
+          <div class="ct-name">Tier 1 · Start here</div>
+          <div class="ct-title">Organic, high-signal</div>
+          <div class="ch">
+            <div class="ch-name">Reddit</div>
+            <div class="ch-desc">r/cscareerquestions, r/jobs, r/resumes, r/EngineeringResumes, r/jobsearchhacks, r/recruitinghell. Lead with the problem, link to free tier.</div>
+            <span class="ch-time">30 min/day · 5×/wk</span>
+          </div>
+          <div class="ch">
+            <div class="ch-name">LinkedIn posts</div>
+            <div class="ch-desc">"Why I built this" + screenshots. The job-seeker audience already lives here.</div>
+            <span class="ch-time">1–2 hr/week</span>
+          </div>
+          <div class="ch">
+            <div class="ch-name">Show HN</div>
+            <div class="ch-desc">One-shot launch. Front-page hit = thousands of signups. Only fire once onboarding is bulletproof.</div>
+            <span class="ch-time">1 day prep + live-reply</span>
+          </div>
+          <div class="ch">
+            <div class="ch-name">Product Hunt</div>
+            <div class="ch-desc">Tuesday or Wednesday launch. Pairs well with Show HN.</div>
+            <span class="ch-time">1 week prep</span>
+          </div>
+        </div>
+
+        <div class="channel-tier">
+          <div class="ct-name">Tier 2 · After week 4</div>
+          <div class="ct-title">Compounding</div>
+          <div class="ch">
+            <div class="ch-name">SEO content</div>
+            <div class="ch-desc">Long-tail posts: "how to tailor a resume for a senior backend role". Compounds over 3–6 months.</div>
+            <span class="ch-time">2–3 hr/post</span>
+          </div>
+          <div class="ch">
+            <div class="ch-name">Indie Hackers</div>
+            <div class="ch-desc">Build-in-public posts about MRR, conversion, churn. Community is friendly to founders.</div>
+            <span class="ch-time">30 min/week</span>
+          </div>
+          <div class="ch">
+            <div class="ch-name">YouTube demo</div>
+            <div class="ch-desc">One 60–90 second "tailor a resume in 30 seconds" video pays for itself across every channel.</div>
+            <span class="ch-time">3–4 hr/video</span>
+          </div>
+        </div>
+
+        <div class="channel-tier">
+          <div class="ct-name">Tier 3 · After validation</div>
+          <div class="ct-title">Paid, with proof</div>
+          <div class="ch">
+            <div class="ch-name">Google Ads</div>
+            <div class="ch-desc">"resume builder", "AI cover letter generator", "job application tracker". Don't start until ≥5% landing-page signup rate.</div>
+            <span class="ch-time">$2–6 CPC</span>
+          </div>
+          <div class="ch">
+            <div class="ch-name">LinkedIn Ads</div>
+            <div class="ch-desc">Expensive ($10+ CPC), precise targeting. Only worth it with a clear ICP and &gt;$10 ARPU.</div>
+            <span class="ch-time">conditional</span>
+          </div>
+          <div class="ch">
+            <div class="ch-name">Bootcamp partnerships</div>
+            <div class="ch-desc">Co-marketing or affiliate with career coaches and coding bootcamps. Higher-touch but loyal.</div>
+            <span class="ch-time">v1.5</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-h">Channels we skip</h3>
+      <ul class="tight">
+        <li><strong>TikTok / Reels.</strong> High effort, wrong audience demographics for paid SaaS.</li>
+        <li><strong>Cold email to recruiters.</strong> Not our customer.</li>
+        <li><strong>TechCrunch / press outreach.</strong> Irrelevant at this stage; founders who chase press before traction burn months.</li>
+      </ul>
+
+      <h3 class="sub-h">Founder's edge as competitive advantage</h3>
+      <div class="pull-quote">
+        "Comment what's missing, I'll ship it this week."
+      </div>
+      <p class="prose">
+        Teal, Huntr, and Simplify have product teams and roadmaps. A solo founder can ship the
+        feature the same day a user requests it — that response time, repeated on Reddit and
+        LinkedIn, out-converts any feature list. Speed of iteration is the GTM.
+      </p>
+    </section>
+
+    <!-- §08 Metrics -->
+    <section class="doc-section" id="metrics">
+      <div class="sec-num">Section 08</div>
+      <h2 class="sec-h">North-star <em>metrics</em></h2>
+      <p class="prose">
+        Set up <code>PostHog</code> or <code>Plausible</code> before driving any traffic. Vanity
+        metrics (signups, traffic) are noise; the numbers below are the ones that move the
+        business.
+      </p>
+
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-label">Landing → signup</div>
+          <div class="metric-value">5%+</div>
+          <div class="metric-why">Below this, fix copy before driving more traffic.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Signup → activation</div>
+          <div class="metric-value">40%+</div>
+          <div class="metric-why">First tailored resume. Below this, fix onboarding.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Free → paid</div>
+          <div class="metric-value">3–5%</div>
+          <div class="metric-why">SaaS benchmark. Below this, free is too generous or paid too expensive.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Day-7 retention</div>
+          <div class="metric-value">30%+</div>
+          <div class="metric-why">Job search is intermittent; anything above 30% is healthy.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">MRR by day 90</div>
+          <div class="metric-value">$500</div>
+          <div class="metric-why">~50–100 paid users. Achievable from Reddit + HN alone.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §09 Stack -->
+    <section class="doc-section" id="stack">
+      <div class="sec-num">Section 09</div>
+      <h2 class="sec-h">Stack &amp; <em>rails</em></h2>
+      <ul class="tight">
+        <li><strong>Backend</strong> — <code>Go 1.26</code> + Gin + <code>golang-migrate</code>. Postgres 16 on RDS. Single-AZ at launch — multi-AZ flips the moment a paying customer signs up.</li>
+        <li><strong>Frontend</strong> — <code>React 19</code> + TypeScript + Tailwind 4 + Zustand. <code>dnd-kit</code> for the Kanban drag-and-drop.</li>
+        <li><strong>AI</strong> — OpenAI GPT-4o as the default. Provider-agnostic from day one: BYO-key tier supports Claude. The product never assumes one model.</li>
+        <li><strong>Scraping</strong> — Playwright (headless Chromium) with Cheerio fallback for static pages. Official APIs (Greenhouse, Lever) preferred where they exist.</li>
+        <li><strong>Storage</strong> — S3 for generated PDFs. PDFs are immutable; the JSON is the source of truth.</li>
+        <li><strong>Infra</strong> — EC2 + Docker on AWS (us-east-1, two AZs). ALB termination, private subnets. Plain <code>docker compose</code>. <em>ECS / EKS is a v2 question, not a launch question.</em></li>
+        <li><strong>Secrets</strong> — AWS Secrets Manager; user-data renders <code>.env</code> on boot. Rotation = reboot, not redeploy.</li>
+        <li><strong>Analytics</strong> — PostHog from day one. CloudWatch alarms ship before public signups, not after.</li>
+      </ul>
+      <p class="prose">
+        Architecture principle: the cost of a system isn't its AWS bill — it's the surface area
+        the founder has to keep in their head. Every "should we add X?" gets a counter-question:
+        <em>what signal am I waiting for that says X is worth the cost?</em> If there isn't a
+        signal, the answer is not now.
+      </p>
+    </section>
+
+    <!-- §10 Roadmap -->
+    <section class="doc-section" id="roadmap">
+      <div class="sec-num">Section 10</div>
+      <h2 class="sec-h">Roadmap — by <em>signal</em>, not by calendar</h2>
+      <p class="prose">
+        Calendar dates are a smell. Each phase ships when the gate signal from the previous one
+        is hit. The MVP build (Phases 1–6 in the PRD) is the v1.0 line below.
+      </p>
+
+      <div class="phase">
+        <div class="phase-head">
+          <h4>v1.0 — <em>"I can ship an application"</em></h4>
+          <span class="v">~12 weeks</span>
+        </div>
+        <ul class="tight">
+          <li>Auth, CV editor, cover-letter input.</li>
+          <li>Kanban board (drag-and-drop, user columns).</li>
+          <li>URL scrape + normalise (LinkedIn, Indeed, Greenhouse, Lever, Workday).</li>
+          <li>AI tailoring with transparency report (resume + cover letter).</li>
+          <li>Apply &amp; Confirm flow; snapshot lock; PDF export.</li>
+        </ul>
+      </div>
+      <div class="gate">
+        <span class="label">Gate →</span>
+        <span class="gate-text"><b>50 paid users</b> retained for <b>≥ 2 weeks</b>, with <b>≥ 5 tailored applications each</b>.</span>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <h4>v1.1 — <em>"It feels native"</em></h4>
+          <span class="v">post-gate</span>
+        </div>
+        <ul class="tight">
+          <li>Browser extension — capture postings from LinkedIn / Indeed / Greenhouse in one click.</li>
+          <li>CV upload via PDF / DOCX parsing.</li>
+          <li>OAuth (Google, GitHub).</li>
+          <li>Email verification non-blocking on day-1 use.</li>
+        </ul>
+      </div>
+      <div class="gate">
+        <span class="label">Gate →</span>
+        <span class="gate-text"><b>30% of new signups</b> install the extension within their first week, and extension-captured cards convert to <em>Applied</em> at <b>≥ 1.5×</b> the rate of URL-pasted ones.</span>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <h4>v1.2 — <em>"It tracks what comes after"</em></h4>
+          <span class="v">post-gate</span>
+        </div>
+        <ul class="tight">
+          <li>Email-thread tracking — auto-advance cards on recruiter replies.</li>
+          <li>Interview prep — AI question sets grounded in the posting + the user's resume.</li>
+          <li>Analytics dashboard — response rates by keyword, company, role type.</li>
+          <li>Cohort / coach mode — career coaches manage boards for multiple candidates.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- §11 Risk -->
+    <section class="doc-section" id="risk">
+      <div class="sec-num">Section 11</div>
+      <h2 class="sec-h">Risk <em>register</em></h2>
+
+      <div class="risk-grid">
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>AI hallucination</h5>
+            <span class="sev high">high</span>
+          </div>
+          <p>An LLM that invents experience is product-fatal in this category. One viral "GitHired lied on my resume" thread torches the brand.</p>
+          <div class="mit"><b>Mitigation —</b> strict prompts that ban invention; transparency report exposes every claim; user must verify before snapshot locks. Marketed as the "no-hallucination" tool — that becomes the headline benefit, not a defense.</div>
+        </div>
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>LLM cost at scale</h5>
+            <span class="sev med">medium</span>
+          </div>
+          <p>Per-generation OpenAI calls compound fast. A heavy Premium user can erode margin from comfortable to thin.</p>
+          <div class="mit"><b>Mitigation —</b> cache normalised postings (same JD → same parse); BYO-key tier for power users; generation caps on Free; consider self-hosted small model for normalisation in v1.2.</div>
+        </div>
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>Job-board anti-scraping</h5>
+            <span class="sev med">medium</span>
+          </div>
+          <p>LinkedIn and Workday actively block automated fetches; bot-detection arms races are expensive to lose.</p>
+          <div class="mit"><b>Mitigation —</b> manual paste fallback is always one click away — the scrape is convenience, not load-bearing. Browser extension (v1.1) sidesteps the scraping problem entirely.</div>
+        </div>
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>User-data sensitivity</h5>
+            <span class="sev high">high</span>
+          </div>
+          <p>Resumes are PII-dense. A breach is reputation-fatal in a market where trust is the entire moat.</p>
+          <div class="mit"><b>Mitigation —</b> encryption at rest &amp; in transit; never share resume content with third parties; one-click export &amp; delete-account; published incident-response policy; never store OpenAI prompts long-term.</div>
+        </div>
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>Intermittent demand</h5>
+            <span class="sev med">medium</span>
+          </div>
+          <p>Users cancel the moment they land a job. Two-month average tenure caps LTV; aggressive paid acquisition becomes uneconomic fast.</p>
+          <div class="mit"><b>Mitigation —</b> annual plan with 17% discount smooths churn; "pause subscription for 3 months" instead of full cancel; referral credit for the friend they recommend post-hire.</div>
+        </div>
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>Solo-founder bandwidth</h5>
+            <span class="sev med">medium</span>
+          </div>
+          <p>Support, ops, growth, and engineering on one operator. Burnout is the failure mode, not lack of demand.</p>
+          <div class="mit"><b>Mitigation —</b> hard scope ceiling at v1.0; ship-fast iteration on Reddit / LinkedIn feedback is the GTM; outsource support emails before scaling paid channels.</div>
+        </div>
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>Base tier dead-zone</h5>
+            <span class="sev low">low</span>
+          </div>
+          <p>The $5/mo Base tier may be a dead zone — users either stay Free or jump straight to Premium.</p>
+          <div class="mit"><b>Mitigation —</b> watch the funnel; if Base &lt; 10% of paid after 90 days, fold its features into Free or Premium and drop the tier entirely.</div>
+        </div>
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>Big-tech entry</h5>
+            <span class="sev low">low</span>
+          </div>
+          <p>LinkedIn or OpenAI ships "AI resume tailoring" as a free feature inside an existing product.</p>
+          <div class="mit"><b>Mitigation —</b> default features by big platforms are generic by definition; the moat is the transparency report and the pipeline workflow, neither of which is a single-feature add. Speed of iteration outpaces big-co release cycles.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- §12 One sentence -->
+    <section class="doc-section" id="one">
+      <div class="sec-num">Section 12</div>
+      <h2 class="sec-h">One <em>sentence</em></h2>
+      <div class="one-sentence">
+        <p>
+          GitHired is the job-search workflow that <em>tailors every application</em>
+          and <strong>shows you, line by line, exactly why every word made the cut</strong> —
+          so you can defend it in the interview.
+        </p>
+      </div>
+    </section>
+
+  </article>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="colo">
+  <div>GitHired · Business Plan · v0.1 · Revised 27 May 2026 · Synthesised from <code>PRD.md</code>, <code>MARKETING.md</code>, <code>ARCHITECTURE.md</code></div>
+  <div>
+    <a href="/githired/prd/">PRD →</a> &nbsp;·&nbsp;
+    <a href="/githired/marketing-plan/">Marketing →</a> &nbsp;·&nbsp;
+    <a href="/githired/oss-plan/">OSS Plan →</a> &nbsp;·&nbsp;
+    <a href="/">↑ Back to Backoffice</a>
+  </div>
+</footer>
+
+</body>
+</html>

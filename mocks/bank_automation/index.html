@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mocks · StackFlow redesign</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body style="background: var(--surface);">
+
+<div class="mock-index">
+
+  <div class="row gap-12 center mb-24">
+    <div class="brand-glyph" style="width: 40px; height: 40px;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 17l5-5 5 5 6-8"/></svg>
+    </div>
+    <div>
+      <div class="display-md">StackFlow · UI redesign</div>
+      <div class="caption">Static HTML mocks · open any screen in a browser</div>
+    </div>
+  </div>
+
+  <!-- Design notes -->
+  <div class="card padded mb-24">
+    <div class="title mb-8">What changed, and why</div>
+    <div class="body mt-12">
+      <p class="mt-12"><strong>The product is a personal-finance automation tool</strong> — Plaid-connected accounts, savings "buckets" with goals, and rule-based automations that fire on direct deposits, schedules, balance thresholds, round-ups, and transaction matches.</p>
+
+      <p class="mt-12"><strong>Diagnosis of the current UI.</strong> The existing screens are functional but generic: the dashboard is a wall of cards with no narrative, money flow (income → allocation → goals) is split across three pages and never visualized together, automation rules feel form-heavy rather than visual, and bucket goals show raw numbers but no on-track / behind / ETA framing. The aesthetic reads as "stock SaaS template," not "trusted financial companion."</p>
+
+      <p class="mt-12"><strong>Redesign moves:</strong></p>
+      <ul style="line-height: 1.7;">
+        <li><strong>Narrative dashboard.</strong> The hero answers <em>"where is my money, and where is it going?"</em> via a net-cash sparkline + a Sankey-like "your last paycheck, automated" flow diagram showing income splitting into buckets.</li>
+        <li><strong>Goals with status, not just totals.</strong> Every bucket card shows a color stripe, target, ETA, on-track / behind chip, and the rule funding it.</li>
+        <li><strong>Visual "When → Then" automations.</strong> Each rule renders as a two-card diagram (trigger chip → action chips) instead of a dense form readout, plus per-rule stats (fired count, lifetime moved).</li>
+        <li><strong>One money calendar.</strong> Paychecks, bills, subscriptions, and rule firings on one timeline + a side panel projecting the month's free cash.</li>
+        <li><strong>Inline allocation in transactions.</strong> A purchase shows the round-up that went to Vacation; a paycheck shows the three rules it triggered. Money is contextual, not abstract.</li>
+        <li><strong>Warmer, calmer aesthetic.</strong> Off-white background, warm neutrals, deep emerald accent (money / growth / trust), earth-tone palette for buckets so each goal has a stable identity. Generous whitespace, confident tabular numerals, Inter throughout.</li>
+        <li><strong>Three-step wizard for new rules.</strong> Trigger → Action → Review, with a live preview that reads as a sentence ("When a direct deposit ≥ $1,000 lands in Chase Checking, then…").</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="title mb-16">Screens</div>
+
+  <div class="mock-grid">
+    <a class="mock-tile" href="landing.html">
+      <div class="num">00</div>
+      <h3>Marketing landing</h3>
+      <p>Public hero, product shot, features, social proof, CTA.</p>
+    </a>
+    <a class="mock-tile" href="dashboard.html">
+      <div class="num">01</div>
+      <h3>Dashboard</h3>
+      <p>Net-cash hero, paycheck flow diagram, goals, upcoming events.</p>
+    </a>
+    <a class="mock-tile" href="accounts.html">
+      <div class="num">02</div>
+      <h3>Accounts</h3>
+      <p>Institutions grouped, sync state, bucket breakdown bar, KPIs.</p>
+    </a>
+    <a class="mock-tile" href="buckets.html">
+      <div class="num">03</div>
+      <h3>Buckets</h3>
+      <p>Goal cards with progress, ETA, and on-track status; subscription table.</p>
+    </a>
+    <a class="mock-tile" href="bucket-detail.html">
+      <div class="num">04</div>
+      <h3>Bucket detail</h3>
+      <p>Drill-in: growth chart with target line, funding rules, activity log.</p>
+    </a>
+    <a class="mock-tile" href="automations.html">
+      <div class="num">05</div>
+      <h3>Automations</h3>
+      <p>Rule cards with When → Then visualization, per-rule stats, templates.</p>
+    </a>
+    <a class="mock-tile" href="create-automation.html">
+      <div class="num">06</div>
+      <h3>Create automation</h3>
+      <p>Three-step wizard with live sentence preview.</p>
+    </a>
+    <a class="mock-tile" href="calendar.html">
+      <div class="num">07</div>
+      <h3>Calendar</h3>
+      <p>Month view with color-coded events; today summary + month projection.</p>
+    </a>
+    <a class="mock-tile" href="transactions.html">
+      <div class="num">08</div>
+      <h3>Transactions</h3>
+      <p>Date-grouped list with allocation inline, filter chips, summary KPIs.</p>
+    </a>
+    <a class="mock-tile" href="profile.html">
+      <div class="num">09</div>
+      <h3>Profile</h3>
+      <p>Money-story view: hero, savings activity heatmap, milestones, badges, records.</p>
+    </a>
+    <a class="mock-tile" href="settings.html">
+      <div class="num">10</div>
+      <h3>Settings</h3>
+      <p>Profile fields, notifications, connected banks, plan & billing.</p>
+    </a>
+  </div>
+
+  <div class="caption" style="margin-top: 48px; text-align: center;">
+    Mocks use static demo data. Open in any modern browser — no build step.
+  </div>
+
+  <div class="title mb-16" style="margin-top: 64px;">Business</div>
+  <div class="body mb-16" style="color: var(--text-2);">
+    Planning, strategy, and go-to-launch documents. Lives alongside the UI mocks so design and business questions stay in one place.
+  </div>
+
+  <div class="mock-grid">
+    <a class="mock-tile" href="business/index.html">
+      <div class="num">B0</div>
+      <h3>Business index</h3>
+      <p>Catalog of strategy &amp; launch-planning docs.</p>
+    </a>
+    <a class="mock-tile" href="business/production-launch.html">
+      <div class="num">B1</div>
+      <h3>Production launch plan</h3>
+      <p>What it takes to go live with real money: legal stack + Plaid production &amp; Transfer access.</p>
+    </a>
+  </div>
+
+</div>
+
+</body>
+</html>

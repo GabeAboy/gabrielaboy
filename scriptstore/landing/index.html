@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>I Need A Script — the open script library for modern developers</title>
+  <meta name="description" content="Free, public marketplace for the small useful programs you write every day — bash, Python, Go, Claude skills, MCP server configs, system prompts. Search, copy, share. No tiers, ever." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    html, body { margin: 0; padding: 0; }
+    body { background: #ffffff; }
+
+    .gls {
+      --bg:          #ffffff;
+      --bg-alt:      #fafafa;
+      --bg-soft:     #f4f4f6;
+      --ink:         #1f1e24;
+      --ink-2:       #2f2e33;
+      --body:        #4b4a55;
+      --muted:       #898792;
+      --line:        #e5e5ea;
+      --line-strong: #c3c3cb;
+      --orange:      #fc6d26;
+      --orange-2:    #e24329;
+      --orange-deep: #c93a14;
+      --orange-soft: #fff1ea;
+      --purple:      #6b4fbb;
+      --purple-soft: #f0eaff;
+      --green:       #1aaa55;
+      --green-soft:  #e7f8ee;
+
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    .gls * { box-sizing: border-box; }
+    .gls a { color: inherit; text-decoration: none; }
+
+    .gls-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 28px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .gls-brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
+    .gls-brand-mark {
+      width: 24px; height: 24px;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%);
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 700; font-size: 11px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .gls-nav-links { display: flex; align-items: center; gap: 24px; font-size: 13.5px; color: var(--body); }
+    .gls-nav-links a { cursor: pointer; }
+    .gls-nav-links a:hover { color: var(--ink); }
+    .gls-nav-cta { display: flex; align-items: center; gap: 10px; }
+    @media (max-width: 760px) {
+      .gls-nav-links { display: none; }
+      .gls-nav { padding: 12px 18px; }
+    }
+
+    .gls-btn {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px; font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid transparent;
+    }
+    .gls-btn-ghost { color: var(--ink); }
+    .gls-btn-ghost:hover { background: var(--bg-soft); }
+    .gls-btn-secondary {
+      background: white; color: var(--ink);
+      border-color: var(--line-strong);
+    }
+    .gls-btn-secondary:hover { border-color: var(--ink); }
+    .gls-btn-primary {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%);
+      color: white; font-weight: 500;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05), 0 2px 4px rgba(252,109,38,0.25);
+    }
+    .gls-btn-primary:hover {
+      background: linear-gradient(135deg, var(--orange-2) 0%, var(--orange-deep) 100%);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05), 0 6px 14px rgba(252,109,38,0.35);
+      transform: translateY(-1px);
+    }
+    .gls-btn-lg { padding: 12px 22px; font-size: 14px; }
+
+    .gls-hero {
+      position: relative;
+      padding: 88px 48px 56px;
+      background: var(--bg);
+      overflow: hidden;
+    }
+    .gls-hero::before {
+      content: ""; position: absolute; top: -200px; right: -120px;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(252,109,38,0.13) 0%, transparent 65%);
+      z-index: 0;
+    }
+    .gls-hero::after {
+      content: ""; position: absolute; top: 80px; left: -200px;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(107,79,187,0.12) 0%, transparent 65%);
+      z-index: 0;
+    }
+    .gls-hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1100px; margin: 0 auto;
+      text-align: center;
+    }
+    @media (max-width: 880px) { .gls-hero { padding: 56px 24px 36px; } }
+
+    .gls-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 5px 12px 5px 5px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 12px; color: var(--body);
+      margin-bottom: 24px;
+      animation: gls-fade 0.7s 0s both;
+    }
+    .gls-eyebrow-tag {
+      background: var(--orange-soft); color: var(--orange-2);
+      padding: 2px 9px; border-radius: 100px;
+      font-size: 11px; font-weight: 600;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .gls-h1 {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 600;
+      font-size: clamp(36px, 5.5vw, 60px);
+      line-height: 1.05; letter-spacing: -0.025em;
+      color: var(--ink);
+      margin: 0 auto 18px;
+      max-width: 18ch;
+      animation: gls-fade 0.8s 0.05s both;
+    }
+    .gls-h1 .grad {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 60%, var(--purple) 130%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .gls-deck {
+      font-size: 18px; line-height: 1.55;
+      color: var(--body);
+      max-width: 56ch; margin: 0 auto 28px;
+      animation: gls-fade 0.9s 0.12s both;
+    }
+    .gls-hero-cta {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 14px;
+      animation: gls-fade 0.9s 0.18s both;
+    }
+    .gls-hero-foot {
+      font-size: 12px; color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+      animation: gls-fade 0.9s 0.24s both;
+    }
+    .gls-hero-foot strong { color: var(--green); font-weight: 600; }
+
+    .gls-preview-stage {
+      position: relative; z-index: 1;
+      max-width: 1080px;
+      margin: 48px auto 0;
+      padding: 0 24px;
+      animation: gls-rise 1s 0.3s both;
+    }
+    .gls-preview {
+      background: white;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px -20px rgba(31, 30, 36, 0.25), 0 8px 16px -8px rgba(31, 30, 36, 0.1);
+    }
+    .gls-prev-chrome {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px;
+      background: var(--bg-soft);
+      border-bottom: 1px solid var(--line);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px; color: var(--muted);
+    }
+    .gls-prev-chrome .dots { display: flex; gap: 6px; }
+    .gls-prev-chrome .dots span {
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--line-strong);
+    }
+    .gls-prev-url {
+      flex: 1; padding: 5px 12px;
+      background: white; border: 1px solid var(--line); border-radius: 6px;
+      font-size: 11px; color: var(--body);
+    }
+    .gls-prev-url::before { content: "🔒 "; opacity: 0.5; }
+    .gls-prev-body {
+      display: grid; grid-template-columns: 220px 1fr; min-height: 380px;
+    }
+    @media (max-width: 760px) { .gls-prev-body { grid-template-columns: 1fr; } .gls-prev-side { display: none; } }
+    .gls-prev-side {
+      background: var(--bg-alt);
+      border-right: 1px solid var(--line);
+      padding: 20px 18px;
+      font-size: 13px;
+    }
+    .gls-prev-side h4 {
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); font-weight: 600;
+      margin: 0 0 10px;
+    }
+    .gls-prev-side .item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 7px 10px; border-radius: 6px;
+      color: var(--body);
+      margin-bottom: 2px;
+    }
+    .gls-prev-side .item.on { background: var(--orange-soft); color: var(--orange-2); font-weight: 500; }
+    .gls-prev-side .item .n { font-size: 11px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
+    .gls-prev-side .item.on .n { color: var(--orange-2); }
+    .gls-prev-side .sep { height: 1px; background: var(--line); margin: 14px 0; }
+
+    .gls-prev-main { padding: 22px 26px; }
+    .gls-prev-search {
+      display: flex; gap: 8px;
+      padding: 9px 12px;
+      background: var(--bg-alt);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 13px; color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .gls-prev-search::before { content: "⌕"; font-size: 16px; }
+    .gls-prev-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    }
+    @media (max-width: 600px) { .gls-prev-grid { grid-template-columns: 1fr; } }
+    .gls-prev-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: white;
+      transition: all 0.2s ease;
+    }
+    .gls-prev-card:hover { border-color: var(--orange); transform: translateY(-2px); box-shadow: 0 8px 16px -8px rgba(252,109,38,0.18); }
+    .gls-prev-card-h {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 6px;
+    }
+    .gls-prev-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
+      padding: 2px 8px; border-radius: 4px;
+    }
+    .gls-prev-tag.bash { background: var(--bg-soft); color: var(--ink); }
+    .gls-prev-tag.python { background: #e7f0ff; color: #1f4ea3; }
+    .gls-prev-tag.claude { background: var(--orange-soft); color: var(--orange-2); }
+    .gls-prev-tag.mcp { background: var(--purple-soft); color: var(--purple); }
+    .gls-prev-card-meta { font-size: 11px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
+    .gls-prev-card-title { font-size: 14px; font-weight: 500; color: var(--ink); margin: 4px 0; line-height: 1.35; }
+    .gls-prev-card-desc { font-size: 12px; color: var(--body); line-height: 1.45; margin-bottom: 10px; }
+    .gls-prev-card-foot { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
+
+    .gls-trust {
+      padding: 28px 48px;
+      background: var(--bg-alt);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .gls-trust-label { font-size: 12px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
+    .gls-trust-logos {
+      display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600; font-size: 14px;
+      color: var(--ink-2);
+      opacity: 0.85;
+    }
+    .gls-trust-logos span { display: inline-flex; align-items: center; gap: 6px; }
+    .gls-trust-logos .d { width: 4px; height: 4px; background: var(--line-strong); border-radius: 50%; }
+
+    .gls-sec {
+      padding: 80px 48px;
+      position: relative;
+    }
+    @media (max-width: 880px) { .gls-sec { padding: 56px 24px; } }
+    .gls-sec-alt { background: var(--bg-alt); }
+    .gls-sec-head {
+      max-width: 720px; margin: 0 auto 48px; text-align: center;
+    }
+    .gls-sec-eye {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--orange-2);
+      margin-bottom: 14px;
+    }
+    .gls-sec-h2 {
+      font-size: clamp(28px, 3.6vw, 38px);
+      font-weight: 600; line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 0 0 14px;
+    }
+    .gls-sec-p {
+      font-size: 16px; color: var(--body); line-height: 1.6;
+      margin: 0 auto; max-width: 56ch;
+    }
+
+    .gls-features {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      max-width: 1080px; margin: 0 auto;
+    }
+    @media (max-width: 880px) { .gls-features { grid-template-columns: 1fr; } }
+    .gls-feat {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 28px 24px;
+      transition: all 0.2s ease;
+    }
+    .gls-feat:hover {
+      border-color: var(--line-strong);
+      box-shadow: 0 12px 24px -12px rgba(31, 30, 36, 0.12);
+      transform: translateY(-2px);
+    }
+    .gls-feat-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 18px;
+    }
+    .gls-feat-icon.orange { background: var(--orange-soft); color: var(--orange-2); }
+    .gls-feat-icon.purple { background: var(--purple-soft); color: var(--purple); }
+    .gls-feat-icon.green  { background: var(--green-soft); color: var(--green); }
+    .gls-feat h3 {
+      font-size: 18px; font-weight: 600; line-height: 1.3;
+      color: var(--ink); margin: 0 0 8px;
+    }
+    .gls-feat p {
+      font-size: 14px; color: var(--body); line-height: 1.6; margin: 0 0 14px;
+    }
+    .gls-feat-link {
+      font-size: 13px; font-weight: 500;
+      color: var(--orange-2);
+      display: inline-flex; align-items: center; gap: 5px;
+      cursor: pointer;
+    }
+    .gls-feat-link:hover { color: var(--orange-deep); }
+
+    .gls-twoup {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+      align-items: center;
+      max-width: 1080px; margin: 0 auto;
+    }
+    .gls-twoup.flip { direction: rtl; }
+    .gls-twoup.flip > * { direction: ltr; }
+    @media (max-width: 880px) {
+      .gls-twoup { grid-template-columns: 1fr; gap: 32px; }
+      .gls-twoup.flip { direction: ltr; }
+    }
+    .gls-twoup-eye {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--orange-2); margin-bottom: 12px;
+    }
+    .gls-twoup h2 {
+      font-size: clamp(26px, 3.2vw, 34px);
+      font-weight: 600; line-height: 1.18;
+      letter-spacing: -0.018em;
+      color: var(--ink);
+      margin: 0 0 14px;
+    }
+    .gls-twoup p {
+      font-size: 15.5px; color: var(--body); line-height: 1.6;
+      margin: 0 0 16px;
+    }
+    .gls-bullets { list-style: none; padding: 0; margin: 12px 0 22px; }
+    .gls-bullets li {
+      display: flex; gap: 10px; align-items: start;
+      font-size: 14px; color: var(--body);
+      padding: 6px 0;
+    }
+    .gls-bullets li::before {
+      content: "✓"; color: var(--green); font-weight: 700;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    .gls-mini-pv {
+      background: white;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -16px rgba(31, 30, 36, 0.18);
+    }
+    .gls-mini-chrome {
+      background: var(--bg-soft);
+      border-bottom: 1px solid var(--line);
+      padding: 8px 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; color: var(--muted);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .gls-mini-chrome .dot {
+      width: 9px; height: 9px; border-radius: 50%; background: var(--line-strong);
+    }
+    .gls-mini-body { padding: 18px; }
+
+    .gls-form-row { margin-bottom: 14px; }
+    .gls-form-label {
+      font-size: 11px; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      font-family: 'IBM Plex Mono', monospace;
+      display: block; margin-bottom: 6px;
+    }
+    .gls-form-input {
+      width: 100%; padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: 13px; font-family: 'IBM Plex Sans', sans-serif;
+      background: white;
+      color: var(--ink);
+    }
+    .gls-form-input.code {
+      font-family: 'IBM Plex Mono', monospace;
+      background: #1f1e24; color: #f5f5f7;
+      font-size: 12px; line-height: 1.55;
+      padding: 12px;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .gls-chip-row { display: flex; gap: 6px; margin-top: 6px; }
+    .gls-chip {
+      font-size: 11px; padding: 3px 9px; border-radius: 12px;
+      background: var(--orange-soft); color: var(--orange-2);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .gls-ai {
+      padding: 80px 48px;
+      background: linear-gradient(135deg, #1f1e24 0%, #2f1e3a 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .gls-ai::before {
+      content: ""; position: absolute; bottom: -200px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(252,109,38,0.25) 0%, transparent 70%);
+    }
+    .gls-ai::after {
+      content: ""; position: absolute; top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(107,79,187,0.3) 0%, transparent 70%);
+    }
+    .gls-ai-inner { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; }
+    .gls-ai-eye {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 16px;
+      font-weight: 600;
+    }
+    .gls-ai h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 600; line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin: 0 0 16px;
+      max-width: 22ch;
+    }
+    .gls-ai h2 .grad {
+      background: linear-gradient(135deg, var(--orange) 0%, #ff9d6c 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .gls-ai p {
+      font-size: 17px; line-height: 1.6;
+      color: rgba(255,255,255,0.75);
+      max-width: 60ch;
+      margin: 0 0 28px;
+    }
+    .gls-ai p code {
+      font-family: 'IBM Plex Mono', monospace;
+      background: rgba(255,255,255,0.08);
+      padding: 3px 8px; border-radius: 5px;
+      color: var(--orange); font-size: 14px;
+    }
+    .gls-ai-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+      margin-top: 28px;
+    }
+    @media (max-width: 700px) { .gls-ai-grid { grid-template-columns: repeat(2, 1fr); } }
+    .gls-ai-stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 18px 16px;
+    }
+    .gls-ai-stat .n {
+      font-size: 28px; font-weight: 600; color: white;
+      letter-spacing: -0.015em;
+    }
+    .gls-ai-stat .l {
+      font-size: 12px; color: rgba(255,255,255,0.65);
+      margin-top: 4px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .gls-stats {
+      padding: 56px 48px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+      max-width: 1080px; margin: 0 auto;
+    }
+    @media (max-width: 700px) { .gls-stats { grid-template-columns: repeat(2, 1fr); padding: 36px 24px; } }
+    .gls-stat .n {
+      font-size: 44px; font-weight: 600; color: var(--ink);
+      letter-spacing: -0.025em; line-height: 1;
+    }
+    .gls-stat .n .grad {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .gls-stat .l {
+      font-size: 13px; color: var(--body);
+      margin-top: 8px;
+    }
+
+    .gls-final {
+      padding: 96px 48px;
+      background: var(--bg-alt);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .gls-final::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(252,109,38,0.08) 0%, transparent 60%);
+    }
+    .gls-final-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+    .gls-final h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 600; line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 0 0 14px;
+    }
+    .gls-final p { font-size: 16px; color: var(--body); margin: 0 0 28px; }
+    .gls-final .gls-hero-cta { margin-bottom: 0; }
+
+    .gls-foot {
+      padding: 56px 48px 28px;
+      background: white;
+      border-top: 1px solid var(--line);
+    }
+    .gls-foot-grid {
+      display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 32px;
+      margin-bottom: 36px;
+      max-width: 1080px;
+      margin-left: auto; margin-right: auto;
+    }
+    @media (max-width: 880px) { .gls-foot-grid { grid-template-columns: repeat(2, 1fr); } }
+    .gls-foot-brand p {
+      font-size: 13px; color: var(--body); margin-top: 12px; max-width: 28ch;
+    }
+    .gls-foot-col h5 {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin: 0 0 12px;
+    }
+    .gls-foot-col ul { list-style: none; padding: 0; margin: 0; }
+    .gls-foot-col li { margin-bottom: 8px; font-size: 13.5px; color: var(--body); cursor: pointer; }
+    .gls-foot-col li:hover { color: var(--ink); }
+    .gls-foot-bot {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      font-size: 12px; color: var(--muted);
+      max-width: 1080px; margin: 0 auto;
+      flex-wrap: wrap; gap: 12px;
+    }
+
+    @keyframes gls-fade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes gls-rise {
+      from { opacity: 0; transform: translateY(40px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+  </style>
+</head>
+<body>
+<div class="gls">
+  <nav class="gls-nav">
+    <div class="gls-brand">
+      <div class="gls-brand-mark">{ }</div>
+      <span>I Need A Script</span>
+    </div>
+    <div class="gls-nav-links">
+      <a>Browse</a>
+      <a>Categories</a>
+      <a>Pricing</a>
+      <a>Docs</a>
+      <a>Blog</a>
+    </div>
+    <div class="gls-nav-cta">
+      <a class="gls-btn gls-btn-ghost">Sign in</a>
+      <a class="gls-btn gls-btn-primary">Sign up free</a>
+    </div>
+  </nav>
+
+  <section class="gls-hero">
+    <div class="gls-hero-inner">
+      <div class="gls-eyebrow">
+        <span class="gls-eyebrow-tag">NEW</span>
+        <span>First-class support for Claude skills and MCP configs</span>
+      </div>
+      <h1 class="gls-h1">The open script library for <span class="grad">modern developers</span>.</h1>
+      <p class="gls-deck">
+        A free, public marketplace for the small useful programs you write every day — bash, Python, Go, Claude skills, MCP server configs, system prompts. Search, copy, share. No tiers, ever.
+      </p>
+      <div class="gls-hero-cta">
+        <a class="gls-btn gls-btn-primary gls-btn-lg">Get started — it's free →</a>
+        <a class="gls-btn gls-btn-secondary gls-btn-lg">Browse the marketplace</a>
+      </div>
+      <div class="gls-hero-foot"><strong>Free forever.</strong> · GitHub sign-in · No credit card · 1,247 scripts and counting</div>
+    </div>
+
+    <div class="gls-preview-stage">
+      <div class="gls-preview">
+        <div class="gls-prev-chrome">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="gls-prev-url">ineedascript.dev/browse</div>
+        </div>
+        <div class="gls-prev-body">
+          <aside class="gls-prev-side">
+            <h4>Languages</h4>
+            <div class="item on"><span>All</span><span class="n">1,247</span></div>
+            <div class="item"><span>Bash</span><span class="n">312</span></div>
+            <div class="item"><span>Python</span><span class="n">288</span></div>
+            <div class="item"><span>Go</span><span class="n">94</span></div>
+            <div class="sep"></div>
+            <h4>AI Tooling</h4>
+            <div class="item"><span>Claude Skills</span><span class="n">184</span></div>
+            <div class="item"><span>MCP Configs</span><span class="n">72</span></div>
+            <div class="item"><span>System Prompts</span><span class="n">211</span></div>
+          </aside>
+          <div class="gls-prev-main">
+            <div class="gls-prev-search">Search 1,247 scripts…</div>
+            <div class="gls-prev-grid">
+              <div class="gls-prev-card">
+                <div class="gls-prev-card-h">
+                  <span class="gls-prev-card-meta">jane.doe</span>
+                  <span class="gls-prev-tag bash">BASH</span>
+                </div>
+                <div class="gls-prev-card-title">Rename Git branches by regex</div>
+                <div class="gls-prev-card-desc">Bulk-rename matching branches with a dry-run flag.</div>
+                <div class="gls-prev-card-foot"><span>↗ 312 copies</span><span>2d ago</span></div>
+              </div>
+              <div class="gls-prev-card">
+                <div class="gls-prev-card-h">
+                  <span class="gls-prev-card-meta">aiden.b</span>
+                  <span class="gls-prev-tag claude">CLAUDE SKILL</span>
+                </div>
+                <div class="gls-prev-card-title">PR review with a checklist</div>
+                <div class="gls-prev-card-desc">Reviews a diff against a configurable checklist.</div>
+                <div class="gls-prev-card-foot"><span>↗ 488 copies</span><span>5h ago</span></div>
+              </div>
+              <div class="gls-prev-card">
+                <div class="gls-prev-card-h">
+                  <span class="gls-prev-card-meta">miguel.a</span>
+                  <span class="gls-prev-tag python">PYTHON</span>
+                </div>
+                <div class="gls-prev-card-title">Diff two JSON files semantically</div>
+                <div class="gls-prev-card-desc">Ignores key order, colorized output, CI mode.</div>
+                <div class="gls-prev-card-foot"><span>↗ 207 copies</span><span>1w ago</span></div>
+              </div>
+              <div class="gls-prev-card">
+                <div class="gls-prev-card-h">
+                  <span class="gls-prev-card-meta">david.c</span>
+                  <span class="gls-prev-tag mcp">MCP CONFIG</span>
+                </div>
+                <div class="gls-prev-card-title">Local Postgres MCP server</div>
+                <div class="gls-prev-card-desc">Read-only access with safe-query filtering.</div>
+                <div class="gls-prev-card-foot"><span>↗ 691 copies</span><span>3d ago</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gls-trust">
+    <div class="gls-trust-label">Built for the tools you already use</div>
+    <div class="gls-trust-logos">
+      <span>BASH</span><span class="d"></span>
+      <span>PYTHON</span><span class="d"></span>
+      <span>NODE</span><span class="d"></span>
+      <span>GO</span><span class="d"></span>
+      <span>CLAUDE</span><span class="d"></span>
+      <span>CURSOR</span><span class="d"></span>
+      <span>MCP</span>
+    </div>
+  </div>
+
+  <section class="gls-sec">
+    <div class="gls-sec-head">
+      <div class="gls-sec-eye">Built for craft</div>
+      <h2 class="gls-sec-h2">Everything a snippet deserves — and nothing it doesn't.</h2>
+      <p class="gls-sec-p">No analytics dashboards, no upsells, no AI feature you didn't ask for. Just a clean, fast home for the scripts you actually use.</p>
+    </div>
+
+    <div class="gls-features">
+      <div class="gls-feat">
+        <div class="gls-feat-icon orange">⌘</div>
+        <h3>A real editor, not a textarea</h3>
+        <p>Monaco-powered code editor with syntax highlighting for every supported language. Tabs survive, comments survive, your dignity survives.</p>
+        <a class="gls-feat-link">Learn more →</a>
+      </div>
+      <div class="gls-feat">
+        <div class="gls-feat-icon purple">◆</div>
+        <h3>First-class AI tooling</h3>
+        <p>Claude skills, MCP server configs, system prompts, Cursor rules — all browseable, searchable, and copyable like any other script.</p>
+        <a class="gls-feat-link">See AI scripts →</a>
+      </div>
+      <div class="gls-feat">
+        <div class="gls-feat-icon green">∞</div>
+        <h3>Free, public, forever</h3>
+        <p>No tiers, no paywall, no "pro plan coming soon." We're an independent project, and we don't plan to change that.</p>
+        <a class="gls-feat-link">Read our promise →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="gls-sec gls-sec-alt">
+    <div class="gls-twoup">
+      <div>
+        <div class="gls-twoup-eye">Find</div>
+        <h2>The right script in seconds, not Gist-archaeology.</h2>
+        <p>Full-text search across titles, descriptions, and tags. Filter by language. Sort by newest or most copied. Land on a clean detail page with a one-click copy button.</p>
+        <ul class="gls-bullets">
+          <li>Postgres full-text search — fast and forgiving</li>
+          <li>Filter by language or AI-tooling type</li>
+          <li>Trending scripts surfaced on the homepage</li>
+          <li>Clean URLs you can share or bookmark</li>
+        </ul>
+        <a class="gls-btn gls-btn-secondary">Try the marketplace →</a>
+      </div>
+      <div class="gls-mini-pv">
+        <div class="gls-mini-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>ineedascript.dev/browse</span></div>
+        <div class="gls-mini-body">
+          <div class="gls-prev-search">Search 1,247 scripts…</div>
+          <div style="display: grid; grid-template-columns: 1fr; gap: 8px;">
+            <div class="gls-prev-card">
+              <div class="gls-prev-card-h">
+                <span class="gls-prev-card-meta">sara.k</span>
+                <span class="gls-prev-tag bash">BASH</span>
+              </div>
+              <div class="gls-prev-card-title">Pretty-print JSON from clipboard</div>
+              <div class="gls-prev-card-foot"><span>↗ 207 copies</span><span>1w ago</span></div>
+            </div>
+            <div class="gls-prev-card">
+              <div class="gls-prev-card-h">
+                <span class="gls-prev-card-meta">oliver.t</span>
+                <span class="gls-prev-tag" style="background:#e7f5ee; color:#1aaa55;">GO</span>
+              </div>
+              <div class="gls-prev-card-title">Tail a log with regex highlight</div>
+              <div class="gls-prev-card-foot"><span>↗ 154 copies</span><span>4d ago</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gls-sec">
+    <div class="gls-twoup flip">
+      <div>
+        <div class="gls-twoup-eye">Submit</div>
+        <h2>Paste, label, publish — in about sixty seconds.</h2>
+        <p>Sign in with GitHub. Paste your code. Add a title, a one-line description, and a language. Hit publish. The whole form fits on one screen, and we mean it.</p>
+        <ul class="gls-bullets">
+          <li>Markdown supported in descriptions</li>
+          <li>Tags for browsability — up to five</li>
+          <li>Edit, version, or retire your scripts anytime</li>
+          <li>Soft delete — never lose your work by accident</li>
+        </ul>
+        <a class="gls-btn gls-btn-primary">Submit your first script →</a>
+      </div>
+      <div class="gls-mini-pv">
+        <div class="gls-mini-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>ineedascript.dev/new</span></div>
+        <div class="gls-mini-body">
+          <div class="gls-form-row">
+            <label class="gls-form-label">Title</label>
+            <div class="gls-form-input">Rename Git branches in bulk by regex</div>
+          </div>
+          <div class="gls-form-row">
+            <label class="gls-form-label">Language</label>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <div class="gls-form-input" style="width:auto;padding:5px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;background:var(--bg-soft);">BASH ▾</div>
+              <div class="gls-chip-row">
+                <span class="gls-chip">git</span><span class="gls-chip">cli</span><span class="gls-chip">refactor</span>
+              </div>
+            </div>
+          </div>
+          <div class="gls-form-row">
+            <label class="gls-form-label">Code</label>
+            <div class="gls-form-input code">#!/usr/bin/env bash
+PATTERN="$1"
+git branch --list "$PATTERN" \
+  | while read b; do
+    git branch -m "$b" "${b}-new"
+  done</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gls-ai">
+    <div class="gls-ai-inner">
+      <div class="gls-ai-eye">— The agent era</div>
+      <h2>A proper home for <span class="grad">Claude skills, MCP configs, and prompts.</span></h2>
+      <p>
+        The new wave of dev tools produces a new kind of artifact — a Claude skill folder, an MCP server config, a battle-tested system prompt. They get lost in Twitter threads and Discord pins. I Need A Script treats them like first-class code. Browse them, copy them, drop a Claude skill straight into your <code>~/.claude/skills/</code> folder.
+      </p>
+      <div class="gls-hero-cta" style="justify-content:flex-start;">
+        <a class="gls-btn gls-btn-primary">Browse AI scripts →</a>
+        <a class="gls-btn" style="background:rgba(255,255,255,0.08); color:white; border:1px solid rgba(255,255,255,0.2);">Submit a Claude skill</a>
+      </div>
+
+      <div class="gls-ai-grid">
+        <div class="gls-ai-stat"><div class="n">184</div><div class="l">Claude Skills</div></div>
+        <div class="gls-ai-stat"><div class="n">72</div><div class="l">MCP Configs</div></div>
+        <div class="gls-ai-stat"><div class="n">211</div><div class="l">System Prompts</div></div>
+        <div class="gls-ai-stat"><div class="n">46</div><div class="l">Cursor Rules</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gls-stats">
+    <div class="gls-stat"><div class="n"><span class="grad">1,247</span></div><div class="l">Scripts in the marketplace</div></div>
+    <div class="gls-stat"><div class="n">18</div><div class="l">Supported languages &amp; formats</div></div>
+    <div class="gls-stat"><div class="n">9,840</div><div class="l">Copies in the last 30 days</div></div>
+    <div class="gls-stat"><div class="n">$0</div><div class="l">Forever &amp; for everyone</div></div>
+  </section>
+
+  <section class="gls-final">
+    <div class="gls-final-inner">
+      <div class="gls-sec-eye">— Join the registry</div>
+      <h2>Start with someone else's, or share your own.</h2>
+      <p>Free, public, fast. GitHub sign-in, no tiers, no upsells, no paywall coming later.</p>
+      <div class="gls-hero-cta">
+        <a class="gls-btn gls-btn-primary gls-btn-lg">Get started — it's free →</a>
+        <a class="gls-btn gls-btn-secondary gls-btn-lg">Browse 1,247 scripts</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="gls-foot">
+    <div class="gls-foot-grid">
+      <div class="gls-foot-brand">
+        <div class="gls-brand">
+          <div class="gls-brand-mark">{ }</div>
+          <span>I Need A Script</span>
+        </div>
+        <p>The free, public marketplace for scripts and AI-tooling artifacts.</p>
+      </div>
+      <div class="gls-foot-col">
+        <h5>Product</h5>
+        <ul>
+          <li>Browse</li>
+          <li>Submit a script</li>
+          <li>Categories</li>
+          <li>Trending</li>
+        </ul>
+      </div>
+      <div class="gls-foot-col">
+        <h5>Resources</h5>
+        <ul>
+          <li>Docs</li>
+          <li>API</li>
+          <li>Changelog</li>
+          <li>Blog</li>
+        </ul>
+      </div>
+      <div class="gls-foot-col">
+        <h5>Community</h5>
+        <ul>
+          <li>GitHub</li>
+          <li>Discord</li>
+          <li>RSS</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+      <div class="gls-foot-col">
+        <h5>Legal</h5>
+        <ul>
+          <li>Terms</li>
+          <li>Privacy</li>
+          <li>License</li>
+          <li>Conduct</li>
+        </ul>
+      </div>
+    </div>
+    <div class="gls-foot-bot">
+      <span>© 2026 I Need A Script · An independent project</span>
+      <span>Built with care · Hosted by humans</span>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

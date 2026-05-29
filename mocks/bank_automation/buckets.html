@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Buckets · StackFlow</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand-mark">
+      <div class="brand-glyph">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 5 5 6-8"/></svg>
+      </div>
+      <div class="brand-name">StackFlow</div>
+    </div>
+    <div class="nav-section">Overview</div>
+    <nav class="nav">
+      <a href="dashboard.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Dashboard</a>
+      <a href="accounts.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/></svg>Accounts</a>
+      <a href="transactions.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 17l10-10"/><path d="M17 10V7h-3"/><path d="M7 14v3h3"/></svg>Transactions</a>
+    </nav>
+    <div class="nav-section">Plan</div>
+    <nav class="nav">
+      <a href="buckets.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16l-1.5 12a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>Buckets<span class="nav-badge">8</span></a>
+      <a href="automations.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2L4.5 13.5h6L11 22l8.5-11.5h-6L13 2z"/></svg>Automations<span class="nav-badge">5</span></a>
+      <a href="calendar.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4M16 3v4"/></svg>Calendar</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="user-card" href="profile.html">
+        <div class="avatar">AM</div>
+        <div class="user-meta"><div class="user-name">Alex Morgan</div><div class="user-plan">Pro plan</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="color: var(--text-3)"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <div>
+    <header class="topbar">
+      <div class="crumbs"><span>Home</span><span>›</span><strong>Buckets</strong></div>
+      <div class="search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        Search…
+        <kbd>⌘K</kbd>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></button>
+        <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg></button>
+        <button class="btn btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>New bucket</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Buckets</div>
+          <div class="page-sub">Slice your savings into goals, subscriptions, and income pools</div>
+        </div>
+        <div class="row gap-8">
+          <button class="btn btn-secondary">Transfer funds</button>
+        </div>
+      </div>
+
+      <!-- Total -->
+      <div class="card padded mb-24">
+        <div class="row between center" style="align-items: flex-start;">
+          <div>
+            <div class="eyebrow">Allocated across 8 buckets</div>
+            <div class="display-lg mt-8">$18,052.00 <span class="muted" style="font-size: 16px; font-weight: 500;">of $21,160 in Ally Savings</span></div>
+            <div class="caption mt-8">$3,108 unallocated · ready to assign</div>
+          </div>
+          <div style="text-align: right;">
+            <div class="caption">Monthly contribution</div>
+            <div class="display-sm">$1,820.00 <span style="font-size: 13px;" class="pos">↑ 12%</span></div>
+          </div>
+        </div>
+
+        <!-- composite bar -->
+        <div class="mt-16">
+          <div style="display: flex; height: 12px; border-radius: 999px; overflow: hidden; background: var(--surface-3);">
+            <div style="background: var(--c-sage); width: 39.7%"></div>
+            <div style="background: var(--c-terracotta); width: 31.7%"></div>
+            <div style="background: var(--c-ochre); width: 13.4%"></div>
+            <div style="background: var(--c-plum); width: 15.2%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tab-row">
+        <div class="tab active">Savings goals <span class="muted">4</span></div>
+        <div class="tab">Subscriptions <span class="muted">3</span></div>
+        <div class="tab">Income <span class="muted">1</span></div>
+      </div>
+
+      <!-- Savings goals grid -->
+      <div class="grid cols-3 mb-24">
+
+        <!-- Emergency fund -->
+        <div class="bucket-card">
+          <div class="bucket-stripe sage"></div>
+          <div class="row between">
+            <div class="bucket-icon sage">🛡️</div>
+            <span class="chip pos"><span class="chip-dot"></span>on track</span>
+          </div>
+          <div class="title mt-12">Emergency fund</div>
+          <div class="caption mt-4">3-month buffer · auto-funded</div>
+
+          <div class="mt-16">
+            <div class="row between mb-8">
+              <span class="display-sm">$8,400</span>
+              <span class="muted">of $12,000</span>
+            </div>
+            <div class="progress thick"><div class="bar sage" style="width: 70%;"></div></div>
+            <div class="row between mt-8">
+              <span class="caption">70% complete</span>
+              <span class="caption">ETA Feb 2027</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+          <div class="row gap-8 between">
+            <div class="caption">
+              <strong style="color: var(--text);">$400/mo</strong> via Auto-sweep rule
+            </div>
+            <button class="btn btn-ghost btn-sm">Contribute</button>
+          </div>
+        </div>
+
+        <!-- New Car -->
+        <div class="bucket-card">
+          <div class="bucket-stripe terracotta"></div>
+          <div class="row between">
+            <div class="bucket-icon terracotta">🚗</div>
+            <span class="chip"><span class="chip-dot"></span>on pace</span>
+          </div>
+          <div class="title mt-12">New Car fund</div>
+          <div class="caption mt-4">Tesla Model Y down payment</div>
+
+          <div class="mt-16">
+            <div class="row between mb-8">
+              <span class="display-sm">$6,720</span>
+              <span class="muted">of $25,000</span>
+            </div>
+            <div class="progress thick"><div class="bar terracotta" style="width: 27%;"></div></div>
+            <div class="row between mt-8">
+              <span class="caption">27% complete</span>
+              <span class="caption">ETA Dec 2027</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+          <div class="row gap-8 between">
+            <div class="caption">
+              <strong style="color: var(--text);">20% of every deposit</strong>
+            </div>
+            <button class="btn btn-ghost btn-sm">Contribute</button>
+          </div>
+        </div>
+
+        <!-- Vacation -->
+        <div class="bucket-card">
+          <div class="bucket-stripe ochre"></div>
+          <div class="row between">
+            <div class="bucket-icon ochre">🌴</div>
+            <span class="chip pos"><span class="chip-dot"></span>on track</span>
+          </div>
+          <div class="title mt-12">Vacation '26</div>
+          <div class="caption mt-4">Portugal · 2 weeks · Sept</div>
+
+          <div class="mt-16">
+            <div class="row between mb-8">
+              <span class="display-sm">$2,840</span>
+              <span class="muted">of $5,000</span>
+            </div>
+            <div class="progress thick"><div class="bar ochre" style="width: 57%;"></div></div>
+            <div class="row between mt-8">
+              <span class="caption">57% complete</span>
+              <span class="caption">ETA Sep 2026</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+          <div class="row gap-8 between">
+            <div class="caption">
+              <strong style="color: var(--text);">$420/mo</strong> from paycheck rule
+            </div>
+            <button class="btn btn-ghost btn-sm">Contribute</button>
+          </div>
+        </div>
+
+        <!-- Student loan -->
+        <div class="bucket-card">
+          <div class="bucket-stripe plum"></div>
+          <div class="row between">
+            <div class="bucket-icon plum">🎓</div>
+            <span class="chip warn"><span class="chip-dot"></span>behind</span>
+          </div>
+          <div class="title mt-12">Student loan payoff</div>
+          <div class="caption mt-4">Accelerate paydown · target 2028</div>
+
+          <div class="mt-16">
+            <div class="row between mb-8">
+              <span class="display-sm">$3,200</span>
+              <span class="muted">of $14,000</span>
+            </div>
+            <div class="progress thick"><div class="bar plum" style="width: 23%;"></div></div>
+            <div class="row between mt-8">
+              <span class="caption">23% complete</span>
+              <span class="caption neg">behind goal date</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+          <div class="row gap-8 between">
+            <div class="caption">Contribute <strong style="color: var(--negative);">$80 more / mo</strong> to catch up</div>
+            <button class="btn btn-secondary btn-sm">Adjust rule</button>
+          </div>
+        </div>
+
+        <!-- New goal CTA -->
+        <a href="#" style="display: block;">
+          <div class="card" style="border-style: dashed; padding: 24px; text-align: center; height: 100%;">
+            <div class="empty-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg></div>
+            <div style="font-weight: 600; color: var(--text-2);">New savings goal</div>
+            <div class="caption mt-4">e.g. Down payment, Tax reserve, Wedding</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Subscription buckets section -->
+      <div class="card flush mb-24">
+        <div class="card-section">
+          <div class="row between">
+            <div>
+              <div class="card-title">Subscription buckets</div>
+              <div class="card-sub">Set aside next month's bill, automatically</div>
+            </div>
+            <button class="btn btn-ghost btn-sm">+ Subscription</button>
+          </div>
+        </div>
+        <table class="t-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Next charge</th>
+              <th>Saved / Needed</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="row gap-12 center">
+                  <div class="bucket-icon rose" style="width: 32px; height: 32px; font-size: 14px;">▶</div>
+                  <div>
+                    <div style="font-weight: 600;">Netflix</div>
+                    <div class="caption">Monthly · day 18</div>
+                  </div>
+                </div>
+              </td>
+              <td><div>May 18</div><div class="caption">in 3 days</div></td>
+              <td><span class="num">$15.49</span> <span class="muted">/ $15.49</span></td>
+              <td><span class="chip pos"><span class="chip-dot"></span>funded</span></td>
+              <td style="text-align: right;"><button class="btn btn-ghost btn-sm">···</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="row gap-12 center">
+                  <div class="bucket-icon teal" style="width: 32px; height: 32px; font-size: 14px;">📱</div>
+                  <div>
+                    <div style="font-weight: 600;">Verizon</div>
+                    <div class="caption">Monthly · day 28</div>
+                  </div>
+                </div>
+              </td>
+              <td><div>May 28</div><div class="caption">in 13 days</div></td>
+              <td><span class="num">$78.00</span> <span class="muted">/ $112.00</span></td>
+              <td><span class="chip warn"><span class="chip-dot"></span>$34 short</span></td>
+              <td style="text-align: right;"><button class="btn btn-secondary btn-sm">Top up</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="row gap-12 center">
+                  <div class="bucket-icon slate" style="width: 32px; height: 32px; font-size: 14px;">☁️</div>
+                  <div>
+                    <div style="font-weight: 600;">iCloud + Apple One</div>
+                    <div class="caption">Monthly · day 5</div>
+                  </div>
+                </div>
+              </td>
+              <td><div>Jun 5</div><div class="caption">in 21 days</div></td>
+              <td><span class="num">$0.00</span> <span class="muted">/ $32.99</span></td>
+              <td><span class="chip"><span class="chip-dot"></span>setting up</span></td>
+              <td style="text-align: right;"><button class="btn btn-secondary btn-sm">Enable rule</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+
+</div>
+</body>
+</html>

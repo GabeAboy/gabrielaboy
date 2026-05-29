@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Marketplace · I Need A Script</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:          #ffffff;
+      --bg-alt:      #fafafa;
+      --bg-soft:     #f4f4f6;
+      --ink:         #1f1e24;
+      --ink-2:       #2f2e33;
+      --body:        #4b4a55;
+      --muted:       #898792;
+      --line:        #e5e5ea;
+      --line-strong: #c3c3cb;
+      --orange:      #fc6d26;
+      --orange-2:    #e24329;
+      --orange-deep: #c93a14;
+      --orange-soft: #fff1ea;
+      --purple:      #6b4fbb;
+      --purple-soft: #f0eaff;
+      --green:       #1aaa55;
+      --green-soft:  #e7f8ee;
+      --blue:        #1f4ea3;
+      --blue-soft:   #e7f0ff;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      font-size: 14px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+
+    /* ===== NAV ===== */
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 28px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
+    .brand-mark {
+      width: 24px; height: 24px;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%);
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 700; font-size: 11px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .nav-search {
+      flex: 1; max-width: 540px; margin: 0 32px;
+      position: relative;
+    }
+    .nav-search input {
+      width: 100%; padding: 9px 12px 9px 38px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13.5px;
+      color: var(--ink);
+    }
+    .nav-search::before {
+      content: "⌕"; position: absolute;
+      left: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 16px; color: var(--muted);
+    }
+    .nav-search kbd {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      background: white; border: 1px solid var(--line);
+      border-radius: 4px; padding: 2px 6px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 10.5px;
+      color: var(--muted);
+    }
+    .nav-right { display: flex; align-items: center; gap: 14px; font-size: 13.5px; color: var(--body); }
+    .nav-right a:hover { color: var(--ink); }
+    .nav-publish {
+      padding: 7px 14px;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%);
+      color: white; border-radius: 6px;
+      font-weight: 500; font-size: 13px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05), 0 2px 4px rgba(252,109,38,0.25);
+    }
+    .nav-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, #6b4fbb, #b87bd9);
+      color: white; font-weight: 600; font-size: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* ===== LAYOUT ===== */
+    .shell {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      max-width: 1320px; margin: 0 auto;
+    }
+    @media (max-width: 880px) { .shell { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+    .sidebar {
+      border-right: 1px solid var(--line);
+      padding: 28px 18px;
+      min-height: calc(100vh - 57px);
+    }
+    .side-h {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 10px;
+      padding: 0 8px;
+    }
+    .side-list {
+      list-style: none; padding: 0; margin: 0 0 22px;
+    }
+    .side-list li {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 7px 10px; border-radius: 6px;
+      color: var(--body); font-size: 13.5px;
+      cursor: pointer;
+    }
+    .side-list li:hover { background: var(--bg-soft); }
+    .side-list li.on { background: var(--orange-soft); color: var(--orange-2); font-weight: 500; }
+    .side-list li .n {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; color: var(--muted);
+    }
+    .side-list li.on .n { color: var(--orange-2); }
+
+    .tag-cloud {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      padding: 0 4px;
+    }
+    .tag-cloud .tag {
+      padding: 3px 9px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 11.5px;
+      color: var(--body);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* ===== MAIN ===== */
+    .main {
+      padding: 28px 32px;
+      min-width: 0;
+    }
+    @media (max-width: 600px) { .main { padding: 20px 18px; } }
+
+    .breadcrumb {
+      font-size: 12px; color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+      margin-bottom: 10px;
+    }
+    .breadcrumb a:hover { color: var(--body); }
+    .breadcrumb .sep { margin: 0 6px; opacity: 0.6; }
+
+    .page-h {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .page-h h1 {
+      font-size: 26px; font-weight: 600; letter-spacing: -0.018em;
+      margin: 0;
+    }
+    .page-h .count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px; color: var(--muted);
+    }
+    .page-h .count strong { color: var(--ink); font-weight: 600; }
+
+    .page-sub {
+      font-size: 14px; color: var(--body);
+      margin-bottom: 22px;
+    }
+
+    .filter-row {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 22px;
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 11px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 12.5px;
+      color: var(--body);
+      cursor: pointer;
+    }
+    .chip:hover { border-color: var(--line-strong); }
+    .chip.on {
+      background: var(--ink); color: white; border-color: var(--ink);
+    }
+    .chip .x { opacity: 0.6; font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+    .filter-spacer { flex: 1; }
+    .sort {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 11px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: 12.5px;
+      color: var(--body);
+      cursor: pointer;
+    }
+    .sort .lbl { color: var(--muted); }
+    .sort:hover { border-color: var(--line-strong); }
+
+    /* ===== CARDS ===== */
+    .list {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    @media (max-width: 880px) { .list { grid-template-columns: 1fr; } }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px 18px;
+      background: white;
+      transition: all 0.18s ease;
+    }
+    .card:hover {
+      border-color: var(--orange);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px -12px rgba(252,109,38,0.22);
+    }
+    .card-h {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 4px;
+    }
+    .lang-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
+      padding: 2px 7px; border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .lang-tag.bash   { background: var(--bg-soft);    color: var(--ink); }
+    .lang-tag.python { background: var(--blue-soft);  color: var(--blue); }
+    .lang-tag.go     { background: #d7f3f6;           color: #066b78; }
+    .lang-tag.claude { background: var(--orange-soft); color: var(--orange-2); }
+    .lang-tag.mcp    { background: var(--purple-soft); color: var(--purple); }
+    .lang-tag.ts     { background: #dde9ff;           color: #1d4ed8; }
+
+    .card-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; color: var(--muted);
+    }
+    .card-title {
+      font-size: 15px; font-weight: 500;
+      color: var(--ink);
+      margin: 6px 0 4px;
+      line-height: 1.35;
+    }
+    .card-desc {
+      font-size: 13px; color: var(--body); line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .card-install {
+      background: #faf9fa;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px; color: var(--ink-2);
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 11px;
+      overflow: hidden;
+    }
+    .card-install code { color: var(--ink); }
+    .card-install .copy {
+      padding: 2px 8px; border: 1px solid var(--line);
+      background: white; border-radius: 4px;
+      color: var(--muted); font-size: 10.5px;
+      flex-shrink: 0; margin-left: 8px;
+    }
+    .card-foot {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 11.5px; color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .card-foot .stat { display: inline-flex; align-items: center; gap: 4px; }
+    .card-foot .stat + .stat { margin-left: 12px; }
+    .card-foot .author { color: var(--body); }
+    .card-foot .author strong { color: var(--ink-2); font-weight: 500; }
+
+    /* ===== PAGINATION ===== */
+    .pager {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 28px; padding-top: 18px;
+      border-top: 1px solid var(--line);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px; color: var(--muted);
+    }
+    .pager-nums { display: flex; gap: 4px; }
+    .pager-nums a {
+      padding: 5px 10px; border: 1px solid var(--line);
+      border-radius: 5px; background: white;
+      color: var(--body); font-size: 12px;
+    }
+    .pager-nums a.on { background: var(--ink); color: white; border-color: var(--ink); }
+    .pager-nums a:hover { border-color: var(--line-strong); }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="brand">
+      <div class="brand-mark">{}</div>
+      I Need A Script
+    </div>
+    <div class="nav-search">
+      <input type="text" value="bash · git stash diff" />
+      <kbd>⌘K</kbd>
+    </div>
+    <div class="nav-right">
+      <a href="#">Docs</a>
+      <a href="#">Skills</a>
+      <a href="#" class="nav-publish">Publish</a>
+      <div class="nav-avatar">GA</div>
+    </div>
+  </header>
+
+  <div class="shell">
+
+    <aside class="sidebar">
+      <p class="side-h">Languages</p>
+      <ul class="side-list">
+        <li><span>All</span><span class="n">12,084</span></li>
+        <li class="on"><span>Bash</span><span class="n">4,219</span></li>
+        <li><span>Python</span><span class="n">3,118</span></li>
+        <li><span>Go</span><span class="n">1,402</span></li>
+        <li><span>TypeScript</span><span class="n">982</span></li>
+      </ul>
+
+      <p class="side-h">Surfaces</p>
+      <ul class="side-list">
+        <li><span>Claude skills</span><span class="n">764</span></li>
+        <li><span>MCP servers</span><span class="n">411</span></li>
+        <li><span>System prompts</span><span class="n">1,188</span></li>
+      </ul>
+
+      <p class="side-h">Popular tags</p>
+      <div class="tag-cloud">
+        <span class="tag">git</span>
+        <span class="tag">aws</span>
+        <span class="tag">docker</span>
+        <span class="tag">postgres</span>
+        <span class="tag">macos</span>
+        <span class="tag">refactor</span>
+        <span class="tag">linting</span>
+        <span class="tag">ci</span>
+        <span class="tag">ffmpeg</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <p class="breadcrumb"><a>Marketplace</a><span class="sep">/</span><a>Bash</a><span class="sep">/</span>git</p>
+
+      <div class="page-h">
+        <h1>Bash · git</h1>
+        <span class="count"><strong>284</strong> scripts</span>
+      </div>
+      <p class="page-sub">Small, useful programs people actually use. Copy, read the source, ship it.</p>
+
+      <div class="filter-row">
+        <span class="chip on">Bash <span class="x">×</span></span>
+        <span class="chip on">git <span class="x">×</span></span>
+        <span class="chip">verified only</span>
+        <span class="chip">last 30 days</span>
+        <span class="filter-spacer"></span>
+        <span class="sort"><span class="lbl">Sort:</span> Most installed ▾</span>
+      </div>
+
+      <div class="list">
+
+        <article class="card">
+          <div class="card-h">
+            <span class="lang-tag bash">bash</span>
+            <span class="card-meta">v1.4.2 · updated 2d</span>
+          </div>
+          <h3 class="card-title">git-stash-diff — preview a stash without applying it</h3>
+          <p class="card-desc">Color-diffs any stash against current HEAD without touching the working tree. Useful when you can't remember what you stashed three weeks ago.</p>
+          <div class="card-install">
+            <code>$ ins install git-stash-diff</code>
+            <span class="copy">copy</span>
+          </div>
+          <div class="card-foot">
+            <span class="author">by <strong>@chitra</strong></span>
+            <span>
+              <span class="stat">⤓ 8,402</span>
+              <span class="stat">★ 612</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-h">
+            <span class="lang-tag bash">bash</span>
+            <span class="card-meta">v0.9.1 · updated 6d</span>
+          </div>
+          <h3 class="card-title">prune-merged — delete every local branch already merged into main</h3>
+          <p class="card-desc">Walks `git branch --merged`, skips protected names, and prompts once per batch. Dry-run mode lists what it would delete.</p>
+          <div class="card-install">
+            <code>$ ins install prune-merged</code>
+            <span class="copy">copy</span>
+          </div>
+          <div class="card-foot">
+            <span class="author">by <strong>@oss-shu</strong></span>
+            <span>
+              <span class="stat">⤓ 6,118</span>
+              <span class="stat">★ 482</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-h">
+            <span class="lang-tag bash">bash</span>
+            <span class="card-meta">v2.0.0 · updated 11h</span>
+          </div>
+          <h3 class="card-title">gh-pr-since — list PRs you merged this week</h3>
+          <p class="card-desc">Wraps `gh pr list` with sensible defaults for weekly reviews. Outputs Markdown ready to paste into a standup doc.</p>
+          <div class="card-install">
+            <code>$ ins install gh-pr-since</code>
+            <span class="copy">copy</span>
+          </div>
+          <div class="card-foot">
+            <span class="author">by <strong>@gabrielaboy</strong></span>
+            <span>
+              <span class="stat">⤓ 4,902</span>
+              <span class="stat">★ 388</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-h">
+            <span class="lang-tag bash">bash</span>
+            <span class="card-meta">v1.1.0 · updated 1w</span>
+          </div>
+          <h3 class="card-title">git-rebase-onto-default — rebase a feature branch onto main or master, whichever exists</h3>
+          <p class="card-desc">Detects the default branch from the remote rather than guessing. Handles detached HEAD gracefully.</p>
+          <div class="card-install">
+            <code>$ ins install git-rebase-onto-default</code>
+            <span class="copy">copy</span>
+          </div>
+          <div class="card-foot">
+            <span class="author">by <strong>@maeve.codes</strong></span>
+            <span>
+              <span class="stat">⤓ 3,610</span>
+              <span class="stat">★ 271</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-h">
+            <span class="lang-tag bash">bash</span>
+            <span class="card-meta">v0.6.4 · updated 3d</span>
+          </div>
+          <h3 class="card-title">conventional-commit — interactive prompt for conventional commit messages</h3>
+          <p class="card-desc">Asks type, scope, subject, body, footer. Generates the commit and runs it. Reads `.commitlintrc` if present.</p>
+          <div class="card-install">
+            <code>$ ins install conventional-commit</code>
+            <span class="copy">copy</span>
+          </div>
+          <div class="card-foot">
+            <span class="author">by <strong>@jasper</strong></span>
+            <span>
+              <span class="stat">⤓ 3,202</span>
+              <span class="stat">★ 244</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-h">
+            <span class="lang-tag bash">bash</span>
+            <span class="card-meta">v1.0.0 · updated 2w</span>
+          </div>
+          <h3 class="card-title">worktree-here — git worktree, but it remembers which dir you wanted</h3>
+          <p class="card-desc">Sets up a sibling-folder worktree per branch with `.envrc` carried over. Adds a `wtr` shortcut to jump between them.</p>
+          <div class="card-install">
+            <code>$ ins install worktree-here</code>
+            <span class="copy">copy</span>
+          </div>
+          <div class="card-foot">
+            <span class="author">by <strong>@nikhil</strong></span>
+            <span>
+              <span class="stat">⤓ 2,809</span>
+              <span class="stat">★ 199</span>
+            </span>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="pager">
+        <span>showing <strong style="color: var(--ink)">1–6</strong> of 284</span>
+        <div class="pager-nums">
+          <a class="on">1</a>
+          <a>2</a>
+          <a>3</a>
+          <a>…</a>
+          <a>48</a>
+          <a>→</a>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

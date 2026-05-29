@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Accounts · StackFlow</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand-mark">
+      <div class="brand-glyph">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 5 5 6-8"/></svg>
+      </div>
+      <div class="brand-name">StackFlow</div>
+    </div>
+    <div class="nav-section">Overview</div>
+    <nav class="nav">
+      <a href="dashboard.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Dashboard</a>
+      <a href="accounts.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/></svg>Accounts</a>
+      <a href="transactions.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l10-10"/><path d="M17 10V7h-3"/><path d="M7 14v3h3"/></svg>Transactions</a>
+    </nav>
+    <div class="nav-section">Plan</div>
+    <nav class="nav">
+      <a href="buckets.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16l-1.5 12a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>Buckets<span class="nav-badge">8</span></a>
+      <a href="automations.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5h6L11 22l8.5-11.5h-6L13 2z"/></svg>Automations<span class="nav-badge">5</span></a>
+      <a href="calendar.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4M16 3v4"/></svg>Calendar</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="user-card" href="profile.html">
+        <div class="avatar">AM</div>
+        <div class="user-meta"><div class="user-name">Alex Morgan</div><div class="user-plan">Pro plan</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-3)"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <div>
+    <header class="topbar">
+      <div class="crumbs"><span>Home</span><span>›</span><strong>Accounts</strong></div>
+      <div class="search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        Search…
+        <kbd>⌘K</kbd>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></button>
+        <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg></button>
+        <button class="btn btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Connect account</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Accounts</div>
+          <div class="page-sub">6 accounts across 4 institutions · last sync 2 minutes ago</div>
+        </div>
+        <div class="row gap-8">
+          <button class="btn btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
+            Sync all
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI strip -->
+      <div class="card flush mb-24">
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="eyebrow">Net cash</div>
+            <div class="stat-value">$48,217.49</div>
+            <div class="stat-delta pos">↑ $1,284 this month</div>
+          </div>
+          <div class="kpi">
+            <div class="eyebrow">Liquid</div>
+            <div class="stat-value">$29,652.10</div>
+            <div class="caption" style="margin-top: 4px;">Checking + Savings</div>
+          </div>
+          <div class="kpi">
+            <div class="eyebrow">Investments</div>
+            <div class="stat-value">$19,489.89</div>
+            <div class="stat-delta pos">↑ 2.4% MTD</div>
+          </div>
+          <div class="kpi">
+            <div class="eyebrow">Credit owed</div>
+            <div class="stat-value neg">−$924.50</div>
+            <div class="caption" style="margin-top: 4px;">Due May 25</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tab-row">
+        <div class="tab active">All <span class="muted">6</span></div>
+        <div class="tab">Checking <span class="muted">1</span></div>
+        <div class="tab">Savings <span class="muted">2</span></div>
+        <div class="tab">Credit <span class="muted">2</span></div>
+        <div class="tab">Investment <span class="muted">1</span></div>
+      </div>
+
+      <!-- Institutions -->
+      <div class="col gap-16">
+
+        <!-- Chase -->
+        <div class="card flush">
+          <div class="card-section row gap-12 center">
+            <div class="bank-mark chase">CB</div>
+            <div style="flex: 1;">
+              <div class="title">Chase</div>
+              <div class="caption row gap-6 center">
+                <span class="chip pos" style="padding: 1px 7px;"><span class="chip-dot"></span>Connected</span>
+                <span>Synced 2m ago · 2 accounts</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div class="num" style="font-weight: 600; font-size: 16px;">$7,567.60</div>
+              <div class="caption">combined</div>
+            </div>
+            <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+          </div>
+
+          <div class="card-section">
+            <div class="row gap-16 between">
+              <div class="row gap-12 center" style="flex: 1;">
+                <div class="bucket-icon teal" style="width: 32px; height: 32px; font-size: 14px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+                </div>
+                <div style="min-width: 0;">
+                  <div style="font-weight: 600;">Total Checking <span class="chip outline" style="font-size: 11px; margin-left: 4px;">primary</span></div>
+                  <div class="caption">··· 4218 · Checking · last activity 6:42 PM</div>
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div class="num" style="font-weight: 600;">$8,492.10</div>
+                <div class="caption">Available $8,492.10</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section">
+            <div class="row gap-16 between">
+              <div class="row gap-12 center" style="flex: 1;">
+                <div class="bucket-icon rose" style="width: 32px; height: 32px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 14h2M10 14h6"/></svg>
+                </div>
+                <div style="min-width: 0;">
+                  <div style="font-weight: 600;">Sapphire Reserve</div>
+                  <div class="caption">··· 7732 · Credit · due May 25</div>
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div class="num" style="font-weight: 600;">−$924.50</div>
+                <div class="caption">Limit $20,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ally -->
+        <div class="card flush">
+          <div class="card-section row gap-12 center">
+            <div class="bank-mark ally">AL</div>
+            <div style="flex: 1;">
+              <div class="title">Ally Bank</div>
+              <div class="caption row gap-6 center">
+                <span class="chip pos" style="padding: 1px 7px;"><span class="chip-dot"></span>Connected</span>
+                <span>Synced 2m ago · holds 8 buckets</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div class="num" style="font-weight: 600; font-size: 16px;">$21,160.00</div>
+              <div class="caption">combined</div>
+            </div>
+            <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+          </div>
+
+          <div class="card-section">
+            <div class="row gap-16 between">
+              <div class="row gap-12 center" style="flex: 1;">
+                <div class="bucket-icon sage" style="width: 32px; height: 32px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16l-1.5 12a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+                </div>
+                <div style="min-width: 0;">
+                  <div style="font-weight: 600;">Online Savings</div>
+                  <div class="caption">··· 9921 · 4.20% APY · holds Emergency, Car, Vacation +5</div>
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div class="num" style="font-weight: 600;">$21,160.00</div>
+                <div class="caption">$3,108 unallocated</div>
+              </div>
+            </div>
+            <!-- Bucket breakdown bar -->
+            <div class="mt-16">
+              <div style="display: flex; height: 8px; border-radius: 999px; overflow: hidden;">
+                <div style="background: var(--c-sage); width: 39.7%"></div>
+                <div style="background: var(--c-terracotta); width: 31.7%"></div>
+                <div style="background: var(--c-ochre); width: 13.4%"></div>
+                <div style="background: var(--c-plum); width: 15.2%"></div>
+              </div>
+              <div class="row gap-12 wrap mt-12" style="font-size: 12px;">
+                <span class="row gap-4 center"><span style="width:8px;height:8px;background:var(--c-sage);border-radius:2px;"></span>Emergency $8,400</span>
+                <span class="row gap-4 center"><span style="width:8px;height:8px;background:var(--c-terracotta);border-radius:2px;"></span>Car $6,720</span>
+                <span class="row gap-4 center"><span style="width:8px;height:8px;background:var(--c-ochre);border-radius:2px;"></span>Vacation $2,840</span>
+                <span class="row gap-4 center"><span style="width:8px;height:8px;background:var(--c-plum);border-radius:2px;"></span>Other $3,200</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Amex -->
+        <div class="card flush">
+          <div class="card-section row gap-12 center">
+            <div class="bank-mark amex">AX</div>
+            <div style="flex: 1;">
+              <div class="title">American Express</div>
+              <div class="caption row gap-6 center">
+                <span class="chip warn" style="padding: 1px 7px;"><span class="chip-dot"></span>Re-auth needed</span>
+                <span>Last sync 4 days ago</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div class="num" style="font-weight: 600; font-size: 16px;">$0.00</div>
+              <div class="caption">paid in full</div>
+            </div>
+            <button class="btn btn-secondary btn-sm">Reconnect</button>
+          </div>
+          <div class="card-section">
+            <div class="row gap-16 between">
+              <div class="row gap-12 center" style="flex: 1;">
+                <div class="bucket-icon ochre" style="width: 32px; height: 32px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 14h2M10 14h6"/></svg>
+                </div>
+                <div style="min-width: 0;">
+                  <div style="font-weight: 600;">Blue Cash Preferred</div>
+                  <div class="caption">··· 0017 · Credit · 3% groceries</div>
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div class="num" style="font-weight: 600;">$0.00</div>
+                <div class="caption">Limit $15,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Schwab -->
+        <div class="card flush">
+          <div class="card-section row gap-12 center">
+            <div class="bank-mark schwab">SC</div>
+            <div style="flex: 1;">
+              <div class="title">Charles Schwab</div>
+              <div class="caption row gap-6 center">
+                <span class="chip pos" style="padding: 1px 7px;"><span class="chip-dot"></span>Connected</span>
+                <span>Synced 11m ago · 1 account</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div class="num" style="font-weight: 600; font-size: 16px;">$19,489.89</div>
+              <div class="stat-delta pos">↑ 2.4% MTD</div>
+            </div>
+            <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+          </div>
+          <div class="card-section">
+            <div class="row gap-16 between">
+              <div class="row gap-12 center" style="flex: 1;">
+                <div class="bucket-icon slate" style="width: 32px; height: 32px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+                </div>
+                <div style="min-width: 0;">
+                  <div style="font-weight: 600;">Brokerage</div>
+                  <div class="caption">··· 2284 · Investment · taxable</div>
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div class="num" style="font-weight: 600;">$19,489.89</div>
+                <div class="caption">Cost basis $17,840</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add account CTA -->
+        <a href="#" style="display: block;">
+          <div class="card" style="text-align: center; border-style: dashed; padding: 32px; color: var(--text-3); transition: all 0.15s;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 8px;"><path d="M12 5v14M5 12h14"/></svg>
+            <div style="font-weight: 600; color: var(--text-2);">Connect another account</div>
+            <div class="caption mt-4">2,000+ banks supported via Plaid</div>
+          </div>
+        </a>
+      </div>
+    </main>
+  </div>
+
+</div>
+</body>
+</html>

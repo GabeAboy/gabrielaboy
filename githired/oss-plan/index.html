@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GitApplied · Open-Source Plan</title>
+  <meta name="description" content="A call-to-action plan for open-sourcing GitApplied as open-core without putting the SaaS business at risk." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/mocks/githired/mocks.css" />
+  <style>
+    .oss { padding-bottom: 0; }
+    .oss-section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 80px 32px;
+    }
+    .oss-section--tight { padding: 56px 32px; }
+    .oss-section + .oss-section { border-top: 1px solid var(--rule-hairline); }
+
+    .oss-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .oss-h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 3.25rem;
+      line-height: 1.08;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      margin: 0 0 20px;
+      color: var(--text-primary);
+    }
+    .oss-h1 .accent { color: var(--accent); font-style: italic; }
+    .oss-h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2.125rem;
+      line-height: 1.18;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin: 0 0 12px;
+      color: var(--text-primary);
+    }
+    .oss-h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.375rem;
+      line-height: 1.3;
+      font-weight: 600;
+      margin: 0 0 6px;
+      color: var(--text-primary);
+    }
+    .oss-sub {
+      font-size: 1.0625rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      max-width: 720px;
+      margin: 0 0 12px;
+    }
+    .oss-body {
+      font-size: 0.9375rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 760px;
+      margin: 0 0 14px;
+    }
+    .oss-body strong { color: var(--text-primary); }
+    .oss-body code, .inline-code {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.85em;
+      background: var(--surface-base);
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--rule-hairline);
+    }
+
+    /* Hero */
+    .hero { padding-top: 96px; }
+    .hero-meta {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: 24px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+    .hero-meta .dot { width: 4px; height: 4px; border-radius: 999px; background: var(--text-muted); display: inline-block; }
+
+    /* Two-repo cards */
+    .repos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .repo-card {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      padding: 26px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .repo-card.is-public {
+      border-color: color-mix(in srgb, var(--accent) 50%, var(--rule-hairline));
+      box-shadow: var(--shadow-2);
+    }
+    .repo-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .repo-name {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .repo-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+    .repo-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .repo-list li {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      padding-left: 16px;
+      position: relative;
+    }
+    .repo-list li::before {
+      content: "▸";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    /* Split table */
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .split-col {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .split-col h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.25rem;
+      margin: 0 0 16px;
+    }
+    .split-col.is-private h3 .marker { color: #c2410c; }
+    .split-col.is-public h3 .marker { color: var(--positive); }
+    .split-row {
+      padding: 12px 0;
+      border-top: 1px solid var(--rule-hairline);
+      font-size: 0.875rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+    .split-row:first-of-type { border-top: 0; }
+    .split-row .file {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.8125rem;
+      color: var(--text-primary);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* Code block */
+    .code-block {
+      background: var(--surface-base);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-top: 16px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.8125rem;
+      line-height: 1.65;
+      color: var(--text-primary);
+      white-space: pre;
+    }
+    .code-block .comment { color: var(--text-muted); }
+    .code-block .keyword { color: var(--accent); }
+    .code-block .type    { color: #0e7490; }
+    .code-block .string  { color: #ad6800; }
+
+    /* Numbered checklist */
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 28px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .checklist li {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 12px;
+      padding: 18px 22px;
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .checklist .num {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.875rem;
+      color: var(--accent);
+      font-weight: 600;
+      background: var(--accent-soft);
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .checklist .title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+    .checklist .body {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+    .checklist .body code {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.85em;
+      background: var(--surface-base);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .checklist .badge-critical {
+      display: inline-block;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      margin-left: 8px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Repo strategy diagram */
+    .diagram {
+      background: var(--surface-base);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-top: 24px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.8125rem;
+      line-height: 1.85;
+      color: var(--text-primary);
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .diagram .arrow { color: var(--accent); }
+
+    /* Launch weeks */
+    .weeks {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+    .week {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .week-num {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .week-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.1875rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+    .week-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .week-list li {
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      padding-left: 14px;
+      position: relative;
+    }
+    .week-list li::before {
+      content: "·";
+      color: var(--accent);
+      position: absolute;
+      left: 4px;
+      top: -3px;
+      font-size: 1.2em;
+      font-weight: 700;
+    }
+
+    /* Risk table */
+    .risk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      font-size: 0.9rem;
+    }
+    .risk-table th {
+      text-align: left;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--rule-strong);
+    }
+    .risk-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--rule-hairline);
+      vertical-align: top;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+    .risk-table td:first-child {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 600;
+      color: var(--text-primary);
+      width: 38%;
+    }
+
+    /* Plain bullet list */
+    .bullets {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 800px;
+    }
+    .bullets li {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      padding-left: 18px;
+      position: relative;
+    }
+    .bullets li::before {
+      content: "—";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: 600;
+    }
+    .bullets li strong { color: var(--text-primary); }
+    .bullets li code {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.85em;
+      background: var(--surface-base);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    /* Closing callout */
+    .closing {
+      margin-top: 24px;
+      padding: 26px 28px;
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.125rem;
+      line-height: 1.55;
+      color: var(--text-primary);
+    }
+    .closing strong { color: var(--accent); }
+
+    @media (max-width: 880px) {
+      .oss-section { padding: 56px 24px; }
+      .oss-h1 { font-size: 2.375rem; }
+      .repos, .split-grid { grid-template-columns: 1fr; }
+      .weeks { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body class="oss">
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────── -->
+  <section class="oss-section hero">
+    <div class="oss-eyebrow">Open-source · call-to-action plan</div>
+    <h1 class="oss-h1">Open-source the tracker. <span class="accent">Keep the AI hosted.</span></h1>
+    <p class="oss-sub">A six-week sequenced plan to publish GitApplied as MIT open-core — the Kanban + auth + billing scaffold goes public, the AI services and scrapers stay private, the hosted SaaS at app.gitapplied.com keeps shipping unchanged.</p>
+    <div class="hero-meta">
+      <span><span class="dot"></span>Model: open-core</span>
+      <span><span class="dot"></span>License: MIT (public repo)</span>
+      <span><span class="dot"></span>Contributor terms: DCO sign-off</span>
+      <span><span class="dot"></span>Drafted: 2026-05-27</span>
+    </div>
+  </section>
+
+  <!-- ─── §1 CONTEXT ─────────────────────────────────────────────── -->
+  <section class="oss-section">
+    <div class="oss-eyebrow">§ 1 · Context</div>
+    <h2 class="oss-h2">Why now, and what's at stake.</h2>
+    <p class="oss-body">Open-sourcing buys distribution, hiring signal, community goodwill, and the kind of credibility that makes a solo SaaS look serious. But done naïvely it also hands competitors (Teal, Huntr, Simplify) a free clone and lets self-hosters bypass the paid tiers. The constraint is to publish enough that "open-source" is an honest claim, while keeping the ~30–40% of code that constitutes the moat — prompts, scrapers, AI services — out of public view.</p>
+    <p class="oss-body">The codebase already has a clean natural seam: <code>internal/auth/features.go</code> tier-gates Free vs Base vs Premium, and that gate maps almost 1:1 to the open-core line. Free-tier code (Kanban, manual CRUD, basic URL scrape, auth, billing scaffold) goes public; paid-tier code (resume tailoring, cover letter generation, skill matching, structured posting breakdown) stays private. No invented architecture, no refactor war — just promotion of an existing boundary into a repository boundary.</p>
+    <p class="oss-body"><strong>Two non-negotiables:</strong> (1) the hosted SaaS keeps shipping unchanged — paid users notice nothing, (2) nothing currently sensitive (live keys, AWS account IDs, the MARKETING.md playbook, personal identity) ends up in the public repo or its history.</p>
+  </section>
+
+  <!-- ─── §2 STRATEGIC POSTURE ─────────────────────────────────── -->
+  <section class="oss-section">
+    <div class="oss-eyebrow">§ 2 · Strategic posture</div>
+    <h2 class="oss-h2">Two repos, one product.</h2>
+    <p class="oss-sub">The public repo is a working job tracker on its own. The private repo turns it into the hosted SaaS by binding real AI providers and scrapers at startup. Same Go module imports, two different <code class="inline-code">main.go</code> entrypoints.</p>
+
+    <div class="repos">
+      <div class="repo-card is-public">
+        <div class="repo-eyebrow">Public</div>
+        <div class="repo-name">github.com/gitapplied/gitapplied</div>
+        <span class="repo-tag">MIT</span>
+        <ul class="repo-list">
+          <li>Kanban board UI, job CRUD, notes, contacts</li>
+          <li>Auth (JWT, email verification, password reset)</li>
+          <li>Billing scaffold (Stripe wiring, tier middleware)</li>
+          <li>Basic URL scrape (HTML meta-tag fetch)</li>
+          <li><code class="inline-code">ai.Provider</code> interface + no-op default</li>
+          <li><code class="inline-code">scrape.Scraper</code> interface + generic default</li>
+          <li>Frontend shell, Dockerfile, example Terraform</li>
+        </ul>
+      </div>
+      <div class="repo-card">
+        <div class="repo-eyebrow">Private</div>
+        <div class="repo-name">github.com/gitapplied/gitapplied-core</div>
+        <span class="repo-tag">All rights reserved</span>
+        <ul class="repo-list">
+          <li><code class="inline-code">internal/prompts/</code> — tuned LLM prompts</li>
+          <li>Resume tailoring + cover letter + suggestion services</li>
+          <li>Skill matching + scoring</li>
+          <li>Site-specific scrapers (LinkedIn, Indeed, Greenhouse, Lever, Workday)</li>
+          <li>Browser extension source</li>
+          <li>MARKETING.md, PRD.md, production infra docs</li>
+          <li>SaaS entrypoint that wires real providers</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="oss-body" style="margin-top:28px;"><strong>Trademark, not just license.</strong> MIT lets anyone use the code; a <code>TRADEMARK.md</code> file reserves the "GitApplied" name and logo. Forks can exist, but they can't ship as GitApplied. <strong>DCO over CLA</strong> — sign-off in commits is enough to keep the option open to dual-license later without forcing contributors through a legal agreement.</p>
+  </section>
+
+  <!-- ─── §3 PUBLIC vs PRIVATE SPLIT ─────────────────────────── -->
+  <section class="oss-section oss-section--tight">
+    <div class="oss-eyebrow">§ 3 · File-level split</div>
+    <h2 class="oss-h2">What goes where.</h2>
+
+    <div class="split-grid">
+      <div class="split-col is-private">
+        <h3><span class="marker">●</span> Stays private</h3>
+        <div class="split-row">
+          <span class="file">internal/prompts/</span>
+          Tuned prompts = months of iteration. Single biggest IP item.
+        </div>
+        <div class="split-row">
+          <span class="file">internal/services/tailor_service.go</span>
+          Resume tailoring core logic.
+        </div>
+        <div class="split-row">
+          <span class="file">internal/services/suggestion_service.go</span>
+          Premium suggestion engine.
+        </div>
+        <div class="split-row">
+          <span class="file">internal/services/skill_match_service.go</span>
+          Skill matching + scoring.
+        </div>
+        <div class="split-row">
+          <span class="file">internal/extractor/ (LLM path)</span>
+          Structured posting breakdown.
+        </div>
+        <div class="split-row">
+          <span class="file">site-specific scraper adapters</span>
+          LinkedIn / Indeed / Greenhouse / Lever / Workday parsers — maintenance burden = moat.
+        </div>
+        <div class="split-row">
+          <span class="file">browser extension source</span>
+          Distribution advantage; hard for self-hosters to replicate.
+        </div>
+        <div class="split-row">
+          <span class="file">MARKETING.md · PRD.md · AWS_REVIEW.md</span>
+          Go-to-market playbook, roadmap, operational details.
+        </div>
+        <div class="split-row">
+          <span class="file">infra/terraform/ (real values)</span>
+          Until templated with placeholders.
+        </div>
+      </div>
+
+      <div class="split-col is-public">
+        <h3><span class="marker">●</span> Goes public (after scrubbing)</h3>
+        <div class="split-row">
+          <span class="file">cmd/server/ · internal/handlers/ · internal/middleware/</span>
+          Server entrypoint, HTTP layer, request middleware.
+        </div>
+        <div class="split-row">
+          <span class="file">internal/auth/ · internal/billing/ · internal/database/</span>
+          Auth, Stripe wiring, repositories — commodity scaffolding.
+        </div>
+        <div class="split-row">
+          <span class="file">internal/services/ (non-AI only)</span>
+          S3, email, document export, notes, contacts, interview, billing helpers.
+        </div>
+        <div class="split-row">
+          <span class="file">internal/extractor/ (basic path)</span>
+          The current <code>ExtractBasicFromURL</code> HTML meta-tag fetch.
+        </div>
+        <div class="split-row">
+          <span class="file">web/ (entire frontend)</span>
+          Already tier-gates premium features; gracefully degrades when AI returns 501.
+        </div>
+        <div class="split-row">
+          <span class="file">Dockerfile · docker-compose.example.yml</span>
+          One-command local boot.
+        </div>
+        <div class="split-row">
+          <span class="file">Generic Terraform examples</span>
+          With <code>&lt;ACCOUNT_ID&gt;</code> placeholders, not real values.
+        </div>
+        <div class="split-row">
+          <span class="file">New: LICENSE · README.md · CONTRIBUTING.md</span>
+          MIT + DCO instructions + self-host quickstart.
+        </div>
+        <div class="split-row">
+          <span class="file">New: SECURITY.md · TRADEMARK.md · .env.example</span>
+          Disclosure email, trademark reservation, required env vars.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── §4 TECHNICAL SEAM ──────────────────────────────────── -->
+  <section class="oss-section">
+    <div class="oss-eyebrow">§ 4 · The technical seam</div>
+    <h2 class="oss-h2">Two interfaces. The split lives here.</h2>
+    <p class="oss-sub">Introduce these in the existing monorepo first (during the private-fork refactor phase). Once handlers depend on the interfaces instead of concrete services, the AI implementation can move out cleanly. The hosted SaaS keeps importing the real implementation; the public binary binds the no-op.</p>
+
+<div class="code-block"><span class="comment">// internal/ai/provider.go  (PUBLIC)</span>
+<span class="keyword">type</span> Provider <span class="keyword">interface</span> {
+    EnrichJobPosting(ctx <span class="type">context.Context</span>, rawHTML <span class="type">string</span>) (<span class="type">Job</span>, <span class="type">error</span>)
+    TailorResume(ctx <span class="type">context.Context</span>, resume <span class="type">Resume</span>, job <span class="type">Job</span>) (<span class="type">Resume</span>, <span class="type">error</span>)
+    GenerateCoverLetter(ctx <span class="type">context.Context</span>, resume <span class="type">Resume</span>, job <span class="type">Job</span>, sample <span class="type">string</span>) (<span class="type">string</span>, <span class="type">error</span>)
+    SuggestResumeEdits(ctx <span class="type">context.Context</span>, resume <span class="type">Resume</span>, job <span class="type">Job</span>) ([]<span class="type">Suggestion</span>, <span class="type">error</span>)
+    MatchSkills(ctx <span class="type">context.Context</span>, resume <span class="type">Resume</span>, job <span class="type">Job</span>) (<span class="type">MatchResult</span>, <span class="type">error</span>)
+    PolishApplicationAnswer(ctx <span class="type">context.Context</span>, prompt, draft <span class="type">string</span>) (<span class="type">string</span>, <span class="type">error</span>)
+}
+
+<span class="comment">// internal/ai/noop.go  (PUBLIC) — default; returns ErrAINotConfigured.</span>
+<span class="comment">// Handlers detect this and respond HTTP 501 with a helpful body</span>
+<span class="comment">// pointing self-hosters at app.gitapplied.com or to BYO provider.</span></div>
+
+<div class="code-block"><span class="comment">// internal/scrape/scraper.go  (PUBLIC)</span>
+<span class="keyword">type</span> Scraper <span class="keyword">interface</span> {
+    Fetch(ctx <span class="type">context.Context</span>, url <span class="type">string</span>) (<span class="type">RawPosting</span>, <span class="type">error</span>)
+}
+
+<span class="comment">// Public default: generic HTML + meta-tag scrape (current ExtractBasicFromURL).</span>
+<span class="comment">// Private impl: per-site adapters wired in at server start.</span></div>
+
+    <p class="oss-body" style="margin-top:24px;"><strong>Wiring.</strong> <code>cmd/server/server.go</code> accepts <code>Provider</code> and <code>Scraper</code> as constructor args. The public <code>main.go</code> binds no-op + basic. The private SaaS entrypoint in <code>gitapplied-core/cmd/saas</code> imports the public module and binds real implementations.</p>
+    <p class="oss-body"><strong>Frontend impact: none required immediately.</strong> The UI already gates premium features by tier. When AI endpoints return 501 in self-hosted mode, surface a friendly "AI features require gitapplied.com hosted backend or a custom provider" banner using the existing tier-gate component.</p>
+  </section>
+
+  <!-- ─── §5 PRE-LAUNCH CHECKLIST ──────────────────────────── -->
+  <section class="oss-section">
+    <div class="oss-eyebrow">§ 5 · Pre-launch checklist</div>
+    <h2 class="oss-h2">Gating items. In order. Private fork only.</h2>
+    <p class="oss-sub">From the secrets audit: a <code>.env</code> with live OpenAI/AWS/Stripe/JWT keys was committed at some point. Assume compromised. Rotate first, then everything else.</p>
+
+    <ol class="checklist">
+      <li>
+        <div class="num">1</div>
+        <div>
+          <div class="title">Rotate every credential that was ever in git history. <span class="badge-critical">Critical</span></div>
+          <div class="body">OpenAI, AWS access keys, Stripe secret + webhook secret, JWT secret, Postgres password. Do this regardless of the rest of the plan.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">2</div>
+        <div>
+          <div class="title">Use a squashed initial commit. Do not try to scrub existing history.</div>
+          <div class="body">Create the new public repo from a curated tree as a single initial commit. Loses blame/git-log, but eliminates the entire class of "did we miss a file in an old commit" risk. The existing private repo stays as-is for internal continuity.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">3</div>
+        <div>
+          <div class="title">Scrub identifiers from anything that goes public.</div>
+          <div class="body">AWS account ID <code>728821956014</code> → <code>&lt;ACCOUNT_ID&gt;</code> · real instance/subnet/bucket IDs → placeholders · <code>gabriel-admin</code> IAM references → <code>admin</code> · "Gabriel Aboy" / personal-email references → "Maintainer" or remove. The domain <code>app.gitapplied.com</code> is fine — it's already public.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">4</div>
+        <div>
+          <div class="title">Add LICENSE (MIT) at root.</div>
+          <div class="body">Standard MIT text with current year + "GitApplied Maintainers" as copyright holder.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">5</div>
+        <div>
+          <div class="title">Add SECURITY.md with a dedicated disclosure email.</div>
+          <div class="body">Use <code>security@gitapplied.com</code>, not a personal address. State response SLA (e.g. 72 hours) and supported versions.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">6</div>
+        <div>
+          <div class="title">Add .env.example with every required variable name and no values.</div>
+          <div class="body">Include comments noting which are required vs optional, and which gate which features.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">7</div>
+        <div>
+          <div class="title">Add CONTRIBUTING.md noting DCO sign-off requirement.</div>
+          <div class="body">Brief: how to build, how to test, code style, "all commits must be <code>Signed-off-by</code>", triage policy.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">8</div>
+        <div>
+          <div class="title">Add TRADEMARK.md reserving the GitApplied name and logo.</div>
+          <div class="body">Even though the code is MIT, the brand is not licensed. Forks may not call themselves GitApplied or use the logo.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">9</div>
+        <div>
+          <div class="title">Verify CI passes with the no-op AI provider bound.</div>
+          <div class="body"><code>make test</code> must be green without any OpenAI key. This is the contract: self-hosters get a working tracker out of the box.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">10</div>
+        <div>
+          <div class="title">Run gitleaks + trufflehog on the curated tree. <span class="badge-critical">Critical</span></div>
+          <div class="body">Belt-and-suspenders secret scan. Zero findings required before pushing.</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ─── §6 REPO CREATION STRATEGY ──────────────────────── -->
+  <section class="oss-section oss-section--tight">
+    <div class="oss-eyebrow">§ 6 · Repo creation strategy</div>
+    <h2 class="oss-h2">Extract first, refactor in place, publish last.</h2>
+    <p class="oss-sub">The order matters: move IP-sensitive files to the new private repo <em>before</em> introducing the interface seam, so the diff stays narrow. Then verify the hosted SaaS still works end-to-end before any public push.</p>
+
+<div class="diagram">Today (private monorepo: GitHired)
+       │
+       ├<span class="arrow">─→</span> extract IP-sensitive files to new private repo gitapplied-core
+       │       (git filter-repo, preserve history of moved files)
+       │
+       ├<span class="arrow">─→</span> refactor in place: add ai.Provider + scrape.Scraper interfaces,
+       │       swap call sites to depend on interfaces instead of concrete services
+       │
+       ├<span class="arrow">─→</span> verify hosted SaaS still works (deploy to staging.gitapplied.com)
+       │
+       └<span class="arrow">─→</span> publish curated tree as new repo gitapplied
+               (squashed initial commit, MIT, CI, branch protection, issue templates)</div>
+
+    <p class="oss-body" style="margin-top:24px;">Hosted production then becomes: <code>gitapplied-core</code> imports <code>github.com/gitapplied/gitapplied</code> as a Go module, binds real providers, builds the SaaS binary. The public binary remains usable standalone — it just returns 501 for AI features.</p>
+  </section>
+
+  <!-- ─── §7 LAUNCH SEQUENCE ──────────────────────────────── -->
+  <section class="oss-section">
+    <div class="oss-eyebrow">§ 7 · Launch sequence</div>
+    <h2 class="oss-h2">Quiet first. Loud second. Never claim "fully open source."</h2>
+    <p class="oss-sub">Messaging guardrail: say <strong>"open-core: the tracker is MIT, the AI is hosted."</strong> Misrepresentation gets punished hard on HN — honesty is the marketing.</p>
+
+    <div class="weeks">
+      <div class="week">
+        <div class="week-num">Stage 1</div>
+        <div class="week-title">Quiet pre-launch</div>
+        <ul class="week-list">
+          <li>Invite ~10 trusted founders / devs to clone and self-host for a week</li>
+          <li>Collect friction list — what breaks, what's confusing</li>
+          <li>Fix top 5 issues before any wider push</li>
+        </ul>
+      </div>
+      <div class="week">
+        <div class="week-num">Stage 2</div>
+        <div class="week-title">Soft launch</div>
+        <ul class="week-list">
+          <li>Publish the public repo</li>
+          <li>Post in a single low-key channel (existing audience or one subreddit you already participate in)</li>
+          <li>No press, no Show HN yet</li>
+        </ul>
+      </div>
+      <div class="week">
+        <div class="week-num">Stage 3</div>
+        <div class="week-title">Loud launch</div>
+        <ul class="week-list">
+          <li>Show HN + Indie Hackers + r/SaaS</li>
+          <li>Blog post on gitapplied.com: why open-source, what's private and why</li>
+          <li>Link to hosted product as the easy path</li>
+        </ul>
+      </div>
+      <div class="week">
+        <div class="week-num">Stage 4</div>
+        <div class="week-title">Discoverability</div>
+        <ul class="week-list">
+          <li>PR to awesome-selfhosted</li>
+          <li>GitHub topic tags: <code>job-search</code>, <code>resume</code>, <code>kanban</code>, <code>self-hosted</code></li>
+          <li>One-screen demo gif at the top of README</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── §8 SUSTAINMENT ────────────────────────────────── -->
+  <section class="oss-section">
+    <div class="oss-eyebrow">§ 8 · Sustainment</div>
+    <h2 class="oss-h2">Plan the steady-state before launch day.</h2>
+    <ul class="bullets">
+      <li><strong>Support load.</strong> Budget 2–4 hours per week initially for issues + PR triage. If it overruns, throttle by closing stale issues aggressively or disabling Discussions.</li>
+      <li><strong>Governance.</strong> Sole maintainer. Document that decisions are yours; community contributions welcome but not promised to merge.</li>
+      <li><strong>DCO bot.</strong> Install the DCO GitHub App so PRs without <code>Signed-off-by</code> are blocked automatically — no manual policing.</li>
+      <li><strong>Roadmap visibility.</strong> Post a quarterly "what's coming in the public repo" issue. Keep paid-only features off the public roadmap entirely.</li>
+      <li><strong>Release cadence.</strong> Tag the public repo monthly. The private SaaS can deploy daily as it does today.</li>
+    </ul>
+  </section>
+
+  <!-- ─── §9 RISKS ──────────────────────────────────────── -->
+  <section class="oss-section oss-section--tight">
+    <div class="oss-eyebrow">§ 9 · Risks &amp; guardrails</div>
+    <h2 class="oss-h2">What can go wrong, and what blunts it.</h2>
+    <table class="risk-table">
+      <thead>
+        <tr><th>Risk</th><th>Mitigation</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Competitor lifts the public tracker and rebrands as their own.</td>
+          <td>Trademark on the GitApplied name + logo. Their fork can exist but can't trade on your brand. Speed-of-iteration is your remaining moat.</td>
+        </tr>
+        <tr>
+          <td>Self-hoster guesses the prompts and recreates the AI features.</td>
+          <td>Acceptable. The prompts are not the whole moat — scrapers + ongoing tuning + cost amortization are. Track this; if a quality clone emerges, reassess.</td>
+        </tr>
+        <tr>
+          <td>Old git history leaks if we scrub-and-republish the existing repo.</td>
+          <td>Avoided by using a fresh squashed initial commit. No history = no leakable past.</td>
+        </tr>
+        <tr>
+          <td>Free-tier hosted users churn to self-hosting.</td>
+          <td>Likely net-neutral: self-hosters were never going to pay anyway. Some convert later when they hit operational friction (OpenAI bills, scraper rot). Watch the cohort.</td>
+        </tr>
+        <tr>
+          <td>Maintainer burnout from issue load.</td>
+          <td>Strict triage policy in <code>CONTRIBUTING.md</code>: "Issues may be closed without response if low-effort or out-of-scope." Disable Discussions if needed.</td>
+        </tr>
+        <tr>
+          <td>You decide later you want to relicense (e.g. to BSL or AGPL).</td>
+          <td>DCO + MIT lets you ship new versions under any license. Old versions stay MIT forever — that's the deal you make with contributors up-front.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─── §10 CRITICAL FILES ─────────────────────────────── -->
+  <section class="oss-section">
+    <div class="oss-eyebrow">§ 10 · Critical files to modify</div>
+    <h2 class="oss-h2">The narrow set of edits in the private-fork refactor phase.</h2>
+    <ul class="bullets">
+      <li><code>cmd/server/server.go</code> — accept <code>Provider</code> + <code>Scraper</code> as constructor args.</li>
+      <li><code>internal/handlers/</code> — every handler that today imports <code>tailor_service</code> / <code>suggestion_service</code> / <code>skill_match_service</code> switches to depend on the <code>ai.Provider</code> interface.</li>
+      <li><code>internal/extractor/</code> — split into public basic extractor + private LLM-enrichment path behind the interface.</li>
+      <li><code>internal/auth/features.go</code> — leave as-is. The tier-gating semantics stay valid in both repos.</li>
+      <li><strong>New (public):</strong> <code>internal/ai/provider.go</code>, <code>internal/ai/noop.go</code>, <code>internal/scrape/scraper.go</code>, <code>internal/scrape/basic.go</code>.</li>
+      <li><strong>New (public root):</strong> <code>LICENSE</code>, <code>README.md</code>, <code>CONTRIBUTING.md</code>, <code>SECURITY.md</code>, <code>TRADEMARK.md</code>, <code>.env.example</code>, <code>.github/ISSUE_TEMPLATE/*</code>, <code>.github/workflows/ci.yml</code>.</li>
+    </ul>
+  </section>
+
+  <!-- ─── §11 VERIFICATION ──────────────────────────────── -->
+  <section class="oss-section oss-section--tight">
+    <div class="oss-eyebrow">§ 11 · Verification</div>
+    <h2 class="oss-h2">Before any public push, all six must pass.</h2>
+    <ol class="checklist">
+      <li>
+        <div class="num">1</div>
+        <div>
+          <div class="title">Fresh-clone build is green with no secrets.</div>
+          <div class="body"><code>git clone …</code> → <code>cp .env.example .env</code> → <code>docker compose up</code>. Server boots, frontend loads, user can sign up, create a job manually, drag it across the Kanban. AI endpoints return 501 with the documented "not configured" body.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">2</div>
+        <div>
+          <div class="title">Hosted SaaS unchanged on staging.</div>
+          <div class="body">Deploy the new architecture to <code>staging.gitapplied.com</code> from <code>gitapplied-core</code> (imports public module + binds real providers). Walk through every paid-tier flow: scrape a LinkedIn job, generate tailored resume, generate cover letter, get skill match. Identical to prod today.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">3</div>
+        <div>
+          <div class="title">Secret scan returns zero findings.</div>
+          <div class="body"><code>gitleaks detect --source . --no-git</code> and <code>trufflehog filesystem .</code> both clean on the curated tree.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">4</div>
+        <div>
+          <div class="title">No personal info in the public tree.</div>
+          <div class="body"><code>rg -i 'gabriel|aboy.gabriel|728821956014'</code> returns nothing.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">5</div>
+        <div>
+          <div class="title">License compliance clean.</div>
+          <div class="body"><code>go-licenses report ./...</code> shows no GPL/AGPL deps. <code>license-checker</code> on <code>web/</code> shows the same.</div>
+        </div>
+      </li>
+      <li>
+        <div class="num">6</div>
+        <div>
+          <div class="title">Frontend degrades gracefully.</div>
+          <div class="body">In dev, point the web app at the no-op-provider backend. AI feature buttons show the "requires hosted backend" banner rather than crashing or showing empty results.</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ─── §12 TIMELINE ──────────────────────────────────── -->
+  <section class="oss-section">
+    <div class="oss-eyebrow">§ 12 · Suggested timeline</div>
+    <h2 class="oss-h2">Six weeks, end to end.</h2>
+    <div class="weeks">
+      <div class="week">
+        <div class="week-num">Week 1</div>
+        <div class="week-title">Rotate &amp; extract</div>
+        <ul class="week-list">
+          <li>Rotate all credentials that were ever in git history</li>
+          <li>Build the file inventory (public vs private)</li>
+          <li>Create <code>gitapplied-core</code> private repo</li>
+          <li>Move IP files with <code>git filter-repo</code></li>
+        </ul>
+      </div>
+      <div class="week">
+        <div class="week-num">Week 2</div>
+        <div class="week-title">Seam refactor</div>
+        <ul class="week-list">
+          <li>Add <code>ai.Provider</code> + <code>scrape.Scraper</code> interfaces in the private fork</li>
+          <li>Swap call sites to use interfaces</li>
+          <li>Hosted SaaS deploys cleanly to staging from new structure</li>
+        </ul>
+      </div>
+      <div class="week">
+        <div class="week-num">Week 3</div>
+        <div class="week-title">Scrub &amp; document</div>
+        <ul class="week-list">
+          <li>Scrub identifiers from docs</li>
+          <li>Write README, CONTRIBUTING, LICENSE, SECURITY, TRADEMARK</li>
+          <li>Set up CI on the curated tree</li>
+          <li>Run gitleaks + trufflehog — must be clean</li>
+        </ul>
+      </div>
+      <div class="week">
+        <div class="week-num">Week 4</div>
+        <div class="week-title">Quiet pre-launch</div>
+        <ul class="week-list">
+          <li>Invite 10 trusted testers to self-host</li>
+          <li>Collect friction list</li>
+          <li>Fix top 5 issues</li>
+        </ul>
+      </div>
+      <div class="week">
+        <div class="week-num">Week 5</div>
+        <div class="week-title">Soft launch</div>
+        <ul class="week-list">
+          <li>Publish public repo</li>
+          <li>Post in one low-key channel</li>
+          <li>Monitor early issues</li>
+        </ul>
+      </div>
+      <div class="week">
+        <div class="week-num">Week 6</div>
+        <div class="week-title">Loud launch</div>
+        <ul class="week-list">
+          <li>Show HN + Indie Hackers + blog post</li>
+          <li>Submit to awesome-selfhosted</li>
+          <li>Tag GitHub topics</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="closing">
+      <strong>The one-sentence pitch.</strong> Open-source the parts that don't differentiate you, keep the AI hosted, trademark the name, accept DCO contributions, and ship the public repo as a single squashed commit so no past mistake can leak.
+    </div>
+  </section>
+
+</body>
+</html>

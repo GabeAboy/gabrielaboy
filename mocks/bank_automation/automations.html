@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Automations · StackFlow</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand-mark">
+      <div class="brand-glyph">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 17l5-5 5 5 6-8"/></svg>
+      </div>
+      <div class="brand-name">StackFlow</div>
+    </div>
+    <div class="nav-section">Overview</div>
+    <nav class="nav">
+      <a href="dashboard.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Dashboard</a>
+      <a href="accounts.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/></svg>Accounts</a>
+      <a href="transactions.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 17l10-10"/><path d="M17 10V7h-3"/><path d="M7 14v3h3"/></svg>Transactions</a>
+    </nav>
+    <div class="nav-section">Plan</div>
+    <nav class="nav">
+      <a href="buckets.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16l-1.5 12a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>Buckets<span class="nav-badge">8</span></a>
+      <a href="automations.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2L4.5 13.5h6L11 22l8.5-11.5h-6L13 2z"/></svg>Automations<span class="nav-badge">5</span></a>
+      <a href="calendar.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4M16 3v4"/></svg>Calendar</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="user-card" href="profile.html">
+        <div class="avatar">AM</div>
+        <div class="user-meta"><div class="user-name">Alex Morgan</div><div class="user-plan">Pro plan</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="color: var(--text-3)"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <div>
+    <header class="topbar">
+      <div class="crumbs"><span>Home</span><span>›</span><strong>Automations</strong></div>
+      <div class="search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        Search…
+        <kbd>⌘K</kbd>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></button>
+        <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg></button>
+        <a href="create-automation.html" class="btn btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>New automation</a>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Automations</div>
+          <div class="page-sub">Rules that move your money so you don't have to</div>
+        </div>
+      </div>
+
+      <!-- KPI strip -->
+      <div class="card flush mb-24">
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="eyebrow">Active rules</div>
+            <div class="stat-value">5 <span class="muted" style="font-size: 16px; font-weight: 500;">of 7</span></div>
+            <div class="caption" style="margin-top: 4px;">2 paused</div>
+          </div>
+          <div class="kpi">
+            <div class="eyebrow">Moved this month</div>
+            <div class="stat-value">$1,820.00</div>
+            <div class="stat-delta pos">↑ vs $1,400 last month</div>
+          </div>
+          <div class="kpi">
+            <div class="eyebrow">Lifetime saved</div>
+            <div class="stat-value">$24,860</div>
+            <div class="caption" style="margin-top: 4px;">since Aug 2024</div>
+          </div>
+          <div class="kpi">
+            <div class="eyebrow">Next firing</div>
+            <div class="stat-value" style="font-size: 22px;">May 20</div>
+            <div class="caption" style="margin-top: 4px;">Auto-sweep · $200</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Templates strip -->
+      <div class="mb-24">
+        <div class="eyebrow mb-8">Start from a template</div>
+        <div class="row gap-12 wrap">
+          <a href="create-automation.html" class="chip-tag">
+            <span style="font-size: 14px;">💰</span> Save % of every paycheck
+          </a>
+          <a href="create-automation.html" class="chip-tag">
+            <span style="font-size: 14px;">🛡️</span> Top up emergency fund weekly
+          </a>
+          <a href="create-automation.html" class="chip-tag">
+            <span style="font-size: 14px;">🪙</span> Round-up purchases to savings
+          </a>
+          <a href="create-automation.html" class="chip-tag">
+            <span style="font-size: 14px;">📅</span> Monthly bill sinking fund
+          </a>
+          <a href="create-automation.html" class="chip-tag">
+            <span style="font-size: 14px;">🧾</span> Set aside 30% for taxes
+          </a>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tab-row">
+        <div class="tab active">Rules <span class="muted">7</span></div>
+        <div class="tab">Activity</div>
+        <div class="tab">Insights</div>
+      </div>
+
+      <!-- Rules list -->
+      <div class="col gap-12">
+
+        <!-- Rule 1 -->
+        <div class="card padded">
+          <div class="row between" style="align-items: flex-start;">
+            <div style="flex: 1; min-width: 0;">
+              <div class="row gap-8 center mb-8">
+                <span class="chip brand"><span class="chip-dot"></span>Active</span>
+                <span class="caption">Last fired May 1 · 14 days ago</span>
+              </div>
+              <div class="title">Paycheck → savings split</div>
+              <div class="caption mt-4">Automatically distribute 40% of every direct deposit across 3 goals</div>
+
+              <!-- Trigger → Action visual -->
+              <div class="mt-16" style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center;">
+                <div class="flow-node" style="padding: 12px 14px; background: var(--surface-2);">
+                  <div class="eyebrow" style="font-size: 10px;">When</div>
+                  <div class="row gap-8 center mt-4">
+                    <span class="chip info" style="font-size: 12px;">📥 Direct deposit</span>
+                  </div>
+                  <div class="caption mt-8">to Chase Checking · ≥ $1,000</div>
+                </div>
+
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+
+                <div class="flow-node" style="padding: 12px 14px; background: var(--surface-2);">
+                  <div class="eyebrow" style="font-size: 10px;">Then</div>
+                  <div class="col gap-6 mt-4">
+                    <div class="row gap-8 between">
+                      <span class="chip" style="font-size: 12px;">🚗 New Car</span>
+                      <span class="num caption" style="font-weight: 600;">20%</span>
+                    </div>
+                    <div class="row gap-8 between">
+                      <span class="chip" style="font-size: 12px;">🛡️ Emergency</span>
+                      <span class="num caption" style="font-weight: 600;">$400</span>
+                    </div>
+                    <div class="row gap-8 between">
+                      <span class="chip" style="font-size: 12px;">🌴 Vacation</span>
+                      <span class="num caption" style="font-weight: 600;">10%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col gap-12" style="align-items: flex-end; margin-left: 20px; flex-shrink: 0;">
+              <div class="toggle on"></div>
+              <div class="row gap-4">
+                <button class="icon-btn" style="width: 32px; height: 32px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
+                <button class="icon-btn" style="width: 32px; height: 32px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+          <div class="row gap-24 wrap">
+            <div>
+              <div class="caption">Fired</div>
+              <div style="font-weight: 600;">42 times</div>
+            </div>
+            <div>
+              <div class="caption">Moved lifetime</div>
+              <div style="font-weight: 600;">$18,640</div>
+            </div>
+            <div>
+              <div class="caption">Last 30 days</div>
+              <div style="font-weight: 600;">$1,660</div>
+            </div>
+            <div style="margin-left: auto;">
+              <a href="#" class="card-link">View history →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rule 2 -->
+        <div class="card padded">
+          <div class="row between" style="align-items: flex-start;">
+            <div style="flex: 1; min-width: 0;">
+              <div class="row gap-8 center mb-8">
+                <span class="chip brand"><span class="chip-dot"></span>Active</span>
+                <span class="caption">Last fired today · next May 20</span>
+              </div>
+              <div class="title">Monthly emergency fund top-up</div>
+              <div class="caption mt-4">Reliable $200 every 5th and 20th regardless of payroll timing</div>
+
+              <div class="mt-16" style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center;">
+                <div class="flow-node" style="padding: 12px 14px; background: var(--surface-2);">
+                  <div class="eyebrow" style="font-size: 10px;">When</div>
+                  <div class="row gap-8 center mt-4">
+                    <span class="chip info" style="font-size: 12px;">📅 Scheduled</span>
+                  </div>
+                  <div class="caption mt-8">Bi-monthly · 5th & 20th · 9:00 AM</div>
+                </div>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                <div class="flow-node" style="padding: 12px 14px; background: var(--surface-2);">
+                  <div class="eyebrow" style="font-size: 10px;">Then</div>
+                  <div class="caption mt-4">Transfer <strong style="color: var(--text); font-weight: 600;">$200</strong> from Chase Checking</div>
+                  <div class="row gap-8 between mt-8">
+                    <span class="chip" style="font-size: 12px;">🛡️ Emergency fund</span>
+                    <span class="caption">→</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col gap-12" style="align-items: flex-end; margin-left: 20px; flex-shrink: 0;">
+              <div class="toggle on"></div>
+              <div class="row gap-4">
+                <button class="icon-btn" style="width: 32px; height: 32px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
+                <button class="icon-btn" style="width: 32px; height: 32px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="row gap-24 wrap">
+            <div><div class="caption">Fired</div><div style="font-weight: 600;">18 times</div></div>
+            <div><div class="caption">Moved lifetime</div><div style="font-weight: 600;">$3,600</div></div>
+            <div><div class="caption">Last 30 days</div><div style="font-weight: 600;">$400</div></div>
+            <div style="margin-left: auto;"><a href="#" class="card-link">View history →</a></div>
+          </div>
+        </div>
+
+        <!-- Rule 3 -->
+        <div class="card padded">
+          <div class="row between" style="align-items: flex-start;">
+            <div style="flex: 1; min-width: 0;">
+              <div class="row gap-8 center mb-8">
+                <span class="chip brand"><span class="chip-dot"></span>Active</span>
+                <span class="caption">17 fired this month</span>
+              </div>
+              <div class="title">Round-up coffee runs</div>
+              <div class="caption mt-4">Spare change from every checking purchase rounds up into vacation</div>
+
+              <div class="mt-16" style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center;">
+                <div class="flow-node" style="padding: 12px 14px; background: var(--surface-2);">
+                  <div class="eyebrow" style="font-size: 10px;">When</div>
+                  <div class="row gap-8 center mt-4">
+                    <span class="chip info" style="font-size: 12px;">🪙 Round-up</span>
+                  </div>
+                  <div class="caption mt-8">Every Chase Checking purchase</div>
+                </div>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                <div class="flow-node" style="padding: 12px 14px; background: var(--surface-2);">
+                  <div class="eyebrow" style="font-size: 10px;">Then</div>
+                  <div class="caption mt-4">Round to nearest <strong style="color: var(--text); font-weight: 600;">$1</strong>, transfer change</div>
+                  <div class="row gap-8 between mt-8">
+                    <span class="chip" style="font-size: 12px;">🌴 Vacation</span>
+                    <span class="caption">→</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col gap-12" style="align-items: flex-end; margin-left: 20px; flex-shrink: 0;">
+              <div class="toggle on"></div>
+              <div class="row gap-4">
+                <button class="icon-btn" style="width: 32px; height: 32px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
+                <button class="icon-btn" style="width: 32px; height: 32px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="row gap-24 wrap">
+            <div><div class="caption">Fired</div><div style="font-weight: 600;">214 times</div></div>
+            <div><div class="caption">Saved lifetime</div><div style="font-weight: 600;">$284.16</div></div>
+            <div><div class="caption">Last 30 days</div><div style="font-weight: 600;">$18.42</div></div>
+            <div style="margin-left: auto;"><a href="#" class="card-link">View history →</a></div>
+          </div>
+        </div>
+
+        <!-- Rule 4 (paused) -->
+        <div class="card padded" style="opacity: 0.78;">
+          <div class="row between" style="align-items: flex-start;">
+            <div style="flex: 1; min-width: 0;">
+              <div class="row gap-8 center mb-8">
+                <span class="chip"><span class="chip-dot"></span>Paused</span>
+                <span class="caption">Paused Apr 22 · last fired Apr 15</span>
+              </div>
+              <div class="title">Low-balance auto-transfer</div>
+              <div class="caption mt-4">Keep checking above $500 by pulling from savings</div>
+
+              <div class="mt-16" style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center;">
+                <div class="flow-node" style="padding: 12px 14px; background: var(--surface-2);">
+                  <div class="eyebrow" style="font-size: 10px;">When</div>
+                  <div class="row gap-8 center mt-4">
+                    <span class="chip info" style="font-size: 12px;">⚖️ Balance threshold</span>
+                  </div>
+                  <div class="caption mt-8">Chase Checking &lt; $500</div>
+                </div>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                <div class="flow-node" style="padding: 12px 14px; background: var(--surface-2);">
+                  <div class="eyebrow" style="font-size: 10px;">Then</div>
+                  <div class="caption mt-4">Transfer enough to restore <strong style="color: var(--text); font-weight: 600;">$1,000</strong></div>
+                </div>
+              </div>
+            </div>
+            <div class="col gap-12" style="align-items: flex-end; margin-left: 20px; flex-shrink: 0;">
+              <div class="toggle"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- New CTA -->
+        <a href="create-automation.html" style="display: block;">
+          <div class="card" style="border-style: dashed; padding: 24px; text-align: center;">
+            <div class="empty-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg></div>
+            <div style="font-weight: 600; color: var(--text-2);">Create a new automation</div>
+            <div class="caption mt-4">Build a rule from scratch or start from a template</div>
+          </div>
+        </a>
+      </div>
+
+    </main>
+  </div>
+
+</div>
+</body>
+</html>

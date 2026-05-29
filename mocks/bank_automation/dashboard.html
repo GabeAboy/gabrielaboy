@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dashboard · StackFlow</title>
+<link rel="stylesheet" href="styles.css" />
+<script src="heatmap.js" defer></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- ========== Sidebar ========== -->
+  <aside class="sidebar">
+    <div class="brand-mark">
+      <div class="brand-glyph">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 5 5 6-8"/></svg>
+      </div>
+      <div class="brand-name">StackFlow</div>
+    </div>
+
+    <div class="nav-section">Overview</div>
+    <nav class="nav">
+      <a href="dashboard.html" class="active">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Dashboard
+      </a>
+      <a href="accounts.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/></svg>
+        Accounts
+      </a>
+      <a href="transactions.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l10-10"/><path d="M17 10V7h-3"/><path d="M7 14v3h3"/></svg>
+        Transactions
+      </a>
+    </nav>
+
+    <div class="nav-section">Plan</div>
+    <nav class="nav">
+      <a href="buckets.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16l-1.5 12a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+        Buckets
+        <span class="nav-badge">8</span>
+      </a>
+      <a href="automations.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5h6L11 22l8.5-11.5h-6L13 2z"/></svg>
+        Automations
+        <span class="nav-badge">5</span>
+      </a>
+      <a href="calendar.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4M16 3v4"/></svg>
+        Calendar
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a class="user-card" href="profile.html">
+        <div class="avatar">AM</div>
+        <div class="user-meta">
+          <div class="user-name">Alex Morgan</div>
+          <div class="user-plan">Pro plan</div>
+        </div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-3)"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========== Main ========== -->
+  <div>
+    <header class="topbar">
+      <div class="crumbs">
+        <span>Home</span>
+        <span>›</span>
+        <strong>Dashboard</strong>
+      </div>
+      <div class="search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        Search accounts, rules, transactions…
+        <kbd>⌘K</kbd>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" title="Sync">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
+        </button>
+        <button class="icon-btn" title="Notifications">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
+          <span class="dot"></span>
+        </button>
+        <button class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          New automation
+        </button>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <!-- Greeting + KPI hero -->
+      <div class="page-header">
+        <div>
+          <div class="page-title">Good evening, Alex</div>
+          <div class="page-sub">Here's what your money did this week.</div>
+        </div>
+        <div class="row gap-8">
+          <button class="btn btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
+            Sync now
+          </button>
+          <button class="btn btn-secondary">
+            This month ▾
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== Hero: net worth flow ===== -->
+      <div class="grid cols-2-1 mb-24">
+        <div class="flow-card">
+          <div class="row between" style="align-items: flex-start;">
+            <div>
+              <div class="eyebrow">Net cash across all accounts</div>
+              <div class="display-xl" style="margin-top: 8px;">$48,217.49</div>
+              <div class="row gap-12 mt-12" style="color: rgba(255,255,255,0.85); font-size: 13px;">
+                <span class="row gap-4">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14l5-5 5 5"/></svg>
+                  $1,284 this month
+                </span>
+                <span style="opacity: 0.6;">·</span>
+                <span style="opacity: 0.7;">across 6 accounts</span>
+              </div>
+            </div>
+            <button class="btn ghost-btn">View accounts</button>
+          </div>
+
+          <!-- sparkline -->
+          <svg viewBox="0 0 600 80" class="sparkline mt-16" style="width: 100%; height: 60px;" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.25)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 55 L40 50 L80 53 L120 45 L160 48 L200 40 L240 42 L280 36 L320 38 L360 30 L400 32 L440 24 L480 26 L520 18 L560 22 L600 12"
+                  fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2"/>
+            <path d="M0 55 L40 50 L80 53 L120 45 L160 48 L200 40 L240 42 L280 36 L320 38 L360 30 L400 32 L440 24 L480 26 L520 18 L560 22 L600 12 L600 80 L0 80 Z"
+                  fill="url(#g1)"/>
+          </svg>
+
+          <div class="row gap-24 mt-12" style="color: rgba(255,255,255,0.7); font-size: 12px;">
+            <span>30d ago</span>
+            <span style="margin-left: auto;">Today</span>
+          </div>
+        </div>
+
+        <!-- right side: at a glance -->
+        <div class="card flush">
+          <div class="card-section">
+            <div class="eyebrow">Saved this month</div>
+            <div class="display-md mt-8">$1,820<span class="muted" style="font-size: 14px; font-weight: 500;"> of $2,400</span></div>
+            <div class="progress mt-12"><div class="bar" style="width: 76%; background: var(--c-sage);"></div></div>
+            <div class="row between mt-8">
+              <span class="caption">76% to goal</span>
+              <span class="caption">$580 to go</span>
+            </div>
+          </div>
+          <div class="card-section">
+            <div class="row between">
+              <div>
+                <div class="eyebrow">Automations</div>
+                <div class="title mt-8">5 active</div>
+                <div class="caption mt-4">2 fired this week · moved $1,420</div>
+              </div>
+              <a href="automations.html" class="card-link">Manage →</a>
+            </div>
+          </div>
+          <div class="card-section">
+            <div class="row between">
+              <div>
+                <div class="eyebrow">Subscriptions</div>
+                <div class="title mt-8">$184.50 / mo</div>
+                <div class="caption mt-4">12 active · next: Netflix on May 18</div>
+              </div>
+              <a href="buckets.html" class="card-link">View →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 14-day money strip ===== -->
+      <style>
+        .day-strip {
+          display: grid;
+          grid-template-columns: repeat(14, minmax(0, 1fr));
+          gap: 8px;
+        }
+        .day-cell {
+          background: var(--surface-2);
+          border: 1px solid var(--border);
+          border-radius: var(--r-md);
+          padding: 10px 6px 10px;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.12s ease;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          min-height: 116px;
+          position: relative;
+        }
+        .day-cell:hover {
+          border-color: var(--border-strong);
+          background: var(--surface);
+        }
+        .day-cell .dow {
+          font-size: 10px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: var(--text-3);
+        }
+        .day-cell .dnum {
+          font-size: 22px;
+          font-weight: 600;
+          letter-spacing: -0.01em;
+          line-height: 1;
+          font-variant-numeric: tabular-nums;
+        }
+        .day-events {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 3px;
+          justify-content: center;
+          align-items: center;
+          min-height: 8px;
+          width: 100%;
+        }
+        .ev-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          flex-shrink: 0;
+        }
+        .ev-dot.income   { background: var(--positive); }
+        .ev-dot.expense  { background: var(--negative); }
+        .ev-dot.sub      { background: var(--warning); }
+        .ev-dot.rule     { background: var(--info); }
+        .day-net {
+          font-size: 12px;
+          font-weight: 600;
+          font-variant-numeric: tabular-nums;
+          color: var(--text-2);
+          margin-top: auto;
+        }
+        .day-net.pos { color: var(--positive); }
+        .day-net.neg { color: var(--negative); }
+        .day-net.empty { color: var(--text-3); font-weight: 500; }
+
+        .day-cell.past {
+          opacity: 0.62;
+        }
+        .day-cell.past:hover { opacity: 0.9; }
+
+        .day-cell.weekend {
+          background: transparent;
+        }
+
+        .day-cell.today {
+          background: var(--brand);
+          color: white;
+          border-color: var(--brand);
+          box-shadow: 0 6px 18px -6px rgba(15, 107, 74, 0.45);
+          transform: translateY(-4px);
+        }
+        .day-cell.today .dow,
+        .day-cell.today .dnum,
+        .day-cell.today .day-net { color: white; }
+        .day-cell.today .day-net.pos { color: white; }
+        .day-cell.today .ev-dot { background: white; }
+        .day-cell.today::after {
+          content: 'Today';
+          position: absolute;
+          bottom: -22px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 10px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: var(--brand);
+        }
+
+        .strip-legend {
+          display: flex;
+          gap: 14px;
+          flex-wrap: wrap;
+          font-size: 12px;
+          color: var(--text-3);
+        }
+        .strip-legend > span {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        @media (max-width: 1080px) {
+          .day-strip { overflow-x: auto; grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 72px; }
+        }
+      </style>
+
+      <div class="card padded mb-24">
+        <div class="row between mb-16">
+          <div>
+            <div class="card-title">Next 14 days</div>
+            <div class="card-sub">Two days behind, today, and the two weeks ahead</div>
+          </div>
+          <div class="row gap-16">
+            <div class="strip-legend">
+              <span><span class="ev-dot income"></span>Income</span>
+              <span><span class="ev-dot expense"></span>Bill</span>
+              <span><span class="ev-dot sub"></span>Subscription</span>
+              <span><span class="ev-dot rule"></span>Automation</span>
+            </div>
+            <a href="calendar.html" class="card-link">Full calendar →</a>
+          </div>
+        </div>
+
+        <div class="day-strip">
+          <!-- May 13 — Wed, past -->
+          <a href="calendar.html?date=2026-05-13" class="day-cell past" style="text-decoration: none; color: inherit;" title="3 expenses">
+            <div class="dow">Wed</div>
+            <div class="dnum">13</div>
+            <div class="day-events">
+              <span class="ev-dot expense"></span>
+              <span class="ev-dot expense"></span>
+              <span class="ev-dot expense"></span>
+            </div>
+            <div class="day-net neg">−$163</div>
+          </a>
+
+          <!-- May 14 — Thu, past (yesterday) -->
+          <a href="calendar.html?date=2026-05-14" class="day-cell past" style="text-decoration: none; color: inherit;" title="1 expense, 1 subscription">
+            <div class="dow">Thu</div>
+            <div class="dnum">14</div>
+            <div class="day-events">
+              <span class="ev-dot expense"></span>
+              <span class="ev-dot sub"></span>
+            </div>
+            <div class="day-net neg">−$60</div>
+          </a>
+
+          <!-- May 15 — Fri, TODAY -->
+          <a href="calendar.html?date=2026-05-15" class="day-cell today" style="text-decoration: none;" title="Payroll + 3 automations + 1 expense">
+            <div class="dow">Fri</div>
+            <div class="dnum">15</div>
+            <div class="day-events">
+              <span class="ev-dot income"></span>
+              <span class="ev-dot rule"></span>
+              <span class="ev-dot rule"></span>
+              <span class="ev-dot rule"></span>
+              <span class="ev-dot expense"></span>
+            </div>
+            <div class="day-net pos">+$4,133</div>
+          </a>
+
+          <!-- May 16 — Sat, future, weekend -->
+          <a href="calendar.html?date=2026-05-16" class="day-cell weekend" style="text-decoration: none; color: inherit;">
+            <div class="dow">Sat</div>
+            <div class="dnum">16</div>
+            <div class="day-events"></div>
+            <div class="day-net empty">—</div>
+          </a>
+
+          <!-- May 17 — Sun, weekend -->
+          <a href="calendar.html?date=2026-05-17" class="day-cell weekend" style="text-decoration: none; color: inherit;">
+            <div class="dow">Sun</div>
+            <div class="dnum">17</div>
+            <div class="day-events"></div>
+            <div class="day-net empty">—</div>
+          </a>
+
+          <!-- May 18 — Mon, Netflix sub -->
+          <a href="calendar.html?date=2026-05-18" class="day-cell" style="text-decoration: none; color: inherit;" title="Netflix subscription">
+            <div class="dow">Mon</div>
+            <div class="dnum">18</div>
+            <div class="day-events">
+              <span class="ev-dot sub"></span>
+            </div>
+            <div class="day-net neg">−$15</div>
+          </a>
+
+          <!-- May 19 — Tue, empty -->
+          <a href="calendar.html?date=2026-05-19" class="day-cell" style="text-decoration: none; color: inherit;">
+            <div class="dow">Tue</div>
+            <div class="dnum">19</div>
+            <div class="day-events"></div>
+            <div class="day-net empty">—</div>
+          </a>
+
+          <!-- May 20 — Wed, Auto-sweep rule -->
+          <a href="calendar.html?date=2026-05-20" class="day-cell" style="text-decoration: none; color: inherit;" title="Auto-sweep $200 → Emergency fund">
+            <div class="dow">Wed</div>
+            <div class="dnum">20</div>
+            <div class="day-events">
+              <span class="ev-dot rule"></span>
+            </div>
+            <div class="day-net">$200</div>
+          </a>
+
+          <!-- May 21 — Thu, empty -->
+          <a href="calendar.html?date=2026-05-21" class="day-cell" style="text-decoration: none; color: inherit;">
+            <div class="dow">Thu</div>
+            <div class="dnum">21</div>
+            <div class="day-events"></div>
+            <div class="day-net empty">—</div>
+          </a>
+
+          <!-- May 22 — Fri, Rent -->
+          <a href="calendar.html?date=2026-05-22" class="day-cell" style="text-decoration: none; color: inherit;" title="Rent · Westside Apts">
+            <div class="dow">Fri</div>
+            <div class="dnum">22</div>
+            <div class="day-events">
+              <span class="ev-dot expense"></span>
+            </div>
+            <div class="day-net neg">−$1,850</div>
+          </a>
+
+          <!-- May 23 — Sat, weekend -->
+          <a href="calendar.html?date=2026-05-23" class="day-cell weekend" style="text-decoration: none; color: inherit;">
+            <div class="dow">Sat</div>
+            <div class="dnum">23</div>
+            <div class="day-events"></div>
+            <div class="day-net empty">—</div>
+          </a>
+
+          <!-- May 24 — Sun, weekend -->
+          <a href="calendar.html?date=2026-05-24" class="day-cell weekend" style="text-decoration: none; color: inherit;">
+            <div class="dow">Sun</div>
+            <div class="dnum">24</div>
+            <div class="day-events"></div>
+            <div class="day-net empty">—</div>
+          </a>
+
+          <!-- May 25 — Mon, Amex due -->
+          <a href="calendar.html?date=2026-05-25" class="day-cell" style="text-decoration: none; color: inherit;" title="Amex credit card payment due">
+            <div class="dow">Mon</div>
+            <div class="dnum">25</div>
+            <div class="day-events">
+              <span class="ev-dot expense"></span>
+            </div>
+            <div class="day-net neg">−$924</div>
+          </a>
+
+          <!-- May 26 — Tue, empty -->
+          <a href="calendar.html?date=2026-05-26" class="day-cell" style="text-decoration: none; color: inherit;">
+            <div class="dow">Tue</div>
+            <div class="dnum">26</div>
+            <div class="day-events"></div>
+            <div class="day-net empty">—</div>
+          </a>
+        </div>
+
+        <!-- Summary footer -->
+        <div class="row between wrap gap-12" style="border-top: 1px solid var(--border); padding-top: 14px; margin-top: 28px;">
+          <div class="caption">
+            <strong style="color: var(--text);">8 events</strong> across the next 14 days
+          </div>
+          <div class="row gap-16 wrap caption">
+            <span><strong class="pos">+$4,200</strong> in</span>
+            <span><strong class="neg">−$3,012</strong> out</span>
+            <span><strong style="color: var(--info);">3</strong> automations will fire</span>
+            <span><strong style="color: var(--text);">$1,188</strong> net change</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Money flow narrative ===== -->
+      <div class="card padded mb-24">
+        <div class="row between mb-16">
+          <div>
+            <div class="title">Your last paycheck, automated</div>
+            <div class="caption mt-4">From Chase Checking · May 1, 2026 · $4,200.00</div>
+          </div>
+          <div class="row gap-8">
+            <span class="chip pos"><span class="chip-dot"></span>3 rules fired</span>
+            <button class="btn btn-ghost btn-sm">View history</button>
+          </div>
+        </div>
+
+        <!-- Flow diagram -->
+        <div class="flow-diagram">
+          <!-- Source -->
+          <div class="flow-node">
+            <div class="row gap-8">
+              <div class="bank-mark chase" style="width: 32px; height: 32px; font-size: 11px;">CB</div>
+              <div style="min-width: 0;">
+                <div class="title" style="font-size: 13px;">Chase Checking</div>
+                <div class="caption">Payroll · ACME Co.</div>
+              </div>
+            </div>
+            <div class="display-sm pos mt-12">+$4,200.00</div>
+          </div>
+
+          <div class="flow-connector"></div>
+
+          <!-- Allocations stacked -->
+          <div class="col gap-8">
+            <div class="flow-node" style="padding: 10px 14px;">
+              <div class="row gap-8 between">
+                <div class="row gap-8 center" style="min-width: 0;">
+                  <div class="bucket-icon terracotta" style="width: 26px; height: 26px; font-size: 13px;">🚗</div>
+                  <div style="min-width: 0;">
+                    <div style="font-weight: 600; font-size: 13px;">New Car fund</div>
+                    <div class="caption">20% of deposit</div>
+                  </div>
+                </div>
+                <div class="num" style="font-weight: 600;">$840</div>
+              </div>
+            </div>
+            <div class="flow-node" style="padding: 10px 14px;">
+              <div class="row gap-8 between">
+                <div class="row gap-8 center" style="min-width: 0;">
+                  <div class="bucket-icon sage" style="width: 26px; height: 26px; font-size: 13px;">🛡️</div>
+                  <div style="min-width: 0;">
+                    <div style="font-weight: 600; font-size: 13px;">Emergency fund</div>
+                    <div class="caption">Fixed amount</div>
+                  </div>
+                </div>
+                <div class="num" style="font-weight: 600;">$400</div>
+              </div>
+            </div>
+            <div class="flow-node" style="padding: 10px 14px;">
+              <div class="row gap-8 between">
+                <div class="row gap-8 center" style="min-width: 0;">
+                  <div class="bucket-icon ochre" style="width: 26px; height: 26px; font-size: 13px;">🌴</div>
+                  <div style="min-width: 0;">
+                    <div style="font-weight: 600; font-size: 13px;">Vacation</div>
+                    <div class="caption">10% of deposit</div>
+                  </div>
+                </div>
+                <div class="num" style="font-weight: 600;">$420</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-connector"></div>
+
+          <!-- Destination -->
+          <div class="flow-node">
+            <div class="row gap-8">
+              <div class="bank-mark ally" style="width: 32px; height: 32px; font-size: 11px;">AL</div>
+              <div style="min-width: 0;">
+                <div class="title" style="font-size: 13px;">Ally Savings</div>
+                <div class="caption">3 buckets</div>
+              </div>
+            </div>
+            <div class="display-sm pos mt-12">+$1,660.00</div>
+            <div class="caption mt-4">Remaining $2,540 stayed in checking</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Goals + Upcoming ===== -->
+      <div class="grid cols-2-1 mb-24">
+        <!-- Goals -->
+        <div class="card padded">
+          <div class="card-header no-border">
+            <div>
+              <div class="card-title">Goals</div>
+              <div class="card-sub">Where your savings are heading</div>
+            </div>
+            <a href="buckets.html" class="card-link">All buckets →</a>
+          </div>
+
+          <div class="col gap-16">
+            <div>
+              <div class="row between mb-8">
+                <div class="row gap-8 center">
+                  <div class="bucket-icon terracotta" style="width: 28px; height: 28px; font-size: 14px;">🚗</div>
+                  <div>
+                    <div style="font-weight: 600;">New Car</div>
+                    <div class="caption">$840/mo · on pace</div>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <div class="num" style="font-weight: 600;">$6,720<span class="muted" style="font-weight: 500;"> / $25,000</span></div>
+                  <div class="caption">ETA Dec 2027</div>
+                </div>
+              </div>
+              <div class="progress"><div class="bar terracotta" style="width: 27%;"></div></div>
+            </div>
+
+            <div>
+              <div class="row between mb-8">
+                <div class="row gap-8 center">
+                  <div class="bucket-icon sage" style="width: 28px; height: 28px; font-size: 14px;">🛡️</div>
+                  <div>
+                    <div style="font-weight: 600;">Emergency fund</div>
+                    <div class="caption row gap-4 center"><span class="chip pos" style="padding: 1px 7px; font-size: 11px;">on track</span> $400/mo</div>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <div class="num" style="font-weight: 600;">$8,400<span class="muted" style="font-weight: 500;"> / $12,000</span></div>
+                  <div class="caption">ETA Feb 2027</div>
+                </div>
+              </div>
+              <div class="progress"><div class="bar sage" style="width: 70%;"></div></div>
+            </div>
+
+            <div>
+              <div class="row between mb-8">
+                <div class="row gap-8 center">
+                  <div class="bucket-icon ochre" style="width: 28px; height: 28px; font-size: 14px;">🌴</div>
+                  <div>
+                    <div style="font-weight: 600;">Vacation '26</div>
+                    <div class="caption">$420/mo · 8 mo to deadline</div>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <div class="num" style="font-weight: 600;">$2,840<span class="muted" style="font-weight: 500;"> / $5,000</span></div>
+                  <div class="caption">ETA Sep 2026</div>
+                </div>
+              </div>
+              <div class="progress"><div class="bar ochre" style="width: 57%;"></div></div>
+            </div>
+
+            <div>
+              <div class="row between mb-8">
+                <div class="row gap-8 center">
+                  <div class="bucket-icon plum" style="width: 28px; height: 28px; font-size: 14px;">🎓</div>
+                  <div>
+                    <div style="font-weight: 600;">Student loan payoff</div>
+                    <div class="caption row gap-4 center"><span class="chip warn" style="padding: 1px 7px; font-size: 11px;">behind</span> contribute $80 more</div>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <div class="num" style="font-weight: 600;">$3,200<span class="muted" style="font-weight: 500;"> / $14,000</span></div>
+                  <div class="caption">ETA past goal</div>
+                </div>
+              </div>
+              <div class="progress"><div class="bar plum" style="width: 23%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming -->
+        <div class="card flush">
+          <div class="card-section" style="padding: 18px 20px;">
+            <div class="row between">
+              <div>
+                <div class="card-title">Coming up</div>
+                <div class="card-sub">Next 14 days</div>
+              </div>
+              <a href="calendar.html" class="card-link">Calendar →</a>
+            </div>
+          </div>
+
+          <div class="event-row">
+            <div class="event-date">
+              <div class="d">15</div>
+              <div class="m">May</div>
+            </div>
+            <div class="event-icon" style="background: var(--positive-soft); color: var(--positive);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14l5-5 5 5"/></svg>
+            </div>
+            <div class="event-meta">
+              <div class="event-title">Paycheck · ACME Co.</div>
+              <div class="event-sub">Direct deposit · triggers 3 rules</div>
+            </div>
+            <div class="event-amount pos">+$4,200.00</div>
+          </div>
+
+          <div class="event-row">
+            <div class="event-date">
+              <div class="d">18</div>
+              <div class="m">May</div>
+            </div>
+            <div class="event-icon" style="background: var(--negative-soft); color: var(--negative);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 12 12 22 2 12 12 2"/></svg>
+            </div>
+            <div class="event-meta">
+              <div class="event-title">Netflix</div>
+              <div class="event-sub">Subscription · funded</div>
+            </div>
+            <div class="event-amount neg">−$15.49</div>
+          </div>
+
+          <div class="event-row">
+            <div class="event-date">
+              <div class="d">20</div>
+              <div class="m">May</div>
+            </div>
+            <div class="event-icon" style="background: var(--info-soft); color: var(--info);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
+            </div>
+            <div class="event-meta">
+              <div class="event-title">Auto-sweep to Emergency</div>
+              <div class="event-sub">Scheduled rule · monthly</div>
+            </div>
+            <div class="event-amount">$200.00</div>
+          </div>
+
+          <div class="event-row">
+            <div class="event-date">
+              <div class="d">22</div>
+              <div class="m">May</div>
+            </div>
+            <div class="event-icon" style="background: var(--negative-soft); color: var(--negative);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+            </div>
+            <div class="event-meta">
+              <div class="event-title">Rent · Westside Apts</div>
+              <div class="event-sub">Recurring · auto-paid</div>
+            </div>
+            <div class="event-amount neg">−$1,850.00</div>
+          </div>
+
+          <div class="event-row">
+            <div class="event-date">
+              <div class="d">28</div>
+              <div class="m">May</div>
+            </div>
+            <div class="event-icon" style="background: var(--warning-soft); color: var(--warning);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6l3 2"/></svg>
+            </div>
+            <div class="event-meta">
+              <div class="event-title">Verizon</div>
+              <div class="event-sub">Subscription · needs $34 more</div>
+            </div>
+            <div class="event-amount neg">−$112.00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Saving activity heatmap ===== -->
+      <div class="card padded mb-24">
+        <div class="row between mb-16">
+          <div>
+            <div class="card-title">Your saving habit</div>
+            <div class="card-sub">52 weeks of deposits, automation firings, and bucket contributions</div>
+          </div>
+          <a href="profile.html" class="card-link">See full story →</a>
+        </div>
+
+        <svg class="heatmap-svg" data-heatmap viewBox="0 0 820 132" preserveAspectRatio="xMinYMid meet"></svg>
+
+        <div class="row between wrap gap-12" style="border-top: 1px solid var(--border); padding-top: 14px; margin-top: 16px;">
+          <div class="row gap-16 wrap">
+            <span class="row gap-6 center">
+              <strong style="font-size: 18px; font-variant-numeric: tabular-nums;">287</strong>
+              <span class="caption">active days · 79% of the year</span>
+            </span>
+            <span class="row gap-6 center">
+              <strong style="font-size: 18px; font-variant-numeric: tabular-nums; color: var(--c-terracotta);">47</strong>
+              <span class="caption">day current streak</span>
+            </span>
+            <span class="row gap-6 center">
+              <strong style="font-size: 18px; font-variant-numeric: tabular-nums;">$820</strong>
+              <span class="caption">best day · Apr 2 bonus</span>
+            </span>
+          </div>
+          <div class="row gap-8 center">
+            <span class="caption">Less</span>
+            <span class="legend-sq" style="background: var(--surface-3);"></span>
+            <span class="legend-sq" style="background: rgba(111, 140, 94, 0.28);"></span>
+            <span class="legend-sq" style="background: rgba(111, 140, 94, 0.55);"></span>
+            <span class="legend-sq" style="background: rgba(111, 140, 94, 0.8);"></span>
+            <span class="legend-sq" style="background: var(--c-sage);"></span>
+            <span class="caption">More</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Accounts strip + Recent activity ===== -->
+      <div class="grid cols-2 mb-24">
+        <div class="card padded">
+          <div class="card-header no-border">
+            <div>
+              <div class="card-title">Accounts</div>
+              <div class="card-sub">All connected via Plaid · last sync 2m ago</div>
+            </div>
+            <a href="accounts.html" class="card-link">Details →</a>
+          </div>
+
+          <div class="col gap-12">
+            <div class="row gap-12 between">
+              <div class="row gap-12 center">
+                <div class="bank-mark chase">CB</div>
+                <div>
+                  <div style="font-weight: 600;">Chase Total Checking</div>
+                  <div class="caption">··· 4218 · Checking</div>
+                </div>
+              </div>
+              <div class="num" style="font-weight: 600;">$8,492.10</div>
+            </div>
+
+            <div class="row gap-12 between">
+              <div class="row gap-12 center">
+                <div class="bank-mark ally">AL</div>
+                <div>
+                  <div style="font-weight: 600;">Ally Online Savings</div>
+                  <div class="caption">··· 9921 · Savings · 8 buckets</div>
+                </div>
+              </div>
+              <div class="num" style="font-weight: 600;">$21,160.00</div>
+            </div>
+
+            <div class="row gap-12 between">
+              <div class="row gap-12 center">
+                <div class="bank-mark amex">AX</div>
+                <div>
+                  <div style="font-weight: 600;">Amex Blue Cash</div>
+                  <div class="caption">··· 0017 · Credit</div>
+                </div>
+              </div>
+              <div class="num" style="font-weight: 600;">−$924.50</div>
+            </div>
+
+            <div class="row gap-12 between">
+              <div class="row gap-12 center">
+                <div class="bank-mark schwab">SC</div>
+                <div>
+                  <div style="font-weight: 600;">Schwab Brokerage</div>
+                  <div class="caption">··· 2284 · Investment</div>
+                </div>
+              </div>
+              <div class="num" style="font-weight: 600;">$19,489.89</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card flush">
+          <div class="card-section">
+            <div class="row between">
+              <div>
+                <div class="card-title">Activity</div>
+                <div class="card-sub">Latest transactions</div>
+              </div>
+              <a href="transactions.html" class="card-link">All →</a>
+            </div>
+          </div>
+          <div class="event-row">
+            <div class="event-icon" style="background: var(--surface-3); color: var(--text-2);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12h6"/></svg>
+            </div>
+            <div class="event-meta">
+              <div class="event-title">Whole Foods Market</div>
+              <div class="event-sub">Today, 6:42 PM · Chase Checking</div>
+            </div>
+            <div class="event-amount neg">−$67.42</div>
+          </div>
+          <div class="event-row">
+            <div class="event-icon" style="background: var(--positive-soft); color: var(--positive);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+            <div class="event-meta">
+              <div class="event-title">Transfer to Emergency fund</div>
+              <div class="event-sub">Today, 9:00 AM · Auto-sweep rule</div>
+            </div>
+            <div class="event-amount">$200.00</div>
+          </div>
+          <div class="event-row">
+            <div class="event-icon" style="background: var(--surface-3); color: var(--text-2);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2V9z"/></svg>
+            </div>
+            <div class="event-meta">
+              <div class="event-title">Westside Apartments</div>
+              <div class="event-sub">May 1 · Rent</div>
+            </div>
+            <div class="event-amount neg">−$1,850.00</div>
+          </div>
+          <div class="event-row">
+            <div class="event-icon" style="background: var(--positive-soft); color: var(--positive);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14l5-5 5 5"/></svg>
+            </div>
+            <div class="event-meta">
+              <div class="event-title">ACME Co. Payroll</div>
+              <div class="event-sub">May 1 · Direct deposit</div>
+            </div>
+            <div class="event-amount pos">+$4,200.00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Footer hint ===== -->
+      <div class="help">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><circle cx="12" cy="16" r="0.5" fill="currentColor"/></svg>
+        <div>
+          You haven't created a goal for taxes yet. Self-employed users typically set aside 25–30% of each deposit.
+          <a href="automations.html" style="font-weight: 600; text-decoration: underline; margin-left: 4px;">Build a tax rule</a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GitApplied · Marketing &amp; Traction Plan</title>
+  <meta name="description" content="A pragmatic 90-day go-to-market playbook for a solo-launched job-search tool." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/mocks/githired/mocks.css" />
+  <style>
+    /* ─── Layout shells ─────────────────────────────────────────────── */
+    .mkt { padding-bottom: 0; }
+    .mkt-section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 80px 32px;
+    }
+    .mkt-section--tight { padding: 56px 32px; }
+    .mkt-section + .mkt-section { border-top: 1px solid var(--rule-hairline); }
+
+    .mkt-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .mkt-h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 3.25rem;
+      line-height: 1.08;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      margin: 0 0 20px;
+      color: var(--text-primary);
+    }
+    .mkt-h1 .accent { color: var(--accent); font-style: italic; }
+    .mkt-h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2.125rem;
+      line-height: 1.18;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin: 0 0 12px;
+      color: var(--text-primary);
+    }
+    .mkt-h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.375rem;
+      line-height: 1.3;
+      font-weight: 600;
+      margin: 0 0 6px;
+      color: var(--text-primary);
+    }
+    .mkt-sub {
+      font-size: 1.0625rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      max-width: 640px;
+      margin: 0 0 12px;
+    }
+
+    /* ─── Hero ──────────────────────────────────────────────────────── */
+    .hero { padding-top: 96px; }
+    .hero-meta {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: 24px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+    .hero-meta .dot { width: 4px; height: 4px; border-radius: 999px; background: var(--text-muted); display: inline-block; }
+
+    /* ─── Channel mix tiers ─────────────────────────────────────────── */
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .tier-card {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .tier-card.is-featured {
+      border-color: color-mix(in srgb, var(--accent) 50%, var(--rule-hairline));
+      box-shadow: var(--shadow-2);
+    }
+    .tier-card-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .tier-card-name {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.375rem;
+      font-weight: 600;
+    }
+    .tier-channel {
+      border-top: 1px solid var(--rule-hairline);
+      padding-top: 14px;
+    }
+    .tier-channel:first-of-type { border-top: 0; padding-top: 0; }
+    .tier-channel-name {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .tier-channel-desc {
+      font-size: 0.875rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+    .tier-channel-time {
+      display: inline-block;
+      margin-top: 8px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .skip-strip {
+      margin-top: 28px;
+      padding: 18px 22px;
+      background: var(--surface-draft);
+      border: 1px dashed var(--rule-strong);
+      border-radius: 12px;
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+    }
+    .skip-strip strong { color: var(--text-primary); }
+
+    /* ─── Tradeoff block ────────────────────────────────────────────── */
+    .tradeoff {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .tradeoff-card {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      padding: 26px 24px;
+    }
+    .tradeoff-card h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.25rem;
+      margin: 0 0 10px;
+    }
+    .tradeoff-card p { font-size: 0.9375rem; line-height: 1.6; color: var(--text-secondary); margin: 0; }
+    .tradeoff-rule {
+      margin-top: 24px;
+      padding: 22px 26px;
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.125rem;
+      line-height: 1.55;
+      color: var(--text-primary);
+    }
+    .tradeoff-rule strong { color: var(--accent); }
+
+    /* ─── Landing-page review ───────────────────────────────────────── */
+    .review-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .review-col h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.25rem;
+      margin: 0 0 16px;
+    }
+    .review-item {
+      padding: 18px 0;
+      border-top: 1px solid var(--rule-hairline);
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+    }
+    .review-item:first-child { border-top: 0; padding-top: 0; }
+    .review-item .num {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.875rem;
+      color: var(--accent);
+      font-weight: 600;
+      padding-top: 1px;
+    }
+    .review-item .q {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+    .review-item .a {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+    .review-item .action {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 0.8125rem;
+      color: var(--text-primary);
+      background: var(--surface-base);
+      border: 1px solid var(--rule-hairline);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .review-side {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .review-side h4 {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin: 0 0 14px;
+    }
+    .review-side ul { list-style: none; padding: 0; margin: 0 0 22px; }
+    .review-side li {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 8px 0;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--rule-hairline);
+    }
+    .review-side li:first-child { border-top: 0; }
+    .review-side li i { color: var(--positive); width: 16px; height: 16px; margin-top: 3px; }
+
+    /* ─── Onboarding ────────────────────────────────────────────────── */
+    .onboarding-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .ob-card {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 12px;
+      padding: 22px 20px;
+    }
+    .ob-card .icon {
+      width: 36px; height: 36px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+    }
+    .ob-card .icon i { width: 18px; height: 18px; }
+    .ob-card h4 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      margin: 0 0 6px;
+    }
+    .ob-card p { font-size: 0.875rem; line-height: 1.55; color: var(--text-secondary); margin: 0; }
+
+    /* ─── 30-day plan ───────────────────────────────────────────────── */
+    .weeks {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+    .week {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      padding: 22px 20px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .week-num {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .week-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+    .week-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .week-list li {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      display: grid;
+      grid-template-columns: 16px 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+    .week-list li i { width: 14px; height: 14px; color: var(--accent); margin-top: 3px; }
+
+    /* ─── Metrics ───────────────────────────────────────────────────── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .metric {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 12px;
+      padding: 22px 18px;
+      text-align: left;
+    }
+    .metric-label {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .metric-value {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    .metric-why {
+      margin-top: 8px;
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    /* ─── Example posts ─────────────────────────────────────────────── */
+    .posts {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 28px;
+    }
+    .post {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      padding: 24px 26px;
+    }
+    .post-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      align-items: baseline;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--rule-hairline);
+    }
+    .post-platform {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .post-scenario {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .post-body {
+      font-size: 0.9375rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+    .post-body p { margin: 0 0 12px; }
+    .post-body p:last-child { margin-bottom: 0; }
+    .post-body ul { padding-left: 20px; margin: 0 0 12px; }
+    .post-body li { margin-bottom: 6px; }
+    .post-body strong { color: var(--text-primary); }
+    .post-body em { color: var(--text-primary); }
+
+    /* ─── Catch lines ───────────────────────────────────────────────── */
+    .catch-lines-block { margin-top: 40px; }
+    .catch-lines {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .catch-line {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .catch-line-tag {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .catch-line-text {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.0625rem;
+      line-height: 1.4;
+      color: var(--text-primary);
+      font-style: italic;
+    }
+
+    /* ─── Final CTA ─────────────────────────────────────────────────── */
+    .final-cta {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 16px;
+      padding: 56px 32px;
+      max-width: 880px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .final-cta blockquote {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.625rem;
+      line-height: 1.35;
+      color: var(--text-primary);
+      font-style: italic;
+      margin: 16px 0 18px;
+      letter-spacing: -0.005em;
+    }
+    .final-cta p { color: var(--text-secondary); font-size: 1rem; margin: 0; }
+
+    /* ─── Footer ────────────────────────────────────────────────────── */
+    .mkt-footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 32px 64px;
+      border-top: 1px solid var(--rule-hairline);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+    .mkt-footer a { color: var(--accent); text-decoration: none; }
+    .mkt-footer a:hover { text-decoration: underline; }
+
+    /* ─── Responsive ────────────────────────────────────────────────── */
+    @media (max-width: 980px) {
+      .mkt-section { padding: 56px 24px; }
+      .mkt-h1 { font-size: 2.375rem; }
+      .mkt-h2 { font-size: 1.625rem; }
+      .tiers, .tradeoff, .review-grid, .onboarding-grid, .weeks, .metrics-grid, .catch-lines {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="mkt">
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="/">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="/">← Backoffice</a></li>
+        <li><a class="nav-link" href="/mocks/githired/landing.html" target="_blank">Landing</a></li>
+        <li><a class="nav-link" href="/mocks/githired/pricing.html" target="_blank">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="header-tools" style="gap: 12px;">
+      <span class="nav-link" style="font-size: 0.8125rem; color: var(--text-muted);">90-day go-to-market</span>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══════════════════════════════════════ HERO ═══ -->
+    <section class="mkt-section hero">
+      <div class="mkt-eyebrow">Marketing &amp; traction plan</div>
+      <h1 class="mkt-h1">A <span class="accent">pragmatic</span> playbook for a solo-launched job-search tool.</h1>
+      <p class="mkt-sub">Optimized for low-budget, high-signal channels first. Paid channels later, once messaging is validated. Source: <code style="font-family:'JetBrains Mono',monospace; font-size:0.9em;">GitHired/MARKETING.md</code>.</p>
+      <div class="hero-meta">
+        <span><i data-lucide="calendar" style="width:14px; height:14px;"></i> 90-day horizon</span>
+        <span class="dot"></span>
+        <span><i data-lucide="user" style="width:14px; height:14px;"></i> Solo founder</span>
+        <span class="dot"></span>
+        <span><i data-lucide="target" style="width:14px; height:14px;"></i> $500 MRR by day 90</span>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ CHANNEL MIX ═══ -->
+    <section class="mkt-section">
+      <div class="mkt-eyebrow">§ 1 · Channel mix (first 90 days)</div>
+      <h2 class="mkt-h2">Pick fewer channels and go deep.</h2>
+      <p class="mkt-sub">Your audience is already gathered on Reddit and LinkedIn. Meet them there.</p>
+
+      <div class="tiers">
+        <!-- Tier 1 -->
+        <div class="tier-card is-featured">
+          <div>
+            <div class="tier-card-eyebrow">Tier 1 · Start here</div>
+            <div class="tier-card-name">Organic, high-signal</div>
+          </div>
+          <div class="tier-channel">
+            <div class="tier-channel-name">Reddit</div>
+            <div class="tier-channel-desc">r/cscareerquestions, r/jobs, r/resumes, r/EngineeringResumes, r/jobsearchhacks, r/recruitinghell. Founders are tolerated if they lead with the problem and a free tier.</div>
+            <span class="tier-channel-time">30 min/day · 5×/wk</span>
+          </div>
+          <div class="tier-channel">
+            <div class="tier-channel-name">LinkedIn personal posts</div>
+            <div class="tier-channel-desc">"Why I built this" + screenshots converts. Post 2–3× per week.</div>
+            <span class="tier-channel-time">1–2 hr/week</span>
+          </div>
+          <div class="tier-channel">
+            <div class="tier-channel-name">Show HN</div>
+            <div class="tier-channel-desc">One-shot launch channel. Front-page hit = thousands of signups. Only fire once onboarding is bulletproof.</div>
+            <span class="tier-channel-time">1 day prep + live-reply</span>
+          </div>
+          <div class="tier-channel">
+            <div class="tier-channel-name">Product Hunt</div>
+            <div class="tier-channel-desc">Pairs well with Show HN. Tuesday or Wednesday. Pre-tease in maker communities.</div>
+            <span class="tier-channel-time">1 week prep + launch day</span>
+          </div>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="tier-card">
+          <div>
+            <div class="tier-card-eyebrow">Tier 2 · After week 4</div>
+            <div class="tier-card-name">Layer in compounding</div>
+          </div>
+          <div class="tier-channel">
+            <div class="tier-channel-name">SEO content</div>
+            <div class="tier-channel-desc">Long-tail blog posts ("how to tailor a resume for a senior backend role"). Compounds over 3–6 months.</div>
+            <span class="tier-channel-time">2–3 hr/post</span>
+          </div>
+          <div class="tier-channel">
+            <div class="tier-channel-name">Indie Hackers</div>
+            <div class="tier-channel-desc">Build-in-public posts about MRR, conversion, churn. Community is friendly to founders.</div>
+            <span class="tier-channel-time">30 min/week</span>
+          </div>
+          <div class="tier-channel">
+            <div class="tier-channel-name">Twitter/X build-in-public</div>
+            <div class="tier-channel-desc">Slow burn unless you already have a following. Skip if you don't.</div>
+            <span class="tier-channel-time">conditional</span>
+          </div>
+          <div class="tier-channel">
+            <div class="tier-channel-name">YouTube demos</div>
+            <div class="tier-channel-desc">One 60–90 second "tailor a resume in 30 seconds" demo pays for itself across every channel.</div>
+            <span class="tier-channel-time">3–4 hr/video</span>
+          </div>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="tier-card">
+          <div>
+            <div class="tier-card-eyebrow">Tier 3 · After validation</div>
+            <div class="tier-card-name">Paid, with proof</div>
+          </div>
+          <div class="tier-channel">
+            <div class="tier-channel-name">Google Ads</div>
+            <div class="tier-channel-desc">Keywords: "resume builder", "AI cover letter generator", "job application tracker". Don't start until ≥5% landing-page signup rate.</div>
+            <span class="tier-channel-time">$2–6 CPC</span>
+          </div>
+          <div class="tier-channel">
+            <div class="tier-channel-name">LinkedIn Ads</div>
+            <div class="tier-channel-desc">Expensive but precise. Worth it only with a clear ICP and &gt;$10 ARPU.</div>
+            <span class="tier-channel-time">$10+ CPC</span>
+          </div>
+          <div class="tier-channel">
+            <div class="tier-channel-name">Career-coach / bootcamp partnerships</div>
+            <div class="tier-channel-desc">Affiliate or co-marketing deals. Higher-touch but loyal users.</div>
+            <span class="tier-channel-time">case-by-case</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skip-strip">
+        <strong>Skip entirely (for now):</strong> TikTok / Instagram Reels (wrong audience demographics for paid SaaS) ·
+        Cold email to recruiters (they are not your customer) ·
+        Press / TechCrunch outreach (founders who chase press before traction burn months).
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ TRADEOFF ═══ -->
+    <section class="mkt-section mkt-section--tight">
+      <div class="mkt-eyebrow">§ 2 · The tradeoff</div>
+      <h2 class="mkt-h2">Organic teaches you the language. Paid amplifies it.</h2>
+
+      <div class="tradeoff">
+        <div class="tradeoff-card">
+          <h3><i data-lucide="message-circle" style="width:18px; height:18px; vertical-align:-3px; color:var(--accent);"></i> Organic is slow but teaches you</h3>
+          <p>Each Reddit comment, LinkedIn reply, and HN thread tells you which words your users actually use to describe the pain. That language becomes your landing-page copy, your ad copy, and your onboarding microcopy.</p>
+        </div>
+        <div class="tradeoff-card">
+          <h3><i data-lucide="zap" style="width:18px; height:18px; vertical-align:-3px; color:var(--accent);"></i> Paid is fast but expensive without it</h3>
+          <p>$500 in Google Ads with generic copy = 0 conversions and 0 learning. The same $500 spent <em>after</em> you've watched 50 Reddit threads = 3× the conversion rate.</p>
+        </div>
+      </div>
+
+      <div class="tradeoff-rule">
+        <strong>Rule of thumb:</strong> don't spend a dollar on paid until you have ~100 organic signups and you can recite the top 3 reasons people sign up without checking your notes.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ LANDING PAGE REVIEW ═══ -->
+    <section class="mkt-section">
+      <div class="mkt-eyebrow">§ 3 · Landing-page review</div>
+      <h2 class="mkt-h2">The bones are good — but several elements are leaking conversion rate.</h2>
+      <p class="mkt-sub">Reviewed <code style="font-family:'JetBrains Mono',monospace; font-size:0.9em;">web/src/pages/LandingPage.tsx</code>. Clear hero, features, pricing, FAQ, CTA. Below are the highest-leverage fixes.</p>
+
+      <div class="review-grid">
+        <div class="review-col">
+          <h3>Critical gaps</h3>
+          <div class="review-item">
+            <div class="num">1</div>
+            <div>
+              <div class="q">No product screenshots or demo.</div>
+              <div class="a">Hero is text-only. Job-search tools live or die on "show me what it looks like." Users won't sign up to <em>find out</em>.</div>
+              <span class="action">Action: hero screenshot of Kanban board, or 30-sec Loom of the tailor flow.</span>
+            </div>
+          </div>
+          <div class="review-item">
+            <div class="num">2</div>
+            <div>
+              <div class="q">Vague social proof.</div>
+              <div class="a">"Join job seekers taking control of their search" reads as a placeholder. With no number, it implies zero users.</div>
+              <span class="action">Action: real number once you have one, or drop the badge.</span>
+            </div>
+          </div>
+          <div class="review-item">
+            <div class="num">3</div>
+            <div>
+              <div class="q">No testimonials or quotes.</div>
+              <div class="a">2–3 quotes from early users (real first names + role: "Sarah, SWE at startup") raise conversion materially.</div>
+              <span class="action">Action: ask your first 10 signups for a one-sentence quote.</span>
+            </div>
+          </div>
+          <div class="review-item">
+            <div class="num">4</div>
+            <div>
+              <div class="q">The browser extension is invisible.</div>
+              <div class="a">You ship a Chrome extension but the landing page never mentions it. That extension is a huge differentiator vs. a plain SaaS.</div>
+              <span class="action">Action: "One-click capture from LinkedIn, Indeed, Greenhouse…" in the features grid.</span>
+            </div>
+          </div>
+          <div class="review-item">
+            <div class="num">5</div>
+            <div>
+              <div class="q">"Smart Job Import" refers to the product in third person.</div>
+              <div class="a">"GitApplied automatically extracts…" on your own homepage is unusual.</div>
+              <span class="action">Action: "Paste any job URL, we pull the title, company, salary, and requirements automatically."</span>
+            </div>
+          </div>
+          <div class="review-item">
+            <div class="num">6</div>
+            <div>
+              <div class="q">Hero CTA reads as secondary.</div>
+              <div class="a">White button with grey border, vs. a dark "Sign Up" in the header. Header demands more attention than the hero.</div>
+              <span class="action">Action: make hero CTA dark/gradient; demote header signup to outlined.</span>
+            </div>
+          </div>
+          <div class="review-item">
+            <div class="num">7</div>
+            <div>
+              <div class="q">No above-the-fold proof of the AI feature.</div>
+              <div class="a">Premium ($10/mo) is your highest-margin tier — the page mentions AI tailoring but never <em>shows</em> it.</div>
+              <span class="action">Action: the demo video should focus on the AI tailor flow.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-side">
+          <h4>Smaller wins</h4>
+          <ul>
+            <li><i data-lucide="chevron-right"></i>FAQ only has 3 items. Add: competitor comparison, DOCX/Google Docs support, cancellation, student discount.</li>
+            <li><i data-lucide="chevron-right"></i>Verify "5 minute setup" — specific numbers ("3 min") outperform round ones.</li>
+            <li><i data-lucide="chevron-right"></i>Footer has no contact email. Adds trust for a resume-handling tool.</li>
+            <li><i data-lucide="chevron-right"></i>Bump footer copyright from 2025 to 2026.</li>
+            <li><i data-lucide="chevron-right"></i>Pricing "Base" $5/mo may be a dead zone. Watch the funnel; consider folding into Free or Premium.</li>
+          </ul>
+          <h4>What's working</h4>
+          <ul>
+            <li><i data-lucide="check"></i>Clean visual hierarchy, modern aesthetic — doesn't look like a side project.</li>
+            <li><i data-lucide="check"></i>3-tier pricing + "Save 17%" yearly toggle is well-executed.</li>
+            <li><i data-lucide="check"></i>"No credit card required" trust signals placed under both CTAs.</li>
+            <li><i data-lucide="check"></i>Mobile overrides via <code style="font-family:'JetBrains Mono',monospace; font-size:0.85em;">@media (max-width: 640px)</code>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ ONBOARDING ═══ -->
+    <section class="mkt-section mkt-section--tight">
+      <div class="mkt-eyebrow">§ 4 · Onboarding flow</div>
+      <h2 class="mkt-h2">Verify these before driving any traffic.</h2>
+
+      <div class="onboarding-grid">
+        <div class="ob-card">
+          <div class="icon"><i data-lucide="timer"></i></div>
+          <h4>Time-to-value &lt; 3 min</h4>
+          <p>From "Sign Up" to seeing a tailored resume. Measure on a fresh account with a stopwatch.</p>
+        </div>
+        <div class="ob-card">
+          <div class="icon"><i data-lucide="layout-template"></i></div>
+          <h4>Empty state with sample</h4>
+          <p>"Try with this sample job" button. Users landing on an empty Kanban bounce.</p>
+        </div>
+        <div class="ob-card">
+          <div class="icon"><i data-lucide="mail-check"></i></div>
+          <h4>No verification block</h4>
+          <p>Don't gate first use on email verification. ~30% drop off. Prompt on day 2 instead.</p>
+        </div>
+        <div class="ob-card">
+          <div class="icon"><i data-lucide="gauge"></i></div>
+          <h4>Free-tier limit visible</h4>
+          <p>"10 active applications" shown on the dashboard, not surfaced as a surprise paywall.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ 30-DAY PLAN ═══ -->
+    <section class="mkt-section">
+      <div class="mkt-eyebrow">§ 5 · A concrete 30-day plan</div>
+      <h2 class="mkt-h2">Four weeks, three swings.</h2>
+
+      <div class="weeks">
+        <div class="week">
+          <div>
+            <div class="week-num">Week 01</div>
+            <div class="week-title">Fix the leaks</div>
+          </div>
+          <ul class="week-list">
+            <li><i data-lucide="check"></i>Record a 60-sec demo (Loom/QuickTime). Embed on hero.</li>
+            <li><i data-lucide="check"></i>Three high-quality screenshots: Kanban, AI tailor, job detail.</li>
+            <li><i data-lucide="check"></i>Rewrite "Smart Job Import" copy (drop third person).</li>
+            <li><i data-lucide="check"></i>Add browser extension to features grid.</li>
+            <li><i data-lucide="check"></i>Add 2–3 more FAQ items.</li>
+            <li><i data-lucide="check"></i>Bump footer copyright to 2026.</li>
+          </ul>
+        </div>
+
+        <div class="week">
+          <div>
+            <div class="week-num">Week 02</div>
+            <div class="week-title">Soft launch</div>
+          </div>
+          <ul class="week-list">
+            <li><i data-lucide="check"></i>Post to r/cscareerquestions: lead with the problem, free tier link only.</li>
+            <li><i data-lucide="check"></i>LinkedIn: "Why I built GitApplied" — personal story, screenshots, link in comments.</li>
+            <li><i data-lucide="check"></i>Reach out to first 10 signups individually: what almost made you not sign up?</li>
+          </ul>
+        </div>
+
+        <div class="week">
+          <div>
+            <div class="week-num">Week 03</div>
+            <div class="week-title">Iterate</div>
+          </div>
+          <ul class="week-list">
+            <li><i data-lucide="check"></i>Rewrite hero copy using Week-2 Reddit feedback. The phrase that gets "yes, this!" is your new H1.</li>
+            <li><i data-lucide="check"></i>Ask the 3 most engaged users for a one-sentence testimonial.</li>
+            <li><i data-lucide="check"></i>Write first SEO post: "Resume tailoring: should you actually do it for every job?"</li>
+          </ul>
+        </div>
+
+        <div class="week">
+          <div>
+            <div class="week-num">Week 04</div>
+            <div class="week-title">Bigger swing</div>
+          </div>
+          <ul class="week-list">
+            <li><i data-lucide="check"></i><strong>Show HN</strong> — only if onboarding is solid and you can reply all day.</li>
+            <li><i data-lucide="check"></i><strong>Product Hunt</strong> Tuesday/Wednesday. Pre-warm "coming soon" page.</li>
+            <li><i data-lucide="check"></i>Measure signup-to-<em>activation</em> per channel. Double down on highest, not signup count.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ EXAMPLE POSTS ═══ -->
+    <section class="mkt-section">
+      <div class="mkt-eyebrow">§ 6 · Example posts &amp; catch lines</div>
+      <h2 class="mkt-h2">Templates that lead with the problem.</h2>
+      <p class="mkt-sub">Reuse the pattern, not the words verbatim — Reddit's spam filter pattern-matches on copy-paste, and so do humans. Every example below leads with the user's pain, then mentions GitApplied as one option, with a free tier to lower the bar.</p>
+
+      <div class="posts">
+        <article class="post">
+          <header class="post-head">
+            <span class="post-platform">Reddit · r/jobs</span>
+            <span class="post-scenario">replying to: "How are you tracking job applications without going crazy?"</span>
+          </header>
+          <div class="post-body">
+            <p>You're not crazy — the market is. I was 180 apps deep into a Notion doc that had become a graveyard before I admitted spreadsheets work fine for 20 applications, not 200.</p>
+            <p>What actually moved the needle for me:</p>
+            <ul>
+              <li><strong>Stages, not lists.</strong> Applied → Phone screen → Onsite → Offer → Ghosted. Seeing the funnel kills the "shouting into a void" feeling.</li>
+              <li><strong>One-click capture.</strong> Every open job tab is a 5-minute tax on hope. A browser extension that grabs the title, company, salary, and JD in one click removes most of the friction.</li>
+              <li><strong>Track which resume version went where.</strong> That's the actual signal — without it, callbacks feel random and you can't iterate.</li>
+            </ul>
+            <p>Full disclosure: I got tired of fighting my own spreadsheet and built <strong>GitApplied</strong> around exactly this. Free tier handles 10 active apps if you want to poke at it — happy to answer questions either way.</p>
+          </div>
+        </article>
+
+        <article class="post">
+          <header class="post-head">
+            <span class="post-platform">Reddit · r/recruitinghell</span>
+            <span class="post-scenario">shorter, empathy-first reply</span>
+          </header>
+          <div class="post-body">
+            <p>The market changed. Your strategy probably hasn't, and that's the gap.</p>
+            <p>Three things that helped me stop spiraling: (1) cap active applications at ~15 at a time so each one gets a tailored resume, (2) track <em>response rate per resume variant</em>, not just total apps sent, (3) put it in a Kanban so you can see the funnel instead of doomscrolling a spreadsheet.</p>
+            <p>I built <strong>GitApplied</strong> after burning out on my own tracker — free tier if you want a template that's already wired up. Otherwise honestly a Trello board does 70% of this.</p>
+          </div>
+        </article>
+
+        <article class="post">
+          <header class="post-head">
+            <span class="post-platform">LinkedIn · personal post</span>
+            <span class="post-scenario">"Why I built this" — pin for first 30 days</span>
+          </header>
+          <div class="post-body">
+            <p>I sent 247 job applications last cycle.</p>
+            <p>By application 80, my tracker spreadsheet had three "Status" columns, two date formats, and a tab I was scared to open.</p>
+            <p>The problem wasn't discipline. Every job-search tool I tried was built for <em>recruiters</em>, not candidates. They optimize for filling a role, not for surviving the search.</p>
+            <p>So I built <strong>GitApplied</strong>:</p>
+            <p>→ Kanban board that mirrors how the search actually feels<br>
+            → Browser extension — one click on any LinkedIn / Indeed / Greenhouse posting<br>
+            → AI tailors a resume version per role so you stop sending the same generic PDF<br>
+            → Free for the first 10 active applications</p>
+            <p>Link in the comments. If you're job-hunting right now: comment what's missing and I'll ship it this week.</p>
+          </div>
+        </article>
+
+        <article class="post">
+          <header class="post-head">
+            <span class="post-platform">Show HN · launch post</span>
+            <span class="post-scenario">title + 2-paragraph context, fire once</span>
+          </header>
+          <div class="post-body">
+            <p><strong>Title:</strong> Show HN: GitApplied – Kanban + AI resume tailoring for the job search</p>
+            <p>I built this after watching my own tracker spreadsheet collapse around application #80 last year. The market is rough, and every existing tool felt like it was built for recruiters, not the person sending the applications.</p>
+            <p>Differentiator vs. Teal / Huntr / Simplify is the browser extension — one click on a LinkedIn / Indeed / Greenhouse posting captures title, company, salary, and JD, then the AI tailors a resume variant for that specific role. Free tier covers 10 active applications, enough to know if it clicks for you.</p>
+            <p>Happy to dig into the stack (Go + React, Postgres, Chrome extension) or the product decisions in the comments. Roast away.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="catch-lines-block">
+        <h3 class="mkt-h3">Catch lines &amp; hooks</h3>
+        <p class="mkt-sub">For headlines, ad copy, tweet drops, and the first line of cold posts. The good ones reframe the problem before naming the product.</p>
+
+        <div class="catch-lines">
+          <div class="catch-line">
+            <div class="catch-line-tag">Problem reframe</div>
+            <div class="catch-line-text">"Your spreadsheet didn't fail — it was never designed for 200 applications."</div>
+          </div>
+          <div class="catch-line">
+            <div class="catch-line-tag">Empathy hook</div>
+            <div class="catch-line-text">"You're not crazy. The market is. Your tracker doesn't have to be."</div>
+          </div>
+          <div class="catch-line">
+            <div class="catch-line-tag">Founder origin</div>
+            <div class="catch-line-text">"247 applications, 1 spreadsheet from hell, and the tool I wish I'd had."</div>
+          </div>
+          <div class="catch-line">
+            <div class="catch-line-tag">Cost reframe</div>
+            <div class="catch-line-text">"Every open job tab is a 5-minute tax on hope. We give it back."</div>
+          </div>
+          <div class="catch-line">
+            <div class="catch-line-tag">Funnel angle</div>
+            <div class="catch-line-text">"Stop journaling your job search. Start tracking the funnel."</div>
+          </div>
+          <div class="catch-line">
+            <div class="catch-line-tag">Anti-recruiter</div>
+            <div class="catch-line-text">"Built for the candidate, not the recruiter."</div>
+          </div>
+          <div class="catch-line">
+            <div class="catch-line-tag">Specificity</div>
+            <div class="catch-line-text">"One click captures the job. The AI handles the resume. You handle the interview."</div>
+          </div>
+          <div class="catch-line">
+            <div class="catch-line-tag">Direct contrast</div>
+            <div class="catch-line-text">"Teal has a product team. I have you — comment what's missing, I'll ship it this week."</div>
+          </div>
+          <div class="catch-line">
+            <div class="catch-line-tag">Survival framing</div>
+            <div class="catch-line-text">"Layoffs everywhere. Ghost jobs everywhere. At least your tracker should be on your side."</div>
+          </div>
+          <div class="catch-line">
+            <div class="catch-line-tag">Numerical punch</div>
+            <div class="catch-line-text">"From job posting to tailored resume in under 60 seconds."</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ METRICS ═══ -->
+    <section class="mkt-section mkt-section--tight">
+      <div class="mkt-eyebrow">§ 7 · Metrics to track from day 1</div>
+      <h2 class="mkt-h2">You cannot improve what you cannot measure.</h2>
+      <p class="mkt-sub">Set up PostHog or Plausible (privacy-friendly, lightweight) <em>before</em> driving any traffic. Don't optimize for vanity metrics.</p>
+
+      <div class="metrics-grid">
+        <div class="metric">
+          <div class="metric-label">Landing → signup</div>
+          <div class="metric-value">5%+</div>
+          <div class="metric-why">Below this, fix copy before driving more traffic.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Signup → activation</div>
+          <div class="metric-value">40%+</div>
+          <div class="metric-why">First tailored resume. Below this, fix onboarding.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Free → paid</div>
+          <div class="metric-value">3–5%</div>
+          <div class="metric-why">SaaS benchmark. Below this, free is too generous or paid too expensive.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Day-7 retention</div>
+          <div class="metric-value">30%+</div>
+          <div class="metric-why">Job search is intermittent — anything above 30% is healthy.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">MRR by day 90</div>
+          <div class="metric-value">$500</div>
+          <div class="metric-why">~50–100 paid users. Achievable from Reddit + HN alone.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ ONE LAST THING ═══ -->
+    <section class="mkt-section">
+      <div class="final-cta">
+        <div class="mkt-eyebrow" style="margin-bottom:8px;">§ 8 · One last thing</div>
+        <blockquote>"Comment what's missing, I'll ship it this week."</blockquote>
+        <p>Your biggest competitive advantage as a solo founder is <strong>speed of iteration</strong>. Teal, Huntr, and Simplify have product teams. You can ship a feature the same day a user requests it — make that part of your story. That single line, repeated on Reddit and LinkedIn, will out-convert any feature list.</p>
+      </div>
+    </section>
+
+    <footer class="mkt-footer">
+      <span>Source: <code>~/development/GitHired/MARKETING.md</code></span>
+      <span><a href="/">← back to Backoffice</a></span>
+    </footer>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/mocks/githired/mocks.js"></script>
+  <script>
+    if (window.lucide && lucide.createIcons) lucide.createIcons();
+  </script>
+</body>
+</html>

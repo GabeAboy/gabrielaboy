@@ -1,0 +1,1497 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GitHired · Product Requirements Document</title>
+  <meta name="description" content="GitHired is a Trello-style job-application pipeline with AI-tailored resumes and cover letters — every choice the AI makes is annotated against the posting it answers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:              #FAF7F0;
+      --surface-base:    #FBF8F1;
+      --surface-raised:  #FFFFFF;
+      --surface-draft:   #FBF7EA;
+      --surface-quote:   #F4EED9;
+      --rule-hairline:   #E5E0D5;
+      --rule-strong:     #C9C2B0;
+      --text-primary:    #1C1A14;
+      --text-secondary:  #5F5A4E;
+      --text-muted:      #8E897C;
+      --accent:          #9B7825;
+      --accent-soft:     #F2E8CC;
+      --accent-deep:     #6F5417;
+      --positive:        #557A3A;
+      --warn:            #A05A00;
+      --danger:          #B1431C;
+
+      --serif:  'Source Serif 4', Iowan Old Style, Georgia, serif;
+      --sans:   'Inter', ui-sans-serif, system-ui, sans-serif;
+      --mono:   'JetBrains Mono', ui-monospace, monospace;
+
+      --shadow-2: 0 20px 40px -16px rgba(28, 26, 20, 0.16);
+      --gutter:   clamp(20px, 4vw, 56px);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--text-primary); }
+    body {
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "ss01", "kern";
+    }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    code {
+      font-family: var(--mono);
+      font-size: 0.86em;
+      background: var(--surface-base);
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--rule-hairline);
+      color: var(--text-primary);
+    }
+    pre {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height: 1.6;
+      background: var(--surface-base);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 6px;
+      padding: 16px 18px;
+      overflow-x: auto;
+      color: var(--text-primary);
+      margin: 12px 0 8px;
+    }
+    pre code { background: transparent; border: 0; padding: 0; }
+
+    /* ─── App header ──────────────────────────────────────── */
+    header.app {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250, 247, 240, 0.92);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--rule-hairline);
+    }
+    .app-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 14px var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .crumb {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .crumb .sep { color: var(--rule-strong); }
+    .crumb .here { color: var(--text-primary); }
+    .crumb .home {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--text-primary);
+    }
+    .crumb .home .badge {
+      width: 22px; height: 22px;
+      background: var(--accent);
+      color: var(--bg);
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 5px;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 11px;
+    }
+    .header-meta {
+      display: flex; gap: 18px; align-items: center;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .header-meta .v { color: var(--accent); }
+    @media (max-width: 640px) { .header-meta { display: none; } }
+
+    /* ─── Title block ──────────────────────────────────── */
+    section.title-block {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: clamp(56px, 7vw, 96px) var(--gutter) clamp(36px, 5vw, 64px);
+    }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 1px;
+      background: var(--accent);
+    }
+    h1.doc-title {
+      font-family: var(--serif);
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+      font-variation-settings: 'opsz' 60;
+    }
+    h1.doc-title em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .doc-lede {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.2vw, 24px);
+      line-height: 1.45;
+      color: var(--text-secondary);
+      max-width: 64ch;
+      font-weight: 400;
+      font-variation-settings: 'opsz' 24;
+    }
+    .doc-lede strong { color: var(--text-primary); font-weight: 600; }
+
+    .doc-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px 36px;
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule-hairline);
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+    .doc-meta-row .pair { display: flex; align-items: baseline; gap: 8px; }
+    .doc-meta-row .pair .k { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.12em; font-size: 10.5px; }
+    .doc-meta-row .pair .v { color: var(--text-primary); }
+    .doc-meta-row .pair .v.live { color: var(--accent); }
+    .doc-meta-row .pair .v.live::before {
+      content: '';
+      display: inline-block;
+      width: 7px; height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-right: 7px;
+      vertical-align: middle;
+      box-shadow: 0 0 0 0 rgba(155,120,37,0.5);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(155,120,37,0.45); }
+      70%     { box-shadow: 0 0 0 9px rgba(155,120,37,0); }
+    }
+
+    /* ─── Layout: TOC + content ────────────────────────── */
+    main.body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--gutter) 80px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: clamp(28px, 4vw, 64px);
+    }
+    @media (max-width: 880px) {
+      main.body { grid-template-columns: 1fr; }
+      aside.toc { position: static; max-height: none; }
+    }
+
+    aside.toc {
+      position: sticky;
+      top: 84px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      padding-top: 6px;
+    }
+    aside.toc .toc-label {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    aside.toc ol { list-style: none; counter-reset: tocnum; }
+    aside.toc li { counter-increment: tocnum; padding: 2px 0; }
+    aside.toc a {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding: 4px 0;
+      display: block;
+      border-left: 2px solid transparent;
+      padding-left: 12px;
+      margin-left: -14px;
+      transition: color .2s, border-color .2s;
+    }
+    aside.toc a::before {
+      content: counter(tocnum, decimal-leading-zero) " · ";
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      margin-right: 4px;
+    }
+    aside.toc a:hover { color: var(--accent); border-left-color: var(--accent); }
+
+    /* ─── Sections ──────────────────────────────────────── */
+    section.doc-section {
+      padding: clamp(40px, 5vw, 64px) 0;
+      border-top: 1px solid var(--rule-hairline);
+    }
+    section.doc-section:first-of-type { border-top: 0; padding-top: clamp(16px, 2vw, 28px); }
+
+    .sec-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .sec-num::before {
+      content: '§';
+      color: var(--text-muted);
+    }
+    h2.sec-h {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.6vw, 40px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+      font-weight: 600;
+      font-variation-settings: 'opsz' 40;
+    }
+    h2.sec-h em { font-style: italic; color: var(--accent); }
+
+    h3.sub-h {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 14px;
+    }
+
+    p.prose {
+      font-family: var(--serif);
+      font-size: 17.5px;
+      line-height: 1.62;
+      color: var(--text-secondary);
+      max-width: 68ch;
+      margin-bottom: 16px;
+      font-variation-settings: 'opsz' 18;
+    }
+    p.prose strong { color: var(--text-primary); font-weight: 600; }
+    p.prose em { font-style: italic; }
+    p.prose a { color: var(--accent); border-bottom: 1px solid var(--accent-soft); }
+    p.prose a:hover { border-bottom-color: var(--accent); }
+
+    ul.tight, ol.tight {
+      list-style: none;
+      max-width: 68ch;
+    }
+    ul.tight li, ol.tight li {
+      font-family: var(--serif);
+      font-size: 16.5px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      padding: 6px 0 6px 28px;
+      position: relative;
+    }
+    ul.tight li::before {
+      content: '';
+      position: absolute;
+      left: 8px; top: 17px;
+      width: 8px; height: 1px;
+      background: var(--accent);
+    }
+    ol.tight { counter-reset: oltight; }
+    ol.tight li {
+      counter-increment: oltight;
+      padding-left: 36px;
+    }
+    ol.tight li::before {
+      content: counter(oltight, decimal-leading-zero);
+      position: absolute;
+      left: 0; top: 8px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--accent);
+    }
+    ul.tight li strong, ol.tight li strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ─── Tables ──────────────────────────────────────── */
+    .tbl-wrap {
+      border: 1px solid var(--rule-strong);
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--surface-raised);
+      margin: 18px 0 6px;
+      box-shadow: var(--shadow-2);
+    }
+    table.doc-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--sans);
+      font-size: 14px;
+    }
+    table.doc-tbl thead th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--surface-base);
+      border-bottom: 1px solid var(--rule-strong);
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    table.doc-tbl tbody td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--rule-hairline);
+      vertical-align: top;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    table.doc-tbl tbody tr:last-child td { border-bottom: 0; }
+    table.doc-tbl tbody td.role {
+      font-family: var(--sans);
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+    table.doc-tbl tbody td.example {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--text-primary);
+    }
+    table.doc-tbl td .yes { color: var(--accent); font-weight: 600; }
+    table.doc-tbl td .no  { color: var(--text-muted); }
+    table.doc-tbl td .partial { color: var(--warn); }
+    table.doc-tbl td.center { text-align: center; }
+
+    /* ─── Feature card ────────────────────────────────── */
+    .feature-card {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 8px;
+      padding: 22px 24px;
+      margin: 14px 0;
+      box-shadow: var(--shadow-2);
+    }
+    .feature-card .head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .feature-card .head h4 {
+      font-family: var(--serif);
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .feature-card .head h4 em { font-style: italic; color: var(--accent); }
+    .feature-card .head .tag {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .feature-card p.prose { font-size: 16px; margin-bottom: 12px; }
+
+    /* ─── Pull-quote ────────────────────────────────── */
+    .pull-quote {
+      background: var(--surface-quote);
+      border-left: 3px solid var(--accent);
+      padding: 18px 22px;
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--text-primary);
+      font-style: italic;
+      border-radius: 0 6px 6px 0;
+      margin: 18px 0 6px;
+      max-width: 68ch;
+    }
+
+    /* ─── ASCII / Diagram block ─────────────────────── */
+    .diagram {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+    .diagram pre {
+      background: transparent;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+
+    /* ─── Scope grid ────────────────────────────────── */
+    .scope-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    @media (max-width: 760px) { .scope-grid { grid-template-columns: 1fr; } }
+    .scope-col {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 6px;
+      padding: 18px 22px;
+    }
+    .scope-col h5 {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .scope-col.in h5 { color: var(--positive); }
+    .scope-col.out h5 { color: var(--text-muted); }
+    .scope-col ul { list-style: none; }
+    .scope-col ul li {
+      font-family: var(--serif);
+      font-size: 15.5px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      padding: 6px 0 6px 22px;
+      position: relative;
+      border-top: 1px dashed var(--rule-hairline);
+    }
+    .scope-col ul li:first-child { border-top: 0; }
+    .scope-col.in ul li::before {
+      content: '✓';
+      position: absolute; left: 0; top: 6px;
+      color: var(--positive);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .scope-col.out ul li::before {
+      content: '—';
+      position: absolute; left: 0; top: 6px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+    }
+
+    /* ─── Roadmap phase blocks ───────────────────────── */
+    .phase {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 8px;
+      padding: 22px 24px;
+      margin: 14px 0;
+      box-shadow: var(--shadow-2);
+    }
+    .phase .phase-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .phase .phase-head .v {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+    .phase .phase-head h4 {
+      font-family: var(--serif);
+      font-size: 22px;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .phase .phase-head h4 em { font-style: italic; color: var(--accent); }
+    .phase ul.tight li { font-size: 16px; padding-top: 4px; padding-bottom: 4px; }
+
+    /* ─── Risk register ─────────────────────────────── */
+    .risk-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 10px;
+    }
+    @media (max-width: 760px) { .risk-grid { grid-template-columns: 1fr; } }
+    .risk {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 6px;
+      padding: 18px 20px;
+    }
+    .risk .risk-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 8px; gap: 12px; flex-wrap: wrap;
+    }
+    .risk .risk-head h5 {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .risk .risk-head .sev {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+    .risk .risk-head .sev.high { background: rgba(177,67,28,0.1); color: var(--danger); }
+    .risk .risk-head .sev.med  { background: rgba(160,90,0,0.12); color: var(--warn); }
+    .risk .risk-head .sev.low  { background: var(--accent-soft); color: var(--accent); }
+    .risk p {
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .risk .mit {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      color: var(--text-muted);
+      padding-top: 8px;
+      border-top: 1px dashed var(--rule-hairline);
+    }
+    .risk .mit b { color: var(--text-primary); font-weight: 600; }
+
+    /* ─── Final summary ─────────────────────────────── */
+    .one-sentence {
+      margin: 28px 0 12px;
+      padding: 32px 30px;
+      background: var(--text-primary);
+      color: var(--bg);
+      border-radius: 8px;
+      box-shadow: var(--shadow-2);
+      position: relative;
+    }
+    .one-sentence::before {
+      content: 'TL;DR';
+      position: absolute;
+      top: 16px; right: 22px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+    }
+    .one-sentence p {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.4vw, 26px);
+      line-height: 1.35;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      max-width: 56ch;
+    }
+    .one-sentence p em { font-style: italic; color: var(--accent); font-weight: 500; }
+    .one-sentence p strong { font-weight: 600; color: #fff; }
+
+    /* ─── Footer ────────────────────────────────────── */
+    footer.colo {
+      border-top: 1px solid var(--rule-hairline);
+      padding: 28px var(--gutter) 56px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    footer.colo a { color: var(--accent); }
+    footer.colo a:hover { color: var(--accent-deep); border-bottom: 1px solid var(--accent); padding-bottom: 1px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ APP HEADER ============ -->
+<header class="app">
+  <div class="app-inner">
+    <div class="crumb">
+      <a href="/" class="home"><span class="badge">GH</span> GitHired</a>
+      <span class="sep">/</span>
+      <span class="here">Product Requirements</span>
+    </div>
+    <div class="header-meta">
+      <span>Rev. <span class="v">v1.0</span></span>
+      <span>Updated 27 May 2026</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ TITLE BLOCK ============ -->
+<section class="title-block">
+  <div class="eyebrow">Product Requirements · Job-application pipeline</div>
+  <h1 class="doc-title">GitHired — a job-search workflow that <em>shows its work</em>.</h1>
+  <p class="doc-lede">
+    A Trello-style pipeline for the roles you're actually pursuing — paired with an AI that
+    <strong>tailors a resume and cover letter for every posting</strong> and annotates every
+    inclusion, exclusion, and paraphrase against the requirement it answers.
+    No spray-and-pray. No black-box prompts. Every line is traceable.
+  </p>
+  <div class="doc-meta-row">
+    <div class="pair"><span class="k">Stage</span> <span class="v">MVP build</span></div>
+    <div class="pair"><span class="k">Status</span> <span class="v live">Active development</span></div>
+    <div class="pair"><span class="k">Owner</span> <span class="v">Gabriel Aboy</span></div>
+    <div class="pair"><span class="k">Codename</span> <span class="v">GitHired</span></div>
+    <div class="pair"><span class="k">Stack</span> <span class="v">Go · React · Postgres · OpenAI</span></div>
+  </div>
+</section>
+
+<!-- ============ BODY ============ -->
+<main class="body">
+
+  <!-- TOC -->
+  <aside class="toc" aria-label="Table of contents">
+    <div class="toc-label">Contents</div>
+    <ol>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#problem">Problem statement</a></li>
+      <li><a href="#users">Target users</a></li>
+      <li><a href="#goals">Goals &amp; success metrics</a></li>
+      <li><a href="#features">Core features</a></li>
+      <li><a href="#tool">The Tool tab — AI assistant</a></li>
+      <li><a href="#scraper">Scraper &amp; normaliser</a></li>
+      <li><a href="#ai">AI pipeline</a></li>
+      <li><a href="#pdf">PDF export</a></li>
+      <li><a href="#flows">User flows</a></li>
+      <li><a href="#ia">Information architecture</a></li>
+      <li><a href="#tech">Technical architecture</a></li>
+      <li><a href="#data">Data model</a></li>
+      <li><a href="#nfr">Non-functional requirements</a></li>
+      <li><a href="#mvp">MVP scope</a></li>
+      <li><a href="#milestones">Milestones</a></li>
+      <li><a href="#risks">Risks &amp; mitigations</a></li>
+      <li><a href="#future">Future considerations</a></li>
+      <li><a href="#one">One sentence</a></li>
+    </ol>
+  </aside>
+
+  <!-- Article -->
+  <article>
+
+    <!-- §01 Overview -->
+    <section class="doc-section" id="overview">
+      <div class="sec-num">Section 01</div>
+      <h2 class="sec-h">The <em>overview</em></h2>
+      <p class="prose">
+        <strong>GitHired</strong> is a web application that streamlines the job-application process.
+        Users supply their career history (CV) and a sample cover letter once, then manage individual
+        job opportunities on a Trello-style Kanban board. For each posting, the platform
+        <em>scrapes</em>, <em>normalises</em>, and <em>tailors</em> — producing a resume and cover letter
+        whose every inclusion and exclusion is annotated against the requirement it answers.
+        Everything exports to ATS-friendly PDF.
+      </p>
+    </section>
+
+    <!-- §02 Problem -->
+    <section class="doc-section" id="problem">
+      <div class="sec-num">Section 02</div>
+      <h2 class="sec-h">The <em>problem</em></h2>
+      <p class="prose">
+        Applying to jobs is repetitive and time-consuming. Candidates re-format the same
+        information dozens of times, miss keywords, and fail to align their materials
+        with the specific posting. Existing tools either automate too little
+        (spreadsheets, Notion boards) or too much (one-click apply spam).
+        <strong>There is no single tool that combines pipeline tracking <em>and</em>
+        intelligent, explainable document generation.</strong>
+      </p>
+
+      <div class="pull-quote">
+        "I'm on application number 87. I have no idea what I sent to which company,
+        and every cover letter looks like the last one with the company name swapped in."
+      </div>
+    </section>
+
+    <!-- §03 Users -->
+    <section class="doc-section" id="users">
+      <div class="sec-num">Section 03</div>
+      <h2 class="sec-h">Target <em>users</em></h2>
+
+      <div class="tbl-wrap">
+        <table class="doc-tbl">
+          <thead>
+            <tr>
+              <th style="width: 200px;">Persona</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="role">Active job seeker</td>
+              <td>Applying to 10–50+ roles. Needs speed and consistency across tailored applications. Highest willingness to pay; most acute pain.</td>
+            </tr>
+            <tr>
+              <td class="role">Passive job seeker</td>
+              <td>Casually tracking a handful of roles. Values organisation and quick generation when ready to apply.</td>
+            </tr>
+            <tr>
+              <td class="role">Career switcher</td>
+              <td>Needs help surfacing transferable skills. Benefits most from the AI's relevance-mapping and transparency report.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- §04 Goals -->
+    <section class="doc-section" id="goals">
+      <div class="sec-num">Section 04</div>
+      <h2 class="sec-h">Goals &amp; success <em>metrics</em></h2>
+
+      <div class="tbl-wrap">
+        <table class="doc-tbl">
+          <thead>
+            <tr>
+              <th style="width: 320px;">Goal</th>
+              <th>Metric</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="role">Reduce per-application effort</td>
+              <td>&lt; 5 minutes from job link → tailored PDF, on a warm account.</td>
+            </tr>
+            <tr>
+              <td class="role">Transparent AI decisions</td>
+              <td>100% of resume / cover-letter choices annotated with their reasoning and source.</td>
+            </tr>
+            <tr>
+              <td class="role">Organised pipeline</td>
+              <td>Every application stage visible at a glance; no card requires more than two clicks to update.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- §05 Core features -->
+    <section class="doc-section" id="features">
+      <div class="sec-num">Section 05</div>
+      <h2 class="sec-h">Core <em>features</em></h2>
+
+      <div class="feature-card">
+        <div class="head">
+          <h4>5.1 — <em>User profile &amp; CV intake</em></h4>
+          <span class="tag">Onboarding</span>
+        </div>
+        <p class="prose">
+          A structured form (or paste / upload) captures contact info, summary, work experience,
+          education, skills, certifications, and projects. The user provides at least one
+          sample cover letter so the AI can learn tone, structure, and voice.
+        </p>
+        <ul class="tight">
+          <li>Profile is the single source of truth — every future generation reads from it.</li>
+          <li>Edits propagate forward; locked snapshots on previously-submitted applications stay intact.</li>
+          <li>CV editor supports freeform text sections for unconventional careers.</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <div class="head">
+          <h4>5.2 — <em>The Kanban board</em></h4>
+          <span class="tag">Trello-style</span>
+        </div>
+        <p class="prose">
+          A horizontally-scrollable set of columns; cards drag between columns or reorder within them.
+          Columns are user-editable — add, rename, reorder, remove.
+        </p>
+
+        <div class="tbl-wrap">
+          <table class="doc-tbl">
+            <thead>
+              <tr>
+                <th style="width: 160px;">Column</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="role">Backlog</td><td>Newly created — not yet prepared.</td></tr>
+              <tr><td class="role">Pending</td><td>Resume &amp; cover letter being drafted or edited.</td></tr>
+              <tr><td class="role">Applied</td><td>Application has been submitted.</td></tr>
+              <tr><td class="role">Interviewing</td><td>Actively in the interview process.</td></tr>
+              <tr><td class="role">Completed</td><td>Offer accepted, rejected, or withdrawn.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="sub-h">Card appearance</h3>
+        <ul class="tight">
+          <li>Job title &amp; company.</li>
+          <li>Location (remote / on-site / hybrid).</li>
+          <li>Salary range (if available).</li>
+          <li>Date added · column-coloured label.</li>
+          <li>Interview-progress badge once an interview list exists (e.g. <code>2 / 5 done</code>).</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <div class="head">
+          <h4>5.2.1 — <em>Create application flow</em></h4>
+          <span class="tag">URL → card</span>
+        </div>
+        <ol class="tight">
+          <li>User clicks <strong>+ Create Application</strong> (always visible above the board).</li>
+          <li>Modal opens with a single required field: <strong>job posting URL</strong>.</li>
+          <li>System scrapes &amp; normalises the posting and auto-populates the card.</li>
+          <li>Card lands at the top of <strong>Backlog</strong>.</li>
+          <li>On scrape failure: falls back to a manual form pre-filled with whatever was extractable.</li>
+        </ol>
+      </div>
+
+      <div class="feature-card">
+        <div class="head">
+          <h4>5.2.2 — <em>Job Detail page</em></h4>
+          <span class="tag">Full-page</span>
+        </div>
+        <p class="prose">
+          Clicking a card opens a full-page detail view — not a modal. The page has a left side-nav
+          and an action bar pinned at the bottom.
+        </p>
+
+        <div class="diagram">
+<pre>┌──────────────────────────────────────────────────┐
+│  ← Back to Board          Job Title @ Company    │
+├────────────┬─────────────────────────────────────┤
+│            │                                     │
+│  Side Nav  │         Main Content Area           │
+│            │   (changes based on active nav)     │
+│  Posting   │                                     │
+│  Comments  │                                     │
+│  Tool      │                                     │
+│  Interview │                                     │
+├────────────┴─────────────────────────────────────┤
+│           [ Apply ]   action bar                 │
+└──────────────────────────────────────────────────┘</pre>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="doc-tbl">
+            <thead>
+              <tr>
+                <th style="width: 140px;">Tab</th>
+                <th>Content</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="role">Posting</td><td>Normalised job description: title, company, location, salary, requirements categorised as hard/soft, responsibilities, nice-to-haves, benefits, link to original.</td></tr>
+              <tr><td class="role">Comments</td><td>Threaded notes — recruiter correspondence, reminders, personal observations. Timestamped, editable.</td></tr>
+              <tr><td class="role">Tool</td><td>The AI Resume &amp; Cover-Letter assistant (see §06).</td></tr>
+              <tr><td class="role">Interview</td><td>TODO-style checklist of interview subjects (phone screen, system design, behavioural, etc.).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="head">
+          <h4>5.2.4 — <em>Apply &amp; confirm workflow</em></h4>
+          <span class="tag">Snapshot lock</span>
+        </div>
+        <ol class="tight">
+          <li>Click <strong>Apply</strong> in the persistent action bar.</li>
+          <li><strong>Final Review</strong> screen — read-only previews of resume &amp; cover letter, plus <strong>Copy</strong> and <strong>Download PDF</strong> buttons for each.</li>
+          <li>Click <strong>Mark as Applied</strong>.</li>
+          <li>Confirmation dialog: <em>"Have you submitted your application for [Job] at [Company]?"</em></li>
+          <li>On <strong>Yes</strong>: card moves to <strong>Applied</strong>; <code>applied_at</code> stamped; resume + cover letter locked as a versioned snapshot.</li>
+          <li>On <strong>Not Yet</strong>: dialog closes; user stays on the review screen.</li>
+        </ol>
+      </div>
+
+      <div class="feature-card">
+        <div class="head">
+          <h4>5.2.5 — <em>Interview tab</em></h4>
+          <span class="tag">TODO checklist</span>
+        </div>
+        <p class="prose">
+          A list of interview subjects with title, free-text notes (date, interviewer, prep links),
+          a checkbox, and a created-at timestamp. Drag-to-reorder. Completing strikes through and moves
+          to the bottom. A small <code>2 / 5</code> progress fraction appears at the top of the tab and
+          on the Kanban card.
+        </p>
+      </div>
+    </section>
+
+    <!-- §06 Tool tab -->
+    <section class="doc-section" id="tool">
+      <div class="sec-num">Section 06 · The differentiator</div>
+      <h2 class="sec-h">The <em>Tool</em> tab — AI assistant</h2>
+      <p class="prose">
+        The Tool tab is where the product earns its $10/mo. It contains two sub-sections — the
+        <strong>Resume Builder</strong> and the <strong>Cover Letter Builder</strong> — both of which
+        annotate every choice against the posting it answers and the CV detail it sourced.
+      </p>
+
+      <h3 class="sub-h">Resume builder</h3>
+      <ol class="tight">
+        <li>AI generates a tailored resume using the matching algorithm in §08.</li>
+        <li>Result is displayed as an editable document — add, remove, reword any line before finalising.</li>
+        <li>Each included CV entry shows the <strong>posting requirement it answers</strong> as an inline annotation, plus a relevance tag (<em>Hard Requirement</em>, <em>Responsibility</em>, <em>Nice-to-Have</em>, <em>Bonus Strength</em>).</li>
+        <li>Annotations are <em>optional</em> — an entry may be included purely because it's a strong achievement, even without a posting match.</li>
+        <li>Excluded entries appear in a collapsible <strong>"Not Included"</strong> section with a brief reason — manually pullable.</li>
+      </ol>
+
+      <h3 class="sub-h">Cover letter builder</h3>
+      <ol class="tight">
+        <li>AI generates a tailored cover letter using the user's sample for tone, structure, voice.</li>
+        <li>Result is an editable rich-text document.</li>
+        <li>Key phrases or paragraphs annotate with: the <strong>CV detail</strong> that sourced the claim, the <strong>posting text</strong> it addresses, and a short <strong>rationale</strong>.</li>
+        <li>User edits freely; annotations update or disappear as underlying text changes.</li>
+      </ol>
+
+      <h3 class="sub-h">Regenerate</h3>
+      <p class="prose">
+        Both builders offer a <strong>Regenerate</strong> button that re-runs the AI pipeline while
+        preserving any manual edits the user has pinned or locked.
+      </p>
+    </section>
+
+    <!-- §07 Scraper -->
+    <section class="doc-section" id="scraper">
+      <div class="sec-num">Section 07</div>
+      <h2 class="sec-h">Job posting <em>scraper &amp; normaliser</em></h2>
+      <ol class="tight">
+        <li><strong>Input</strong> — user pastes a URL.</li>
+        <li><strong>Scrape</strong> — backend fetches the page; common job boards covered (LinkedIn, Indeed, Greenhouse, Lever, Workday).</li>
+        <li><strong>Normalise</strong> — AI parses raw content into a structured schema (title, company, location, salary, requirements by category, responsibilities, nice-to-haves, benefits, raw text).</li>
+        <li><strong>Fallback</strong> — if scraping fails (auth-walled page), user pastes the posting text manually.</li>
+      </ol>
+
+      <pre><code>{
+  "title": "Senior Frontend Engineer",
+  "company": "Acme Corp",
+  "location": "Remote (US)",
+  "salary": { "min": 140000, "max": 180000, "currency": "USD" },
+  "employment_type": "Full-time",
+  "requirements": [
+    { "text": "5+ years of experience with React", "category": "hard_skill" },
+    { "text": "Strong communication skills",       "category": "soft_skill" }
+  ],
+  "responsibilities": [ ... ],
+  "nice_to_haves":    [ ... ],
+  "benefits":         [ ... ],
+  "raw_text":         "..."
+}</code></pre>
+    </section>
+
+    <!-- §08 AI pipeline -->
+    <section class="doc-section" id="ai">
+      <div class="sec-num">Section 08</div>
+      <h2 class="sec-h">AI pipeline &amp; <em>matching algorithm</em></h2>
+      <p class="prose">
+        The matching engine takes the user's CV, the user's sample cover letter, and the normalised
+        posting — and produces tailored documents plus a transparency report for each.
+      </p>
+
+      <div class="diagram">
+<pre>┌────────────┐     ┌────────────────┐     ┌──────────────────┐
+│  User CV   │────▶│                │     │  Normalised Job  │
+└────────────┘     │   AI Matching  │◀────│    Posting       │
+┌────────────┐     │    Engine      │     └──────────────────┘
+│  Sample    │────▶│                │
+│  Cover Ltr │     └───────┬────────┘
+└────────────┘             │
+                  ┌────────┴────────┐
+                  │                 │
+           ┌──────▼──────┐  ┌──────▼───────┐
+           │  Tailored   │  │  Tailored    │
+           │  Resume     │  │  Cover Letter│
+           └──────┬──────┘  └──────┬───────┘
+                  │                │
+           ┌──────▼──────┐  ┌──────▼───────┐
+           │  Inclusion/ │  │  Inclusion/  │
+           │  Exclusion  │  │  Selection   │
+           │  Report     │  │  Report      │
+           └──────┬──────┘  └──────┬───────┘
+                  └───────┬────────┘
+                          │
+                   ┌──────▼──────┐
+                   │  PDF Export │
+                   └─────────────┘</pre>
+      </div>
+
+      <h3 class="sub-h">Priority tiers</h3>
+      <ol class="tight">
+        <li><strong>Tier 1 — Hard requirements</strong> (e.g. "Must have 5+ years React") → Highest weight. Surface the most relevant CV bullets.</li>
+        <li><strong>Tier 2 — Responsibilities</strong> (e.g. "You will lead a team of 5") → Medium weight. Surface leadership / collaboration evidence.</li>
+        <li><strong>Tier 3 — Nice-to-haves</strong> (e.g. "GraphQL is a plus") → Lower weight. Include if space allows.</li>
+        <li><strong>Tier 4 — Unmatched CV strengths</strong> → Include standout achievements even without a direct posting match, space permitting.</li>
+      </ol>
+
+      <div class="pull-quote">
+        <strong>Key rule:</strong> the system <em>never</em> fabricates experience. If no CV entry matches
+        a requirement, that requirement is noted as <em>unmatched</em> in the report — it is
+        <em>not</em> filled with invented content.
+      </div>
+
+      <h3 class="sub-h">Transparency report — resume</h3>
+      <div class="tbl-wrap">
+        <table class="doc-tbl">
+          <thead>
+            <tr>
+              <th>CV entry</th>
+              <th>Status</th>
+              <th>Matched requirement</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>"Led migration to React 18 at Foo Inc."</td>
+              <td class="role"><span class="yes">✓ Included</span></td>
+              <td>"5+ years of experience with React"</td>
+              <td>Direct skill match — demonstrates hands-on React leadership.</td>
+            </tr>
+            <tr>
+              <td>"Managed office supply budget"</td>
+              <td class="role"><span class="no">— Excluded</span></td>
+              <td>—</td>
+              <td>No relevance to any listed requirement.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-h">Transparency report — cover letter</h3>
+      <div class="tbl-wrap">
+        <table class="doc-tbl">
+          <thead>
+            <tr>
+              <th>Detail used</th>
+              <th>CV source</th>
+              <th>Matched posting text</th>
+              <th>Why selected</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>"Reduced page load by 40%"</td>
+              <td>Work Experience → Foo Inc.</td>
+              <td>"Performance-minded engineering culture"</td>
+              <td>Quantifiable impact aligned with stated company value.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- §09 PDF -->
+    <section class="doc-section" id="pdf">
+      <div class="sec-num">Section 09</div>
+      <h2 class="sec-h">PDF <em>export</em></h2>
+      <ul class="tight">
+        <li><strong>Resume PDF</strong> — professionally formatted, ATS-friendly, one-click download.</li>
+        <li><strong>Cover letter PDF</strong> — matching visual style, addressed to the correct company &amp; role.</li>
+        <li><strong>Combined PDF</strong> — option to download both as a single document.</li>
+        <li>Templates are minimal and clean by default; template selection is a v2 question.</li>
+      </ul>
+    </section>
+
+    <!-- §10 Flows -->
+    <section class="doc-section" id="flows">
+      <div class="sec-num">Section 10</div>
+      <h2 class="sec-h">User <em>flows</em></h2>
+
+      <h3 class="sub-h">First-time setup</h3>
+      <pre><code>Sign up → Enter CV details → Paste sample cover letter → Dashboard (empty Kanban)</code></pre>
+
+      <h3 class="sub-h">Create application</h3>
+      <pre><code>+ Create Application → Paste job URL → System scrapes &amp; auto-populates → Card lands in Backlog</code></pre>
+
+      <h3 class="sub-h">Prepare materials</h3>
+      <pre><code>Click card → Job Detail → Tool tab → AI generates resume (annotated) → Edit →
+AI generates cover letter (annotated) → Edit</code></pre>
+
+      <h3 class="sub-h">Apply &amp; confirm</h3>
+      <pre><code>Click Apply → Final Review (read-only) → Copy / Download PDF → Mark as Applied →
+"Have you submitted?" → Yes → Card moves to Applied (snapshot locked)
+                      → Not yet → Stay on review</code></pre>
+
+      <h3 class="sub-h">Edit &amp; regenerate</h3>
+      <pre><code>Open card → Edit content or job details → Regenerate → Diff shown against previous version</code></pre>
+    </section>
+
+    <!-- §11 IA -->
+    <section class="doc-section" id="ia">
+      <div class="sec-num">Section 11</div>
+      <h2 class="sec-h">Information <em>architecture</em></h2>
+      <pre><code>/
+├── Dashboard (Kanban — Trello-style)
+│   └── + Create Application (modal → URL input → auto-populate)
+├── Job Detail Page (per card)
+│   ├── Side Nav
+│   │   ├── Posting    — normalised job description
+│   │   ├── Comments   — threaded notes &amp; recruiter correspondence
+│   │   ├── Tool       — AI assistant
+│   │   │    ├── Resume Builder      (editable, annotated)
+│   │   │    └── Cover Letter Builder (editable, annotated)
+│   │   └── Interview  — TODO checklist of interview subjects
+│   └── Action Bar
+│        └── Apply → Final Review → Copy / Download PDF → Mark as Applied → Confirm
+├── Profile
+│   ├── CV Editor
+│   └── Cover Letter Samples
+└── Settings
+    ├── Account
+    ├── Board Preferences
+    └── AI Preferences (tone, length, template, model)</code></pre>
+    </section>
+
+    <!-- §12 Tech -->
+    <section class="doc-section" id="tech">
+      <div class="sec-num">Section 12</div>
+      <h2 class="sec-h">Technical <em>architecture</em></h2>
+
+      <div class="tbl-wrap">
+        <table class="doc-tbl">
+          <thead>
+            <tr>
+              <th style="width: 180px;">Layer</th>
+              <th>Technology</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="role">Frontend</td><td>React 19 · TypeScript · Tailwind CSS 4 · Zustand · <code>dnd-kit</code> for drag-and-drop</td></tr>
+            <tr><td class="role">Backend / API</td><td><code>Go 1.26</code> · Gin · golang-migrate</td></tr>
+            <tr><td class="role">Database</td><td>PostgreSQL 16 (user data, job cards, generated docs, transparency reports)</td></tr>
+            <tr><td class="role">AI / LLM</td><td>OpenAI GPT-4o for normalisation, matching, and generation; pluggable per user preference</td></tr>
+            <tr><td class="role">Scraping</td><td>Headless Chromium (Playwright) + Cheerio fallback for static pages</td></tr>
+            <tr><td class="role">PDF generation</td><td>React-PDF or Puppeteer rendering</td></tr>
+            <tr><td class="role">Auth</td><td>Email + password (NextAuth-style); OAuth deferred to v2</td></tr>
+            <tr><td class="role">Hosting</td><td>EC2 + Docker on AWS (single region, two AZs); ALB termination; private subnets</td></tr>
+            <tr><td class="role">Storage</td><td>S3-compatible bucket for generated PDFs</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- §13 Data model -->
+    <section class="doc-section" id="data">
+      <div class="sec-num">Section 13</div>
+      <h2 class="sec-h">Data <em>model</em></h2>
+      <p class="prose">Simplified — production schema lives in <code>internal/database/migrations/</code>.</p>
+
+      <pre><code>User
+  ├─ id, email, password_hash, created_at
+  ├─ Profile (1:1)
+  │    ├─ full_name, contact_info, summary
+  │    ├─ experiences[]    (company, title, dates, bullets[])
+  │    ├─ education[]      (institution, degree, dates)
+  │    ├─ skills[], certifications[], projects[]
+  ├─ CoverLetterSamples[]  (body_text, label)
+  ├─ Boards[]              (default: 1)
+  │    └─ Columns[]        (ordered)
+  │         └─ JobCards[]  (ordered)
+  └─ JobCard
+       ├─ id, url, raw_html, normalised_json
+       ├─ status, column_id, position
+       ├─ created_at, applied_at?, completed_at?
+       ├─ Comments[]
+       ├─ InterviewItems[]   (title, description, is_complete, position)
+       ├─ GeneratedResume?
+       │    ├─ content_json, pdf_url, is_locked
+       │    ├─ ResumeReportEntries[]   (cv_entry, posting_requirement, relevance_tag, included)
+       │    └─ Versions[]    (snapshot on apply)
+       └─ GeneratedCoverLetter?
+            ├─ content_text, pdf_url, is_locked
+            ├─ CoverLetterReportEntries[]  (detail_used, cv_source, posting_text, rationale)
+            └─ Versions[]    (snapshot on apply)</code></pre>
+    </section>
+
+    <!-- §14 NFR -->
+    <section class="doc-section" id="nfr">
+      <div class="sec-num">Section 14</div>
+      <h2 class="sec-h">Non-functional <em>requirements</em></h2>
+
+      <div class="tbl-wrap">
+        <table class="doc-tbl">
+          <thead>
+            <tr>
+              <th style="width: 180px;">Attribute</th>
+              <th>Requirement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="role">Performance</td><td>Scrape + normalise &lt; 10s p95; AI generation &lt; 30s p95.</td></tr>
+            <tr><td class="role">Scalability</td><td>10k concurrent users at launch; vertical-first, then horizontal at web/API tier.</td></tr>
+            <tr><td class="role">Security</td><td>Encryption at rest &amp; in transit; PII handling compliant with GDPR / CCPA.</td></tr>
+            <tr><td class="role">Availability</td><td>99.5% uptime SLA — single-AZ RDS until first paying customer.</td></tr>
+            <tr><td class="role">Accessibility</td><td>WCAG 2.1 AA compliance across all primary flows.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- §15 MVP -->
+    <section class="doc-section" id="mvp">
+      <div class="sec-num">Section 15</div>
+      <h2 class="sec-h">MVP <em>scope</em> — v1.0</h2>
+
+      <div class="scope-grid">
+        <div class="scope-col in">
+          <h5>In scope</h5>
+          <ul>
+            <li>CV intake (structured form)</li>
+            <li>Single sample cover letter</li>
+            <li>Trello-style Kanban (Backlog → Completed)</li>
+            <li>Create application via URL (auto-populate)</li>
+            <li>Job Detail page w/ side nav (Posting, Comments, Tool, Interview)</li>
+            <li>AI resume + cover letter generation (editable, annotated)</li>
+            <li>Inline posting-requirement ↔ CV-entry mapping</li>
+            <li>Apply → Final Review → Copy / Download → Confirm</li>
+            <li>Document snapshot &amp; versioning on apply</li>
+            <li>PDF download (resume + cover letter)</li>
+            <li>Email / password auth</li>
+          </ul>
+        </div>
+        <div class="scope-col out">
+          <h5>Out of scope (future)</h5>
+          <ul>
+            <li>CV upload via PDF / DOCX parsing</li>
+            <li>Multiple cover letter styles</li>
+            <li>Custom board templates</li>
+            <li>Universal scraping / browser extension</li>
+            <li>Multi-language support</li>
+            <li>Analytics dashboard (application stats)</li>
+            <li>ATS submission integration</li>
+            <li>Email tracking / auto-status updates</li>
+            <li>Template marketplace</li>
+            <li>OAuth (Google, GitHub)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- §16 Milestones -->
+    <section class="doc-section" id="milestones">
+      <div class="sec-num">Section 16</div>
+      <h2 class="sec-h">Build <em>milestones</em></h2>
+
+      <div class="phase">
+        <div class="phase-head">
+          <h4>Phase 1 — <em>Foundation</em></h4>
+          <span class="v">Weeks 1–2</span>
+        </div>
+        <ul class="tight">
+          <li>Auth, CV editor, cover-letter input.</li>
+          <li>Initial database schema &amp; migrations.</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <h4>Phase 2 — <em>Board</em></h4>
+          <span class="v">Weeks 3–4</span>
+        </div>
+        <ul class="tight">
+          <li>Kanban board with drag-and-drop.</li>
+          <li>Job-card CRUD; column customisation.</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <h4>Phase 3 — <em>Scraper</em></h4>
+          <span class="v">Weeks 5–6</span>
+        </div>
+        <ul class="tight">
+          <li>URL scraping pipeline (LinkedIn, Indeed, Greenhouse, Lever, Workday).</li>
+          <li>Normalisation into the structured schema.</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <h4>Phase 4 — <em>AI engine</em></h4>
+          <span class="v">Weeks 7–9</span>
+        </div>
+        <ul class="tight">
+          <li>Resume &amp; cover-letter generation with transparency reports.</li>
+          <li>Editable views with inline annotation; "Not Included" surfacing.</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <h4>Phase 5 — <em>PDF &amp; polish</em></h4>
+          <span class="v">Weeks 10–11</span>
+        </div>
+        <ul class="tight">
+          <li>PDF export; Apply &amp; Confirm flow; snapshot locking.</li>
+          <li>Error handling, accessibility audit, cross-browser testing.</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <h4>Phase 6 — <em>Launch</em></h4>
+          <span class="v">Week 12</span>
+        </div>
+        <ul class="tight">
+          <li>Deployment to AWS (single AZ); monitoring; ALB access logs.</li>
+          <li>Beta feedback loop — Reddit + LinkedIn channels.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- §17 Risks -->
+    <section class="doc-section" id="risks">
+      <div class="sec-num">Section 17</div>
+      <h2 class="sec-h">Risks &amp; <em>mitigations</em></h2>
+
+      <div class="risk-grid">
+        <div class="risk">
+          <div class="risk-head">
+            <h5>Job-board anti-scraping</h5>
+            <span class="sev med">medium</span>
+          </div>
+          <p>LinkedIn, Indeed, and Workday actively block automated fetches; ToS issues plus technical blockers.</p>
+          <div class="mit"><b>Mitigation —</b> manual paste fallback always available; rotate user-agents; prefer official APIs (Greenhouse, Lever) where they exist.</div>
+        </div>
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>AI hallucination</h5>
+            <span class="sev high">high</span>
+          </div>
+          <p>An LLM can confidently invent experience the user does not have — a single bad submission destroys trust.</p>
+          <div class="mit"><b>Mitigation —</b> strict prompts that ban invention; transparency report exposes every claim; user verifies before locking the snapshot.</div>
+        </div>
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>LLM cost at scale</h5>
+            <span class="sev med">medium</span>
+          </div>
+          <p>Per-generation OpenAI calls compound quickly. A Premium user generating 20 applications/month materially affects margin.</p>
+          <div class="mit"><b>Mitigation —</b> cache normalised postings; allow user-provided API keys; tiered pricing with generation caps on Free.</div>
+        </div>
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>PDF formatting drift</h5>
+            <span class="sev low">low</span>
+          </div>
+          <p>Recruiter ATS systems reject documents with unusual layout. Unprofessional output torches conversion.</p>
+          <div class="mit"><b>Mitigation —</b> constrained templates (single-column, system fonts only); cross-browser/device tests; ATS-validation pass before release.</div>
+        </div>
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>User data sensitivity</h5>
+            <span class="sev high">high</span>
+          </div>
+          <p>Resumes contain detailed PII. A breach is reputation-fatal in a market where trust is the only moat.</p>
+          <div class="mit"><b>Mitigation —</b> encrypted at rest &amp; in transit; never share resume content with third parties; one-click export &amp; delete-account; published incident-response policy.</div>
+        </div>
+
+        <div class="risk">
+          <div class="risk-head">
+            <h5>Solo-founder bandwidth</h5>
+            <span class="sev med">medium</span>
+          </div>
+          <p>Support, ops, growth, and engineering on one operator. Burnout is the failure mode.</p>
+          <div class="mit"><b>Mitigation —</b> hard scope ceiling at MVP v1.0; ship-fast iteration on Reddit/LinkedIn feedback; outsource support emails before scaling paid channels.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §18 Future -->
+    <section class="doc-section" id="future">
+      <div class="sec-num">Section 18</div>
+      <h2 class="sec-h">Future <em>considerations</em></h2>
+      <ul class="tight">
+        <li><strong>Browser extension</strong> — capture postings without leaving LinkedIn / Indeed / Greenhouse. Differentiator vs. Teal, Huntr, Simplify.</li>
+        <li><strong>Email tracking</strong> — connect inbox to auto-update card status on recruiter replies.</li>
+        <li><strong>Interview prep</strong> — AI-generated question sets based on posting + user's resume.</li>
+        <li><strong>Analytics</strong> — response rates by keyword, company, role type.</li>
+        <li><strong>Team / cohort mode</strong> — career coaches manage boards for multiple clients.</li>
+        <li><strong>Template marketplace</strong> — community-contributed resume &amp; cover-letter templates.</li>
+      </ul>
+    </section>
+
+    <!-- §19 One sentence -->
+    <section class="doc-section" id="one">
+      <div class="sec-num">Section 19</div>
+      <h2 class="sec-h">One <em>sentence</em></h2>
+      <div class="one-sentence">
+        <p>
+          GitHired is the job-search workflow that <em>tailors every application</em>
+          to the posting that asked for it — and <strong>shows you, line by line,
+          exactly why every word made the cut.</strong>
+        </p>
+      </div>
+    </section>
+
+  </article>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="colo">
+  <div>GitHired · Product Requirements · v1.0 · Revised 27 May 2026 · Source: <code>~/development/GitHired/PRD.md</code></div>
+  <div>
+    <a href="/githired/marketing-plan/">Marketing →</a> &nbsp;·&nbsp;
+    <a href="/githired/business-plan/">Business Plan →</a> &nbsp;·&nbsp;
+    <a href="/githired/oss-plan/">OSS Plan →</a> &nbsp;·&nbsp;
+    <a href="/">↑ Back to Backoffice</a>
+  </div>
+</footer>
+
+</body>
+</html>
