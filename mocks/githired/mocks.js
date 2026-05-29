@@ -2,9 +2,10 @@
 (function () {
   const STORAGE_KEY = 'gh-mock-theme';
   const root = document.documentElement;
+  const isEmbedded = window.self !== window.top;
   const stored = localStorage.getItem(STORAGE_KEY);
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initial = stored || (prefersDark ? 'dark' : 'light');
+  const initial = isEmbedded ? 'light' : (stored || (prefersDark ? 'dark' : 'light'));
   root.setAttribute('data-theme', initial);
 
   function toggleTheme() {

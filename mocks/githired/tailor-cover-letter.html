@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tailor · Cover letter, Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+</head>
+<body class="tailor-page">
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link" href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="tailor-header">
+    <a class="back-link" href="./job-detail.html"><i data-lucide="arrow-left"></i> Senior Product Designer · Anthropic</a>
+    <h1>Drafting your cover letter</h1>
+    <div class="subtitle">Hover any paragraph to see which job posting requirement it answers.</div>
+  </div>
+
+  <div class="tailor-toolbar">
+    <div class="segmented" role="tablist">
+      <a class="segmented-item" href="./tailor.html">Resume</a>
+      <a class="segmented-item is-active" href="./tailor-cover-letter.html">Cover letter</a>
+      <a class="segmented-item" href="./tailor-questions.html">Questions</a>
+    </div>
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <span class="t-small subtle mono">Drafted · 217 words · auto-saved 12s ago</span>
+      <button class="btn btn--ghost"><i data-lucide="refresh-cw"></i> Re-draft</button>
+      <button class="btn btn--secondary"><i data-lucide="download"></i> Export</button>
+      <button class="btn btn--primary"><i data-lucide="lock"></i> Lock draft</button>
+    </div>
+  </div>
+
+  <main class="tailor-canvas">
+    <!-- Left: job posting requirements -->
+    <aside>
+      <div class="tailor-rail-header">
+        <h2>Job posting requirements</h2>
+        <span class="tailor-rail-count">4 of 6 answered</span>
+      </div>
+
+      <div class="req-card" data-req="r1">
+        <div class="req-glyph req-glyph--hard"></div>
+        <div>
+          <div class="req-meta">Hard requirement</div>
+          <div class="req-text">Lead end-to-end design for a major Claude surface, discovery through post-ship iteration.</div>
+        </div>
+      </div>
+
+      <div class="req-card" data-req="r2">
+        <div class="req-glyph req-glyph--hard"></div>
+        <div>
+          <div class="req-meta">Hard requirement</div>
+          <div class="req-text">Shape the design-system primitives that other surfaces inherit from.</div>
+        </div>
+      </div>
+
+      <div class="req-card" data-req="r3">
+        <div class="req-glyph req-glyph--responsibility"></div>
+        <div>
+          <div class="req-meta">Responsibility</div>
+          <div class="req-text">Run small qualitative studies with users and translate findings into product decisions.</div>
+        </div>
+      </div>
+
+      <div class="req-card" data-req="r4">
+        <div class="req-glyph req-glyph--responsibility"></div>
+        <div>
+          <div class="req-meta">Responsibility</div>
+          <div class="req-text">Mentor two mid-level designers and one design engineer.</div>
+        </div>
+      </div>
+
+      <div class="req-card" data-req="r5">
+        <div class="req-glyph req-glyph--nice"></div>
+        <div>
+          <div class="req-meta">Nice to have</div>
+          <div class="req-text">Comfort reading production code (Figma + React), not engineering, but technical fluency.</div>
+        </div>
+      </div>
+
+      <div class="req-card" data-req="r6">
+        <div class="req-glyph req-glyph--bonus"></div>
+        <div>
+          <div class="req-meta">Bonus</div>
+          <div class="req-text">A public writing practice, essays, longform reviews, design crits.</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px; padding: 12px 14px; border: 1px dashed var(--rule-hairline); border-radius: 10px; font-size: 0.8125rem; line-height: 1.5; color: var(--text-secondary);">
+        <span style="display:inline-flex; align-items:center; gap:6px; color: var(--text-primary); font-weight: 600; margin-bottom: 6px;"><i data-lucide="lightbulb" style="width:14px; height:14px;"></i> Two unanswered</span>
+        <div class="subtle">Your draft doesn't reach <em>qualitative studies</em> or <em>code fluency</em>. Add a paragraph or leave them for the resume.</div>
+      </div>
+    </aside>
+
+    <!-- Right: cover letter draft -->
+    <section class="letter-pane">
+      <div class="letter-header">
+        <div class="recipient">Anthropic, Design hiring team</div>
+        <div>San Francisco · Remote</div>
+        <div class="date">May 15, 2026</div>
+      </div>
+
+      <div class="letter-greeting">To the Anthropic design team,</div>
+
+      <p class="letter-paragraph">
+        I've been a heavy Claude user since the API opened, drafting product specs in it, arguing with it about architecture decisions, occasionally letting it talk me down from a bad idea. So when I saw the Senior Product Designer job posting, I read it twice to make sure it wasn't a recruiting mirage.
+      </p>
+
+      <p class="letter-paragraph" data-pin="r1">
+        What pulled me in was the framing of <em>what does honest AI feel like in a chat surface</em> as an open design question, not a settled one. For the last three years I've led end-to-end design on Claude-adjacent surfaces, most recently a workspaces beta that 18,000 users opted into in its first week. The work I'm proudest of has always lived at exactly that seam between trust and capability.
+        <span class="letter-paragraph-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Hard requirement · Lead a major surface</span>
+      </p>
+
+      <p class="letter-paragraph" data-pin="r4">
+        On mentorship: I've taken two designers from L4 to L5 and watched a design engineer become the most-asked-for collaborator on our team. Both took deliberate time. Both are part of why I keep coming back to roles like this one, the leverage of doing the work alongside people you're investing in.
+        <span class="letter-paragraph-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Responsibility · Mentorship</span>
+      </p>
+
+      <p class="letter-paragraph" data-pin="r6">
+        I also noticed the line about "we hire writers." I publish essays on design systems and AI surfaces (linked in my application). It's not a side practice for me, it's how I think through what I'm building, and the closest thing I have to a craft outside the product itself.
+        <span class="letter-paragraph-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Bonus · Writing practice</span>
+      </p>
+
+      <p class="letter-paragraph" data-pin="r2">
+        Two things I'd want to dig into in a conversation: how the design-system primitives hold up at the pace you ship, and what an honest team review looks like from the inside. Both are where I've done my best work. Looking forward to talking.
+        <span class="letter-paragraph-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Hard requirement · Design-system primitives</span>
+      </p>
+
+      <div class="letter-signature">, Alex Kim</div>
+
+      <div class="question-answer-footer">
+        <div class="word-counter"><span class="num">217</span> / 300 words · 5 paragraphs · 4 requirements answered</div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn--ghost btn--sm"><i data-lucide="message-square-quote"></i> Try a different opening</button>
+          <button class="btn btn--ghost btn--sm"><i data-lucide="wand-sparkles"></i> Tone: warmer</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

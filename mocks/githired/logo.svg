@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="GitApplied mark">
+  <g fill="none" stroke="#000" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M 24 9.5 A 9 9 0 1 0 24 22.5" />
+    <path d="M 24 16.5 L 16.5 16.5" />
+    <path d="M 24 14 L 24 19" stroke-width="3.5" />
+  </g>
+</svg>

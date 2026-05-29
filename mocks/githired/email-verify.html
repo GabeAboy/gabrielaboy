@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verification email · Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+  <style>
+    /* ─── Page chrome (intro + gallery wrappers) ───────────────────── */
+    .email-intro {
+      max-width: 720px;
+      margin: 32px auto 0;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .email-intro p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 0.95rem;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    .email-note {
+      max-width: 720px;
+      margin: 16px auto 0;
+      padding: 0 24px;
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+      line-height: 1.55;
+      text-align: center;
+    }
+    .email-note code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85em;
+      background: var(--surface-elevated);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--text-secondary);
+    }
+
+    /* ─── Inbox preview frame ──────────────────────────────────────── */
+    /* Wraps the email body so a reviewer sees how it lands in an inbox:
+       sender + subject + date row above, then the rendered email. The
+       inbox chrome is mock-only and never ships in the Go SES template. */
+    .inbox-frame {
+      max-width: 720px;
+      margin: 40px auto 0;
+      padding: 0 24px;
+    }
+    .inbox-card {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      box-shadow: var(--shadow-2);
+      overflow: hidden;
+    }
+    .inbox-meta {
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--rule-hairline);
+      background: var(--surface-elevated);
+    }
+    .inbox-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--primary-text-on-accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+    .inbox-meta-text { min-width: 0; }
+    .inbox-from {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .inbox-from .from-addr { color: var(--text-muted); font-weight: 400; margin-left: 6px; }
+    .inbox-subject {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+    .inbox-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* ─── The email body itself ────────────────────────────────────── */
+    /* This block is the part the Go SES template renders. Production
+       must bake out CSS custom properties to literal hex (Outlook strips
+       custom properties; Gmail strips most modern CSS). The values used
+       here are the resolved light-mode tokens, see mocks.css. */
+    .email-body {
+      background: #FAF7F0;            /* --surface-base resolved */
+      padding: 40px 24px;
+    }
+    .email-letter {
+      max-width: 520px;
+      margin: 0 auto;
+      background: #FFFFFF;            /* --surface-raised */
+      border: 1px solid #E5E0D5;      /* --rule-hairline */
+      border-radius: 14px;
+      padding: 40px 36px 32px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #1C1A14;                 /* --text-primary */
+      line-height: 1.6;
+    }
+    .email-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9B7825;                 /* --accent */
+      margin: 0 0 14px;
+    }
+    .email-headline {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.75rem;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.012em;
+      color: #1C1A14;
+      margin: 0 0 16px;
+    }
+    .email-headline em {
+      font-style: italic;
+      color: #9B7825;
+      font-weight: 500;
+    }
+    .email-greeting {
+      font-size: 0.95rem;
+      color: #1C1A14;
+      margin: 0 0 12px;
+    }
+    .email-p {
+      font-size: 0.95rem;
+      color: #1C1A14;
+      margin: 0 0 16px;
+    }
+    .email-cta-row {
+      text-align: center;
+      margin: 28px 0 20px;
+    }
+    .email-button {
+      display: inline-block;
+      background: #9B7825;            /* --accent */
+      color: #FFFFFF !important;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 10px;
+      letter-spacing: 0.01em;
+    }
+    .email-button:hover { background: #8a6920; }
+    .email-fallback {
+      font-size: 0.8125rem;
+      color: #5F5A4E;                 /* --text-secondary */
+      margin: 16px 0 0;
+      line-height: 1.5;
+    }
+    .email-fallback-url {
+      display: block;
+      margin-top: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      word-break: break-all;
+      color: #9B7825;
+    }
+    .email-rule {
+      height: 1px;
+      background: #E5E0D5;
+      border: 0;
+      margin: 24px 0;
+    }
+    .email-fine {
+      font-size: 0.78rem;
+      color: #8E897C;                 /* --text-muted */
+      line-height: 1.55;
+      margin: 0 0 8px;
+    }
+    .email-sign {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      color: #5F5A4E;
+      font-size: 0.9rem;
+      margin: 20px 0 0;
+    }
+    .email-foot {
+      max-width: 520px;
+      margin: 16px auto 0;
+      text-align: center;
+      font-size: 0.72rem;
+      color: #8E897C;
+      letter-spacing: 0.02em;
+    }
+    .email-foot a { color: #8E897C; text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ─── Variants gallery ─────────────────────────────────────────── */
+    .state-gallery {
+      max-width: 1180px;
+      margin: 72px auto 96px;
+      padding: 0 24px;
+    }
+    .state-gallery-title { text-align: center; margin-bottom: 12px; }
+    .state-gallery-sub {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      max-width: 640px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 28px;
+    }
+    .state-frame {
+      background: var(--surface-base);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 18px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .state-frame-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .state-frame-label .num {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+    }
+    .state-frame .inbox-card { box-shadow: var(--shadow-1); }
+    .state-frame .email-letter { padding: 32px 28px 24px; }
+    .state-frame .email-headline { font-size: 1.4rem; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./signup.html">Sign up</a></li>
+        <li><a class="nav-link" href="./check-your-inbox.html">Check inbox</a></li>
+        <li><a class="nav-link is-active" href="./email-verify.html">Verify email</a></li>
+        <li><a class="nav-link" href="./email-confirmed.html">Email confirmed</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="email-intro" style="padding-top: 48px;">
+      <div class="t-micro eyebrow">Transactional email · Atelier</div>
+      <h1 class="t-display" style="margin-bottom: 12px;">Verify your email.</h1>
+      <p>The message a new user receives moments after submitting the signup form. One job: get them to click the verify button. Library on cream, accent button, no marketing.</p>
+    </section>
+
+    <!-- Primary surface: the verification email as it arrives in an inbox. -->
+    <section class="inbox-frame">
+      <div class="inbox-card">
+        <div class="inbox-meta">
+          <div class="inbox-avatar" aria-hidden="true">G</div>
+          <div class="inbox-meta-text">
+            <div class="inbox-from">GitApplied <span class="from-addr">&lt;hello@gitapplied.com&gt;</span></div>
+            <div class="inbox-subject">Confirm your GitApplied email</div>
+          </div>
+          <div class="inbox-date">Just now</div>
+        </div>
+
+        <div class="email-body">
+          <div class="email-letter">
+            <div class="email-eyebrow">Welcome to GitApplied</div>
+            <h2 class="email-headline">One quick step to <em>finish up</em>.</h2>
+
+            <p class="email-greeting">Hi Jane,</p>
+            <p class="email-p">Thanks for signing up. Click the button below to confirm your email address so we know we can reach you about your job search.</p>
+
+            <div class="email-cta-row">
+              <a class="email-button" href="https://app.gitapplied.com/verify-email?token=preview">Confirm my email</a>
+            </div>
+
+            <p class="email-fallback">
+              Or paste this link into your browser:
+              <span class="email-fallback-url">https://app.gitapplied.com/verify-email?token=8c4a9f2e1b6d…</span>
+            </p>
+
+            <hr class="email-rule" />
+
+            <p class="email-fine">This link expires in 24 hours. If you didn&rsquo;t create a GitApplied account, you can safely ignore this email and we&rsquo;ll never write to you again.</p>
+
+            <p class="email-sign">, The GitApplied team</p>
+          </div>
+
+          <div class="email-foot">
+            Sent by GitApplied &middot; San Francisco, CA &middot; <a href="#">Unsubscribe from product updates</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Author note: production rendering caveats. -->
+    <p class="email-note">
+      <strong>Implementation note:</strong> the Atelier tokens (<code>var(--accent)</code>, etc.) are baked out to literal hex in <code>internal/email/mailer.go</code>. Outlook strips custom properties; Gmail strips <code>color-mix()</code>; Apple Mail respects most modern CSS but not <code>data-theme</code>. Dark mode is via Apple Mail&rsquo;s automatic invert, not via a separate stylesheet.
+    </p>
+
+    <!-- Variants the same body has to handle. -->
+    <section class="state-gallery">
+      <h2 class="t-h2 state-gallery-title">Variants</h2>
+      <p class="state-gallery-sub">
+        Same template, different framing copy. The resend variant softens the headline so the user doesn&rsquo;t feel like they&rsquo;re being asked to verify twice; the no-name fallback runs when the signup form was missing a first name.
+      </p>
+
+      <div class="state-grid">
+
+        <!-- 01 · Resend ─────────────────────────────────────────────── -->
+        <div class="state-frame">
+          <div class="state-frame-label"><span class="num">01</span><span>Resent verification</span></div>
+          <div class="inbox-card">
+            <div class="inbox-meta">
+              <div class="inbox-avatar" aria-hidden="true">G</div>
+              <div class="inbox-meta-text">
+                <div class="inbox-from">GitApplied <span class="from-addr">&lt;hello@gitapplied.com&gt;</span></div>
+                <div class="inbox-subject">Here&rsquo;s a fresh verification link</div>
+              </div>
+              <div class="inbox-date">2m ago</div>
+            </div>
+            <div class="email-body" style="padding: 32px 20px;">
+              <div class="email-letter">
+                <div class="email-eyebrow">A fresh link</div>
+                <h3 class="email-headline">Here you go, <em>Jane</em>.</h3>
+                <p class="email-p">Your previous link expired. This one&rsquo;s good for the next 24 hours.</p>
+                <div class="email-cta-row">
+                  <a class="email-button" href="#">Confirm my email</a>
+                </div>
+                <p class="email-fine">If you didn&rsquo;t request this, you can ignore the email.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 · No first name on file ───────────────────────────── -->
+        <div class="state-frame">
+          <div class="state-frame-label"><span class="num">02</span><span>No first name</span></div>
+          <div class="inbox-card">
+            <div class="inbox-meta">
+              <div class="inbox-avatar" aria-hidden="true">G</div>
+              <div class="inbox-meta-text">
+                <div class="inbox-from">GitApplied <span class="from-addr">&lt;hello@gitapplied.com&gt;</span></div>
+                <div class="inbox-subject">Confirm your GitApplied email</div>
+              </div>
+              <div class="inbox-date">Just now</div>
+            </div>
+            <div class="email-body" style="padding: 32px 20px;">
+              <div class="email-letter">
+                <div class="email-eyebrow">Welcome to GitApplied</div>
+                <h3 class="email-headline">One quick step to <em>finish up</em>.</h3>
+                <p class="email-greeting">Hi there,</p>
+                <p class="email-p">Thanks for signing up. Click below to confirm your email so we know we can reach you.</p>
+                <div class="email-cta-row">
+                  <a class="email-button" href="#">Confirm my email</a>
+                </div>
+                <p class="email-fine">This link expires in 24 hours.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

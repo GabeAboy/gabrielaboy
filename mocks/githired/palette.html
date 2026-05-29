@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Palette · Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link is-active" href="./palette.html">Palette</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div style="margin-bottom: 48px;">
+      <div class="t-micro" style="color: var(--accent); margin-bottom: 12px;">Foundation</div>
+      <h1 class="t-display">Palette &amp; system</h1>
+      <p class="muted" style="max-width: 620px; margin-top: 12px; line-height: 1.6;">Every token in one place. Toggle the theme to see both palettes. The values shown are the live CSS custom properties, what you see is what ships if these tokens land in <span class="mono">src/index.css</span>.</p>
+    </div>
+
+    <!-- Surfaces -->
+    <section class="palette-section">
+      <div class="palette-section-header">
+        <h2>Surfaces &amp; rules</h2>
+        <div class="muted t-small">Background, raised, elevated, and the hairlines between them.</div>
+      </div>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--surface-base);"></div>
+          <div class="swatch-meta"><div class="name">--surface-base</div><div class="hex">canvas</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--surface-raised);"></div>
+          <div class="swatch-meta"><div class="name">--surface-raised</div><div class="hex">cards, columns</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--surface-elevated); box-shadow: var(--shadow-2);"></div>
+          <div class="swatch-meta"><div class="name">--surface-elevated</div><div class="hex">modals, popovers</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--surface-draft);"></div>
+          <div class="swatch-meta"><div class="name">--surface-draft</div><div class="hex">tailor draft pane</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--surface-raised); border-bottom: 1px solid var(--rule-hairline); position: relative;"><div style="position:absolute; bottom:0; left:0; right:0; height:1px; background: var(--rule-hairline);"></div></div>
+          <div class="swatch-meta"><div class="name">--rule-hairline</div><div class="hex">default border</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--surface-raised); position: relative;"><div style="position:absolute; bottom:0; left:0; right:0; height:2px; background: var(--rule-strong);"></div></div>
+          <div class="swatch-meta"><div class="name">--rule-strong</div><div class="hex">focus, selected</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Text -->
+    <section class="palette-section">
+      <div class="palette-section-header">
+        <h2>Text</h2>
+        <div class="muted t-small">Primary / secondary / muted, three steps, all warm.</div>
+      </div>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--text-primary);"></div>
+          <div class="swatch-meta"><div class="name">--text-primary</div><div class="hex">body, titles</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--text-secondary);"></div>
+          <div class="swatch-meta"><div class="name">--text-secondary</div><div class="hex">labels, secondary</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--text-muted);"></div>
+          <div class="swatch-meta"><div class="name">--text-muted</div><div class="hex">meta, captions</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accent + semantic -->
+    <section class="palette-section">
+      <div class="palette-section-header">
+        <h2>Accent &amp; semantic</h2>
+        <div class="muted t-small">One accent earns the eye. Semantics are quiet on purpose.</div>
+      </div>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--accent);"></div>
+          <div class="swatch-meta"><div class="name">--accent (brass)</div><div class="hex">primary CTA, focus, link</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--accent-soft);"></div>
+          <div class="swatch-meta"><div class="name">--accent-soft</div><div class="hex">tinted fill</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--positive);"></div>
+          <div class="swatch-meta"><div class="name">--positive (sage)</div><div class="hex">offer, success</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--info);"></div>
+          <div class="swatch-meta"><div class="name">--info (porcelain)</div><div class="hex">applied, neutral signal</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--caution);"></div>
+          <div class="swatch-meta"><div class="name">--caution (amber)</div><div class="hex">talking, warnings</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: var(--negative);"></div>
+          <div class="swatch-meta"><div class="name">--negative (terracotta)</div><div class="hex">destructive only</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stages -->
+    <section class="palette-section">
+      <div class="palette-section-header">
+        <h2>Stage indicators</h2>
+        <div class="muted t-small">Five stages, one filled pill. Color is signal, not decoration.</div>
+      </div>
+      <div class="card" style="display: flex; gap: 32px; flex-wrap: wrap;">
+        <div style="display:flex; align-items:center; gap:10px;"><span class="stage-dot stage-dot--saved"></span><span class="t-micro">Saved</span></div>
+        <div style="display:flex; align-items:center; gap:10px;"><span class="stage-dot stage-dot--drafting"></span><span class="t-micro">Drafting</span></div>
+        <div style="display:flex; align-items:center; gap:10px;"><span class="stage-dot stage-dot--applied"></span><span class="t-micro">Applied</span></div>
+        <div style="display:flex; align-items:center; gap:10px;"><span class="stage-dot stage-dot--talking"></span><span class="t-micro">Interviewing</span></div>
+        <div style="display:flex; align-items:center; gap:10px;"><span class="badge badge--filled-positive"><span class="stage-dot stage-dot--offer"></span>Offer</span></div>
+        <div style="display:flex; align-items:center; gap:10px;"><span class="stage-dot stage-dot--closed"></span><span class="t-micro" style="text-decoration: line-through; color: var(--text-muted);">Closed</span></div>
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section class="palette-section">
+      <div class="palette-section-header">
+        <h2>Typography</h2>
+        <div class="muted t-small">Source Serif 4 for content &amp; headlines. Inter for chrome. JetBrains Mono for numerics.</div>
+      </div>
+      <div class="card" style="padding: 8px 24px;">
+        <div class="type-row">
+          <div class="label">display · 36</div>
+          <div class="t-display">Drafting your cover letter</div>
+        </div>
+        <div class="type-row">
+          <div class="label">h1 · 28</div>
+          <div class="t-h1">Senior Product Designer</div>
+        </div>
+        <div class="type-row">
+          <div class="label">h2 · 22</div>
+          <div class="t-h2">About the role</div>
+        </div>
+        <div class="type-row">
+          <div class="label">h3 · 18</div>
+          <div class="t-h3">What you'll work on</div>
+        </div>
+        <div class="type-row">
+          <div class="label">body · 16</div>
+          <div class="t-body">The team is small, the surface area is large, and we ship every Friday. Inter at 16px is the default for forms, lists, and labels.</div>
+        </div>
+        <div class="type-row">
+          <div class="label">body-doc · 17</div>
+          <div class="t-body-doc">Generated drafts and job posting bodies render in Source Serif 4. It reads like writing, not like UI, and that is the entire point of using a serif here.</div>
+        </div>
+        <div class="type-row">
+          <div class="label">small · 14</div>
+          <div class="t-small muted">Used for sub-labels, form helper text, and meta lines under titles.</div>
+        </div>
+        <div class="type-row">
+          <div class="label">micro · 11</div>
+          <div class="t-micro" style="color: var(--text-secondary);">Stage · count · timestamp</div>
+        </div>
+        <div class="type-row">
+          <div class="label">mono · 14</div>
+          <div class="mono t-small" style="color: var(--text-secondary);">$180,000, $240,000 · 4d ago · Remote</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Components -->
+    <section class="palette-section">
+      <div class="palette-section-header">
+        <h2>Components</h2>
+        <div class="muted t-small">Same primitives, dressed in the new tokens.</div>
+      </div>
+      <div class="card" style="padding: 0 24px;">
+
+        <div class="component-row">
+          <div class="component-row-label">Buttons</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <button class="btn btn--primary"><i data-lucide="sparkles"></i> Tailor with AI</button>
+            <button class="btn btn--secondary">Save draft</button>
+            <button class="btn btn--ghost">Cancel</button>
+            <button class="btn btn--danger"><i data-lucide="trash-2"></i> Delete</button>
+            <button class="btn btn--primary btn--sm">Compact</button>
+            <button class="btn btn--primary btn--lg"><i data-lucide="download"></i> Export DOCX</button>
+            <button class="icon-btn" aria-label="more"><i data-lucide="more-horizontal"></i></button>
+          </div>
+        </div>
+
+        <div class="component-row">
+          <div class="component-row-label">Badges &amp; chips</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <span class="badge">Default outline</span>
+            <span class="badge badge--filled-positive">Offer</span>
+            <span class="badge badge--filled-accent">Drafting</span>
+            <span class="badge badge--filled-info">Applied</span>
+            <span class="badge badge--filled-caution">Talking</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px;">
+            <span class="req-tag"><span class="dot"></span>Design systems</span>
+            <span class="req-tag is-selected"><span class="dot"></span>React</span>
+            <span class="req-tag is-soft"><span class="dot"></span>Stakeholder management</span>
+            <span class="req-tag is-tool"><span class="dot"></span>Figma</span>
+          </div>
+        </div>
+
+        <div class="component-row">
+          <div class="component-row-label">Inputs</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+            <input class="input" placeholder="Company name" />
+            <input class="input" value="Senior Product Designer" />
+            <input class="input" placeholder="Focused state (click me)" />
+          </div>
+          <textarea class="textarea mt-16" rows="3" placeholder="Add notes about this conversation..."></textarea>
+        </div>
+
+        <div class="component-row">
+          <div class="component-row-label">Cards</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+            <div class="job-card">
+              <div class="job-card-top">
+                <div class="company-mark">A</div>
+                <div>
+                  <div class="job-card-title">Senior Product Designer</div>
+                  <div class="job-card-company">Anthropic</div>
+                </div>
+              </div>
+              <div class="job-card-meta">
+                <span>$180k–$240k</span><span class="sep">·</span><span>Remote</span>
+              </div>
+              <div class="job-card-footer">
+                <div class="job-card-stage"><span class="stage-dot stage-dot--drafting"></span>Drafting · 4d</div>
+                <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+              </div>
+            </div>
+            <div class="job-card">
+              <div class="job-card-top">
+                <div class="company-mark company-mark--info">L</div>
+                <div>
+                  <div class="job-card-title">Staff Engineer, Platform</div>
+                  <div class="job-card-company">Linear</div>
+                </div>
+              </div>
+              <div class="job-card-meta">
+                <span>$210k–$280k</span><span class="sep">·</span><span>SF / Remote</span>
+              </div>
+              <div class="job-card-footer">
+                <div class="job-card-stage"><span class="stage-dot stage-dot--applied"></span>Applied · 9d</div>
+                <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="component-row">
+          <div class="component-row-label">Tabs (active = brass underline)</div>
+          <div style="border-bottom: 1px solid var(--rule-hairline); display:flex; gap: 32px;">
+            <a class="section-tab is-active" href="#">Read</a>
+            <a class="section-tab" href="#">Craft</a>
+            <a class="section-tab" href="#">Engage</a>
+          </div>
+          <div style="display: flex; gap: 6px; margin-top: 16px;">
+            <a class="sub-tab is-active" href="#">Job posting</a>
+            <a class="sub-tab" href="#">Notes</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

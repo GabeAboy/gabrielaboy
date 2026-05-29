@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings · Documents, Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link is-active" href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="settings-shell">
+    <div class="settings-title-row">
+      <h1>Settings</h1>
+      <p class="subtitle">Your account, your materials, and the connections that keep your search moving.</p>
+    </div>
+
+    <div class="settings-layout">
+      <nav class="settings-nav">
+        <a class="settings-nav-link" href="./settings.html"><i data-lucide="user-circle"></i> Profile</a>
+        <a class="settings-nav-link" href="./settings-network.html"><i data-lucide="users"></i> Network</a>
+        <a class="settings-nav-link is-active" href="./settings-documents.html"><i data-lucide="files"></i> Documents</a>
+        <a class="settings-nav-link" href="./settings-plan.html"><i data-lucide="sparkles"></i> Plan &amp; billing</a>
+        <a class="settings-nav-link" href="./settings-connections.html"><i data-lucide="plug-2"></i> Connections</a>
+        <a class="settings-nav-link" href="./settings-appearance.html"><i data-lucide="palette"></i> Appearance</a>
+        <a class="settings-nav-link" href="./settings-account.html"><i data-lucide="shield"></i> Account</a>
+        <a class="settings-nav-link" href="./settings-data.html"><i data-lucide="database"></i> Data</a>
+      </nav>
+
+      <div>
+        <section class="settings-section">
+          <div class="settings-section-header">
+            <h2>Documents</h2>
+            <p class="desc">Your base resumes and cover-letter templates. Every tailored draft starts from one of these.</p>
+          </div>
+
+          <h3 class="section-eyebrow">Resumes <span style="color: var(--text-muted); font-family: monospace; letter-spacing: 0;">· 2</span></h3>
+
+          <div class="doc-card is-default">
+            <div class="doc-card-icon"><i data-lucide="file-text"></i></div>
+            <div class="doc-card-text">
+              <div class="doc-card-name">
+                Alex-Kim-Resume-2024.docx
+                <span class="badge badge--filled-accent">Default</span>
+              </div>
+              <div class="doc-card-meta">1.2 MB · DOCX · uploaded 3 weeks ago · used in 14 drafts</div>
+            </div>
+            <div class="doc-card-actions">
+              <button class="btn btn--ghost btn--sm"><i data-lucide="eye"></i> Preview</button>
+              <button class="btn btn--ghost btn--sm"><i data-lucide="download"></i> Download</button>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </div>
+
+          <div class="doc-card">
+            <div class="doc-card-icon"><i data-lucide="file-text"></i></div>
+            <div class="doc-card-text">
+              <div class="doc-card-name">Alex-Kim-Resume-2023.docx</div>
+              <div class="doc-card-meta">980 KB · DOCX · uploaded 1 year ago · used in 3 drafts</div>
+            </div>
+            <div class="doc-card-actions">
+              <button class="btn btn--ghost btn--sm">Set default</button>
+              <button class="btn btn--ghost btn--sm"><i data-lucide="eye"></i></button>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </div>
+
+          <button class="btn btn--secondary" style="margin-top: 8px;"><i data-lucide="upload"></i> Upload resume</button>
+
+          <h3 class="section-eyebrow" style="margin-top: 40px;">Cover letter templates <span style="color: var(--text-muted); font-family: monospace; letter-spacing: 0;">· 2</span></h3>
+
+          <div class="doc-card is-default">
+            <div class="doc-card-icon"><i data-lucide="mail"></i></div>
+            <div class="doc-card-text">
+              <div class="doc-card-name">
+                Standard, neutral tone
+                <span class="badge badge--filled-accent">Default</span>
+              </div>
+              <div class="doc-card-meta">used in 12 applications · last edited 6 days ago</div>
+            </div>
+            <div class="doc-card-actions">
+              <button class="btn btn--ghost btn--sm"><i data-lucide="eye"></i> Preview</button>
+              <button class="btn btn--ghost btn--sm"><i data-lucide="edit-3"></i> Edit</button>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </div>
+
+          <div class="doc-card">
+            <div class="doc-card-icon"><i data-lucide="mail"></i></div>
+            <div class="doc-card-text">
+              <div class="doc-card-name">Warmer, for small teams</div>
+              <div class="doc-card-meta">used in 3 applications · last edited 3 weeks ago</div>
+            </div>
+            <div class="doc-card-actions">
+              <button class="btn btn--ghost btn--sm">Set default</button>
+              <button class="btn btn--ghost btn--sm"><i data-lucide="edit-3"></i></button>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </div>
+
+          <button class="btn btn--secondary" style="margin-top: 8px;"><i data-lucide="plus"></i> New template</button>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

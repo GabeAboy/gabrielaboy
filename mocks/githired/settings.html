@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings · Profile, Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link is-active" href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="settings-shell">
+    <div class="settings-title-row">
+      <h1>Settings</h1>
+      <p class="subtitle">Your account, your materials, and the connections that keep your search moving.</p>
+    </div>
+
+    <div class="settings-layout">
+      <nav class="settings-nav">
+        <a class="settings-nav-link is-active" href="./settings.html"><i data-lucide="user-circle"></i> Profile</a>
+        <a class="settings-nav-link" href="./settings-network.html"><i data-lucide="users"></i> Network</a>
+        <a class="settings-nav-link" href="./settings-documents.html"><i data-lucide="files"></i> Documents</a>
+        <a class="settings-nav-link" href="./settings-plan.html"><i data-lucide="sparkles"></i> Plan &amp; billing</a>
+        <a class="settings-nav-link" href="./settings-connections.html"><i data-lucide="plug-2"></i> Connections</a>
+        <a class="settings-nav-link" href="./settings-appearance.html"><i data-lucide="palette"></i> Appearance</a>
+        <a class="settings-nav-link" href="./settings-account.html"><i data-lucide="shield"></i> Account</a>
+        <a class="settings-nav-link" href="./settings-data.html"><i data-lucide="database"></i> Data</a>
+      </nav>
+
+      <div>
+        <section class="settings-section">
+          <div class="settings-section-header">
+            <h2>Profile</h2>
+            <p class="desc">How you appear to yourself across the app. None of this is shared with employers.</p>
+          </div>
+
+          <div class="settings-avatar-row">
+            <div class="settings-avatar">GA</div>
+            <div class="settings-avatar-controls">
+              <button class="btn btn--secondary btn--sm"><i data-lucide="upload"></i> Upload photo</button>
+              <button class="btn btn--ghost btn--sm">Remove</button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-label">
+              Display name
+              <div class="desc">The name shown on your dashboard and document exports.</div>
+            </div>
+            <div class="form-row-control">
+              <input class="input" value="Alex Kim" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-label">
+              Email
+              <div class="desc">Used for sign-in, password resets, and notifications.</div>
+            </div>
+            <div class="form-row-control">
+              <div class="form-row-value">
+                <span>alex.kim@example.com</span>
+                <span class="verified"><i data-lucide="badge-check" style="width:14px; height:14px;"></i> Verified</span>
+              </div>
+              <button class="btn btn--ghost btn--sm" style="padding-left: 0;">Change email</button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-label">
+              Time zone
+              <div class="desc">Used for interview times and "days in stage" math.</div>
+            </div>
+            <div class="form-row-control">
+              <input class="input" value="America/Los_Angeles · PT" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-label">
+              Default location
+              <div class="desc">Pre-fills the location field on new applications.</div>
+            </div>
+            <div class="form-row-control">
+              <input class="input" value="Remote · US/EU" />
+            </div>
+          </div>
+        </section>
+
+        <section class="settings-section">
+          <div class="settings-section-header">
+            <h2>Resume materials</h2>
+            <p class="desc">What we pulled out of your default resume. Edit any card to correct what the parser captured, or open the editor for the full view.</p>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 18px;">
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.8125rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+              <i data-lucide="file-text" style="width:14px; height:14px;"></i>
+              <span>Source: Alex-Kim-Resume-2024.docx · parsed 3 weeks ago</span>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <a class="btn btn--ghost btn--sm" href="./resume-profile-editor.html"><i data-lucide="edit-3"></i> Open editor</a>
+              <button class="btn btn--secondary btn--sm"><i data-lucide="refresh-cw"></i> Re-parse from file</button>
+            </div>
+          </div>
+
+          <h3 class="section-eyebrow">Experiences <span style="color: var(--text-muted); font-family: monospace; letter-spacing: 0;">· 3</span></h3>
+
+          <div class="doc-card" style="align-items: flex-start;">
+            <div class="doc-card-icon"><i data-lucide="briefcase"></i></div>
+            <div class="doc-card-text">
+              <div class="doc-card-name">
+                Senior Software Engineer
+                <span class="badge">Stripe</span>
+              </div>
+              <div class="doc-card-meta">May 2022, Present · San Francisco, CA (Remote)</div>
+              <ul style="margin: 12px 0 0 0; padding-left: 20px; font-size: 0.875rem; color: var(--text-secondary); line-height: 1.55;">
+                <li>Led migration of payments orchestration service from Ruby to Go, reducing p99 latency 38%.</li>
+                <li>Mentored four engineers; two promoted to senior within the year.</li>
+                <li>Owned on-call rotation redesign that cut weekly pages from 14 to 3.</li>
+              </ul>
+            </div>
+            <div class="doc-card-actions">
+              <button class="btn btn--ghost btn--sm"><i data-lucide="edit-3"></i> Edit</button>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </div>
+
+          <div class="doc-card" style="align-items: flex-start;">
+            <div class="doc-card-icon"><i data-lucide="briefcase"></i></div>
+            <div class="doc-card-text">
+              <div class="doc-card-name">
+                Software Engineer
+                <span class="badge">Square</span>
+              </div>
+              <div class="doc-card-meta">Aug 2019, May 2022 · San Francisco, CA</div>
+              <ul style="margin: 12px 0 0 0; padding-left: 20px; font-size: 0.875rem; color: var(--text-secondary); line-height: 1.55;">
+                <li>Built risk-decisioning service handling 12k req/s with sub-50ms p99.</li>
+                <li>Authored internal Go style guide adopted by ~80 engineers.</li>
+              </ul>
+            </div>
+            <div class="doc-card-actions">
+              <button class="btn btn--ghost btn--sm"><i data-lucide="edit-3"></i> Edit</button>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </div>
+
+          <div class="doc-card" style="align-items: flex-start;">
+            <div class="doc-card-icon"><i data-lucide="briefcase"></i></div>
+            <div class="doc-card-text">
+              <div class="doc-card-name">
+                Software Engineer Intern
+                <span class="badge">Palantir</span>
+              </div>
+              <div class="doc-card-meta">Jun 2018, Aug 2018 · Palo Alto, CA</div>
+              <ul style="margin: 12px 0 0 0; padding-left: 20px; font-size: 0.875rem; color: var(--text-secondary); line-height: 1.55;">
+                <li>Prototyped a graph-search UI for analysts; shipped to two pilot customers.</li>
+              </ul>
+            </div>
+            <div class="doc-card-actions">
+              <button class="btn btn--ghost btn--sm"><i data-lucide="edit-3"></i> Edit</button>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </div>
+
+          <h3 class="section-eyebrow" style="margin-top: 40px;">Personal accomplishments <span style="color: var(--text-muted); font-family: monospace; letter-spacing: 0;">· 2</span></h3>
+
+          <div class="doc-card">
+            <div class="doc-card-icon"><i data-lucide="award"></i></div>
+            <div class="doc-card-text">
+              <div class="doc-card-name">Speaker, GopherCon 2023</div>
+              <div class="doc-card-meta">Sep 2023 · "Designing payment retries that don't double-charge"</div>
+            </div>
+            <div class="doc-card-actions">
+              <button class="btn btn--ghost btn--sm"><i data-lucide="edit-3"></i> Edit</button>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </div>
+
+          <div class="doc-card">
+            <div class="doc-card-icon"><i data-lucide="award"></i></div>
+            <div class="doc-card-text">
+              <div class="doc-card-name">Maintainer, github.com/aboy/tinyq</div>
+              <div class="doc-card-meta">2021, Present · Embedded job queue for Go; 2.4k stars</div>
+            </div>
+            <div class="doc-card-actions">
+              <button class="btn btn--ghost btn--sm"><i data-lucide="edit-3"></i> Edit</button>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </div>
+
+          <h3 class="section-eyebrow" style="margin-top: 40px;">Education <span style="color: var(--text-muted); font-family: monospace; letter-spacing: 0;">· 1</span></h3>
+
+          <div class="doc-card">
+            <div class="doc-card-icon"><i data-lucide="graduation-cap"></i></div>
+            <div class="doc-card-text">
+              <div class="doc-card-name">BS Computer Science, Stanford University</div>
+              <div class="doc-card-meta">Sep 2015, Jun 2019 · Concentration in Systems</div>
+            </div>
+            <div class="doc-card-actions">
+              <button class="btn btn--ghost btn--sm"><i data-lucide="edit-3"></i> Edit</button>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </div>
+
+          <!-- Empty-state variant, shown when no resume has been uploaded yet. Kept here for reviewer reference. -->
+          <!--
+          <div style="margin-top: 32px; padding: 32px; text-align: center; background: var(--surface-raised); border: 1px dashed var(--rule-hairline); border-radius: 12px;">
+            <div style="color: var(--text-muted); font-size: 0.9375rem; margin-bottom: 12px;">No resume parsed yet.</div>
+            <a class="btn btn--secondary btn--sm" href="./settings-documents.html"><i data-lucide="upload"></i> Upload a resume</a>
+          </div>
+          -->
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

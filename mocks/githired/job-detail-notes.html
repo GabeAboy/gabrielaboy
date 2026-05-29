@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Senior Product Designer · Notes, Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link" href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="detail-header">
+    <a class="back-link" href="./board.html"><i data-lucide="arrow-left"></i> Back to board</a>
+
+    <div class="detail-title-row">
+      <div class="detail-title-block">
+        <div class="company-mark" style="width: 56px; height: 56px; border-radius: 12px; font-size: 1.5rem;">A</div>
+        <div class="detail-title-text">
+          <h1>Senior Product Designer</h1>
+          <div class="company-line">Anthropic</div>
+          <div class="meta-line">
+            <span>Remote · US/EU</span><span style="opacity: 0.5;">·</span>
+            <span>$180,000, $240,000</span><span style="opacity: 0.5;">·</span>
+            <span>Posted 4d ago</span>
+          </div>
+        </div>
+      </div>
+      <div class="detail-actions">
+        <button class="btn btn--secondary"><i data-lucide="external-link"></i> Open job posting</button>
+        <a class="btn btn--primary" href="./tailor.html"><i data-lucide="sparkles"></i> Tailor</a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="section-tabs">
+    <a class="section-tab is-active" href="./job-detail.html">Read</a>
+    <a class="section-tab" href="./job-detail-craft.html">Craft</a>
+    <a class="section-tab" href="./job-detail-engage.html">Engage</a>
+  </nav>
+
+  <div class="sub-tabs">
+    <a class="sub-tab" href="./job-detail.html">Job posting</a>
+    <a class="sub-tab is-active" href="./job-detail-notes.html">Notes</a>
+  </div>
+
+  <main class="detail-body">
+    <section>
+      <!-- Compose -->
+      <div class="compose-card">
+        <textarea placeholder="What did you notice? A signal from the recruiter, a link to read before the onsite, a phrase from the job posting worth holding onto..."></textarea>
+        <div class="compose-card-toolbar">
+          <div class="compose-card-tools">
+            <button class="icon-btn" title="Pin to top"><i data-lucide="pin"></i></button>
+            <button class="icon-btn" title="Attach a link"><i data-lucide="link-2"></i></button>
+            <button class="icon-btn" title="Tag a date"><i data-lucide="calendar"></i></button>
+            <button class="icon-btn" title="Tag a contact"><i data-lucide="user-plus"></i></button>
+          </div>
+          <button class="btn btn--primary btn--sm">Post note</button>
+        </div>
+      </div>
+
+      <!-- Filter chips -->
+      <div class="note-filter-chips">
+        <button class="filter-chip is-active">All <span class="mono" style="margin-left: 4px;">5</span></button>
+        <button class="filter-chip"><i data-lucide="pin" style="width:12px; height:12px;"></i> Pinned <span class="mono" style="margin-left: 4px;">1</span></button>
+        <button class="filter-chip"><i data-lucide="link-2" style="width:12px; height:12px;"></i> With links <span class="mono" style="margin-left: 4px;">2</span></button>
+        <button class="filter-chip"><i data-lucide="message-circle" style="width:12px; height:12px;"></i> Threaded <span class="mono" style="margin-left: 4px;">1</span></button>
+      </div>
+
+      <!-- Pinned -->
+      <div class="notes-section-header">
+        <span class="accent-icon"><i data-lucide="pin" style="width:14px; height:14px;"></i></span>
+        <span class="label">Pinned</span>
+        <span class="count">· 1</span>
+      </div>
+
+      <article class="note-card is-pinned">
+        <div class="note-card-header">
+          <div class="note-card-date">
+            <span class="pin"><i data-lucide="pin" style="width:12px; height:12px;"></i></span>
+            <span>May 13, 2026 · 2:34 PM</span>
+          </div>
+          <div class="note-card-actions">
+            <button class="icon-btn"><i data-lucide="reply"></i></button>
+            <button class="icon-btn"><i data-lucide="edit-3"></i></button>
+            <button class="icon-btn"><i data-lucide="pin-off"></i></button>
+          </div>
+        </div>
+        <div class="note-card-body">
+          Sam Chen has a sharp essay on agent-trace UI. Read it before the Friday onsite, they'll almost certainly ask my opinion on it, and the job posting language ("how do you make a long agent trace legible") is borrowed straight from this piece.
+        </div>
+        <a class="note-card-link" href="#">
+          <i data-lucide="link-2" style="width:11px; height:11px;"></i>
+          refind.com/sam-chen/agent-traces-2026
+        </a>
+      </article>
+
+      <!-- All -->
+      <div class="notes-section-header" style="margin-top: 32px;">
+        <span class="label">All notes</span>
+        <span class="count">· 4</span>
+      </div>
+
+      <article class="note-card">
+        <div class="note-card-header">
+          <div class="note-card-date">May 14, 2026 · 11:12 AM</div>
+          <div class="note-card-actions">
+            <button class="icon-btn" title="Pin"><i data-lucide="pin"></i></button>
+            <button class="icon-btn"><i data-lucide="reply"></i></button>
+            <button class="icon-btn"><i data-lucide="edit-3"></i></button>
+            <button class="icon-btn"><i data-lucide="trash-2"></i></button>
+          </div>
+        </div>
+        <div class="note-card-body">
+          Hiring-manager call went well. Jordan asked about my mentorship approach more than the resume implied they would, <em>they care about it more than the job posting suggests</em>. Lead with the L4→L5 story in the next round.
+        </div>
+        <div class="note-card-reply">
+          <div class="note-card-reply-meta">
+            <i data-lucide="corner-down-right" style="width:11px; height:11px;"></i>
+            Reply · added to prep notes
+          </div>
+          <div class="note-card-reply-body">
+            Added "Lead with mentorship story" to the onsite prep checklist under the Engage tab.
+          </div>
+        </div>
+      </article>
+
+      <article class="note-card">
+        <div class="note-card-header">
+          <div class="note-card-date">May 12, 2026 · 6:01 PM</div>
+          <div class="note-card-actions">
+            <button class="icon-btn" title="Pin"><i data-lucide="pin"></i></button>
+            <button class="icon-btn"><i data-lucide="reply"></i></button>
+            <button class="icon-btn"><i data-lucide="edit-3"></i></button>
+            <button class="icon-btn"><i data-lucide="trash-2"></i></button>
+          </div>
+        </div>
+        <div class="note-card-body">
+          Recruiter screen done. Maya was warm, didn't push on comp, but said the band is firm. Move forward to HM intro. <em>Don't waste the negotiation move on this round.</em>
+        </div>
+      </article>
+
+      <article class="note-card">
+        <div class="note-card-header">
+          <div class="note-card-date">May 11, 2026 · 9:42 AM</div>
+          <div class="note-card-actions">
+            <button class="icon-btn" title="Pin"><i data-lucide="pin"></i></button>
+            <button class="icon-btn"><i data-lucide="reply"></i></button>
+            <button class="icon-btn"><i data-lucide="edit-3"></i></button>
+            <button class="icon-btn"><i data-lucide="trash-2"></i></button>
+          </div>
+        </div>
+        <div class="note-card-body">
+          From the job posting: <em>"we hire writers."</em> Bring up the essays I've published, link them in the cover letter and the question-4 answer. Not just the link; quote one sentence from each.
+        </div>
+        <a class="note-card-link" href="#">
+          <i data-lucide="link-2" style="width:11px; height:11px;"></i>
+          are.na/blog/alex-kim
+        </a>
+      </article>
+
+      <article class="note-card">
+        <div class="note-card-header">
+          <div class="note-card-date">May 10, 2026 · 8:15 AM</div>
+          <div class="note-card-actions">
+            <button class="icon-btn" title="Pin"><i data-lucide="pin"></i></button>
+            <button class="icon-btn"><i data-lucide="reply"></i></button>
+            <button class="icon-btn"><i data-lucide="edit-3"></i></button>
+            <button class="icon-btn"><i data-lucide="trash-2"></i></button>
+          </div>
+        </div>
+        <div class="note-card-body">
+          Read Anthropic's mission page again before drafting. The Workspaces beta is the most relevant prior work I have, lead the resume and cover letter with it.
+        </div>
+      </article>
+    </section>
+
+    <aside>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+        <h3 class="section-eyebrow" style="margin: 0;">Linked resources</h3>
+        <span class="t-micro" style="color: var(--text-muted);">2</span>
+      </div>
+
+      <div class="linked-resources-list">
+        <a class="linked-resource" href="#">
+          <span class="linked-resource-icon"><i data-lucide="link-2" style="width:14px; height:14px;"></i></span>
+          <div class="linked-resource-text">
+            <div class="linked-resource-title">Agent traces, legibly</div>
+            <div class="linked-resource-meta">refind.com · pinned note · May 13</div>
+          </div>
+          <i data-lucide="external-link" style="width:14px; height:14px; color: var(--text-muted);"></i>
+        </a>
+        <a class="linked-resource" href="#">
+          <span class="linked-resource-icon"><i data-lucide="link-2" style="width:14px; height:14px;"></i></span>
+          <div class="linked-resource-text">
+            <div class="linked-resource-title">Are.na blog · Alex Kim</div>
+            <div class="linked-resource-meta">are.na · note · May 11</div>
+          </div>
+          <i data-lucide="external-link" style="width:14px; height:14px; color: var(--text-muted);"></i>
+        </a>
+      </div>
+
+      <h3 class="section-eyebrow" style="margin-top: 32px; margin-bottom: 14px;">Mentioned contacts</h3>
+      <div class="contact-row">
+        <div class="contact-mark">JD</div>
+        <div class="contact-text">
+          <div class="contact-name">Jordan Diaz</div>
+          <div class="contact-role">1 note · HM intro</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-mark">SC</div>
+        <div class="contact-text">
+          <div class="contact-name">Sam Chen</div>
+          <div class="contact-role">1 note · pinned</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-mark">MR</div>
+        <div class="contact-text">
+          <div class="contact-name">Maya Rosen</div>
+          <div class="contact-role">1 note · recruiter</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px; padding: 14px; border: 1px dashed var(--rule-hairline); border-radius: 10px; font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.5;">
+        <span style="display:inline-flex; align-items:center; gap:6px; color: var(--text-primary); font-weight: 600; margin-bottom: 6px;">
+          <i data-lucide="info" style="width:14px; height:14px;"></i> Notes earn pins
+        </span>
+        Anything you'd want surfaced on the day of an interview, pin it. The onsite prep card in Engage will pull pinned notes directly.
+      </div>
+    </aside>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

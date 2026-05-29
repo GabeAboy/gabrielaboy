@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Review your resume, Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+  <style>
+    /* Scoped styles for this mock only. Promote to mocks.css if this direction ships. */
+
+    .editor-shell {
+      max-width: 920px;
+      margin: 48px auto 96px;
+      padding: 0 24px;
+    }
+
+    .editor-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .editor-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2.25rem;
+      font-weight: 500;
+      letter-spacing: -0.012em;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .editor-subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.55;
+      max-width: 620px;
+    }
+
+    .editor-meta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      padding: 12px 16px;
+      background: var(--accent-soft);
+      border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+      border-radius: 10px;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+
+    .editor-meta-bar [data-lucide] { width: 14px; height: 14px; color: var(--accent); }
+
+    .editor-card {
+      margin-top: 28px;
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 16px;
+      box-shadow: var(--shadow-1);
+      overflow: hidden;
+    }
+
+    .editor-section {
+      padding: 28px 32px;
+      border-bottom: 1px solid var(--rule-hairline);
+    }
+
+    .editor-section:last-of-type { border-bottom: none; }
+
+    .editor-section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .editor-section-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.375rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .editor-section-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .editor-row {
+      background: var(--surface-base);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .editor-row:last-of-type { margin-bottom: 18px; }
+
+    .editor-row-remove {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 150ms ease-out;
+    }
+
+    .editor-row-remove:hover {
+      color: var(--negative);
+      background: color-mix(in srgb, var(--negative) 10%, transparent);
+    }
+
+    .editor-row-remove [data-lucide] { width: 14px; height: 14px; }
+
+    .editor-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 18px;
+      margin-bottom: 14px;
+    }
+
+    .editor-grid--single { grid-template-columns: 1fr; }
+
+    .editor-grid--triple { grid-template-columns: 2fr 2fr 1fr; }
+
+    .editor-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .editor-field-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .editor-field .input,
+    .editor-field textarea.input {
+      width: 100%;
+      font-size: 0.9375rem;
+    }
+
+    .editor-field textarea.input {
+      min-height: 80px;
+      resize: vertical;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+    }
+
+    .bullets-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 8px 0 10px;
+    }
+
+    .bullet-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .bullet-row-dot {
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 14px;
+    }
+
+    .bullet-row .input {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .bullet-row-remove {
+      flex-shrink: 0;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      align-self: center;
+    }
+
+    .bullet-row-remove:hover {
+      color: var(--negative);
+      background: color-mix(in srgb, var(--negative) 8%, transparent);
+    }
+
+    .bullet-row-remove [data-lucide] { width: 14px; height: 14px; }
+
+    .editor-add-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px dashed var(--rule-hairline);
+      color: var(--text-secondary);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 150ms ease-out;
+      margin-top: 4px;
+    }
+
+    .editor-add-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .editor-add-btn [data-lucide] { width: 14px; height: 14px; }
+
+    .editor-footer {
+      position: sticky;
+      bottom: 0;
+      background: var(--surface-raised);
+      border-top: 1px solid var(--rule-hairline);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .editor-footer-hint {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .editor-footer-hint [data-lucide] { width: 14px; height: 14px; }
+
+    .editor-footer-actions { display: flex; gap: 8px; }
+
+    .editor-parse-banner {
+      margin-top: 20px;
+      padding: 12px 16px;
+      background: color-mix(in srgb, var(--caution) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--caution) 30%, transparent);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-size: 0.8125rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .editor-parse-banner [data-lucide] {
+      width: 16px;
+      height: 16px;
+      color: var(--caution);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 720px) {
+      .editor-grid { grid-template-columns: 1fr; }
+      .editor-grid--triple { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link is-active" href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="editor-shell">
+    <div class="editor-eyebrow">06 · Onboarding</div>
+    <h1 class="editor-title">Review your resume</h1>
+    <p class="editor-subtitle">We pulled this out of your file. Adjust anything we got wrong, titles, dates, bullets, then continue. Your edits become the materials shown at the bottom of your profile and the source of truth for tailoring.</p>
+
+    <div class="editor-meta-bar">
+      <span style="display: inline-flex; align-items: center; gap: 8px;">
+        <i data-lucide="file-text"></i>
+        <strong style="color: var(--text-primary);">Alex-Kim-Resume-2024.docx</strong>
+        <span>· 1.2 MB · parsed just now</span>
+      </span>
+      <span style="display: inline-flex; align-items: center; gap: 6px; color: var(--positive); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 500;">
+        <i data-lucide="check-circle" style="color: var(--positive);"></i>
+        Parse complete
+      </span>
+    </div>
+
+    <!-- Failure banner variant (shown when parseStatus === 'failed') -->
+    <!--
+    <div class="editor-parse-banner">
+      <i data-lucide="alert-triangle"></i>
+      <span><strong>We couldn't fully read this file.</strong> Legacy .doc format is not supported, please re-export as .docx or PDF, or fill in the sections below by hand.</span>
+    </div>
+    -->
+
+    <div class="editor-card">
+      <!-- ─────────────────────────────── EXPERIENCES ─── -->
+      <section class="editor-section">
+        <div class="editor-section-head">
+          <div class="editor-section-title">
+            <i data-lucide="briefcase" style="color: var(--accent);"></i>
+            Experiences
+            <span class="editor-section-count">· 3</span>
+          </div>
+        </div>
+
+        <div class="editor-row">
+          <button class="editor-row-remove" aria-label="Remove experience"><i data-lucide="x"></i></button>
+          <div class="editor-grid">
+            <div class="editor-field">
+              <label class="editor-field-label">Title</label>
+              <input class="input" value="Senior Software Engineer" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">Company</label>
+              <input class="input" value="Stripe" />
+            </div>
+          </div>
+          <div class="editor-grid editor-grid--triple">
+            <div class="editor-field">
+              <label class="editor-field-label">Location</label>
+              <input class="input" value="San Francisco, CA (Remote)" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">Start</label>
+              <input class="input" value="May 2022" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">End</label>
+              <input class="input" value="Present" />
+            </div>
+          </div>
+
+          <div class="bullets-eyebrow">Bullets</div>
+          <div class="bullet-row">
+            <span class="bullet-row-dot"></span>
+            <input class="input" value="Led migration of payments orchestration service from Ruby to Go, reducing p99 latency 38%." />
+            <button class="bullet-row-remove" aria-label="Remove bullet"><i data-lucide="x"></i></button>
+          </div>
+          <div class="bullet-row">
+            <span class="bullet-row-dot"></span>
+            <input class="input" value="Mentored four engineers; two promoted to senior within the year." />
+            <button class="bullet-row-remove" aria-label="Remove bullet"><i data-lucide="x"></i></button>
+          </div>
+          <div class="bullet-row">
+            <span class="bullet-row-dot"></span>
+            <input class="input" value="Owned on-call rotation redesign that cut weekly pages from 14 to 3." />
+            <button class="bullet-row-remove" aria-label="Remove bullet"><i data-lucide="x"></i></button>
+          </div>
+          <button class="editor-add-btn"><i data-lucide="plus"></i> Add bullet</button>
+        </div>
+
+        <div class="editor-row">
+          <button class="editor-row-remove" aria-label="Remove experience"><i data-lucide="x"></i></button>
+          <div class="editor-grid">
+            <div class="editor-field">
+              <label class="editor-field-label">Title</label>
+              <input class="input" value="Software Engineer" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">Company</label>
+              <input class="input" value="Square" />
+            </div>
+          </div>
+          <div class="editor-grid editor-grid--triple">
+            <div class="editor-field">
+              <label class="editor-field-label">Location</label>
+              <input class="input" value="San Francisco, CA" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">Start</label>
+              <input class="input" value="Aug 2019" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">End</label>
+              <input class="input" value="May 2022" />
+            </div>
+          </div>
+
+          <div class="bullets-eyebrow">Bullets</div>
+          <div class="bullet-row">
+            <span class="bullet-row-dot"></span>
+            <input class="input" value="Built risk-decisioning service handling 12k req/s with sub-50ms p99." />
+            <button class="bullet-row-remove" aria-label="Remove bullet"><i data-lucide="x"></i></button>
+          </div>
+          <div class="bullet-row">
+            <span class="bullet-row-dot"></span>
+            <input class="input" value="Authored internal Go style guide adopted by ~80 engineers." />
+            <button class="bullet-row-remove" aria-label="Remove bullet"><i data-lucide="x"></i></button>
+          </div>
+          <button class="editor-add-btn"><i data-lucide="plus"></i> Add bullet</button>
+        </div>
+
+        <div class="editor-row">
+          <button class="editor-row-remove" aria-label="Remove experience"><i data-lucide="x"></i></button>
+          <div class="editor-grid">
+            <div class="editor-field">
+              <label class="editor-field-label">Title</label>
+              <input class="input" value="Software Engineer Intern" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">Company</label>
+              <input class="input" value="Palantir" />
+            </div>
+          </div>
+          <div class="editor-grid editor-grid--triple">
+            <div class="editor-field">
+              <label class="editor-field-label">Location</label>
+              <input class="input" value="Palo Alto, CA" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">Start</label>
+              <input class="input" value="Jun 2018" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">End</label>
+              <input class="input" value="Aug 2018" />
+            </div>
+          </div>
+
+          <div class="bullets-eyebrow">Bullets</div>
+          <div class="bullet-row">
+            <span class="bullet-row-dot"></span>
+            <input class="input" value="Prototyped a graph-search UI for analysts; shipped to two pilot customers." />
+            <button class="bullet-row-remove" aria-label="Remove bullet"><i data-lucide="x"></i></button>
+          </div>
+          <button class="editor-add-btn"><i data-lucide="plus"></i> Add bullet</button>
+        </div>
+
+        <button class="btn btn--secondary"><i data-lucide="plus"></i> Add experience</button>
+      </section>
+
+      <!-- ─────────────────────── PERSONAL ACCOMPLISHMENTS ─── -->
+      <section class="editor-section">
+        <div class="editor-section-head">
+          <div class="editor-section-title">
+            <i data-lucide="award" style="color: var(--accent);"></i>
+            Personal accomplishments
+            <span class="editor-section-count">· 2</span>
+          </div>
+        </div>
+
+        <div class="editor-row">
+          <button class="editor-row-remove" aria-label="Remove accomplishment"><i data-lucide="x"></i></button>
+          <div class="editor-grid">
+            <div class="editor-field">
+              <label class="editor-field-label">Title</label>
+              <input class="input" value="Speaker, GopherCon 2023" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">Date</label>
+              <input class="input" value="Sep 2023" />
+            </div>
+          </div>
+          <div class="editor-grid editor-grid--single">
+            <div class="editor-field">
+              <label class="editor-field-label">Description</label>
+              <textarea class="input">Gave a 35-minute talk titled "Designing payment retries that don't double-charge." Talk recording has 12k views.</textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="editor-row">
+          <button class="editor-row-remove" aria-label="Remove accomplishment"><i data-lucide="x"></i></button>
+          <div class="editor-grid">
+            <div class="editor-field">
+              <label class="editor-field-label">Title</label>
+              <input class="input" value="Maintainer, github.com/aboy/tinyq" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">Date</label>
+              <input class="input" value="2021, Present" />
+            </div>
+          </div>
+          <div class="editor-grid editor-grid--single">
+            <div class="editor-field">
+              <label class="editor-field-label">Description</label>
+              <textarea class="input">Embedded job queue for Go. 2.4k stars, 60+ contributors. Used in production by three companies.</textarea>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn--secondary"><i data-lucide="plus"></i> Add accomplishment</button>
+      </section>
+
+      <!-- ────────────────────────────────── EDUCATION ─── -->
+      <section class="editor-section">
+        <div class="editor-section-head">
+          <div class="editor-section-title">
+            <i data-lucide="graduation-cap" style="color: var(--accent);"></i>
+            Education
+            <span class="editor-section-count">· 1</span>
+          </div>
+        </div>
+
+        <div class="editor-row">
+          <button class="editor-row-remove" aria-label="Remove education"><i data-lucide="x"></i></button>
+          <div class="editor-grid">
+            <div class="editor-field">
+              <label class="editor-field-label">Institution</label>
+              <input class="input" value="Stanford University" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">Degree</label>
+              <input class="input" value="BS" />
+            </div>
+          </div>
+          <div class="editor-grid editor-grid--triple">
+            <div class="editor-field">
+              <label class="editor-field-label">Field of study</label>
+              <input class="input" value="Computer Science" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">Start</label>
+              <input class="input" value="Sep 2015" />
+            </div>
+            <div class="editor-field">
+              <label class="editor-field-label">End</label>
+              <input class="input" value="Jun 2019" />
+            </div>
+          </div>
+          <div class="editor-grid editor-grid--single">
+            <div class="editor-field">
+              <label class="editor-field-label">Notes</label>
+              <textarea class="input">Concentration in Systems. Coursework: distributed systems, compilers, ML.</textarea>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn--secondary"><i data-lucide="plus"></i> Add education</button>
+      </section>
+
+      <!-- ──────────────────────────────── FOOTER ─── -->
+      <div class="editor-footer">
+        <button class="btn btn--ghost btn--sm"><i data-lucide="refresh-cw"></i> Re-parse from file</button>
+        <div class="editor-footer-actions">
+          <button class="btn btn--ghost"><i data-lucide="save"></i> Save draft</button>
+          <a class="btn btn--primary" href="./settings.html">Continue <i data-lucide="arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 18px; font-size: 0.75rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; text-align: center;">
+      Continue takes you to your Profile, where these materials appear at the bottom.
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

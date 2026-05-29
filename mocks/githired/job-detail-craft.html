@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Senior Product Designer · Craft, Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link" href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="detail-header">
+    <a class="back-link" href="./board.html"><i data-lucide="arrow-left"></i> Back to board</a>
+
+    <div class="detail-title-row">
+      <div class="detail-title-block">
+        <div class="company-mark" style="width: 56px; height: 56px; border-radius: 12px; font-size: 1.5rem;">A</div>
+        <div class="detail-title-text">
+          <h1>Senior Product Designer</h1>
+          <div class="company-line">Anthropic</div>
+          <div class="meta-line">
+            <span>Remote · US/EU</span><span style="opacity: 0.5;">·</span>
+            <span>$180,000, $240,000</span><span style="opacity: 0.5;">·</span>
+            <span>Posted 4d ago</span>
+          </div>
+        </div>
+      </div>
+      <div class="detail-actions">
+        <button class="btn btn--secondary"><i data-lucide="external-link"></i> Open job posting</button>
+        <a class="btn btn--primary" href="./tailor.html"><i data-lucide="sparkles"></i> Tailor</a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="section-tabs">
+    <a class="section-tab" href="./job-detail.html">Read</a>
+    <a class="section-tab is-active" href="./job-detail-craft.html">Craft</a>
+    <a class="section-tab" href="./job-detail-engage.html">Engage</a>
+  </nav>
+
+  <div class="sub-tabs">
+    <a class="sub-tab is-active" href="#">Resume</a>
+    <a class="sub-tab" href="./tailor-cover-letter.html">Cover letter</a>
+    <a class="sub-tab" href="./tailor-questions.html">Questions</a>
+    <a class="sub-tab" href="./job-detail-apply.html">Apply</a>
+  </div>
+
+  <main class="detail-body">
+    <section>
+      <span class="status-row">
+        <span class="stage-dot stage-dot--drafting"></span>
+        <span>Tailored</span>
+        <span class="meta">last edited 21m ago</span>
+      </span>
+
+      <div class="draft-source-row">
+        <span class="draft-source-label">Drawing from</span>
+        <div class="draft-source-picker" tabindex="0">
+          <i data-lucide="user-square"></i>
+          <span class="draft-source-picker-text">
+            <strong>Engineering profile</strong>
+            <span class="draft-source-picker-meta">3 experiences · edited 3d ago</span>
+          </span>
+          <i data-lucide="chevron-down" class="draft-source-picker-chevron"></i>
+
+          <div class="draft-source-menu" role="listbox" aria-label="Resume source">
+            <div class="draft-source-option is-selected" role="option" aria-selected="true">
+              <i data-lucide="user-square"></i>
+              <span class="draft-source-option-text">
+                <strong>Engineering profile</strong>
+                <span>3 experiences · edited 3d ago</span>
+              </span>
+              <i data-lucide="check" class="draft-source-option-check"></i>
+            </div>
+            <div class="draft-source-option" role="option">
+              <i data-lucide="user-square"></i>
+              <span class="draft-source-option-text">
+                <strong>Design profile</strong>
+                <span>2 experiences · edited 2w ago</span>
+              </span>
+            </div>
+            <div class="draft-source-option" role="option">
+              <i data-lucide="file-text"></i>
+              <span class="draft-source-option-text">
+                <strong>Alex-Kim-Resume-2024.docx</strong>
+                <span>Original upload · unparsed</span>
+              </span>
+            </div>
+            <div class="draft-source-option is-add" role="option">
+              <i data-lucide="plus"></i>
+              <span class="draft-source-option-text">
+                <strong>Add a new profile</strong>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-card-header">
+          <div>
+            <div class="preview-card-title">Tailored resume</div>
+            <div class="preview-card-meta" style="margin-top: 4px;">5 bullets · 6 requirements answered</div>
+          </div>
+          <span class="badge badge--filled-accent">Active</span>
+        </div>
+
+        <div class="preview-bullet">Led end-to-end design for the Claude Workspaces surface, taking a blank canvas through five rounds of usability testing to a shipped beta that 18,000 users opted into in the first week.</div>
+        <div class="preview-bullet">Owned the design-system primitives library (buttons, inputs, layout, motion) used by 14 surfaces and 30+ designers, wrote the contribution model and onboarded three new contributors.</div>
+        <div class="preview-bullet">Ran a six-week qualitative study with 22 power users to understand how long agent traces should be summarized; findings shipped as two new UI patterns now used across the chat surface.</div>
+        <div class="preview-bullet is-faded">Mentored two product designers from L4 to L5 and one design engineer through their first year, both designers shipped lead-IC work within nine months.</div>
+        <div class="preview-bullet is-faded">Pair with engineering daily; comfortable reading and reviewing React PRs to keep design intent intact through to ship.</div>
+
+        <div class="preview-card-actions">
+          <a class="btn btn--primary" href="./tailor.html"><i data-lucide="sparkles"></i> Continue tailoring</a>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn--secondary btn--sm"><i data-lucide="file-text"></i> Export DOCX</button>
+            <button class="btn btn--secondary btn--sm"><i data-lucide="file-down"></i> Export PDF</button>
+            <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-eyebrow">Source profile</h3>
+      <div class="profile-source-card">
+        <div class="profile-source-head">
+          <div class="profile-source-title">
+            <i data-lucide="user-square" style="color: var(--accent);"></i>
+            Your profile
+            <span class="badge">Edited 3d ago</span>
+          </div>
+          <a class="btn btn--ghost btn--sm" href="./resume-profile-editor.html"><i data-lucide="pencil"></i> Edit profile</a>
+        </div>
+        <p class="profile-source-hint">Tailoring draws from your edited profile, not the original upload. Update the profile to change what's available to draw from.</p>
+
+        <div class="profile-source-group">
+          <div class="profile-source-group-label">Experiences · 3</div>
+          <div class="profile-source-row">
+            <span class="profile-source-row-primary">Senior Software Engineer · Stripe</span>
+            <span class="profile-source-row-meta">May 2022, Present</span>
+          </div>
+          <div class="profile-source-row">
+            <span class="profile-source-row-primary">Software Engineer · Square</span>
+            <span class="profile-source-row-meta">Aug 2019, May 2022</span>
+          </div>
+          <div class="profile-source-row">
+            <span class="profile-source-row-primary">Software Engineer Intern · Palantir</span>
+            <span class="profile-source-row-meta">Jun 2018, Aug 2018</span>
+          </div>
+        </div>
+
+        <div class="profile-source-group">
+          <div class="profile-source-group-label">Personal accomplishments · 2</div>
+          <div class="profile-source-row">
+            <span class="profile-source-row-primary">Speaker, GopherCon 2023</span>
+            <span class="profile-source-row-meta">Sep 2023</span>
+          </div>
+          <div class="profile-source-row">
+            <span class="profile-source-row-primary">Maintainer, github.com/aboy/tinyq</span>
+            <span class="profile-source-row-meta">2021, Present</span>
+          </div>
+        </div>
+
+        <div class="profile-source-group">
+          <div class="profile-source-group-label">Education · 1</div>
+          <div class="profile-source-row">
+            <span class="profile-source-row-primary">BS, Computer Science · Stanford University</span>
+            <span class="profile-source-row-meta">2015, 2019</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside>
+      <h3 class="section-eyebrow">Requirements covered</h3>
+      <div class="coverage-list">
+        <div class="coverage-row is-hard">
+          <span class="glyph"></span>
+          <span class="label">Lead a major surface</span>
+        </div>
+        <div class="coverage-row is-hard">
+          <span class="glyph"></span>
+          <span class="label">Design-system primitives</span>
+        </div>
+        <div class="coverage-row is-responsibility">
+          <span class="glyph"></span>
+          <span class="label">Qualitative studies</span>
+        </div>
+        <div class="coverage-row is-responsibility">
+          <span class="glyph"></span>
+          <span class="label">Mentorship</span>
+        </div>
+        <div class="coverage-row is-nice">
+          <span class="glyph"></span>
+          <span class="label">Reading production code</span>
+        </div>
+      </div>
+
+      <h3 class="section-eyebrow">Not yet covered</h3>
+      <div class="coverage-list">
+        <div class="coverage-row is-bonus is-uncovered">
+          <span class="glyph"></span>
+          <span class="label">Public writing practice</span>
+        </div>
+      </div>
+
+      <div style="padding: 14px; border: 1px dashed var(--rule-hairline); border-radius: 10px; font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.5;">
+        <span style="display:inline-flex; align-items:center; gap:6px; color: var(--text-primary); font-weight: 600; margin-bottom: 6px;">
+          <i data-lucide="lightbulb" style="width:14px; height:14px;"></i> Tip
+        </span>
+        Bonus strengths don't need to live on the resume. Save them for the cover letter or the "anything else" question.
+      </div>
+    </aside>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

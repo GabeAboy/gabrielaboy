@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings · Account &amp; security, Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link is-active" href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="settings-shell">
+    <div class="settings-title-row">
+      <h1>Settings</h1>
+      <p class="subtitle">Your account, your materials, and the connections that keep your search moving.</p>
+    </div>
+
+    <div class="settings-layout">
+      <nav class="settings-nav">
+        <a class="settings-nav-link" href="./settings.html"><i data-lucide="user-circle"></i> Profile</a>
+        <a class="settings-nav-link" href="./settings-network.html"><i data-lucide="users"></i> Network</a>
+        <a class="settings-nav-link" href="./settings-documents.html"><i data-lucide="files"></i> Documents</a>
+        <a class="settings-nav-link" href="./settings-plan.html"><i data-lucide="sparkles"></i> Plan &amp; billing</a>
+        <a class="settings-nav-link" href="./settings-connections.html"><i data-lucide="plug-2"></i> Connections</a>
+        <a class="settings-nav-link" href="./settings-appearance.html"><i data-lucide="palette"></i> Appearance</a>
+        <a class="settings-nav-link is-active" href="./settings-account.html"><i data-lucide="shield"></i> Account</a>
+        <a class="settings-nav-link" href="./settings-data.html"><i data-lucide="database"></i> Data</a>
+      </nav>
+
+      <div>
+        <section class="settings-section">
+          <div class="settings-section-header">
+            <h2>Account &amp; security</h2>
+            <p class="desc">Password, two-factor, and active sessions.</p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-label">Password</div>
+            <div class="form-row-control">
+              <div class="form-row-value mono subtle">Last changed 6 months ago</div>
+              <button class="btn btn--secondary btn--sm">Change password</button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-label">
+              Two-factor authentication
+              <div class="desc">Required for production accounts.</div>
+            </div>
+            <div class="form-row-control">
+              <div class="form-row-value">
+                <span class="connection-status"><span class="dot"></span> Not enabled</span>
+              </div>
+              <button class="btn btn--primary btn--sm"><i data-lucide="shield-check"></i> Enable 2FA</button>
+            </div>
+          </div>
+
+          <h3 class="section-eyebrow" style="margin-top: 32px;">Active sessions</h3>
+          <div style="background: var(--surface-raised); border: 1px solid var(--rule-hairline); border-radius: 12px; padding: 4px 20px;">
+            <div class="session-row">
+              <div class="session-icon"><i data-lucide="laptop"></i></div>
+              <div class="session-body">
+                <div class="session-name">This device <span class="session-pill"><span style="width:6px; height:6px; border-radius:50%; background:currentColor;"></span> Active now</span></div>
+                <div class="session-meta">macOS 15.4 · Chrome 122 · San Francisco, CA</div>
+              </div>
+              <button class="btn btn--ghost btn--sm" disabled style="opacity: 0.5;">Current</button>
+            </div>
+            <div class="session-row">
+              <div class="session-icon"><i data-lucide="smartphone"></i></div>
+              <div class="session-body">
+                <div class="session-name">iPhone</div>
+                <div class="session-meta">iOS 18 · Safari · 2 days ago · San Francisco, CA</div>
+              </div>
+              <button class="btn btn--ghost btn--sm">Sign out</button>
+            </div>
+            <div class="session-row">
+              <div class="session-icon"><i data-lucide="laptop"></i></div>
+              <div class="session-body">
+                <div class="session-name">MacBook Air</div>
+                <div class="session-meta">macOS 14 · Safari · 9 days ago · Lisbon, PT</div>
+              </div>
+              <button class="btn btn--ghost btn--sm">Sign out</button>
+            </div>
+          </div>
+
+          <button class="btn btn--secondary btn--sm" style="margin-top: 16px;"><i data-lucide="log-out"></i> Sign out of all devices</button>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

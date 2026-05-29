@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings · Plan &amp; billing, Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+  <style>
+    /* Billing toggle (matches pricing.html) */
+    .billing-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 28px;
+      padding: 4px;
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 999px;
+    }
+    .billing-toggle button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .billing-toggle button.is-active {
+      background: var(--surface-base);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-1);
+    }
+    .billing-toggle .save-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      margin-left: 4px;
+    }
+
+    /* Tier grid (matches pricing.html) */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 1100px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+
+    .tier {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      padding: 24px 20px 22px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .tier.is-current {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-3);
+    }
+    .tier-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--primary-text-on-accent);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    .tier-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .tier-name {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .tier-tagline {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      min-height: 42px;
+    }
+    .tier-price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .tier-price-amount {
+      font-family: 'Source Serif 4', serif;
+      font-size: 2.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .tier-price-cadence {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+    .tier-billing-note {
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 20px;
+      min-height: 16px;
+    }
+    .tier-cta {
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .tier-cta[disabled] {
+      pointer-events: none;
+      opacity: 0.55;
+    }
+    .tier-inherits {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--rule-hairline);
+    }
+    .tier-inherits strong { color: var(--text-primary); font-weight: 600; }
+
+    .tier-section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin: 8px 0 10px;
+    }
+    .tier ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .tier ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 5px 0;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+    .tier ul li i[data-lucide] {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: var(--positive);
+    }
+    .tier.is-current ul li i[data-lucide] { color: var(--accent); }
+    .tier ul li .feat-meta {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      margin-top: 2px;
+    }
+
+    /* Current-plan management strip */
+    .current-plan-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 12px;
+      margin-bottom: 40px;
+    }
+    .current-plan-bar .left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .current-plan-bar .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .current-plan-bar .label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+    .current-plan-bar .text { color: var(--text-primary); font-size: 0.9rem; }
+    .current-plan-bar .text .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.84rem; }
+    .current-plan-bar .actions { display: flex; gap: 8px; }
+
+    .compare-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      margin-bottom: 40px;
+    }
+    .compare-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link is-active" href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="settings-shell">
+    <div class="settings-title-row">
+      <h1>Settings</h1>
+      <p class="subtitle">Your account, your materials, and the connections that keep your search moving.</p>
+    </div>
+
+    <div class="settings-layout">
+      <nav class="settings-nav">
+        <a class="settings-nav-link" href="./settings.html"><i data-lucide="user-circle"></i> Profile</a>
+        <a class="settings-nav-link" href="./settings-network.html"><i data-lucide="users"></i> Network</a>
+        <a class="settings-nav-link" href="./settings-documents.html"><i data-lucide="files"></i> Documents</a>
+        <a class="settings-nav-link is-active" href="./settings-plan.html"><i data-lucide="sparkles"></i> Plan &amp; billing</a>
+        <a class="settings-nav-link" href="./settings-connections.html"><i data-lucide="plug-2"></i> Connections</a>
+        <a class="settings-nav-link" href="./settings-appearance.html"><i data-lucide="palette"></i> Appearance</a>
+        <a class="settings-nav-link" href="./settings-account.html"><i data-lucide="shield"></i> Account</a>
+        <a class="settings-nav-link" href="./settings-data.html"><i data-lucide="database"></i> Data</a>
+      </nav>
+
+      <div>
+        <section class="settings-section">
+          <div class="settings-section-header">
+            <h2>Plan &amp; billing</h2>
+            <p class="desc">You&rsquo;re on Premium. Switch tiers any time, downgrades take effect at the end of the current billing period.</p>
+          </div>
+
+          <!-- Current plan management strip -->
+          <div class="current-plan-bar">
+            <div class="left">
+              <span class="dot"></span>
+              <div>
+                <div class="label">Current plan</div>
+                <div class="text">Premium &middot; <span class="mono">$10.00/mo</span> &middot; next bill <span class="mono">June 14, 2026</span></div>
+              </div>
+            </div>
+            <div class="actions">
+              <button class="btn btn--secondary btn--sm">Manage billing</button>
+              <button class="btn btn--ghost btn--sm">Cancel plan</button>
+            </div>
+          </div>
+
+          <!-- Billing toggle -->
+          <div class="billing-toggle" role="tablist">
+            <button class="is-active" data-cadence="monthly">Monthly</button>
+            <button data-cadence="annual">Annual<span class="save-pill">save 20%</span></button>
+          </div>
+
+          <!-- Tier grid -->
+          <div class="pricing-grid">
+            <!-- FREE -->
+            <article class="tier">
+              <div class="tier-eyebrow">Tier 01</div>
+              <div class="tier-name">Free</div>
+              <div class="tier-tagline">For the early scout, track jobs, take notes, see if the shape fits.</div>
+
+              <div class="tier-price">
+                <span class="tier-price-amount" data-price data-monthly="$0" data-annual="$0">$0</span>
+                <span class="tier-price-cadence">forever</span>
+              </div>
+              <div class="tier-billing-note" data-note data-monthly="no card required" data-annual="no card required">no card required</div>
+
+              <button class="btn btn--ghost tier-cta">Downgrade</button>
+
+              <div class="tier-section-label">What you get</div>
+              <ul>
+                <li><i data-lucide="check"></i><div>Up to <strong>10 active jobs</strong></div></li>
+                <li><i data-lucide="check"></i><div>Manual job capture</div></li>
+                <li><i data-lucide="check"></i><div>Notes, pinned items, stages</div></li>
+                <li><i data-lucide="check"></i><div>Up to <strong>2 resumes &amp; profiles</strong></div></li>
+                <li><i data-lucide="check"></i><div>Resume profile parser</div></li>
+                <li><i data-lucide="check"></i><div>Applied archive<span class="feat-meta">read-only</span></div></li>
+                <li><i data-lucide="check"></i><div>Light &amp; dark themes</div></li>
+              </ul>
+            </article>
+
+            <!-- BASE -->
+            <article class="tier">
+              <div class="tier-eyebrow">Tier 02</div>
+              <div class="tier-name">Base</div>
+              <div class="tier-tagline">For the active applier, unlimited jobs and the tools to engage every lead.</div>
+
+              <div class="tier-price">
+                <span class="tier-price-amount" data-price data-monthly="$5" data-annual="$4">$5</span>
+                <span class="tier-price-cadence">/ month</span>
+              </div>
+              <div class="tier-billing-note" data-note data-monthly="billed monthly" data-annual="$48/yr · billed annually">billed monthly</div>
+
+              <button class="btn btn--ghost tier-cta">Downgrade</button>
+
+              <div class="tier-inherits">Everything in <strong>Free</strong>, plus&hellip;</div>
+
+              <div class="tier-section-label">Capture &amp; intelligence</div>
+              <ul>
+                <li><i data-lucide="check"></i><div><strong>Unlimited jobs</strong> tracked</div></li>
+                <li><i data-lucide="check"></i><div><strong>Unlimited resumes &amp; profiles</strong></div></li>
+                <li><i data-lucide="check"></i><div>Job posting breakdown<span class="feat-meta">skills, must-haves, comp signals</span></div></li>
+                <li><i data-lucide="check"></i><div>Skill match<span class="feat-meta">gap analysis</span></div></li>
+                <li><i data-lucide="check"></i><div>Document editor</div></li>
+                <li><i data-lucide="check"></i><div>Open archive<span class="feat-meta">reopen any archived job</span></div></li>
+              </ul>
+
+              <div class="tier-section-label" style="margin-top: 16px;">Engage</div>
+              <ul>
+                <li><i data-lucide="check"></i><div>Interview prep workspace</div></li>
+                <li><i data-lucide="check"></i><div>Network &amp; contacts</div></li>
+              </ul>
+            </article>
+
+            <!-- PREMIUM (current) -->
+            <article class="tier is-current">
+              <span class="tier-badge">Current plan</span>
+              <div class="tier-eyebrow">Tier 03</div>
+              <div class="tier-name">Premium</div>
+              <div class="tier-tagline">For the serious search, every application gets a tailored draft.</div>
+
+              <div class="tier-price">
+                <span class="tier-price-amount" data-price data-monthly="$10" data-annual="$8">$10</span>
+                <span class="tier-price-cadence">/ month</span>
+              </div>
+              <div class="tier-billing-note" data-note data-monthly="billed monthly" data-annual="$96/yr · billed annually">billed monthly</div>
+
+              <button class="btn btn--secondary tier-cta" disabled>Your current plan</button>
+
+              <div class="tier-inherits">Everything in <strong>Base</strong>, plus&hellip;</div>
+
+              <div class="tier-section-label">AI drafting</div>
+              <ul>
+                <li><i data-lucide="sparkles"></i><div><strong>Priority AI</strong>, no rate limit on AI calls</div></li>
+                <li><i data-lucide="sparkles"></i><div><strong>AI resume tailor</strong>, unlimited drafts</div></li>
+                <li><i data-lucide="sparkles"></i><div><strong>AI cover letter</strong>, example-aware</div></li>
+                <li><i data-lucide="sparkles"></i><div><strong>AI application answers</strong>, in your voice</div></li>
+                <li><i data-lucide="sparkles"></i><div><strong>Auto-prepare on resume select</strong>, match &rarr; suggest &rarr; draft, in the background</div></li>
+              </ul>
+            </article>
+          </div>
+
+          <a class="compare-link" href="./pricing.html">
+            View full feature comparison <i data-lucide="arrow-right" style="width:14px; height:14px;"></i>
+          </a>
+
+          <h3 class="section-eyebrow">Usage this month</h3>
+          <div class="usage-stats">
+            <div class="usage-stat">
+              <div class="usage-stat-value">23</div>
+              <div class="usage-stat-label">Jobs tracked</div>
+            </div>
+            <div class="usage-stat">
+              <div class="usage-stat-value">47</div>
+              <div class="usage-stat-label">Documents generated</div>
+            </div>
+            <div class="usage-stat">
+              <div class="usage-stat-value">12</div>
+              <div class="usage-stat-label">Cover letters</div>
+            </div>
+            <div class="usage-stat">
+              <div class="usage-stat-value">8</div>
+              <div class="usage-stat-label">Conversations active</div>
+            </div>
+          </div>
+
+          <h3 class="section-eyebrow" style="margin-top: 32px;">Payment method</h3>
+          <div class="payment-method-row">
+            <div class="payment-method-icon">VISA</div>
+            <div class="payment-method-text">
+              <div class="payment-method-name">Visa ending in 4242</div>
+              <div class="payment-method-meta">Expires 09/27 · added Mar 2025</div>
+            </div>
+            <button class="btn btn--ghost btn--sm">Update</button>
+          </div>
+
+          <a class="btn btn--ghost btn--sm" href="#" style="margin-top: 16px; padding-left: 0;">
+            <i data-lucide="external-link"></i> View billing history
+          </a>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+  <script>
+    (function () {
+      const toggle = document.querySelector('.billing-toggle');
+      if (!toggle) return;
+      toggle.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-cadence]');
+        if (!btn) return;
+        const cadence = btn.dataset.cadence;
+        toggle.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === btn));
+        document.querySelectorAll('[data-price]').forEach((el) => {
+          el.textContent = el.dataset[cadence];
+        });
+        document.querySelectorAll('[data-note]').forEach((el) => {
+          el.textContent = el.dataset[cadence];
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

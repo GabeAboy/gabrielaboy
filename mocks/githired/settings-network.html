@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings · Network, Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link is-active" href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="settings-shell">
+    <div class="settings-title-row">
+      <h1>Settings</h1>
+      <p class="subtitle">Your account, your materials, and the connections that keep your search moving.</p>
+    </div>
+
+    <div class="settings-layout">
+      <nav class="settings-nav">
+        <a class="settings-nav-link" href="./settings.html"><i data-lucide="user-circle"></i> Profile</a>
+        <a class="settings-nav-link is-active" href="./settings-network.html"><i data-lucide="users"></i> Network</a>
+        <a class="settings-nav-link" href="./settings-documents.html"><i data-lucide="files"></i> Documents</a>
+        <a class="settings-nav-link" href="./settings-plan.html"><i data-lucide="sparkles"></i> Plan &amp; billing</a>
+        <a class="settings-nav-link" href="./settings-connections.html"><i data-lucide="plug-2"></i> Connections</a>
+        <a class="settings-nav-link" href="./settings-appearance.html"><i data-lucide="palette"></i> Appearance</a>
+        <a class="settings-nav-link" href="./settings-account.html"><i data-lucide="shield"></i> Account</a>
+        <a class="settings-nav-link" href="./settings-data.html"><i data-lucide="database"></i> Data</a>
+      </nav>
+
+      <div>
+        <section class="settings-section">
+          <div class="settings-section-header">
+            <h2>Network</h2>
+            <p class="desc">Every recruiter, hiring manager, and interviewer you've added across all of your jobs.</p>
+          </div>
+
+          <div class="network-toolbar">
+            <div class="network-search">
+              <i class="icon" data-lucide="search" style="width:14px; height:14px;"></i>
+              <input class="input" type="text" placeholder="Search by name…" />
+            </div>
+            <select class="network-filter">
+              <option>All companies</option>
+              <option>Anthropic</option>
+              <option>Linear</option>
+              <option>Notion</option>
+              <option>Stripe</option>
+              <option>Figma</option>
+            </select>
+          </div>
+
+          <div class="network-summary">
+            <span class="num">8</span> contacts · <span class="num">5</span> companies · <span class="num">3</span> recruiters · <span class="num">5</span> active conversations
+          </div>
+
+          <div class="network-grid">
+
+            <article class="network-card">
+              <div class="network-card-avatar">JD</div>
+              <div class="network-card-name-row">
+                <span class="network-card-name">Jordan Diaz</span>
+                <a class="network-card-linkedin" href="#" title="LinkedIn">in</a>
+              </div>
+              <p class="network-card-role">Design Manager</p>
+              <span class="network-card-company">Anthropic</span>
+              <div class="network-card-divider"></div>
+              <a class="network-card-email" href="mailto:jordan@anthropic.com">
+                <i data-lucide="mail" style="width:13px; height:13px;"></i> Email
+              </a>
+            </article>
+
+            <article class="network-card">
+              <div class="network-card-avatar is-info">SC</div>
+              <div class="network-card-name-row">
+                <span class="network-card-name">Sam Chen</span>
+                <a class="network-card-linkedin" href="#" title="LinkedIn">in</a>
+              </div>
+              <p class="network-card-role">Sr. Product Designer</p>
+              <span class="network-card-company">Anthropic</span>
+              <div class="network-card-divider"></div>
+              <a class="network-card-email" href="mailto:sam@anthropic.com">
+                <i data-lucide="mail" style="width:13px; height:13px;"></i> Email
+              </a>
+            </article>
+
+            <article class="network-card">
+              <div class="network-card-avatar is-positive">PS</div>
+              <div class="network-card-name-row">
+                <span class="network-card-name">Priya Shah</span>
+              </div>
+              <p class="network-card-role">Engineering Director</p>
+              <span class="network-card-company">Anthropic</span>
+              <div class="network-card-divider"></div>
+              <a class="network-card-email is-disabled" href="#" onclick="event.preventDefault()">
+                <i data-lucide="mail" style="width:13px; height:13px;"></i> No email
+              </a>
+            </article>
+
+            <article class="network-card">
+              <div class="network-card-avatar is-caution">MR</div>
+              <div class="network-card-name-row">
+                <span class="network-card-name">Maya Rosen</span>
+                <a class="network-card-linkedin" href="#" title="LinkedIn">in</a>
+              </div>
+              <p class="network-card-role">Recruiter · External</p>
+              <span class="network-card-company">Anthropic</span>
+              <div class="network-card-divider"></div>
+              <a class="network-card-email" href="mailto:maya@anthropic.com">
+                <i data-lucide="mail" style="width:13px; height:13px;"></i> Email
+              </a>
+            </article>
+
+            <article class="network-card">
+              <div class="network-card-avatar is-neutral">CV</div>
+              <div class="network-card-name-row">
+                <span class="network-card-name">Carlos Vega</span>
+                <a class="network-card-linkedin" href="#" title="LinkedIn">in</a>
+              </div>
+              <p class="network-card-role">Design Lead, Platform</p>
+              <span class="network-card-company">Linear</span>
+              <div class="network-card-divider"></div>
+              <a class="network-card-email" href="mailto:carlos@linear.app">
+                <i data-lucide="mail" style="width:13px; height:13px;"></i> Email
+              </a>
+            </article>
+
+            <article class="network-card">
+              <div class="network-card-avatar">EP</div>
+              <div class="network-card-name-row">
+                <span class="network-card-name">Elena Park</span>
+              </div>
+              <p class="network-card-role">Technical Recruiter</p>
+              <span class="network-card-company">Stripe</span>
+              <div class="network-card-divider"></div>
+              <a class="network-card-email" href="mailto:elena@stripe.com">
+                <i data-lucide="mail" style="width:13px; height:13px;"></i> Email
+              </a>
+            </article>
+
+            <article class="network-card">
+              <div class="network-card-avatar is-info">DL</div>
+              <div class="network-card-name-row">
+                <span class="network-card-name">David Liu</span>
+                <a class="network-card-linkedin" href="#" title="LinkedIn">in</a>
+              </div>
+              <p class="network-card-role">Head of Design</p>
+              <span class="network-card-company">Notion</span>
+              <div class="network-card-divider"></div>
+              <a class="network-card-email is-disabled" href="#" onclick="event.preventDefault()">
+                <i data-lucide="mail" style="width:13px; height:13px;"></i> No email
+              </a>
+            </article>
+
+            <article class="network-card">
+              <div class="network-card-avatar is-positive">AB</div>
+              <div class="network-card-name-row">
+                <span class="network-card-name">Aisha Brown</span>
+                <a class="network-card-linkedin" href="#" title="LinkedIn">in</a>
+              </div>
+              <p class="network-card-role">Engineering Manager</p>
+              <span class="network-card-company">Figma</span>
+              <div class="network-card-divider"></div>
+              <a class="network-card-email" href="mailto:aisha@figma.com">
+                <i data-lucide="mail" style="width:13px; height:13px;"></i> Email
+              </a>
+            </article>
+
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

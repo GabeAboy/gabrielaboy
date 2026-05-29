@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Technical architecture · Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+  <style>
+    .longform { max-width: 820px; }
+    .longform h2.t-h2 { margin-top: 56px; margin-bottom: 12px; }
+    .longform h3 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 10px;
+    }
+    .longform h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 8px;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .longform p { line-height: 1.7; margin-bottom: 14px; }
+    .longform ul { margin: 0 0 16px 0; padding-left: 22px; line-height: 1.7; }
+    .longform ul li { margin-bottom: 6px; }
+    .longform ol { margin: 0 0 16px 0; padding-left: 22px; line-height: 1.7; }
+    .longform ol li { margin-bottom: 10px; }
+    .longform code, .longform .mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88em;
+      background: var(--surface-elevated);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    .longform pre {
+      background: var(--surface-elevated);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 8px;
+      padding: 18px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      overflow-x: auto;
+      margin: 18px 0 24px 0;
+    }
+    .longform pre code { background: transparent; padding: 0; font-size: inherit; }
+    .longform hr { border: 0; border-top: 1px solid var(--rule-hairline); margin: 56px 0; }
+    .longform table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px 0;
+      font-size: 0.9rem;
+    }
+    .longform table th,
+    .longform table td {
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--rule-hairline);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+    .longform table th {
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .longform blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 4px 0 4px 18px;
+      margin: 18px 0;
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--text-primary);
+    }
+    .tier-pill {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--surface-elevated);
+      color: var(--text-secondary);
+      margin-right: 8px;
+    }
+    .toc {
+      background: var(--surface-elevated);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 24px 0 40px 0;
+    }
+    .toc-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+    .toc ol {
+      margin: 0;
+      padding-left: 22px;
+      line-height: 1.9;
+    }
+    .toc a { color: var(--text-primary); text-decoration: none; border-bottom: 1px solid transparent; }
+    .toc a:hover { border-bottom-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link" href="./palette.html">Palette</a></li>
+        <li><a class="nav-link is-active" href="./architecture.html">Architecture</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro-hero">
+      <div class="t-micro eyebrow">Technical reference · Round 0</div>
+      <h1 class="t-display">Architecture</h1>
+      <p>How everything fits together, cloud, network, services, data. A guide to the boring decisions and the seams between them. Written so a new engineer can read once and know where to look the next time something breaks.</p>
+    </section>
+
+    <section class="intro-section">
+      <div class="longform">
+
+        <div class="toc">
+          <div class="toc-title">Contents</div>
+          <ol>
+            <li><a href="#shape">The shape of it</a></li>
+            <li><a href="#cloud">AWS &amp; cloud topology</a></li>
+            <li><a href="#network">Network &amp; security</a></li>
+            <li><a href="#data">Data plane &amp; storage</a></li>
+            <li><a href="#services">Application services</a></li>
+            <li><a href="#frontend">Frontend &amp; extension</a></li>
+            <li><a href="#third-party">Third-party services</a></li>
+            <li><a href="#deploy">Build, deploy &amp; release</a></li>
+            <li><a href="#auth">Identity, auth &amp; tiers</a></li>
+            <li><a href="#observability">Observability &amp; operations</a></li>
+            <li><a href="#scaling">Scaling path</a></li>
+            <li><a href="#principles">Principles</a></li>
+          </ol>
+        </div>
+
+        <h2 id="shape" class="t-h2">1. The shape of it</h2>
+        <p>GitApplied is a job-search atelier: a kanban board for job postings, an LLM-assisted scrape-and-tailor pipeline, a document library, and a Chrome extension that captures jobs while the user browses. The system is a single AWS account in <code>us-east-1</code> with two EC2 instances, a Postgres database, an S3 bucket, and a small set of managed services for email, billing, and DNS. Everything else is application code.</p>
+
+<pre><code>                          ┌─────────────────────────────────────────┐
+                          │            User · browser · ext          │
+                          └────────────────┬────────────────────────┘
+                                           │ HTTPS
+                                           ▼
+                                  Route 53  ──►  app.githired.com
+                                           │
+                                           ▼
+                        ┌──────────────────────────────────────────┐
+                        │   ALB · TLS 1.3 · ACM cert · 2 AZs       │
+                        │   /api/* → API target group              │
+                        │   default → Web target group             │
+                        └────────┬─────────────────────┬───────────┘
+                                 │                     │
+                          private subnet         private subnet
+                                 ▼                     ▼
+                         ┌──────────────┐      ┌──────────────┐
+                         │   Web EC2    │      │   API EC2    │
+                         │   nginx +    │      │   Go + Gin   │
+                         │   React SPA  │      │   chromedp   │
+                         └──────────────┘      └──────┬───────┘
+                                                      │
+                  ┌───────────────┬───────────────────┼──────────────┐
+                  ▼               ▼                   ▼              ▼
+           Secrets Manager   RDS Postgres        S3 bucket       SES v2
+           (DB + app JSON)   16.4 · gp3          documents/      transactional
+                             single-AZ           prefix only     email
+                                                      │
+                                                      ▼
+                                            ┌─────────────────┐
+                                            │   OpenAI API    │
+                                            │   Stripe API    │
+                                            └─────────────────┘
+</code></pre>
+
+        <p>Region <code>us-east-1</code>, VPC <code>10.0.0.0/16</code> over <code>us-east-1a</code> and <code>us-east-1b</code>, three-tier subnet layout (public / app / db). All compute lives in private subnets with no public IPs; outbound internet goes through a single NAT gateway.</p>
+
+        <hr />
+
+        <h2 id="cloud" class="t-h2">2. AWS &amp; cloud topology</h2>
+        <p>Everything in production is provisioned with Terraform under <code>infra/terraform/</code>. The list below is everything AWS knows about us, grouped by purpose.</p>
+
+        <h3>Compute</h3>
+        <table>
+          <thead>
+            <tr><th>Service</th><th>Role</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>EC2 · web</strong></td><td>nginx + React SPA</td><td><code>t4g.small</code>, arm64 AL2023, gp3 20GB encrypted, IMDSv2 required. Runs the built React bundle via <code>docker compose</code>.</td></tr>
+            <tr><td><strong>EC2 · api</strong></td><td>Go API server</td><td><code>t4g.small</code>, arm64 AL2023. Runs the API container plus an embedded headless Chromium for scraping JS-heavy job postings.</td></tr>
+            <tr><td><strong>ALB</strong></td><td>Public edge</td><td>2-AZ ALB. TLS 1.3 termination via ACM cert. Path-based routing: <code>/api/*</code> → API TG, default → Web TG. <code>drop_invalid_header_fields</code> on.</td></tr>
+            <tr><td><strong>NAT Gateway</strong></td><td>Egress for private subnets</td><td>Single NAT (one AZ). Outbound is just container pulls and outbound HTTPS, so a single SPOF is acceptable today.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Data &amp; storage</h3>
+        <table>
+          <thead>
+            <tr><th>Service</th><th>Role</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>RDS Postgres 16</strong></td><td>Primary datastore</td><td><code>db.t4g.micro</code>, gp3 20GB autoscaling to 100GB, single-AZ, encrypted, 7-day backups, deletion protection on. Schema migrations live in <code>internal/database/migrations</code> and run on API boot.</td></tr>
+            <tr><td><strong>S3 · documents bucket</strong></td><td>User documents</td><td>All resumes and cover letters are stored under the <code>documents/</code> prefix. IAM policy on the EC2 role restricts <code>ListBucket</code> to that prefix only. Reads are served via short-lived pre-signed URLs.</td></tr>
+            <tr><td><strong>S3 · docs bucket</strong></td><td>Public docs site</td><td>Created out-of-band in the console (see <em>Out-of-band AWS</em> below).</td></tr>
+            <tr><td><strong>ECR · api / web</strong></td><td>Image registry</td><td>Two repos, scan-on-push, lifecycle policy keeps the last 20 images.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Identity &amp; secrets</h3>
+        <table>
+          <thead>
+            <tr><th>Service</th><th>Role</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Secrets Manager · db</strong></td><td>Postgres credentials</td><td>JSON blob with <code>username</code>, <code>password</code>, <code>host</code>, <code>port</code>, <code>dbname</code>, and a pre-rendered <code>url</code>. Password generated by Terraform <code>random_password</code>.</td></tr>
+            <tr><td><strong>Secrets Manager · app</strong></td><td>Non-DB secrets</td><td>JWT signing key, OpenAI key, S3 bucket name, all six Stripe variables. The API renders <code>.env</code> from this blob on every boot, a rotation is a reboot, not a redeploy.</td></tr>
+            <tr><td><strong>IAM · ec2 role</strong></td><td>Instance role</td><td>Reads the two specific secret ARNs, pulls from ECR (<code>AmazonEC2ContainerRegistryReadOnly</code>), and gets <code>PutObject</code>/<code>GetObject</code>/<code>DeleteObject</code> scoped to <code>documents/*</code>. SSM Managed Instance Core attached for shell-in-without-keys.</td></tr>
+            <tr><td><strong>IAM · GitAppliedDeploy</strong></td><td>CI deploy role</td><td>OIDC trust to GitHub Actions. Used to push images to ECR and restart EC2. Created in the console; not in Terraform.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>DNS, TLS, edge</h3>
+        <table>
+          <thead>
+            <tr><th>Service</th><th>Role</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Route 53</strong></td><td>Authoritative DNS</td><td>Apex, <code>www.</code>, and <code>app.</code> records are A-aliases to the ALB. Cert validation records also live here.</td></tr>
+            <tr><td><strong>ACM</strong></td><td>TLS certificate</td><td>SAN covering apex + <code>www</code> + <code>app</code>. DNS-validated. Attached to the HTTPS listener with TLS 1.3 policy.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Messaging</h3>
+        <table>
+          <thead>
+            <tr><th>Service</th><th>Role</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>SES v2</strong></td><td>Transactional email</td><td>Password reset, welcome, email verification. SDK call from <code>internal/email/mailer.go</code>. Falls back to a stdout logger in dev when <code>EMAIL_FROM_ADDRESS</code> is empty.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Out-of-band AWS (not in Terraform)</h3>
+        <ul>
+          <li><strong>S3 docs bucket</strong> for the marketing/docs site.</li>
+          <li><strong>GitAppliedDeploy OIDC role</strong> used by GitHub Actions.</li>
+          <li><strong>gh-api IAM user</strong> for any non-OIDC automation.</li>
+          <li><strong>SSH keypairs</strong> used for break-glass instance access.</li>
+        </ul>
+        <p>These were created in the console because they predate the Terraform layout or because rotating them via Terraform would be more risk than benefit. If you create new infrastructure, default to Terraform.</p>
+
+        <hr />
+
+        <h2 id="network" class="t-h2">3. Network &amp; security</h2>
+
+        <h3>VPC layout</h3>
+        <p>VPC CIDR <code>10.0.0.0/16</code>, three subnet tiers spread across <code>us-east-1a</code> and <code>us-east-1b</code>:</p>
+        <ul>
+          <li><strong>Public</strong>, ALB and the NAT gateway live here. Inbound from the internet on 80/443 only.</li>
+          <li><strong>App (private)</strong>, the web and API EC2 instances. No public IPs. Outbound goes through the NAT.</li>
+          <li><strong>Database (private)</strong>, RDS subnet group only. No route to the internet.</li>
+        </ul>
+
+        <h3>Security-group chain</h3>
+        <p>Four security groups, chained by reference rather than by IP so the rules survive any IP change.</p>
+<pre><code>internet ──► alb-sg :443,:80
+                  │
+                  ▼  (referenced by SG, not CIDR)
+              web-sg :80          api-sg :8080
+                                       │
+                                       ▼  (referenced by SG)
+                                  rds-sg :5432
+</code></pre>
+        <p>The web and API SGs accept ingress only from the ALB SG. The RDS SG accepts ingress only from the API SG. The ALB SG is the only thing open to the internet. Adding a worker tomorrow is one SG ingress rule.</p>
+
+        <h3>Hardening defaults</h3>
+        <ul>
+          <li><strong>IMDSv2 required</strong> on both EC2 instances.</li>
+          <li><strong>EBS volumes encrypted</strong> by default.</li>
+          <li><strong>RDS storage encrypted</strong>, deletion protection on, 7-day backups, final snapshot.</li>
+          <li><strong>ALB <code>drop_invalid_header_fields</code></strong> enabled.</li>
+          <li><strong>TLS policy</strong> <code>ELBSecurityPolicy-TLS13-1-2-2021-06</code>.</li>
+          <li><strong>S3 IAM scoping</strong> to the <code>documents/*</code> prefix, the role cannot enumerate anything else.</li>
+        </ul>
+
+        <h3>Application-level guards</h3>
+        <ul>
+          <li><strong>CORS</strong> reflects either the configured <code>APP_URL</code> or any <code>chrome-extension://</code> origin; credentials are allowed and the allow-origin is set per-request (no wildcard).</li>
+          <li><strong>Three rate-limiter buckets</strong> (token-bucket, in-process): an auth limiter keyed by IP, a per-user API limiter, and a tighter AI limiter shared across <code>/extract</code>, <code>/tailor</code>, application-question generation, and skill-match endpoints.</li>
+          <li><strong>JWT cookies</strong> for the SPA, Bearer API tokens for the Chrome extension. The bearer token is hashed at rest and <code>last_used_at</code> is best-effort-touched.</li>
+          <li><strong>Per-job ownership middleware</strong> wraps every <code>/jobs/:id/...</code> route so child handlers can trust the path param.</li>
+          <li><strong>Feature-tier middleware</strong> gates Base-only endpoints (job posting breakdown, skill match, document editor, interview prep) and Premium-only endpoints (resume tailor, cover letter, application answers).</li>
+          <li><strong>Stripe webhook</strong> is mounted outside the v1 group; the Stripe signature is the authentication.</li>
+        </ul>
+
+        <hr />
+
+        <h2 id="data" class="t-h2">4. Data plane &amp; storage</h2>
+
+        <h3>Postgres</h3>
+        <p>One Postgres 16 database under the <code>githired</code> schema. Migrations are versioned SQL files embedded into the binary at build time and run on API boot via <code>golang-migrate</code>. The current series ends at migration 35; the latest migrations cover job submissions, user preferences, resume profile snapshots, requirement matches, cover-letter drafts, and per-column timestamps.</p>
+        <p>Repositories live in <code>internal/database/</code>, one file per aggregate. Notable entities:</p>
+        <ul>
+          <li><strong>Users</strong>, auth, profile, tier, trial window, preferences, Stripe customer ID.</li>
+          <li><strong>Jobs</strong>, the kanban card. Has scraping status, autofill-ready flag, outcome, normalized URL, and a per-job example cover letter.</li>
+          <li><strong>Job-scoped children</strong>, contacts, interview rounds, prep notes, job notes (with pinning and threaded comments), application questions, generated documents (multi-version resumes + cover letters), job posting highlights, requirement matches, cover-letter drafts, submissions.</li>
+          <li><strong>Documents</strong>, user&rsquo;s uploaded resumes and cover letters; the actual bytes live in S3.</li>
+          <li><strong>Resume profile</strong>, structured snapshot of a parsed resume (experiences, accomplishments, education). There is a base profile per user and a per-job snapshot under <code>job_resume_profiles</code>.</li>
+          <li><strong>Auth</strong> tables, password reset tokens, email verification tokens, API tokens (hashed), Stripe billing fields.</li>
+        </ul>
+
+        <h3>S3 documents</h3>
+        <p>Every uploaded resume / cover letter and every generated export is keyed under <code>documents/&lt;user&gt;/&lt;doc&gt;</code>. The API serves bytes by issuing a short-lived pre-signed GET URL; the browser fetches the file directly. The same wrapper supports <code>PutObject</code>, <code>CopyObject</code>, and <code>DeleteObject</code>, and falls back to the EC2 instance-role credential chain when static keys are not configured.</p>
+
+        <h3>Secrets &amp; configuration</h3>
+        <p>The API reads its full configuration from environment variables (<code>pkg/config</code>). In dev, a <code>.env</code> file is loaded from one of several relative paths; in prod, the EC2 user-data script reads the two Secrets Manager blobs and writes <code>/opt/gitapplied/.env</code> before <code>docker compose up</code>.</p>
+
+        <hr />
+
+        <h2 id="services" class="t-h2">5. Application services</h2>
+
+        <p>The Go API is a single binary (<code>cmd/server</code>) using <a href="https://github.com/gin-gonic/gin" target="_blank" rel="noopener">Gin</a> as the HTTP layer. There is no microservice split today; instead, the binary is composed of a handful of cohesive packages under <code>internal/</code>.</p>
+
+        <table>
+          <thead>
+            <tr><th>Package</th><th>Responsibility</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>internal/auth</code></td><td>Tier &amp; feature catalog. <code>EffectiveTier</code> resolves a stored tier + trial window into the tier the user should be treated as at request time. Mirrored in <code>web/src/auth/features.ts</code>.</td></tr>
+            <tr><td><code>internal/middleware</code></td><td>JWT/Bearer auth, per-IP and per-user rate limiters, feature-gate, job-ownership.</td></tr>
+            <tr><td><code>internal/handlers</code></td><td>HTTP handlers, one file per resource. The router in <code>cmd/server/server.go</code> wires them all up.</td></tr>
+            <tr><td><code>internal/database</code></td><td>SQL repositories, the embedded migration source, and the <code>CardDataLoader</code> that fans out per-job sub-reads.</td></tr>
+            <tr><td><code>internal/services</code></td><td>S3 wrapper and the LLM-backed services (skill match, tailor, resume text extraction).</td></tr>
+            <tr><td><code>internal/extractor</code></td><td>The scrape-and-parse pipeline. A site-specific scraper handles Greenhouse / Lever / Ashby / LinkedIn / Indeed / Workday; <code>chromedp</code> renders JS-heavy pages; the LLM enrichment step uses an OpenAI model to fill in skills, responsibilities, benefits, company, salary, etc.</td></tr>
+            <tr><td><code>internal/billing</code></td><td>Stripe SDK wrapper. Treats Stripe as the source of truth for subscription state; the app stores Stripe IDs and reacts to webhook events.</td></tr>
+            <tr><td><code>internal/email</code></td><td>SES v2 mailer for transactional email, with a stdout fallback in dev. Disposable-domain blocklist lives next to it.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>The hot paths</h3>
+        <ol>
+          <li><strong><code>POST /api/v1/extract</code></strong>, scrape a URL or parse pasted text, run the LLM enrichment, return a structured job. Rate-limited per user against the shared AI bucket.</li>
+          <li><strong><code>POST /api/v1/jobs/from-extension</code></strong>, the Chrome extension posts the active tab&rsquo;s URL and HTML; the API reuses the LLM enrichment without re-scraping and creates a pending job card.</li>
+          <li><strong><code>POST /api/v1/tailor</code></strong>, Premium-gated. Tailors a resume against a job. Uses OpenAI.</li>
+          <li><strong><code>POST /api/v1/jobs/:id/auto-skill-match</code></strong>, Base-gated. Matches the user&rsquo;s resume bullets to the job posting&rsquo;s requirements.</li>
+          <li><strong><code>POST /api/v1/jobs/:id/questions/generate</code> + <code>/polish</code></strong>, Premium-gated. Drafts and polishes free-form application answers.</li>
+          <li><strong><code>POST /api/v1/billing/checkout</code> / <code>/portal</code></strong>, redirect to Stripe-hosted Checkout and Customer Portal. We never see the card.</li>
+          <li><strong><code>POST /api/v1/billing/webhook</code></strong>, Stripe webhook receiver. Mounted outside the auth-required group; signature is the auth.</li>
+        </ol>
+
+        <hr />
+
+        <h2 id="frontend" class="t-h2">6. Frontend &amp; extension</h2>
+
+        <h3>Web app</h3>
+        <p>React 19 + TypeScript SPA under <code>web/src/</code>, built with <code>react-scripts</code> and a Tailwind CSS layer compiled separately. State management uses <a href="https://github.com/pmndrs/zustand" target="_blank" rel="noopener">Zustand</a> stores for auth, board sort, board data, bullet selection, and theme. The rich-text experience uses <a href="https://tiptap.dev/" target="_blank" rel="noopener">Tiptap</a>; drag-and-drop on the kanban uses <a href="https://dndkit.com/" target="_blank" rel="noopener">dnd-kit</a>; resume rendering uses <code>docx-preview</code>, <code>mammoth</code> for parsing, and <code>html2pdf.js</code> for export.</p>
+        <p>The SPA ships as an nginx container with a single <code>try_files $uri $uri/ /index.html</code> rewrite for client-side routing. Hashed static assets are cached one year, immutable.</p>
+
+        <h3>Chrome extension</h3>
+        <p>Manifest V3, built with Vite + CRXJS under <code>extension/</code>. Three execution contexts:</p>
+        <ul>
+          <li><strong>Popup</strong>, user-facing UI for &ldquo;save this job posting&rdquo; and account status.</li>
+          <li><strong>Background service worker</strong>, calls the API with the Bearer token and proxies messages from content scripts.</li>
+          <li><strong>Content scripts</strong>, injected on the supported job boards (Greenhouse, Lever, Ashby, LinkedIn, Indeed, Workday). They grab <code>document.outerHTML</code> on demand so the API can parse pages it cannot reach from outside.</li>
+        </ul>
+        <p>The extension authenticates via a one-time token issued from Settings &rarr; Connections. The public half of the signing key is pinned in <code>manifest.config.ts</code> so the extension ID is deterministic across dev, CI, and the Chrome Web Store.</p>
+
+        <h3>Mocks</h3>
+        <p>This document, and everything else under <code>web/mocks/</code>, is a static HTML mock that shares a self-contained design-token CSS file (<code>mocks.css</code>) with no React, no build step, and no shared component library. The mocks ship the design system; the production SPA is migrating onto the same tokens.</p>
+
+        <hr />
+
+        <h2 id="third-party" class="t-h2">7. Third-party services</h2>
+        <table>
+          <thead>
+            <tr><th>Service</th><th>Use</th><th>How it&rsquo;s wired</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>OpenAI</strong></td><td>LLM enrichment, resume tailor, cover-letter drafting, skill match, application-answer drafting and polish</td><td><code>OPENAI_API_KEY</code> in Secrets Manager. Direct HTTPS calls from the API container. Costs are bounded by the AI rate-limiter bucket (per-user) on the server.</td></tr>
+            <tr><td><strong>Stripe</strong></td><td>Subscription billing for Base and Premium tiers, monthly and yearly</td><td>Six secrets in Secrets Manager: the secret key, the webhook secret, and four price IDs. Checkout and Customer Portal sessions are server-created; the app never touches a card. Tier state is driven by webhooks.</td></tr>
+            <tr><td><strong>SES v2</strong></td><td>Password reset, welcome, email verification</td><td>SDK call from the API. AWS region inherited from <code>AWS_REGION</code>. Falls back to a stdout logger in dev.</td></tr>
+            <tr><td><strong>Google Fonts</strong></td><td>Inter, Source Serif 4, JetBrains Mono</td><td>Linked from every HTML entry-point with <code>preconnect</code>.</td></tr>
+            <tr><td><strong>Lucide icons</strong></td><td>Iconography in mocks and the SPA</td><td>UMD bundle in mocks; <code>lucide-react</code> in the SPA.</td></tr>
+            <tr><td><strong>GitHub Actions</strong></td><td>CI &amp; deploy</td><td>Authenticates to AWS via the <code>GitAppliedDeploy</code> OIDC role. Builds two images, pushes to ECR, restarts EC2.</td></tr>
+            <tr><td><strong>Chrome Web Store</strong></td><td>Extension distribution</td><td>Manifest V3 zip, deterministic extension ID via pinned public key.</td></tr>
+          </tbody>
+        </table>
+
+        <hr />
+
+        <h2 id="deploy" class="t-h2">8. Build, deploy &amp; release</h2>
+
+        <h3>Images</h3>
+        <p>Two Dockerfiles, one per service:</p>
+        <ul>
+          <li><code>Dockerfile</code> (API), multi-stage Go build (Go 1.26-alpine) producing a static binary, packaged on a <code>debian:13-slim</code> runtime that ships <code>chromium</code>, <code>ca-certificates</code>, fonts, and <code>tini</code>. <code>tini</code> is non-optional: <code>chromedp</code> spawns chromium subprocesses that would otherwise pile up as zombies under the Go server.</li>
+          <li><code>web/Dockerfile</code>, multi-stage Node 25 build producing a static React bundle, served by <code>nginx:1.29-alpine</code> with the SPA-fallback rewrite.</li>
+        </ul>
+
+        <h3>Deploy flow</h3>
+        <ol>
+          <li>A push to <code>develop</code> triggers a CI build via the GitAppliedDeploy OIDC role.</li>
+          <li>Both images are built for <code>linux/arm64</code> (matching <code>t4g.*</code>) and pushed to their ECR repos. ECR scan-on-push runs.</li>
+          <li>The <code>/deploy</code> workflow opens a release branch (<code>release-YYYYMMDD-&lt;sha&gt;</code>) and an associated PR from <code>develop</code> into <code>main</code>; merging that PR is the production cutover.</li>
+          <li>EC2 instances are restarted, or their user-data is re-executed via <code>user_data_replace_on_change</code>, which pulls the new image and writes a fresh <code>.env</code> from Secrets Manager.</li>
+        </ol>
+
+        <h3>Schema migrations</h3>
+        <p>SQL files in <code>internal/database/migrations</code> are embedded into the API binary at build time. On startup, the API runs <code>migrate up</code> against the <code>githired</code> schema. There is no separate migration job; deploying the new API <em>is</em> the migration.</p>
+
+        <hr />
+
+        <h2 id="auth" class="t-h2">9. Identity, auth &amp; tiers</h2>
+
+        <h3>Two credential paths</h3>
+        <ul>
+          <li><strong>JWT cookie</strong>, signed with the JWT secret from Secrets Manager, issued at login. Secure flag in production. Used by the SPA.</li>
+          <li><strong>Bearer API token</strong>, user-issued from Settings &rarr; Connections, stored hashed (<code>HashAPIToken</code>) in <code>api_tokens</code>. Used by the Chrome extension. <code>last_used_at</code> is touched asynchronously on every request.</li>
+        </ul>
+
+        <h3>Tiers</h3>
+        <p>Three tiers: <span class="tier-pill">Free</span> <span class="tier-pill">Base</span> <span class="tier-pill">Premium</span>. Tier is stored on the user row; trial state is a <code>trial_ends_at</code> timestamp. The effective tier is computed per request:</p>
+        <ul>
+          <li>Free + active trial &rarr; treated as Premium until expiry.</li>
+          <li>Base &rarr; Base. Premium &rarr; Premium. Free + no trial &rarr; Free.</li>
+        </ul>
+        <p>Features map to a minimum tier in <code>internal/auth/features.go</code>. The <code>RequireFeature</code> middleware looks up the effective tier and returns 402 if the gate fails. The list is mirrored in <code>web/src/auth/features.ts</code> so the UI can disable controls before the request goes out.</p>
+
+        <h3>Email verification &amp; password reset</h3>
+        <p>Both flows use a single-use token persisted in Postgres with an expiry; the token is sent by SES with a deep link into the SPA, where the user posts back to <code>/api/v1/auth/verify-email</code> or <code>/api/v1/auth/reset-password</code>.</p>
+
+        <hr />
+
+        <h2 id="observability" class="t-h2">10. Observability &amp; operations</h2>
+        <p>Honest answer: minimal. The app relies on the free CloudWatch metrics AWS already publishes for ALB, EC2, and RDS, plus <code>gin</code>&rsquo;s default request logging. There are no CloudWatch alarms in Terraform yet. That&rsquo;s appropriate for &ldquo;no users yet&rdquo; and inappropriate the moment that changes.</p>
+        <p>The planned monitoring increments, in order:</p>
+        <ol>
+          <li><strong>ALB access logs to S3</strong>, turn on before opening signups. Unlocks every retroactive &ldquo;was something weird happening at 02:14?&rdquo; question.</li>
+          <li><strong>~10 CloudWatch alarms wired to SNS &rarr; email</strong>, ALB 5xx rate, ALB unhealthy host count, RDS free storage, RDS CPU, EC2 status check fails.</li>
+          <li><strong>Application metrics</strong>, per-route request duration, DB query time, error rates. CloudWatch Embedded Metric Format from the Go binary, no agent.</li>
+          <li><strong>External synthetic check</strong> on <code>/health</code> every minute from outside the region, paging on two consecutive failures.</li>
+        </ol>
+
+        <h3>Break-glass access</h3>
+        <p>SSM Managed Instance Core is attached to the EC2 role, so <code>aws ssm start-session</code> works without SSH keys for routine debugging. SSH keypairs created in the console exist as a fallback.</p>
+
+        <hr />
+
+        <h2 id="scaling" class="t-h2">11. Scaling path</h2>
+
+        <p>Up to the first thousand active users, we scale <strong>vertically</strong>: bump <code>instance_type</code> and <code>db_instance_class</code>. These are one-line changes in <code>terraform.tfvars</code> plus a brief restart.</p>
+
+        <p>After that, the order is:</p>
+        <ol>
+          <li><strong>ASG at web/API tier</strong>, replace the single <code>aws_instance.{web,api}</code> with launch templates + autoscaling groups. Target groups already exist; the wiring change is small. Trigger: sustained target response time p95 &gt; 500ms for 15 min, or CPU &gt; 70%.</li>
+          <li><strong>Multi-AZ RDS</strong>, flip <code>multi_az = true</code>. Cost roughly doubles. Trigger: first paying customers, or the first scheduled maintenance we can&rsquo;t take an outage for.</li>
+          <li><strong>Second NAT gateway</strong>, one per AZ. Trigger: we lose a deploy because one AZ had a NAT outage.</li>
+          <li><strong>CloudFront in front of the ALB</strong>, reuse the ACM cert, cache static asset paths, leave <code>/api/*</code> pass-through. Trigger: regular non-US latency &gt; 200ms p95, or ALB egress starts to dominate.</li>
+          <li><strong>AWS WAF managed rules</strong>, <code>Common</code>, <code>KnownBadInputs</code>, <code>SQLi</code>. Trigger: first credential-stuffing pattern in ALB access logs.</li>
+          <li><strong>In-API LRU &rarr; read replica &rarr; ElastiCache</strong>, in that order, only if the DB is the bottleneck. Trigger: RDS CPU &gt; 60% sustained, or specific endpoints have DB time dominating their p95.</li>
+          <li><strong>ECS on Fargate</strong>, the moment we&rsquo;re running more than ~4 services, or rolling-back is costing real human time. We skip EKS unless there&rsquo;s a concrete platform feature we need from it.</li>
+          <li><strong>Distributed rate limiter</strong>, today the token-bucket limiters are in-process; switch to Redis the moment we run more than one API replica.</li>
+        </ol>
+
+        <hr />
+
+        <h2 id="principles" class="t-h2">12. Principles</h2>
+
+        <p>The choices above are downstream of a small set of principles. Naming them keeps future decisions consistent.</p>
+
+        <blockquote>The cost of an architecture isn&rsquo;t its AWS bill, it&rsquo;s the surface area you have to keep in your head.</blockquote>
+
+        <ul>
+          <li><strong>Boring beats clever.</strong> EC2 + Docker over ECS until we feel the pain. SES over a third-party email vendor. Postgres over a managed search index. Each &ldquo;we should also&hellip;&rdquo; gets a counter-question: what signal am I waiting for that says this is now worth the cost?</li>
+          <li><strong>Stripe is the source of truth for billing.</strong> The app stores Stripe IDs and reacts to webhook events; it does not mutate subscription tier directly. The card never touches our servers.</li>
+          <li><strong>One Go binary, many handlers.</strong> A microservice split is justified by independent scaling or independent ownership. We have neither, so we don&rsquo;t pay for either.</li>
+          <li><strong>Security groups by reference, not by IP.</strong> If we add a worker, it joins the right SG and the rules just work.</li>
+          <li><strong>Rotation is a reboot.</strong> User-data renders <code>.env</code> from Secrets Manager on every boot, so a credential rotation never requires a redeploy.</li>
+          <li><strong>Mock UI first.</strong> Every user-facing change starts as a static mock in <code>web/mocks/</code> on fixture data, then earns its schema and API.</li>
+          <li><strong>Write the trigger down.</strong> Every &ldquo;we deliberately didn&rsquo;t build X&rdquo; is paired with the signal that will change our minds. Otherwise &ldquo;not yet&rdquo; quietly becomes &ldquo;never.&rdquo;</li>
+        </ul>
+
+        <div style="height: 96px;"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

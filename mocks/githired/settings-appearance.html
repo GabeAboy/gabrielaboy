@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings · Appearance, Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link is-active" href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="settings-shell">
+    <div class="settings-title-row">
+      <h1>Settings</h1>
+      <p class="subtitle">Your account, your materials, and the connections that keep your search moving.</p>
+    </div>
+
+    <div class="settings-layout">
+      <nav class="settings-nav">
+        <a class="settings-nav-link" href="./settings.html"><i data-lucide="user-circle"></i> Profile</a>
+        <a class="settings-nav-link" href="./settings-network.html"><i data-lucide="users"></i> Network</a>
+        <a class="settings-nav-link" href="./settings-documents.html"><i data-lucide="files"></i> Documents</a>
+        <a class="settings-nav-link" href="./settings-plan.html"><i data-lucide="sparkles"></i> Plan &amp; billing</a>
+        <a class="settings-nav-link" href="./settings-connections.html"><i data-lucide="plug-2"></i> Connections</a>
+        <a class="settings-nav-link is-active" href="./settings-appearance.html"><i data-lucide="palette"></i> Appearance</a>
+        <a class="settings-nav-link" href="./settings-account.html"><i data-lucide="shield"></i> Account</a>
+        <a class="settings-nav-link" href="./settings-data.html"><i data-lucide="database"></i> Data</a>
+      </nav>
+
+      <div>
+        <section class="settings-section">
+          <div class="settings-section-header">
+            <h2>Appearance</h2>
+            <p class="desc">Pick the one that fits the room you're working in.</p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-label">
+              Theme
+              <div class="desc">"Match system" follows your OS dark-mode setting.</div>
+            </div>
+            <div class="form-row-control" style="width: 100%;">
+              <div class="theme-picker" style="width: 100%;">
+                <button class="theme-option is-selected" data-theme-toggle type="button">
+                  <div class="theme-option-swatch light"></div>
+                  <div class="theme-option-name">Light</div>
+                  <div class="theme-option-desc">Letterpress on cream</div>
+                </button>
+                <button class="theme-option" data-theme-toggle type="button">
+                  <div class="theme-option-swatch dark"></div>
+                  <div class="theme-option-name">Dark</div>
+                  <div class="theme-option-desc">Library at night</div>
+                </button>
+                <button class="theme-option" type="button">
+                  <div class="theme-option-swatch auto"></div>
+                  <div class="theme-option-name">Match system</div>
+                  <div class="theme-option-desc">Follow OS preference</div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-label">
+              Reduce motion
+              <div class="desc">Skip the streaming-cursor animation and drag-overlay tilt.</div>
+            </div>
+            <div class="form-row-control">
+              <button class="toggle" aria-label="Reduce motion"></button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-row-label">
+              Density
+              <div class="desc">Comfortable adds breathing room around cards and forms.</div>
+            </div>
+            <div class="form-row-control">
+              <div class="segmented" style="border-radius: 8px;">
+                <button class="segmented-item is-active" type="button">Comfortable</button>
+                <button class="segmented-item" type="button">Compact</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

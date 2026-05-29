@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Email confirmed · GitApplied</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+  <style>
+    /* ─── Auth shell (matches login/signup) ────────────────────────── */
+    .auth-shell {
+      min-height: calc(100vh - 64px);
+      display: grid;
+      place-items: center;
+      padding: 64px 24px;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 460px;
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 16px;
+      box-shadow: var(--shadow-2);
+      padding: 44px 36px 36px;
+      text-align: center;
+    }
+    .auth-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .auth-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.875rem;
+      font-weight: 500;
+      line-height: 1.18;
+      letter-spacing: -0.012em;
+      color: var(--text-primary);
+      margin: 0 0 10px;
+    }
+    .auth-title .accent { color: var(--accent); font-style: italic; }
+    .auth-sub {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      margin: 0 0 28px;
+    }
+
+    /* ─── Status badge ─────────────────────────────────────────────── */
+    .status-badge {
+      width: 72px;
+      height: 72px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 22px;
+      position: relative;
+    }
+    .status-badge [data-lucide] {
+      width: 32px;
+      height: 32px;
+      stroke-width: 1.6;
+    }
+    .status-badge--success {
+      background: color-mix(in srgb, var(--positive) 14%, transparent);
+      color: var(--positive);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--positive) 28%, transparent);
+    }
+    .status-badge--error {
+      background: color-mix(in srgb, var(--negative) 12%, transparent);
+      color: var(--negative);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--negative) 30%, transparent);
+    }
+    .status-badge--neutral {
+      background: var(--surface-elevated);
+      color: var(--text-secondary);
+      box-shadow: inset 0 0 0 1px var(--rule-hairline);
+    }
+
+    /* ─── Spinner (verifying state) ────────────────────────────────── */
+    .status-spinner {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 2.5px solid color-mix(in srgb, var(--text-muted) 25%, transparent);
+      border-top-color: var(--accent);
+      animation: spin 720ms linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── Inline notice card (success confirmation strip) ──────────── */
+    .auth-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      text-align: left;
+      background: color-mix(in srgb, var(--positive) 8%, transparent);
+      border: 1px solid color-mix(in srgb, var(--positive) 25%, transparent);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 22px;
+    }
+    .auth-notice [data-lucide] {
+      width: 18px;
+      height: 18px;
+      color: var(--positive);
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+    .auth-notice-text {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+    .auth-notice-text strong { color: var(--text-primary); font-weight: 600; }
+
+    .auth-error {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      text-align: left;
+      background: color-mix(in srgb, var(--negative) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--negative) 35%, transparent);
+      color: var(--negative);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+    .auth-error [data-lucide] {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+
+    .auth-cta-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .auth-cta { width: 100%; }
+
+    .auth-trust {
+      margin-top: 22px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+    .auth-trust .dot { margin: 0 8px; opacity: 0.5; }
+
+    /* ─── State gallery (mock-only, shows variants side-by-side) ───── */
+    .state-gallery {
+      max-width: 1180px;
+      margin: 64px auto 96px;
+      padding: 0 24px;
+    }
+    .state-gallery-title {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .state-gallery-sub {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      max-width: 640px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 28px;
+    }
+    .state-frame {
+      background: var(--surface-base);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 18px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .state-frame-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .state-frame-label .num {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+    }
+    .state-frame .auth-card {
+      padding: 36px 28px 30px;
+      max-width: none;
+      box-shadow: var(--shadow-1);
+    }
+    .state-frame .auth-title { font-size: 1.5rem; }
+    .state-frame .status-badge { width: 60px; height: 60px; margin-bottom: 18px; }
+    .state-frame .status-badge [data-lucide] { width: 26px; height: 26px; }
+    .state-frame .status-spinner { width: 24px; height: 24px; border-width: 2px; }
+    .state-frame .auth-sub { margin-bottom: 22px; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./login.html">Sign in</a></li>
+        <li><a class="nav-link" href="./signup.html">Create account</a></li>
+        <li><a class="nav-link is-active" href="./email-confirmed.html">Verify email</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ────────────────────────────────────────────────────────────────
+       Primary state: success
+       The user landed here from a verification link in their inbox.
+       This is the state to optimize; everything else is a fallback.
+  ──────────────────────────────────────────────────────────────── -->
+  <main class="auth-shell">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <div class="status-badge status-badge--success" aria-hidden="true">
+        <i data-lucide="check"></i>
+      </div>
+
+      <div class="auth-eyebrow">Verification complete</div>
+      <h1 class="auth-title" id="auth-title">
+        Your email is <span class="accent">confirmed</span>.
+      </h1>
+      <p class="auth-sub">Thanks for confirming. Your account is fully set up and your 14-day Premium trial is running.</p>
+
+      <div class="auth-notice">
+        <i data-lucide="check-circle-2"></i>
+        <div class="auth-notice-text">
+          <strong>jane@example.com</strong> verified just now. We won&rsquo;t ask you to do this again.
+        </div>
+      </div>
+
+      <div class="auth-cta-stack">
+        <a class="btn btn--primary btn--lg auth-cta" href="./board.html">Continue to your board</a>
+        <a class="btn btn--ghost btn--sm" href="./settings.html">Open settings</a>
+      </div>
+
+      <div class="auth-trust">
+        Premium trial active<span class="dot">·</span>13 days remaining<span class="dot">·</span>No card on file
+      </div>
+    </section>
+  </main>
+
+  <!-- ────────────────────────────────────────────────────────────────
+       State gallery: every variant of this page in one view so we
+       can sign off on the design before porting to React.
+  ──────────────────────────────────────────────────────────────── -->
+  <section class="state-gallery">
+    <h2 class="t-h2 state-gallery-title">All states</h2>
+    <p class="state-gallery-sub">
+      The same surface, four conditions. Verifying is the brief pre-flight while we POST the token; success is the optimised landing; invalid covers expired or already-used links; missing covers the no-token-in-URL edge case.
+    </p>
+
+    <div class="state-grid">
+
+      <!-- 01 · Verifying ─────────────────────────────────────────── -->
+      <div class="state-frame">
+        <div class="state-frame-label"><span class="num">01</span><span>Verifying</span></div>
+        <div class="auth-card">
+          <div class="status-badge status-badge--neutral" aria-hidden="true">
+            <div class="status-spinner" role="status" aria-label="Verifying"></div>
+          </div>
+          <div class="auth-eyebrow">One moment</div>
+          <h2 class="auth-title">Confirming your email&hellip;</h2>
+          <p class="auth-sub">Hold on while we verify the link from your inbox.</p>
+        </div>
+      </div>
+
+      <!-- 02 · Success ───────────────────────────────────────────── -->
+      <div class="state-frame">
+        <div class="state-frame-label"><span class="num">02</span><span>Success</span></div>
+        <div class="auth-card">
+          <div class="status-badge status-badge--success" aria-hidden="true">
+            <i data-lucide="check"></i>
+          </div>
+          <div class="auth-eyebrow">Verification complete</div>
+          <h2 class="auth-title">Email <span class="accent">confirmed</span>.</h2>
+          <p class="auth-sub">You&rsquo;re fully set up. Pick up where you left off.</p>
+          <div class="auth-cta-stack">
+            <a class="btn btn--primary btn--lg auth-cta" href="./board.html">Continue to your board</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 · Invalid / expired ─────────────────────────────────── -->
+      <div class="state-frame">
+        <div class="state-frame-label"><span class="num">03</span><span>Invalid or expired</span></div>
+        <div class="auth-card">
+          <div class="status-badge status-badge--error" aria-hidden="true">
+            <i data-lucide="alert-triangle"></i>
+          </div>
+          <div class="auth-eyebrow">Link expired</div>
+          <h2 class="auth-title">This link no longer works.</h2>
+          <p class="auth-sub">Verification links expire after 24 hours or once they&rsquo;ve been used. Request a fresh one from the banner inside the app.</p>
+          <div class="auth-error">
+            <i data-lucide="x-circle"></i>
+            <div>This verification link is invalid or has expired.</div>
+          </div>
+          <div class="auth-cta-stack">
+            <a class="btn btn--primary btn--lg auth-cta" href="./login.html">Back to sign in</a>
+            <a class="btn btn--ghost btn--sm" href="./board.html">Resend from your account</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 · Missing token ─────────────────────────────────────── -->
+      <div class="state-frame">
+        <div class="state-frame-label"><span class="num">04</span><span>Missing token</span></div>
+        <div class="auth-card">
+          <div class="status-badge status-badge--error" aria-hidden="true">
+            <i data-lucide="link-2-off"></i>
+          </div>
+          <div class="auth-eyebrow">Incomplete link</div>
+          <h2 class="auth-title">That link is missing a token.</h2>
+          <p class="auth-sub">It looks like the URL got truncated somewhere along the way. You can request a new verification email from your account.</p>
+          <div class="auth-cta-stack">
+            <a class="btn btn--primary btn--lg auth-cta" href="./login.html">Back to sign in</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

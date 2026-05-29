@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Check your inbox · GitApplied</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+  <style>
+    /* ─── Auth shell (matches login / signup / email-confirmed / link-invalid) ── */
+    .auth-shell {
+      min-height: calc(100vh - 64px);
+      display: grid;
+      place-items: center;
+      padding: 64px 24px;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 480px;
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 16px;
+      box-shadow: var(--shadow-2);
+      padding: 44px 36px 36px;
+      text-align: center;
+    }
+    .auth-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .auth-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.875rem;
+      font-weight: 500;
+      line-height: 1.18;
+      letter-spacing: -0.012em;
+      color: var(--text-primary);
+      margin: 0 0 10px;
+    }
+    .auth-title .accent { color: var(--accent); font-style: italic; }
+    .auth-sub {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      margin: 0 0 24px;
+    }
+
+    /* ─── Status badge (shared with email-confirmed / link-invalid) ───── */
+    .status-badge {
+      width: 76px;
+      height: 76px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 22px;
+      position: relative;
+    }
+    .status-badge [data-lucide] {
+      width: 34px;
+      height: 34px;
+      stroke-width: 1.6;
+    }
+    .status-badge--accent {
+      background: var(--accent-soft);
+      color: var(--accent);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent);
+    }
+    /* Subtle pulse so the inbox icon reads as "active / waiting" rather
+       than "done." Half-second cycle, low amplitude, only on the ring. */
+    .status-badge--pulse::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+      animation: pulse 1800ms ease-out infinite;
+      pointer-events: none;
+    }
+    @keyframes pulse {
+      0%   { opacity: 0.8; transform: scale(0.96); }
+      70%  { opacity: 0;   transform: scale(1.10); }
+      100% { opacity: 0;   transform: scale(1.10); }
+    }
+
+    /* ─── Email-target strip, the "we sent it to <address>" callout ── */
+    .target-strip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+      background: var(--surface-elevated);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 22px;
+    }
+    .target-strip [data-lucide] {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+      flex: 0 0 auto;
+    }
+    .target-strip-text {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      line-height: 1.45;
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .target-strip-text strong { font-weight: 600; }
+
+    /* ─── Step list, "what happens next" ───────────────────────────── */
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+      counter-reset: step;
+    }
+    .step-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.875rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      counter-increment: step;
+    }
+    .step-list li::before {
+      content: counter(step);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      flex: 0 0 auto;
+      margin-top: 1px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+    .step-list strong { color: var(--text-primary); font-weight: 600; }
+
+    .auth-cta-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .auth-cta { width: 100%; }
+
+    .auth-foot {
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: 22px;
+      line-height: 1.6;
+    }
+    .auth-foot a, .auth-foot button {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+    }
+    .auth-foot a:hover, .auth-foot button:hover { text-decoration: underline; }
+
+    .resend-feedback {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8125rem;
+      color: var(--positive);
+      margin-top: 12px;
+    }
+    .resend-feedback [data-lucide] { width: 14px; height: 14px; }
+
+    /* ─── State gallery ─────────────────────────────────────────────── */
+    .state-gallery {
+      max-width: 1180px;
+      margin: 64px auto 96px;
+      padding: 0 24px;
+    }
+    .state-gallery-title { text-align: center; margin-bottom: 12px; }
+    .state-gallery-sub {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      max-width: 640px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 28px;
+    }
+    .state-frame {
+      background: var(--surface-base);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 18px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .state-frame-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .state-frame-label .num {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+    }
+    .state-frame .auth-card {
+      padding: 36px 28px 30px;
+      max-width: none;
+      box-shadow: var(--shadow-1);
+    }
+    .state-frame .auth-title { font-size: 1.4rem; }
+    .state-frame .status-badge { width: 60px; height: 60px; margin-bottom: 18px; }
+    .state-frame .status-badge [data-lucide] { width: 26px; height: 26px; }
+    .state-frame .auth-sub { margin-bottom: 18px; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./signup.html">Sign up</a></li>
+        <li><a class="nav-link is-active" href="./check-your-inbox.html">Check inbox</a></li>
+        <li><a class="nav-link" href="./email-confirmed.html">Email confirmed</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ────────────────────────────────────────────────────────────────
+       Primary surface: the moment right after signup. We send the
+       verify email automatically; this page tells the user where to
+       look next and gives them a single recovery action (resend) if
+       the email never arrives.
+  ──────────────────────────────────────────────────────────────── -->
+  <main class="auth-shell">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <div class="status-badge status-badge--accent status-badge--pulse" aria-hidden="true">
+        <i data-lucide="mail-check"></i>
+      </div>
+
+      <div class="auth-eyebrow">Almost there</div>
+      <h1 class="auth-title" id="auth-title">
+        Check your <span class="accent">inbox</span>.
+      </h1>
+      <p class="auth-sub">We sent you a link to finish setting up your account. Click it from any device and you&rsquo;ll be signed in here automatically.</p>
+
+      <div class="target-strip">
+        <i data-lucide="send"></i>
+        <div class="target-strip-text">Sent to <strong>jane@example.com</strong></div>
+      </div>
+
+      <ol class="step-list">
+        <li><span><strong>Open the email</strong> from GitApplied. It usually arrives in under a minute.</span></li>
+        <li><span><strong>Click &ldquo;Verify my email.&rdquo;</strong> The link expires after 24 hours.</span></li>
+        <li><span><strong>You&rsquo;re in.</strong> Your 14-day Premium trial starts the moment you verify.</span></li>
+      </ol>
+
+      <div class="auth-cta-stack">
+        <a class="btn btn--secondary btn--lg auth-cta" href="https://mail.google.com" target="_blank" rel="noopener">
+          <i data-lucide="external-link" style="margin-right: 8px;"></i>Open Gmail
+        </a>
+        <button class="btn btn--ghost btn--sm" type="button">Resend the email</button>
+      </div>
+
+      <div class="auth-foot">
+        Wrong address? <a href="./signup.html">Start over</a> &middot; Already verified? <a href="./login.html">Sign in</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ────────────────────────────────────────────────────────────────
+       State gallery: the small set of secondary states this page has
+       to handle without losing its calm.
+  ──────────────────────────────────────────────────────────────── -->
+  <section class="state-gallery">
+    <h2 class="t-h2 state-gallery-title">Secondary states</h2>
+    <p class="state-gallery-sub">
+      The hero is the screen 95% of users see. These three cover sending the resend, the success confirmation, and the rare delivery failure where we have to be honest that the email never went out.
+    </p>
+
+    <div class="state-grid">
+
+      <!-- 01 · Resend in progress ────────────────────────────────── -->
+      <div class="state-frame">
+        <div class="state-frame-label"><span class="num">01</span><span>Resend in progress</span></div>
+        <div class="auth-card">
+          <div class="status-badge status-badge--accent" aria-hidden="true">
+            <i data-lucide="mail"></i>
+          </div>
+          <div class="auth-eyebrow">Almost there</div>
+          <h2 class="auth-title">Check your inbox.</h2>
+          <p class="auth-sub">Sending a fresh link to <strong>jane@example.com</strong>&hellip;</p>
+          <div class="auth-cta-stack">
+            <button class="btn btn--secondary btn--lg auth-cta" type="button" disabled>
+              <i data-lucide="loader" style="margin-right: 8px;"></i>Sending&hellip;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 · Resend confirmation ───────────────────────────────── -->
+      <div class="state-frame">
+        <div class="state-frame-label"><span class="num">02</span><span>Resend sent</span></div>
+        <div class="auth-card">
+          <div class="status-badge status-badge--accent" aria-hidden="true">
+            <i data-lucide="mail-check"></i>
+          </div>
+          <div class="auth-eyebrow">Almost there</div>
+          <h2 class="auth-title">Check your inbox.</h2>
+          <p class="auth-sub">A fresh link is on its way to <strong>jane@example.com</strong>.</p>
+          <div class="resend-feedback">
+            <i data-lucide="check"></i>
+            <span>New link sent just now</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 · Delivery problem ──────────────────────────────────── -->
+      <div class="state-frame">
+        <div class="state-frame-label"><span class="num">03</span><span>Nothing arrived</span></div>
+        <div class="auth-card">
+          <div class="status-badge status-badge--accent" aria-hidden="true">
+            <i data-lucide="mail-question"></i>
+          </div>
+          <div class="auth-eyebrow">Still waiting</div>
+          <h2 class="auth-title">Didn&rsquo;t get it?</h2>
+          <p class="auth-sub">Check your spam folder for a message from GitApplied. Some corporate inboxes delay first-time senders by a few minutes.</p>
+          <div class="auth-cta-stack">
+            <button class="btn btn--primary btn--lg auth-cta" type="button">Resend the email</button>
+            <a class="btn btn--ghost btn--sm" href="./signup.html">Try a different address</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

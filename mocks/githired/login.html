@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign in · GitApplied</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+  <style>
+    .auth-shell {
+      min-height: calc(100vh - 64px);
+      display: grid;
+      place-items: center;
+      padding: 64px 24px;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 16px;
+      box-shadow: var(--shadow-2);
+      padding: 40px 36px;
+    }
+    .auth-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .auth-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.012em;
+      color: var(--text-primary);
+      margin: 0 0 10px;
+    }
+    .auth-title .accent { color: var(--accent); font-style: italic; }
+    .auth-sub {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      margin-bottom: 28px;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .auth-field { display: flex; flex-direction: column; gap: 6px; }
+    .auth-label-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .auth-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.01em;
+    }
+    .auth-label-link {
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .auth-label-link:hover { text-decoration: underline; }
+
+    .auth-error {
+      background: color-mix(in srgb, var(--negative) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--negative) 35%, transparent);
+      color: var(--negative);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.8125rem;
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+
+    .auth-cta { width: 100%; margin-top: 4px; }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 22px 0 18px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule-hairline);
+    }
+
+    .auth-foot {
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+    .auth-foot a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .auth-foot a:hover { text-decoration: underline; }
+
+    .auth-trust {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+    .auth-trust .dot { margin: 0 8px; opacity: 0.5; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./landing.html">GitApplied</a>
+    </div>
+    <div class="header-tools" style="gap: 12px;">
+      <span class="nav-link" style="font-size: 0.875rem;">New here?</span>
+      <a class="btn btn--secondary btn--sm" href="./signup.html">Create account</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="auth-shell">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <div class="auth-eyebrow">Welcome back</div>
+      <h1 class="auth-title" id="auth-title">Sign in to <span class="accent">GitApplied</span></h1>
+      <p class="auth-sub">Pick up where you left off, your board, your notes, your drafts.</p>
+
+      <!-- Toggle this block to preview the error state -->
+      <!--
+      <div class="auth-error">That email and password don't match. Try again, or reset your password.</div>
+      -->
+
+      <form class="auth-form" onsubmit="event.preventDefault();">
+        <div class="auth-field">
+          <label class="auth-label" for="email">Email</label>
+          <input class="modal-input" id="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+        </div>
+
+        <div class="auth-field">
+          <div class="auth-label-row">
+            <label class="auth-label" for="password">Password</label>
+            <a class="auth-label-link" href="#">Forgot password?</a>
+          </div>
+          <input class="modal-input" id="password" type="password" placeholder="Your password" autocomplete="current-password" required />
+        </div>
+
+        <button class="btn btn--primary btn--lg auth-cta" type="submit">Sign in</button>
+      </form>
+
+      <div class="auth-divider">or</div>
+
+      <div class="auth-foot">
+        Don't have an account? <a href="./signup.html">Start free</a>
+      </div>
+
+      <div class="auth-trust">
+        14-day Premium trial<span class="dot">·</span>No card required<span class="dot">·</span>Cancel anytime
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

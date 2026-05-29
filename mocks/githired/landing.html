@@ -1,0 +1,1384 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GitApplied · The calm place to run your job search</title>
+  <meta name="description" content="Capture job postings, break them down, and tailor your materials without inventing anything you haven't done. Free to start." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="GitApplied · The calm place to run your job search" />
+  <meta property="og:description" content="Capture job postings, break them down, and tailor your materials without inventing anything you haven't done. Free to start." />
+  <meta property="og:url" content="https://gitapplied.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="GitApplied · The calm place to run your job search" />
+  <meta name="twitter:description" content="Capture job postings, break them down, and tailor your materials without inventing anything you haven't done." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+  <style>
+    /* ─── Layout shells ─────────────────────────────────────────────── */
+    .landing { padding-bottom: 0; }
+    .lp-section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 96px 32px;
+    }
+    .lp-section--tight { padding: 64px 32px; }
+    .lp-section + .lp-section { border-top: 1px solid var(--rule-hairline); }
+
+    .lp-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .lp-h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 3.5rem;
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .lp-h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2.25rem;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.012em;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .lp-sub {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 620px;
+      margin-bottom: 28px;
+    }
+
+    /* ─── Hero ──────────────────────────────────────────────────────── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+    .hero-left .lp-h1 .accent {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: 500;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .hero-trust {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .hero-trust .dot { margin: 0 8px; color: var(--rule-strong); }
+
+    /* Browser-frame mockup */
+    .browser-frame {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      box-shadow: var(--shadow-3);
+      overflow: hidden;
+    }
+    .browser-chrome {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--rule-hairline);
+      background: var(--surface-base);
+    }
+    .browser-chrome .traffic {
+      display: flex; gap: 6px;
+    }
+    .browser-chrome .traffic span {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--rule-strong);
+      opacity: 0.6;
+    }
+    .browser-chrome .addr {
+      flex: 1;
+      margin-left: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 6px;
+      padding: 4px 10px;
+      max-width: 360px;
+    }
+    .browser-body {
+      padding: 20px;
+      background: var(--surface-base);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .mini-col-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule-hairline);
+      margin-bottom: 10px;
+    }
+    .mini-col-name .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+    }
+    .mini-card {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 8px;
+      padding: 10px 11px;
+      margin-bottom: 8px;
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+    }
+    .mini-card .mark {
+      width: 22px; height: 22px; border-radius: 5px;
+      background: var(--accent);
+      color: var(--primary-text-on-accent);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mini-card .mark--info { background: var(--info); }
+    .mini-card .mark--positive { background: var(--positive); }
+    .mini-card .mark--caution { background: var(--caution); }
+    .mini-card .mark--neutral { background: var(--text-secondary); }
+    .mini-card .body { min-width: 0; }
+    .mini-card .role {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 1px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .mini-card .co {
+      font-size: 0.66rem;
+      color: var(--text-secondary);
+    }
+    .mini-card .meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ─── Problem strip ────────────────────────────────────────────── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      padding-top: 16px;
+    }
+    .problem-quote {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.25rem;
+      line-height: 1.5;
+      color: var(--text-primary);
+      font-style: italic;
+      padding-left: 18px;
+      border-left: 2px solid var(--accent);
+    }
+
+    /* ─── How it works ─────────────────────────────────────────────── */
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 36px;
+    }
+    .how-step {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .how-step .num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .how-step .name {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.375rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .how-step .desc {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .how-step .illus {
+      margin-top: auto;
+      background: var(--surface-base);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 10px;
+      padding: 14px;
+      min-height: 156px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    /* ─── Step 01 · Understand, match rows ─────────────────────────── */
+    .illus-match-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 0.78rem;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+    .illus-match-glyph {
+      position: relative;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .illus-match-glyph.is-hard {
+      background: var(--accent);
+    }
+    .illus-match-glyph.is-resp {
+      background: linear-gradient(90deg, var(--accent) 50%, transparent 50%);
+      border: 1px solid var(--accent);
+    }
+    .illus-match-glyph.is-nice {
+      background: transparent;
+      border: 1px solid var(--accent);
+    }
+    .illus-match-glyph.is-gap {
+      background: transparent;
+      border: 1px dashed var(--rule-strong);
+    }
+    .illus-match-glyph.is-matched::after {
+      content: '';
+      position: absolute;
+      right: -3px; bottom: -3px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--positive);
+      border: 1.5px solid var(--surface-base);
+    }
+    .illus-match-text .req-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-right: 5px;
+    }
+    .illus-match-text .req-text {
+      color: var(--text-primary);
+    }
+    .illus-match-text.is-gap .req-text {
+      color: var(--text-muted);
+    }
+    .illus-foot {
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px solid var(--rule-hairline);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .illus-foot .accent { color: var(--accent); }
+    .illus-foot .positive { color: var(--positive); }
+
+    /* ─── Step 02 · Tailor, inline diff bullet ─────────────────────── */
+    .illus-diff {
+      font-size: 0.8rem;
+      line-height: 1.55;
+      color: var(--text-primary);
+      padding-left: 12px;
+      position: relative;
+    }
+    .illus-diff::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .illus-diff .old {
+      text-decoration: line-through;
+      color: var(--text-muted);
+      margin-right: 1px;
+    }
+    .illus-diff .new {
+      color: var(--accent);
+      font-weight: 600;
+      background: var(--accent-soft);
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+    :root[data-theme="dark"] .illus-diff .new {
+      background: color-mix(in srgb, var(--accent) 22%, transparent);
+    }
+    .illus-diff strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .illus-pin {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding-left: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--accent);
+    }
+    .illus-pin .arrow {
+      color: var(--text-muted);
+    }
+
+    /* ─── Step 03 · Apply, copy-paste doc rows ─────────────────────── */
+    .illus-doc-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--rule-hairline);
+    }
+    .illus-doc-row:last-of-type {
+      border-bottom: 0;
+    }
+    .illus-doc-row .icon {
+      color: var(--text-muted);
+      display: inline-flex;
+      flex-shrink: 0;
+    }
+    .illus-doc-row .icon i[data-lucide] {
+      width: 13px; height: 13px;
+    }
+    .illus-doc-row .label {
+      flex: 1;
+      font-size: 0.78rem;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    .illus-doc-row .label .meta {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+    .illus-doc-row .copy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      border: 1px solid var(--rule-hairline);
+      border-radius: 5px;
+      color: var(--text-secondary);
+      background: var(--surface-raised);
+      flex-shrink: 0;
+    }
+    .illus-doc-row .copy i[data-lucide] {
+      width: 11px; height: 11px;
+    }
+    .illus-doc-row.is-active .copy {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    :root[data-theme="dark"] .illus-doc-row.is-active .copy {
+      background: color-mix(in srgb, var(--accent) 18%, transparent);
+    }
+
+    /* ─── Feature mosaic ──────────────────────────────────────────── */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 36px;
+    }
+    .feat-card {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .feat-card .icon {
+      width: 38px; height: 38px;
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    :root[data-theme="dark"] .feat-card .icon {
+      background: color-mix(in srgb, var(--accent) 18%, transparent);
+    }
+    .feat-card .icon i[data-lucide] { width: 18px; height: 18px; }
+    .feat-card .name {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .feat-card .desc {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+
+    /* ─── Showpiece (tailor): mirrors the real craft flow ──────────── */
+    .showpiece {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-top: 36px;
+      box-shadow: var(--shadow-2);
+    }
+    .showpiece-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      background: var(--surface-base);
+      border-bottom: 1px solid var(--rule-hairline);
+    }
+    .showpiece-head .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+    .showpiece-head .back i[data-lucide] { width: 14px; height: 14px; }
+    .showpiece-head .tabs {
+      display: flex; gap: 4px;
+      margin-left: 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .showpiece-head .tabs span {
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: default;
+    }
+    .showpiece-head .tabs span.is-active {
+      background: var(--surface-raised);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-1);
+    }
+    .showpiece-head .right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    /* Tailor canvas inside the showpiece: narrower than the full app canvas */
+    .showpiece-canvas {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
+      padding: 24px 28px 32px;
+      background: var(--surface-base);
+    }
+    .showpiece-rail .tailor-rail-header {
+      margin-bottom: 14px;
+    }
+    .showpiece-rail .req-card {
+      padding: 12px 14px;
+    }
+    .showpiece-rail .req-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .showpiece-rail .req-text {
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+    .showpiece-rail .req-card.is-highlighted .req-meta { color: var(--accent); }
+
+    .showpiece .draft-pane {
+      padding: 22px 28px 24px;
+      border-radius: 12px;
+    }
+    .showpiece .draft-pane-header {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+    }
+    .showpiece .draft-pane-header h2 { font-size: 1.0625rem; }
+    .showpiece .draft-bullet {
+      padding: 10px 8px 10px 24px;
+    }
+    .showpiece .draft-bullet-text {
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+    .showpiece .draft-bullet-text::before { top: 10px; left: 10px; }
+    .showpiece .draft-bullet em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+    /* ─── Pricing: matches pricing.html exactly ──────────────────── */
+    .billing-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin: 12px 0 36px;
+      padding: 4px;
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 999px;
+    }
+    .billing-toggle button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .billing-toggle button.is-active {
+      background: var(--surface-base);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-1);
+    }
+    .billing-toggle .save-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      margin-left: 4px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .tier {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      padding: 28px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .tier.is-featured {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-3);
+    }
+    .tier-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--primary-text-on-accent);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    .tier-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .tier-name {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.625rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .tier-tagline {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      min-height: 44px;
+    }
+    .tier-price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .tier-price-amount {
+      font-family: 'Source Serif 4', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .tier-price-cadence {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+    .tier-billing-note {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 22px;
+      min-height: 16px;
+    }
+    .tier-cta {
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .tier-inherits {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--rule-hairline);
+    }
+    .tier-inherits strong { color: var(--text-primary); font-weight: 600; }
+
+    .tier-section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin: 8px 0 10px;
+    }
+    .tier ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .tier ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+    .tier ul li i[data-lucide] {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: var(--positive);
+    }
+    .tier.is-featured ul li i[data-lucide] { color: var(--accent); }
+    .tier ul li .feat-meta {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-top: 2px;
+    }
+
+    /* ─── FAQ ──────────────────────────────────────────────────────── */
+    .faq { max-width: 760px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--rule-hairline);
+      padding: 20px 0;
+    }
+    .faq-item:last-child { border-bottom: 0; }
+    .faq-q {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .faq-a {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.65;
+    }
+
+    /* ─── Final CTA ───────────────────────────────────────────────── */
+    .final-cta {
+      text-align: center;
+      padding: 64px 32px;
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 16px;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .final-cta h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: -0.012em;
+      margin-bottom: 12px;
+    }
+    .final-cta p {
+      color: var(--text-secondary);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      max-width: 540px;
+      margin: 0 auto 24px;
+    }
+
+    /* ─── Footer ──────────────────────────────────────────────────── */
+    .lp-footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 56px 32px 48px;
+      border-top: 1px solid var(--rule-hairline);
+      margin-top: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .lp-footer .brand {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+    }
+    .lp-footer .brand-line {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 6px;
+      max-width: 280px;
+      line-height: 1.5;
+    }
+    .lp-footer .links {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: 56px;
+    }
+    .lp-footer .links h5 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .lp-footer .links a {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      text-decoration: none;
+      padding: 4px 0;
+    }
+    .lp-footer .links a:hover { color: var(--text-primary); }
+
+    /* ─── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 980px) {
+      .lp-h1 { font-size: 2.5rem; }
+      .hero { grid-template-columns: 1fr; gap: 40px; }
+      .problem-grid,
+      .how-grid,
+      .feat-grid,
+      .pricing-grid { grid-template-columns: 1fr; }
+      .showpiece-canvas { grid-template-columns: 1fr; }
+      .lp-footer .links { grid-template-columns: repeat(2, auto); gap: 32px; }
+    }
+  </style>
+</head>
+<body class="landing">
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./landing.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./pricing.html">Pricing</a></li>
+        <li><a class="nav-link" href="./index.html">Mocks</a></li>
+      </ul>
+    </div>
+    <div class="header-tools" style="gap: 12px;">
+      <a class="nav-link" href="./login.html" style="font-size: 0.875rem;">Sign in</a>
+      <a class="btn btn--primary btn--sm" href="./signup.html">Get started</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══════════════════════════════════════ HERO ═══ -->
+    <section class="lp-section hero">
+      <div class="hero-left">
+        <div class="lp-eyebrow">For the serious job search</div>
+        <h1 class="lp-h1">The <span class="accent">calm</span> place to run your job search.</h1>
+        <p class="lp-sub">Capture job postings, break them down, and tailor your materials without inventing anything you haven't done.</p>
+        <div class="hero-ctas">
+          <a class="btn btn--primary btn--lg" href="./signup.html">Start free</a>
+          <a class="btn btn--ghost btn--lg" href="./board.html">See the board <i data-lucide="arrow-right" style="width:16px; height:16px;"></i></a>
+        </div>
+        <div class="hero-trust">
+          No card required<span class="dot">·</span>Free forever for up to 10 jobs<span class="dot">·</span>Light &amp; dark themes
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <div class="traffic"><span></span><span></span><span></span></div>
+            <div class="addr">app.gitapplied.com/board</div>
+          </div>
+          <div class="browser-body">
+            <!-- Column: Saved -->
+            <div>
+              <div class="mini-col-name"><span class="dot" style="background: var(--text-muted);"></span> Saved <span style="margin-left:auto; font-family:'JetBrains Mono', monospace; color:var(--text-muted); font-weight:400;">3</span></div>
+              <div class="mini-card">
+                <div class="mark">S</div>
+                <div class="body">
+                  <div class="role">Senior Software Engineer</div>
+                  <div class="co">Stripe</div>
+                  <div class="meta">$180k · remote</div>
+                </div>
+              </div>
+              <div class="mini-card">
+                <div class="mark mark--info">A</div>
+                <div class="body">
+                  <div class="role">Staff Engineer, Payments</div>
+                  <div class="co">Anthropic</div>
+                  <div class="meta">$220k · SF</div>
+                </div>
+              </div>
+              <div class="mini-card">
+                <div class="mark mark--positive">F</div>
+                <div class="body">
+                  <div class="role">Backend Engineer</div>
+                  <div class="co">Figma</div>
+                  <div class="meta">$165k · NYC</div>
+                </div>
+              </div>
+            </div>
+            <!-- Column: Applied -->
+            <div>
+              <div class="mini-col-name"><span class="dot" style="background: var(--info);"></span> Applied <span style="margin-left:auto; font-family:'JetBrains Mono', monospace; color:var(--text-muted); font-weight:400;">2</span></div>
+              <div class="mini-card">
+                <div class="mark mark--caution">L</div>
+                <div class="body">
+                  <div class="role">Platform Engineer</div>
+                  <div class="co">Linear</div>
+                  <div class="meta">submitted 3d ago</div>
+                </div>
+              </div>
+              <div class="mini-card">
+                <div class="mark mark--neutral">R</div>
+                <div class="body">
+                  <div class="role">Senior Backend</div>
+                  <div class="co">Ramp</div>
+                  <div class="meta">submitted 6d ago</div>
+                </div>
+              </div>
+            </div>
+            <!-- Column: Interviewing -->
+            <div>
+              <div class="mini-col-name"><span class="dot" style="background: var(--caution);"></span> Interviewing <span style="margin-left:auto; font-family:'JetBrains Mono', monospace; color:var(--text-muted); font-weight:400;">1</span></div>
+              <div class="mini-card" style="border-color: var(--accent);">
+                <div class="mark">V</div>
+                <div class="body">
+                  <div class="role">Engineering Manager</div>
+                  <div class="co">Vercel</div>
+                  <div class="meta">round 2 · Thu</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ PROBLEM ═══ -->
+    <section class="lp-section lp-section--tight">
+      <div class="lp-eyebrow">If you&rsquo;ve been searching for a while&hellip;</div>
+      <h2 class="lp-h2" style="max-width: 740px;">You don&rsquo;t need another job board. You need a way to keep your head straight.</h2>
+      <div class="problem-grid">
+        <div class="problem-quote">&ldquo;60 applications in a spreadsheet, half of them I can&rsquo;t even remember anymore.&rdquo;</div>
+        <div class="problem-quote">&ldquo;Tailoring resumes takes hours. I&rsquo;m doing it on adrenaline at 2am.&rdquo;</div>
+        <div class="problem-quote">&ldquo;Was that recruiter email for Stripe or Anthropic? Both of them ghosted me.&rdquo;</div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ HOW IT WORKS ═══ -->
+    <section class="lp-section">
+      <div class="lp-eyebrow">How it works</div>
+      <h2 class="lp-h2">Three steps, then you&rsquo;ve applied.</h2>
+      <p class="lp-sub">Save a job posting and we&rsquo;ll do the matching, the drafting, and have your resume, cover letter, and answers ready to paste into the application.</p>
+
+      <div class="how-grid">
+        <article class="how-step">
+          <div class="num">01</div>
+          <div class="name">Understand</div>
+          <div class="desc">We read the job posting and your resume side-by-side. Every requirement is tagged hard, responsibility, or nice-to-have, and matched against the experience already in your profile.</div>
+          <div class="illus">
+            <div class="illus-match-row">
+              <span class="illus-match-glyph is-hard is-matched"></span>
+              <div class="illus-match-text">
+                <span class="req-label">Hard</span><span class="req-text">TypeScript fluency</span>
+              </div>
+            </div>
+            <div class="illus-match-row">
+              <span class="illus-match-glyph is-hard is-matched"></span>
+              <div class="illus-match-text">
+                <span class="req-label">Hard</span><span class="req-text">Postgres at scale</span>
+              </div>
+            </div>
+            <div class="illus-match-row">
+              <span class="illus-match-glyph is-resp is-matched"></span>
+              <div class="illus-match-text">
+                <span class="req-label">Resp</span><span class="req-text">Mentor 2&ndash;3 engineers</span>
+              </div>
+            </div>
+            <div class="illus-match-row">
+              <span class="illus-match-glyph is-gap"></span>
+              <div class="illus-match-text is-gap">
+                <span class="req-label">Nice</span><span class="req-text">Kafka exposure</span>
+              </div>
+            </div>
+            <div class="illus-foot">
+              <span class="positive">3 matched</span><span>&middot;</span><span>1 gap</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="how-step">
+          <div class="num">02</div>
+          <div class="name">Tailor</div>
+          <div class="desc">Each bullet gets rewritten to answer a specific requirement, in your voice, only from what&rsquo;s in your profile. Cover letters get the same treatment, drawn from your resume and the matches we just found.</div>
+          <div class="illus">
+            <div class="illus-diff">
+              Shipped a <span class="old">JavaScript</span> <span class="new">TypeScript-on-Node</span> payments service handling <strong>$40M/yr</strong> in volume.
+            </div>
+            <div class="illus-pin">
+              <span class="arrow">&#x21B3;</span> answers <span>&ldquo;TypeScript fluency&rdquo;</span>
+            </div>
+            <div class="illus-foot">
+              <span class="accent">AI suggestion</span><span>&middot;</span><span>accept or tweak</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="how-step">
+          <div class="num">03</div>
+          <div class="name">Apply</div>
+          <div class="desc">When you&rsquo;re ready, everything is one click from the clipboard. Open the company portal, paste your resume, cover letter, and answers, send.</div>
+          <div class="illus">
+            <div class="illus-doc-row is-active">
+              <span class="icon"><i data-lucide="file-text"></i></span>
+              <div class="label">Resume<span class="meta">PDF &middot; tailored</span></div>
+              <button class="copy" type="button" aria-label="Copy resume"><i data-lucide="copy"></i></button>
+            </div>
+            <div class="illus-doc-row">
+              <span class="icon"><i data-lucide="mail"></i></span>
+              <div class="label">Cover letter<span class="meta">280 words</span></div>
+              <button class="copy" type="button" aria-label="Copy cover letter"><i data-lucide="copy"></i></button>
+            </div>
+            <div class="illus-doc-row">
+              <span class="icon"><i data-lucide="list-checks"></i></span>
+              <div class="label">Answers<span class="meta">3 questions</span></div>
+              <button class="copy" type="button" aria-label="Copy answers"><i data-lucide="copy"></i></button>
+            </div>
+            <div class="illus-foot">
+              <span class="arrow" style="color: var(--text-muted);">&#x21B3;</span><span>paste into the application portal</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ FEATURE MOSAIC ═══ -->
+    <section class="lp-section">
+      <div class="lp-eyebrow">Everything in one place</div>
+      <h2 class="lp-h2">Built for the way you actually search.</h2>
+      <p class="lp-sub">Not a job board. Not a generic CRM. A workspace that knows the difference between a job posting, a draft, and a hiring manager.</p>
+
+      <div class="feat-grid">
+        <article class="feat-card">
+          <div class="icon"><i data-lucide="layout-dashboard"></i></div>
+          <div class="name">Application pipeline</div>
+          <div class="desc">Kanban board with stages that match how you actually move through a search: Saved, Applied, Interviewing, Completed.</div>
+        </article>
+        <article class="feat-card">
+          <div class="icon"><i data-lucide="scan-search"></i></div>
+          <div class="name">Job posting breakdown</div>
+          <div class="desc">Required skills, must-haves, nice-to-haves, and comp signals, extracted from the JD and pinned to the job card.</div>
+        </article>
+        <article class="feat-card">
+          <div class="icon"><i data-lucide="sparkles"></i></div>
+          <div class="name">AI resume tailor</div>
+          <div class="desc">Per-job-posting tailored drafts that reorder your bullets and rewrite for the role, only from what&rsquo;s in your profile.</div>
+        </article>
+        <article class="feat-card">
+          <div class="icon"><i data-lucide="file-text"></i></div>
+          <div class="name">AI cover letter</div>
+          <div class="desc">Example-aware drafts that sound like you wrote them. Pick a template, the AI handles the job-posting-specific edits.</div>
+        </article>
+        <article class="feat-card">
+          <div class="icon"><i data-lucide="mic"></i></div>
+          <div class="name">Interview prep workspace</div>
+          <div class="desc">Question bank, round-by-round notes, and prep prompts tied to the job, so you walk in ready, not winging it.</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ SHOWPIECE ═══ -->
+    <section class="lp-section">
+      <div class="lp-eyebrow">The showpiece</div>
+      <h2 class="lp-h2">Job posting on the left. Your tailored draft on the right.</h2>
+      <p class="lp-sub">Hover a bullet to see which job posting requirement it answers. Click to regenerate. Every iteration kept, diffable.</p>
+
+      <div class="showpiece">
+        <div class="showpiece-head">
+          <span class="back"><i data-lucide="arrow-left"></i> Senior Software Engineer &middot; Stripe</span>
+          <div class="tabs">
+            <span class="is-active">Resume</span>
+            <span>Cover letter</span>
+            <span>Questions</span>
+          </div>
+          <div class="right">
+            <span>v3 &middot; auto-saved</span>
+            <a class="btn btn--primary btn--sm" href="#" style="font-size: 0.78rem; padding: 5px 12px;"><i data-lucide="arrow-right" style="width:12px; height:12px;"></i> Continue</a>
+          </div>
+        </div>
+
+        <div class="showpiece-canvas">
+          <!-- Left: job posting requirements -->
+          <aside class="showpiece-rail">
+            <div class="tailor-rail-header">
+              <h2>Job posting requirements</h2>
+              <span class="tailor-rail-count">5 extracted</span>
+            </div>
+
+            <div class="req-card is-highlighted">
+              <div class="req-glyph req-glyph--hard"></div>
+              <div>
+                <div class="req-meta">Hard requirement</div>
+                <div class="req-text">Ship in TypeScript on Node, production payments services at scale.</div>
+              </div>
+            </div>
+
+            <div class="req-card">
+              <div class="req-glyph req-glyph--hard"></div>
+              <div>
+                <div class="req-meta">Hard requirement</div>
+                <div class="req-text">Postgres at scale, schema design and zero-downtime migrations.</div>
+              </div>
+            </div>
+
+            <div class="req-card">
+              <div class="req-glyph req-glyph--responsibility"></div>
+              <div>
+                <div class="req-meta">Responsibility</div>
+                <div class="req-text">Lead a team of senior engineers and partner with product on roadmap.</div>
+              </div>
+            </div>
+
+            <div class="req-card">
+              <div class="req-glyph req-glyph--nice"></div>
+              <div>
+                <div class="req-meta">Nice to have</div>
+                <div class="req-text">React component systems used across multiple product surfaces.</div>
+              </div>
+            </div>
+
+            <div class="req-card">
+              <div class="req-glyph req-glyph--bonus"></div>
+              <div>
+                <div class="req-meta">Bonus</div>
+                <div class="req-text">Public writing or open-source contributions in the payments space.</div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Right: tailored draft -->
+          <section class="draft-pane">
+            <div class="draft-pane-header">
+              <h2>Your tailored draft</h2>
+              <span class="draft-streaming"><span class="draft-streaming-dot"></span>5 of 5 bullets</span>
+            </div>
+
+            <div class="draft-bullet is-active">
+              <div class="draft-bullet-text">Shipped a <em>TypeScript-on-Node payments service</em> handling <em>$40M/yr</em> in volume, with a P99 of 80ms under steady load.</div>
+              <span class="draft-bullet-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Hard requirement &middot; TypeScript at scale</span>
+            </div>
+
+            <div class="draft-bullet">
+              <div class="draft-bullet-text">Migrated a <em>50M-row Postgres table</em> to a partitioned schema with <em>zero downtime</em>, halving query latency for the most-hit endpoint.</div>
+              <span class="draft-bullet-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Hard requirement &middot; Postgres at scale</span>
+            </div>
+
+            <div class="draft-bullet">
+              <div class="draft-bullet-text">Led a team of <em>six senior engineers</em> through a year-long platform replatform; shaped the roadmap with PM, ran weekly design crits, mentored two ICs into staff scope.</div>
+              <span class="draft-bullet-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Responsibility &middot; Team leadership</span>
+            </div>
+
+            <div class="draft-bullet">
+              <div class="draft-bullet-text">Owned the <em>React component library</em> used by <em>8 product teams</em>, wrote the contribution model, ran the design-engineering interface.</div>
+              <span class="draft-bullet-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Nice to have &middot; React systems</span>
+            </div>
+
+            <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rule-hairline); display: flex; align-items: center; justify-content: space-between;">
+              <div style="font-size: 0.78rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">4 of 5 requirements answered &middot; 1 bonus held back</div>
+              <button class="btn btn--ghost btn--sm" style="font-size: 0.78rem;"><i data-lucide="refresh-cw" style="width:12px; height:12px;"></i> Re-draft</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ PRICING ═══ -->
+    <section class="lp-section">
+      <div class="lp-eyebrow">Pricing</div>
+      <h2 class="lp-h2">Pick the plan that matches the search you&rsquo;re running.</h2>
+      <p class="lp-sub">Start free while you set up your board. Move to Base when you want unlimited jobs and the job posting breakdown working for you. Go Premium when the search gets serious and every draft needs to be tailored.</p>
+
+      <div class="billing-toggle" role="tablist">
+        <button class="is-active" data-cadence="monthly">Monthly</button>
+        <button data-cadence="annual">Annual<span class="save-pill">save 17%</span></button>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- FREE -->
+        <article class="tier">
+          <div class="tier-eyebrow">Tier 01</div>
+          <div class="tier-name">Free</div>
+          <div class="tier-tagline">For the early scout, track jobs, take notes, see if the shape of GitApplied fits your search.</div>
+
+          <div class="tier-price">
+            <span class="tier-price-amount" data-price data-monthly="$0" data-annual="$0">$0</span>
+            <span class="tier-price-cadence">forever</span>
+          </div>
+          <div class="tier-billing-note" data-note data-monthly="no card required" data-annual="no card required">no card required</div>
+
+          <a class="btn btn--secondary tier-cta" href="./signup.html">Start tracking</a>
+
+          <div class="tier-section-label">What you get</div>
+          <ul>
+            <li><i data-lucide="check"></i><div>Kanban board, up to <strong>10 active jobs</strong></div></li>
+            <li><i data-lucide="check"></i><div>Manual job capture (paste a URL or fill the form)</div></li>
+            <li><i data-lucide="check"></i><div>Job notes, pinned items, stage tracking</div></li>
+            <li><i data-lucide="check"></i><div>Up to <strong>2 resumes &amp; profiles</strong></div></li>
+            <li><i data-lucide="check"></i><div>Resume profile parser<span class="feat-meta">upload a PDF, get structured experiences &amp; education</span></div></li>
+            <li><i data-lucide="check"></i><div>Applied archive<span class="feat-meta">read-only on Free; upgrade to reopen jobs</span></div></li>
+            <li><i data-lucide="check"></i><div>Light &amp; dark themes</div></li>
+          </ul>
+        </article>
+
+        <!-- BASE -->
+        <article class="tier is-featured">
+          <span class="tier-badge">Most popular</span>
+          <div class="tier-eyebrow">Tier 02</div>
+          <div class="tier-name">Base</div>
+          <div class="tier-tagline">For the active applier, unlimited jobs and the tools to engage every lead.</div>
+
+          <div class="tier-price">
+            <span class="tier-price-amount" data-price data-monthly="$5" data-annual="$4.17">$5</span>
+            <span class="tier-price-cadence">/ month</span>
+          </div>
+          <div class="tier-billing-note" data-note data-monthly="billed monthly" data-annual="$50/yr · billed annually">billed monthly</div>
+
+          <a class="btn btn--primary tier-cta" href="./signup.html">Start 14-day trial</a>
+
+          <div class="tier-inherits">Everything in <strong>Free</strong>, plus&hellip;</div>
+
+          <div class="tier-section-label">Capture &amp; intelligence</div>
+          <ul>
+            <li><i data-lucide="check"></i><div><strong>Unlimited jobs</strong> tracked<span class="feat-meta">no monthly cap, no archive limit</span></div></li>
+            <li><i data-lucide="check"></i><div><strong>Unlimited resumes &amp; profiles</strong><span class="feat-meta">tailor a separate profile per role</span></div></li>
+            <li><i data-lucide="check"></i><div>Job posting breakdown<span class="feat-meta">required skills, must-haves, nice-to-haves, comp signals</span></div></li>
+            <li><i data-lucide="check"></i><div>Skill match<span class="feat-meta">gap analysis between your profile and the job posting</span></div></li>
+            <li><i data-lucide="check"></i><div>Document editor, manage a library of resumes &amp; cover letter templates</div></li>
+            <li><i data-lucide="check"></i><div>Open archive<span class="feat-meta">reopen any archived job</span></div></li>
+          </ul>
+
+          <div class="tier-section-label" style="margin-top: 18px;">Engage</div>
+          <ul>
+            <li><i data-lucide="check"></i><div>Interview prep workspace, question bank, round notes</div></li>
+            <li><i data-lucide="check"></i><div>Network &amp; contacts, recruiters, hiring managers, intros</div></li>
+          </ul>
+        </article>
+
+        <!-- PREMIUM -->
+        <article class="tier">
+          <div class="tier-eyebrow">Tier 03</div>
+          <div class="tier-name">Premium</div>
+          <div class="tier-tagline">For the serious search, every application gets a tailored resume, a real cover letter, and answers that sound like you.</div>
+
+          <div class="tier-price">
+            <span class="tier-price-amount" data-price data-monthly="$10" data-annual="$8.33">$10</span>
+            <span class="tier-price-cadence">/ month</span>
+          </div>
+          <div class="tier-billing-note" data-note data-monthly="billed monthly" data-annual="$100/yr · billed annually">billed monthly</div>
+
+          <a class="btn btn--secondary tier-cta" href="./signup.html">Start 14-day trial</a>
+
+          <div class="tier-inherits">Everything in <strong>Base</strong>, plus&hellip;</div>
+
+          <div class="tier-section-label">AI drafting</div>
+          <ul>
+            <li><i data-lucide="sparkles"></i><div><strong>AI resume tailor</strong>, unlimited drafts<span class="feat-meta">re-orders bullets, rewrites for the job posting, keeps your truth</span></div></li>
+            <li><i data-lucide="sparkles"></i><div><strong>AI cover letter</strong>, example-aware, job-posting-aware</div></li>
+            <li><i data-lucide="sparkles"></i><div><strong>AI application answers</strong>, for screener questions, in your voice</div></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ FAQ ═══ -->
+    <section class="lp-section lp-section--tight">
+      <div class="lp-eyebrow" style="text-align:center;">Before you sign up</div>
+      <h2 class="lp-h2" style="text-align:center; margin-bottom: 36px;">Questions worth answering up front.</h2>
+
+      <div class="faq">
+        <div class="faq-item">
+          <div class="faq-q">Is it really free?</div>
+          <div class="faq-a">Yes. The Free tier doesn&rsquo;t expire and we don&rsquo;t ask for a card. You can track up to 10 active jobs, enough to feel out whether the workspace fits before you upgrade.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What&rsquo;s the difference between Base and Premium?</div>
+          <div class="faq-a">Base unlocks unlimited jobs, Job posting breakdown, Skill match, the document editor, interview prep, and network &amp; contacts. Premium adds AI resume tailoring, cover letters, and application-question answers, the drafting layer.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Does my data stay private?</div>
+          <div class="faq-a">Yes. We don&rsquo;t train on your resume, we don&rsquo;t share data with third parties, and you can export or delete everything anytime from Settings &rarr; Data.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Will the AI make things up?</div>
+          <div class="faq-a">It writes only from what&rsquo;s in your profile. No hallucinated employers, no invented projects, no fake numbers. If a job posting wants something you don&rsquo;t have, we flag the gap, we don&rsquo;t fabricate the experience.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ FINAL CTA ═══ -->
+    <section class="lp-section">
+      <div class="final-cta">
+        <h2>Stop tracking your search in a spreadsheet.</h2>
+        <p>Start free. Upgrade when the AI earns it. Cancel anytime, your data stays exportable.</p>
+        <a class="btn btn--primary btn--lg" href="./signup.html">Create your free account</a>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ FOOTER ═══ -->
+    <footer class="lp-footer">
+      <div>
+        <div class="brand">GitApplied</div>
+        <div class="brand-line">A calmer place to run your job search. Library at night, letterpress on cream.</div>
+      </div>
+      <div class="links">
+        <div>
+          <h5>Product</h5>
+          <a href="./board.html">Board</a>
+          <a href="./tailor.html">Tailor</a>
+          <a href="./pricing.html">Pricing</a>
+          <a href="./palette.html">Design system</a>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <a href="#">About</a>
+          <a href="./marketing.html">Marketing</a>
+          <a href="#">Changelog</a>
+          <a href="#">Contact</a>
+        </div>
+        <div>
+          <h5>Legal</h5>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Security</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+  <script>
+    (function () {
+      const toggle = document.querySelector('.billing-toggle');
+      if (!toggle) return;
+      toggle.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-cadence]');
+        if (!btn) return;
+        const cadence = btn.dataset.cadence;
+        toggle.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === btn));
+        document.querySelectorAll('[data-price]').forEach((el) => {
+          el.textContent = el.dataset[cadence];
+        });
+        document.querySelectorAll('[data-note]').forEach((el) => {
+          el.textContent = el.dataset[cadence];
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Board · Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link is-active" href="./board.html">Board</a></li>
+        <li><a class="nav-link" href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="icon-btn" aria-label="Search"><i data-lucide="search"></i></button>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="board-toolbar">
+    <div class="board-title-block">
+      <h1>Your board</h1>
+      <div class="subtitle">23 jobs in flight · 3 conversations active</div>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-chip"><i data-lucide="filter"></i> Filter</button>
+      <button class="filter-chip is-active">Remote</button>
+      <button class="filter-chip">Past 30 days</button>
+      <button class="filter-chip"><i data-lucide="sliders-horizontal"></i> Sort</button>
+      <button class="btn btn--primary" style="margin-left: 8px;"><i data-lucide="plus"></i> New application</button>
+    </div>
+  </div>
+
+  <main class="board-canvas">
+    <div class="board-grid">
+
+      <!-- Saved -->
+      <section class="kanban-column">
+        <header class="kanban-column-header">
+          <div class="kanban-column-name">
+            <span class="stage-dot stage-dot--saved"></span>
+            Saved
+          </div>
+          <span class="kanban-column-count">4</span>
+        </header>
+        <div class="kanban-column-body">
+          <article class="job-card">
+            <div class="job-card-top">
+              <div class="company-mark company-mark--neutral">F</div>
+              <div>
+                <div class="job-card-title">Senior Designer, Brand</div>
+                <div class="job-card-company">Figma</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>$170k–$220k</span><span class="sep">·</span><span>SF</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--saved"></span>Saved · 2d</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+          <article class="job-card">
+            <div class="job-card-top">
+              <div class="company-mark company-mark--neutral">S</div>
+              <div>
+                <div class="job-card-title">Principal Product Designer</div>
+                <div class="job-card-company">Stripe</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>$220k–$310k</span><span class="sep">·</span><span>Remote · US</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--saved"></span>Saved · 5d</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+          <article class="job-card">
+            <div class="job-card-top">
+              <div class="company-mark company-mark--neutral">V</div>
+              <div>
+                <div class="job-card-title">Design Lead, Growth</div>
+                <div class="job-card-company">Vercel</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>$190k–$250k</span><span class="sep">·</span><span>Remote</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--saved"></span>Saved · 6d</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+          <div class="empty-column" style="margin-top: 8px; border-style: dashed;">
+            <i data-lucide="bookmark" style="opacity: 0.5;"></i>
+            <div style="margin-top: 8px;">Save a job posting from anywhere with the extension.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Drafting -->
+      <section class="kanban-column">
+        <header class="kanban-column-header">
+          <div class="kanban-column-name">
+            <span class="stage-dot stage-dot--drafting"></span>
+            Drafting
+          </div>
+          <span class="kanban-column-count">3</span>
+        </header>
+        <div class="kanban-column-body">
+          <article class="job-card">
+            <div class="job-card-top">
+              <div class="company-mark">A</div>
+              <div>
+                <div class="job-card-title">Senior Product Designer</div>
+                <div class="job-card-company">Anthropic</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>$180k–$240k</span><span class="sep">·</span><span>Remote</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--drafting"></span>Drafting · 1d</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+          <article class="job-card">
+            <div class="job-card-top">
+              <div class="company-mark">N</div>
+              <div>
+                <div class="job-card-title">Staff Designer, Product</div>
+                <div class="job-card-company">Notion</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>$200k–$260k</span><span class="sep">·</span><span>SF · Hybrid</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--drafting"></span>Drafting · 3d</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+          <article class="job-card job-card--dragging">
+            <div class="job-card-top">
+              <div class="company-mark">R</div>
+              <div>
+                <div class="job-card-title">Design Engineer</div>
+                <div class="job-card-company">Replit</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>$170k–$230k</span><span class="sep">·</span><span>Remote · Global</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--drafting"></span>Drafting · 4d</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Applied -->
+      <section class="kanban-column">
+        <header class="kanban-column-header">
+          <div class="kanban-column-name">
+            <span class="stage-dot stage-dot--applied"></span>
+            Applied
+          </div>
+          <span class="kanban-column-count">9</span>
+        </header>
+        <div class="kanban-column-body">
+          <article class="job-card">
+            <div class="job-card-top">
+              <div class="company-mark company-mark--info">L</div>
+              <div>
+                <div class="job-card-title">Staff Engineer, Platform</div>
+                <div class="job-card-company">Linear</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>$210k–$280k</span><span class="sep">·</span><span>SF / Remote</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--applied"></span>Applied · 9d</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+          <article class="job-card">
+            <div class="job-card-top">
+              <div class="company-mark company-mark--info">A</div>
+              <div>
+                <div class="job-card-title">Senior PM, Foundation</div>
+                <div class="job-card-company">Airtable</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>$190k–$240k</span><span class="sep">·</span><span>SF · Hybrid</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--applied"></span>Applied · 12d</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+          <article class="job-card">
+            <div class="job-card-top">
+              <div class="company-mark company-mark--info">G</div>
+              <div>
+                <div class="job-card-title">Senior Engineer, Workspaces</div>
+                <div class="job-card-company">Granola</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>$180k–$240k</span><span class="sep">·</span><span>NYC</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--applied"></span>Applied · 14d</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Interviewing -->
+      <section class="kanban-column">
+        <header class="kanban-column-header">
+          <div class="kanban-column-name">
+            <span class="stage-dot stage-dot--talking"></span>
+            Interviewing
+          </div>
+          <span class="kanban-column-count">3</span>
+        </header>
+        <div class="kanban-column-body">
+          <article class="job-card">
+            <div class="job-card-top">
+              <div class="company-mark company-mark--caution">A</div>
+              <div>
+                <div class="job-card-title">Founding Designer</div>
+                <div class="job-card-company">Are.na</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>$160k–$210k</span><span class="sep">·</span><span>Remote</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--talking"></span>Round 2 · 3d</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+          <article class="job-card">
+            <div class="job-card-top">
+              <div class="company-mark company-mark--caution">P</div>
+              <div>
+                <div class="job-card-title">Senior Designer, Studio</div>
+                <div class="job-card-company">Pitch</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>€110k–€140k</span><span class="sep">·</span><span>Berlin</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--talking"></span>Onsite · tomorrow</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+          <article class="job-card">
+            <div class="job-card-top">
+              <div class="company-mark company-mark--caution">H</div>
+              <div>
+                <div class="job-card-title">Product Designer III</div>
+                <div class="job-card-company">Height</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>$170k–$220k</span><span class="sep">·</span><span>Remote</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--talking"></span>Recruiter · 1d</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Closed -->
+      <section class="kanban-column">
+        <header class="kanban-column-header">
+          <div class="kanban-column-name">
+            <span class="stage-dot stage-dot--offer"></span>
+            Closed
+          </div>
+          <span class="kanban-column-count">2</span>
+        </header>
+        <div class="kanban-column-body">
+          <article class="job-card">
+            <div class="job-card-top">
+              <div class="company-mark company-mark--positive">S</div>
+              <div>
+                <div class="job-card-title">Senior Designer, Editor</div>
+                <div class="job-card-company">Substack</div>
+              </div>
+            </div>
+            <div class="job-card-meta"><span>$185k</span><span class="sep">·</span><span>Remote</span></div>
+            <div class="job-card-footer">
+              <span class="badge badge--filled-positive">Offer · accepted</span>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+          <article class="job-card" style="opacity: 0.6;">
+            <div class="job-card-top">
+              <div class="company-mark company-mark--neutral">A</div>
+              <div>
+                <div class="job-card-title" style="text-decoration: line-through; color: var(--text-muted);">Senior Designer</div>
+                <div class="job-card-company">Arc</div>
+              </div>
+            </div>
+            <div class="job-card-meta subtle"><span>,</span></div>
+            <div class="job-card-footer">
+              <div class="job-card-stage"><span class="stage-dot stage-dot--closed"></span>Closed · no offer</div>
+              <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tailor · Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+</head>
+<body class="tailor-page">
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link" href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="tailor-header">
+    <a class="back-link" href="./job-detail.html"><i data-lucide="arrow-left"></i> Senior Product Designer · Anthropic</a>
+    <h1>Drafting your resume</h1>
+    <div class="subtitle">Hover any draft bullet to see which job posting requirement it answers.</div>
+  </div>
+
+  <div class="tailor-toolbar">
+    <div class="segmented" role="tablist">
+      <a class="segmented-item is-active" href="./tailor.html">Resume</a>
+      <a class="segmented-item" href="./tailor-cover-letter.html">Cover letter</a>
+      <a class="segmented-item" href="./tailor-questions.html">Questions</a>
+    </div>
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <span class="t-small subtle mono">Auto-saved · just now</span>
+      <button class="btn btn--ghost">Discard</button>
+      <button class="btn btn--secondary"><i data-lucide="download"></i> Export</button>
+      <button class="btn btn--primary"><i data-lucide="lock"></i> Lock draft</button>
+    </div>
+  </div>
+
+  <main class="tailor-canvas">
+    <!-- Left: job posting requirements -->
+    <aside>
+      <div class="tailor-rail-header">
+        <h2>Job posting requirements</h2>
+        <span class="tailor-rail-count">6 extracted</span>
+      </div>
+
+      <div class="req-card" data-req="r1">
+        <div class="req-glyph req-glyph--hard"></div>
+        <div>
+          <div class="req-meta">Hard requirement</div>
+          <div class="req-text">Lead end-to-end design for a major Claude surface, discovery through post-ship iteration.</div>
+          <button class="req-add-btn"><i data-lucide="plus"></i> Add a bullet</button>
+        </div>
+      </div>
+
+      <div class="req-card" data-req="r2">
+        <div class="req-glyph req-glyph--hard"></div>
+        <div>
+          <div class="req-meta">Hard requirement</div>
+          <div class="req-text">Shape the design-system primitives that other surfaces inherit from.</div>
+          <button class="req-add-btn"><i data-lucide="plus"></i> Add a bullet</button>
+        </div>
+      </div>
+
+      <div class="req-card" data-req="r3">
+        <div class="req-glyph req-glyph--responsibility"></div>
+        <div>
+          <div class="req-meta">Responsibility</div>
+          <div class="req-text">Run small qualitative studies with users and translate findings into product decisions.</div>
+          <button class="req-add-btn"><i data-lucide="plus"></i> Add a bullet</button>
+        </div>
+      </div>
+
+      <div class="req-card" data-req="r4">
+        <div class="req-glyph req-glyph--responsibility"></div>
+        <div>
+          <div class="req-meta">Responsibility</div>
+          <div class="req-text">Mentor two mid-level designers and one design engineer.</div>
+          <button class="req-add-btn"><i data-lucide="plus"></i> Add a bullet</button>
+        </div>
+      </div>
+
+      <div class="req-card" data-req="r5">
+        <div class="req-glyph req-glyph--nice"></div>
+        <div>
+          <div class="req-meta">Nice to have</div>
+          <div class="req-text">Comfort reading production code (Figma + React), not engineering, but technical fluency.</div>
+          <button class="req-add-btn"><i data-lucide="plus"></i> Add a bullet</button>
+        </div>
+      </div>
+
+      <div class="req-card" data-req="r6">
+        <div class="req-glyph req-glyph--bonus"></div>
+        <div>
+          <div class="req-meta">Bonus</div>
+          <div class="req-text">A public writing practice, essays, longform reviews, design crits.</div>
+          <button class="req-add-btn"><i data-lucide="plus"></i> Add a bullet</button>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px; padding: 12px; border: 1px dashed var(--rule-hairline); border-radius: 10px; color: var(--text-muted); font-size: 0.8125rem; line-height: 1.5;">
+        <span style="display:inline-flex; align-items:center; gap:6px; color: var(--text-secondary); font-weight: 500; margin-bottom: 4px;"><i data-lucide="info" style="width:14px; height:14px;"></i> Legend</span>
+        <div style="display:flex; flex-direction:column; gap: 4px;">
+          <div>● filled, hard requirement</div>
+          <div>◐ half, responsibility</div>
+          <div>○ outline, nice to have</div>
+          <div>◇ rotated, bonus strength</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right: tailored draft -->
+    <section class="draft-pane">
+      <div class="draft-pane-header">
+        <h2>Your tailored draft</h2>
+        <span class="draft-streaming"><span class="draft-streaming-dot"></span>Streaming · 4 of 5 bullets</span>
+      </div>
+
+      <div class="draft-bullet" data-pin="r1">
+        <div class="draft-bullet-text">Led end-to-end design for the Claude Workspaces surface, taking a blank canvas through five rounds of usability testing to a shipped beta that 18,000 users opted into in the first week.</div>
+        <span class="draft-bullet-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Hard requirement · Lead a major surface</span>
+      </div>
+
+      <div class="draft-bullet" data-pin="r2">
+        <div class="draft-bullet-text">Owned the design-system primitives library (buttons, inputs, layout, motion) used by 14 surfaces and 30+ designers, wrote the contribution model and onboarded three new contributors.</div>
+        <span class="draft-bullet-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Hard requirement · Design-system primitives</span>
+      </div>
+
+      <div class="draft-bullet" data-pin="r3">
+        <div class="draft-bullet-text">Ran a six-week qualitative study with 22 power users to understand how long agent traces should be summarized; findings shipped as two new UI patterns now used across the chat surface.</div>
+        <span class="draft-bullet-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Responsibility · Qualitative studies</span>
+      </div>
+
+      <div class="draft-bullet" data-pin="r4">
+        <div class="draft-bullet-text">Mentored two product designers from L4 to L5 and one design engineer through their first year, both designers shipped lead-IC work within nine months.</div>
+        <span class="draft-bullet-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Responsibility · Mentorship</span>
+      </div>
+
+      <div class="draft-bullet" data-pin="r5">
+        <div class="draft-bullet-text">Pair with engineering daily; comfortable reading and reviewing React PRs to keep design intent intact through to ship.<span class="cursor-blink"></span></div>
+        <span class="draft-bullet-pin"><i data-lucide="link-2" style="width:11px; height:11px;"></i> Nice to have · Reading production code</span>
+      </div>
+
+      <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--rule-hairline); display: flex; align-items: center; justify-content: space-between;">
+        <div class="t-small muted">5 generated · 6 job posting requirements matched · 1 bonus strength held back</div>
+        <button class="btn btn--ghost btn--sm"><i data-lucide="refresh-cw"></i> Re-draft</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Add Bullet modal -->
+  <div class="modal-backdrop" data-modal="add-bullet" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="add-bullet-title">
+      <div class="modal-header">
+        <div class="modal-title-block">
+          <h2 class="modal-title" id="add-bullet-title">Add a bullet</h2>
+          <div class="modal-subtitle">Write a new resume bullet for the requirement below. It'll be added to your tailored draft alongside the AI-generated ones.</div>
+        </div>
+        <button class="modal-close" data-modal-close aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-label">Writing for</div>
+        <div class="modal-req-target">
+          <div class="req-glyph req-glyph--bonus"></div>
+          <div class="modal-req-target-text">
+            <div class="modal-req-target-meta" data-modal-req-meta>Bonus</div>
+            <div class="modal-req-target-body" data-modal-req-body>A public writing practice, essays, longform reviews, design crits.</div>
+          </div>
+          <button class="modal-req-change" type="button">Change <i data-lucide="chevron-down"></i></button>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-label">Your bullet</div>
+        <textarea class="modal-textarea" placeholder="Write a bullet for this requirement…" data-char-input></textarea>
+        <div class="modal-char-count"><span data-char-count>0</span> characters · ideal length 80–220</div>
+      </div>
+
+      <div class="modal-section">
+        <div class="borrow-section">
+          <div class="borrow-section-header">
+            <div>
+              <div class="borrow-section-title">Borrow from your base resume</div>
+              <div class="borrow-section-desc">3 lines from <span class="mono">Alex-Kim-Resume-2024.docx</span> match this requirement. Click one to use it as a starting point.</div>
+            </div>
+            <button class="icon-btn" type="button" title="Refresh suggestions"><i data-lucide="refresh-cw"></i></button>
+          </div>
+
+          <button class="borrow-suggestion" type="button">
+            <span class="borrow-suggestion-icon"><i data-lucide="arrow-up-left"></i></span>
+            <div class="borrow-suggestion-text">Maintain a public design-systems blog at <em>alexkim.design</em>, 14 essays, 4,000+ subscribers, regularly cited in tools like Linear and Vercel's design documentation.</div>
+          </button>
+
+          <button class="borrow-suggestion" type="button">
+            <span class="borrow-suggestion-icon"><i data-lucide="arrow-up-left"></i></span>
+            <div class="borrow-suggestion-text">Wrote longform reviews of design tools (Figma 2024, Linear, Cursor) for the Are.na blog, three features published in 2024.</div>
+          </button>
+
+          <button class="borrow-suggestion" type="button">
+            <span class="borrow-suggestion-icon"><i data-lucide="arrow-up-left"></i></span>
+            <div class="borrow-suggestion-text">Speaker at Config 2024 and Layers 2025 on AI surface design; talks distributed as written essays after the conferences.</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="modal-footer-hint">⌘↩ to add · esc to close</div>
+        <div class="modal-footer-actions">
+          <button class="btn btn--ghost" type="button" data-modal-close>Cancel</button>
+          <button class="btn btn--primary" type="button"><i data-lucide="check"></i> Add to draft</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

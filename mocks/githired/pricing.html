@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pricing · Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+  <style>
+    .pricing-hero { max-width: 720px; margin: 0 auto 48px; text-align: center; }
+    .pricing-hero .eyebrow { color: var(--accent); margin-bottom: 14px; }
+    .pricing-hero h1 { margin-bottom: 16px; }
+    .pricing-hero p { color: var(--text-secondary); line-height: 1.65; font-size: 1.0625rem; }
+
+    .billing-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin: 28px auto 0;
+      padding: 4px;
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 999px;
+    }
+    .billing-toggle button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .billing-toggle button.is-active {
+      background: var(--surface-base);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-1);
+    }
+    .billing-toggle .save-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      margin-left: 4px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      margin-bottom: 80px;
+    }
+    @media (max-width: 900px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+
+    .tier {
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      padding: 28px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .tier.is-featured {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-3);
+    }
+    .tier-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--primary-text-on-accent);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    .tier-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .tier-name {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.625rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .tier-tagline {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      min-height: 44px;
+    }
+    .tier-price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .tier-price-amount {
+      font-family: 'Source Serif 4', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .tier-price-cadence {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+    .tier-billing-note {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 22px;
+      min-height: 16px;
+    }
+    .tier-cta {
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .tier-inherits {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--rule-hairline);
+    }
+    .tier-inherits strong { color: var(--text-primary); font-weight: 600; }
+
+    .tier-section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin: 8px 0 10px;
+    }
+    .tier ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .tier ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+    .tier ul li i[data-lucide] {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: var(--positive);
+    }
+    .tier.is-featured ul li i[data-lucide] { color: var(--accent); }
+    .tier ul li .feat-meta {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-top: 2px;
+    }
+
+    /* Comparison table */
+    .compare-section { margin-bottom: 80px; }
+    .compare-section h2 { text-align: center; margin-bottom: 8px; }
+    .compare-section .compare-sub {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .compare-table thead th {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 18px 16px;
+      background: var(--surface-base);
+      border-bottom: 1px solid var(--rule-hairline);
+    }
+    .compare-table thead th:first-child { text-align: left; }
+    .compare-table thead th.is-featured { color: var(--accent); }
+    .compare-table tbody tr.compare-group td {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      padding: 22px 16px 10px;
+      background: var(--surface-base);
+      border-bottom: 1px solid var(--rule-hairline);
+    }
+    .compare-table tbody td {
+      padding: 12px 16px;
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--rule-hairline);
+      vertical-align: middle;
+    }
+    .compare-table tbody td:first-child { color: var(--text-primary); }
+    .compare-table tbody td.compare-cell {
+      text-align: center;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+    .compare-table tbody td.is-yes { color: var(--positive); }
+    .compare-table tbody td.is-no { color: var(--text-muted); }
+    .compare-table tbody tr:last-child td { border-bottom: 0; }
+    .compare-table tbody tr.compare-row td.is-featured-col { background: rgba(155, 120, 37, 0.04); }
+    :root[data-theme="dark"] .compare-table tbody tr.compare-row td.is-featured-col { background: rgba(212, 161, 74, 0.06); }
+    .feat-desc {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-top: 2px;
+    }
+
+    /* FAQ */
+    .faq { max-width: 760px; margin: 0 auto 80px; }
+    .faq h2 { text-align: center; margin-bottom: 36px; }
+    .faq-item {
+      border-bottom: 1px solid var(--rule-hairline);
+      padding: 20px 0;
+    }
+    .faq-item:last-child { border-bottom: 0; }
+    .faq-q {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .faq-a {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.65;
+    }
+
+    /* Footer CTA */
+    .footer-cta {
+      text-align: center;
+      padding: 56px 32px;
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 14px;
+      margin-bottom: 80px;
+    }
+    .footer-cta h2 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.75rem;
+      margin-bottom: 12px;
+    }
+    .footer-cta p {
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link" href="./palette.html">Palette</a></li>
+        <li><a class="nav-link is-active" href="./pricing.html">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="pricing-hero">
+      <div class="t-micro eyebrow">Plans &amp; pricing</div>
+      <h1 class="t-display">Pick the plan that matches the search you&rsquo;re running.</h1>
+      <p>Start free while you set up your board. Move to Base when you want unlimited jobs, the extension, and the job posting breakdown working for you. Go Premium when the search gets serious and every draft needs to be tailored.</p>
+
+      <div class="billing-toggle" role="tablist">
+        <button class="is-active" data-cadence="monthly">Monthly</button>
+        <button data-cadence="annual">Annual<span class="save-pill">save 17%</span></button>
+      </div>
+    </section>
+
+    <section class="pricing-grid">
+      <!-- FREE -->
+      <article class="tier">
+        <div class="tier-eyebrow">Tier 01</div>
+        <div class="tier-name">Free</div>
+        <div class="tier-tagline">For the early scout, track jobs, take notes, see if the shape of GitApplied fits your search.</div>
+
+        <div class="tier-price">
+          <span class="tier-price-amount" data-price data-monthly="$0" data-annual="$0">$0</span>
+          <span class="tier-price-cadence">forever</span>
+        </div>
+        <div class="tier-billing-note" data-note data-monthly="no card required" data-annual="no card required">no card required</div>
+
+        <a class="btn btn--secondary tier-cta" href="./signup.html">Start tracking</a>
+
+        <div class="tier-section-label">What you get</div>
+        <ul>
+          <li><i data-lucide="check"></i><div>Kanban board, up to <strong>10 active jobs</strong></div></li>
+          <li><i data-lucide="check"></i><div>Manual job capture (paste a URL or fill the form)</div></li>
+          <li><i data-lucide="check"></i><div>Job notes, pinned items, stage tracking</div></li>
+          <li><i data-lucide="check"></i><div>Up to <strong>2 resumes &amp; profiles</strong></div></li>
+          <li><i data-lucide="check"></i><div>Resume profile parser<span class="feat-meta">upload a PDF, get structured experiences &amp; education</span></div></li>
+          <li><i data-lucide="check"></i><div>Applied archive &amp; basic activity log</div></li>
+          <li><i data-lucide="check"></i><div>Light &amp; dark themes</div></li>
+        </ul>
+      </article>
+
+      <!-- BASE -->
+      <article class="tier is-featured">
+        <span class="tier-badge">Most popular</span>
+        <div class="tier-eyebrow">Tier 02</div>
+        <div class="tier-name">Base</div>
+        <div class="tier-tagline">For the active applier, unlimited jobs, the browser extension, and the tools to engage every lead.</div>
+
+        <div class="tier-price">
+          <span class="tier-price-amount" data-price data-monthly="$5" data-annual="$4.17">$5</span>
+          <span class="tier-price-cadence">/ month</span>
+        </div>
+        <div class="tier-billing-note" data-note data-monthly="billed monthly" data-annual="$50/yr · billed annually">billed monthly</div>
+
+        <a class="btn btn--primary tier-cta" href="./signup.html">Start 14-day trial</a>
+
+        <div class="tier-inherits">Everything in <strong>Free</strong>, plus&hellip;</div>
+
+        <div class="tier-section-label">Capture &amp; intelligence</div>
+        <ul>
+          <li><i data-lucide="check"></i><div><strong>Unlimited jobs</strong> tracked<span class="feat-meta">no monthly cap, no archive limit</span></div></li>
+          <li><i data-lucide="check"></i><div><strong>Unlimited resumes &amp; profiles</strong><span class="feat-meta">tailor a separate profile per role</span></div></li>
+          <li><i data-lucide="check"></i><div>Browser extension, one-click capture from any job posting site</div></li>
+          <li><i data-lucide="check"></i><div>Job posting breakdown<span class="feat-meta">required skills, must-haves, nice-to-haves, comp signals</span></div></li>
+          <li><i data-lucide="check"></i><div>Skill match<span class="feat-meta">gap analysis between your profile and the job posting</span></div></li>
+          <li><i data-lucide="check"></i><div>Document editor, manage a library of resumes &amp; cover letter templates</div></li>
+        </ul>
+
+        <div class="tier-section-label" style="margin-top: 18px;">Engage</div>
+        <ul>
+          <li><i data-lucide="check"></i><div>Interview prep workspace, question bank, round notes</div></li>
+          <li><i data-lucide="check"></i><div>Network &amp; contacts, recruiters, hiring managers, intros</div></li>
+        </ul>
+      </article>
+
+      <!-- PREMIUM -->
+      <article class="tier">
+        <div class="tier-eyebrow">Tier 03</div>
+        <div class="tier-name">Premium</div>
+        <div class="tier-tagline">For the serious search, every application gets a tailored resume, a real cover letter, and answers that sound like you.</div>
+
+        <div class="tier-price">
+          <span class="tier-price-amount" data-price data-monthly="$10" data-annual="$8.33">$10</span>
+          <span class="tier-price-cadence">/ month</span>
+        </div>
+        <div class="tier-billing-note" data-note data-monthly="billed monthly" data-annual="$100/yr · billed annually">billed monthly</div>
+
+        <a class="btn btn--secondary tier-cta" href="./signup.html">Start 14-day trial</a>
+
+        <div class="tier-inherits">Everything in <strong>Base</strong>, plus&hellip;</div>
+
+        <div class="tier-section-label">AI drafting</div>
+        <ul>
+          <li><i data-lucide="sparkles"></i><div><strong>Unlimited AI usage</strong><span class="feat-meta">no draft caps, no monthly metering, chain match, suggest, and draft on every role</span></div></li>
+          <li><i data-lucide="sparkles"></i><div><strong>AI resume tailor</strong>, unlimited drafts<span class="feat-meta">re-orders bullets, rewrites for the job posting, keeps your truth</span></div></li>
+          <li><i data-lucide="sparkles"></i><div><strong>AI cover letter</strong>, example-aware, job-posting-aware</div></li>
+          <li><i data-lucide="sparkles"></i><div><strong>AI application answers</strong>, for screener questions, in your voice</div></li>
+          <li><i data-lucide="sparkles"></i><div><strong>Auto-prepare on resume select</strong><span class="feat-meta">matching &rarr; suggestions &rarr; cover letter run in the background the moment you pick a resume</span></div></li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- Comparison table -->
+    <section class="compare-section">
+      <h2 class="t-h2">Compare every feature</h2>
+      <p class="compare-sub">Everything in GitApplied, grouped by the part of the search it touches.</p>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Free</th>
+            <th class="is-featured">Base</th>
+            <th>Premium</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="compare-group"><td colspan="4">Tracking &amp; capture</td></tr>
+          <tr class="compare-row">
+            <td>Jobs tracked<span class="feat-desc">Active board + applied archive</span></td>
+            <td class="compare-cell">10 active</td>
+            <td class="compare-cell is-featured-col is-yes">Unlimited</td>
+            <td class="compare-cell is-yes">Unlimited</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Manual job add</td>
+            <td class="compare-cell is-yes">Included</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Browser extension<span class="feat-desc">One-click save from any job posting</span></td>
+            <td class="compare-cell is-no">,</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Kanban stages &amp; notes</td>
+            <td class="compare-cell is-yes">Included</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Applied archive</td>
+            <td class="compare-cell is-yes">Included</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+
+          <tr class="compare-group"><td colspan="4">Job posting intelligence</td></tr>
+          <tr class="compare-row">
+            <td>Job posting breakdown<span class="feat-desc">Skills, must-haves, comp signals</span></td>
+            <td class="compare-cell is-no">,</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Skill match<span class="feat-desc">Gap analysis vs your resume</span></td>
+            <td class="compare-cell is-no">,</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Job posting highlights<span class="feat-desc">Pinned passages from the JD</span></td>
+            <td class="compare-cell is-yes">Included</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+
+          <tr class="compare-group"><td colspan="4">Resume &amp; profile</td></tr>
+          <tr class="compare-row">
+            <td>Resume uploads</td>
+            <td class="compare-cell">2</td>
+            <td class="compare-cell is-featured-col">Unlimited</td>
+            <td class="compare-cell">Unlimited</td>
+          </tr>
+          <tr class="compare-row">
+            <td>AI resume profile parser<span class="feat-desc">Structured experiences &amp; education</span></td>
+            <td class="compare-cell is-yes">Included</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Document editor<span class="feat-desc">Resume &amp; cover letter library</span></td>
+            <td class="compare-cell is-no">,</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+
+          <tr class="compare-group"><td colspan="4">AI drafting</td></tr>
+          <tr class="compare-row">
+            <td>AI resume tailor<span class="feat-desc">Per-job-posting tailored drafts</span></td>
+            <td class="compare-cell is-no">,</td>
+            <td class="compare-cell is-featured-col is-no">,</td>
+            <td class="compare-cell is-yes">Unlimited</td>
+          </tr>
+          <tr class="compare-row">
+            <td>AI cover letter generator<span class="feat-desc">Example-aware, job-posting-aware</span></td>
+            <td class="compare-cell is-no">,</td>
+            <td class="compare-cell is-featured-col is-no">,</td>
+            <td class="compare-cell is-yes">Unlimited</td>
+          </tr>
+          <tr class="compare-row">
+            <td>AI application answers<span class="feat-desc">Screener questions in your voice</span></td>
+            <td class="compare-cell is-no">,</td>
+            <td class="compare-cell is-featured-col is-no">,</td>
+            <td class="compare-cell is-yes">Unlimited</td>
+          </tr>
+          <tr class="compare-group"><td colspan="4">Engage &amp; interview</td></tr>
+          <tr class="compare-row">
+            <td>Interview prep workspace<span class="feat-desc">Question bank &amp; round notes</span></td>
+            <td class="compare-cell is-no">,</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Network &amp; contacts<span class="feat-desc">Recruiters, hiring managers, intros</span></td>
+            <td class="compare-cell is-no">,</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+
+          <tr class="compare-group"><td colspan="4">Account &amp; data</td></tr>
+          <tr class="compare-row">
+            <td>Light &amp; dark themes</td>
+            <td class="compare-cell is-yes">Included</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Data export</td>
+            <td class="compare-cell is-no">,</td>
+            <td class="compare-cell is-featured-col is-yes">Included</td>
+            <td class="compare-cell is-yes">Included</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Support</td>
+            <td class="compare-cell">Community</td>
+            <td class="compare-cell is-featured-col">Email · 2 biz days</td>
+            <td class="compare-cell">Email · 2 biz days</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <h2 class="t-h2">Questions before you start</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I try Premium before I commit?</div>
+        <div class="faq-a">Yes, every paid plan starts with a 14-day trial. You won&rsquo;t be charged until day 15, and you can cancel any time from Settings &rarr; Plan &amp; billing.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What happens to my data if I downgrade?</div>
+        <div class="faq-a">Nothing is deleted. Tracked jobs above the Free limit move into a read-only archive, and gated features (AI drafting, integrations) lock until you upgrade again. Export is always available on every tier.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Is the browser extension a separate purchase?</div>
+        <div class="faq-a">No. The extension is part of Base and Premium, install it from the Chrome and Firefox stores and sign in with your account.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How does the AI billing work? Will I hit a usage wall?</div>
+        <div class="faq-a">Premium is unlimited for normal individual job-search use. We don&rsquo;t meter drafts. If we detect automated or abusive usage we&rsquo;ll reach out before throttling.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Do you offer student or career-coach pricing?</div>
+        <div class="faq-a">Students get 40% off Premium with a valid <span class="mono">.edu</span> address. Coaches and outplacement firms, reach out for team plans.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What payment methods do you accept?</div>
+        <div class="faq-a">All major cards via Stripe (Visa, Mastercard, Amex, Discover). Annual plans can also be paid by ACH or invoice.</div>
+      </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="footer-cta">
+      <h2>Start with Free. Upgrade when the AI earns it.</h2>
+      <p>No card required to start. Move up when the extension, unlimited jobs, or the tailored drafts start saving you real time.</p>
+      <a class="btn btn--primary btn--lg" href="./signup.html">Create your free account</a>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+  <script>
+    (function () {
+      const toggle = document.querySelector('.billing-toggle');
+      if (!toggle) return;
+      toggle.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-cadence]');
+        if (!btn) return;
+        const cadence = btn.dataset.cadence;
+        toggle.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === btn));
+        document.querySelectorAll('[data-price]').forEach((el) => {
+          el.textContent = el.dataset[cadence];
+        });
+        document.querySelectorAll('[data-note]').forEach((el) => {
+          el.textContent = el.dataset[cadence];
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Link is invalid or expired · GitApplied</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+  <style>
+    /* ─── Auth shell (matches login / signup / email-confirmed) ───── */
+    .auth-shell {
+      min-height: calc(100vh - 64px);
+      display: grid;
+      place-items: center;
+      padding: 64px 24px;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 480px;
+      background: var(--surface-raised);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 16px;
+      box-shadow: var(--shadow-2);
+      padding: 44px 36px 36px;
+      text-align: center;
+    }
+    .auth-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .auth-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.875rem;
+      font-weight: 500;
+      line-height: 1.18;
+      letter-spacing: -0.012em;
+      color: var(--text-primary);
+      margin: 0 0 10px;
+    }
+    .auth-title .accent { color: var(--accent); font-style: italic; }
+    .auth-title .negative { color: var(--negative); font-style: italic; }
+    .auth-sub {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      margin: 0 0 24px;
+    }
+
+    /* ─── Status badge (shared idiom with email-confirmed) ────────── */
+    .status-badge {
+      width: 72px;
+      height: 72px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 22px;
+    }
+    .status-badge [data-lucide] {
+      width: 32px;
+      height: 32px;
+      stroke-width: 1.6;
+    }
+    .status-badge--error {
+      background: color-mix(in srgb, var(--negative) 12%, transparent);
+      color: var(--negative);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--negative) 30%, transparent);
+    }
+    .status-badge--caution {
+      background: color-mix(in srgb, var(--caution) 14%, transparent);
+      color: var(--caution);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--caution) 30%, transparent);
+    }
+
+    /* ─── Why-it-expired bullets ──────────────────────────────────── */
+    .reason-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+    }
+    .reason-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.875rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+    .reason-list [data-lucide] {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+      flex: 0 0 auto;
+      margin-top: 3px;
+    }
+
+    /* ─── Resend strip (the action that actually moves the user) ──── */
+    .resend-strip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+      background: var(--surface-elevated);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 22px;
+    }
+    .resend-strip [data-lucide] {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+      flex: 0 0 auto;
+    }
+    .resend-strip-text {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      line-height: 1.45;
+    }
+    .resend-strip-text .muted { color: var(--text-secondary); }
+
+    .auth-cta-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .auth-cta { width: 100%; }
+
+    .auth-foot {
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: 22px;
+      line-height: 1.55;
+    }
+    .auth-foot a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .auth-foot a:hover { text-decoration: underline; }
+
+    /* ─── State gallery (signed-out hero + signed-in + missing) ──── */
+    .state-gallery {
+      max-width: 1180px;
+      margin: 64px auto 96px;
+      padding: 0 24px;
+    }
+    .state-gallery-title { text-align: center; margin-bottom: 12px; }
+    .state-gallery-sub {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      max-width: 640px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 28px;
+    }
+    .state-frame {
+      background: var(--surface-base);
+      border: 1px solid var(--rule-hairline);
+      border-radius: 18px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .state-frame-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .state-frame-label .num {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+    }
+    .state-frame .auth-card {
+      padding: 36px 28px 30px;
+      max-width: none;
+      box-shadow: var(--shadow-1);
+    }
+    .state-frame .auth-title { font-size: 1.4rem; }
+    .state-frame .status-badge { width: 56px; height: 56px; margin-bottom: 16px; }
+    .state-frame .status-badge [data-lucide] { width: 24px; height: 24px; }
+    .state-frame .auth-sub { margin-bottom: 18px; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./login.html">Sign in</a></li>
+        <li><a class="nav-link" href="./email-confirmed.html">Email confirmed</a></li>
+        <li><a class="nav-link is-active" href="./link-invalid.html">Link invalid</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ────────────────────────────────────────────────────────────────
+       Primary surface: the signed-out variant.
+       This is the most common path: the user clicks an old link from
+       their inbox in a fresh browser session, so we can't auto-resend
+       and we have to route them through sign-in first.
+  ──────────────────────────────────────────────────────────────── -->
+  <main class="auth-shell">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <div class="status-badge status-badge--caution" aria-hidden="true">
+        <i data-lucide="alert-triangle"></i>
+      </div>
+
+      <div class="auth-eyebrow">Verification link</div>
+      <h1 class="auth-title" id="auth-title">
+        This link is <span class="negative">no longer valid</span>.
+      </h1>
+      <p class="auth-sub">Verification links are deliberately short-lived. The good news: getting a fresh one takes about ten seconds.</p>
+
+      <ul class="reason-list" aria-label="Why links expire">
+        <li><i data-lucide="clock"></i><span>Links expire 24 hours after we send them, so an old one in your inbox won&rsquo;t work.</span></li>
+        <li><i data-lucide="check-check"></i><span>Each link is single-use. If you&rsquo;ve already verified, you don&rsquo;t need this one.</span></li>
+        <li><i data-lucide="shield"></i><span>If you didn&rsquo;t request a verification email recently, you can safely ignore it.</span></li>
+      </ul>
+
+      <div class="resend-strip">
+        <i data-lucide="mail"></i>
+        <div class="resend-strip-text">
+          Sign in and we&rsquo;ll resend a fresh link <span class="muted">to the email on your account.</span>
+        </div>
+      </div>
+
+      <div class="auth-cta-stack">
+        <a class="btn btn--primary btn--lg auth-cta" href="./login.html">Sign in to resend</a>
+        <a class="btn btn--ghost btn--sm" href="./landing.html">Back to home</a>
+      </div>
+
+      <div class="auth-foot">
+        Still stuck? <a href="mailto:support@gitapplied.com">Email support</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ────────────────────────────────────────────────────────────────
+       State gallery: the variants we still need to handle.
+  ──────────────────────────────────────────────────────────────── -->
+  <section class="state-gallery">
+    <h2 class="t-h2 state-gallery-title">All variants</h2>
+    <p class="state-gallery-sub">
+      The hero above covers the signed-out case. The two cards below cover the user who is signed in (we can resend in place) and the rare missing-token case where the URL was truncated somewhere.
+    </p>
+
+    <div class="state-grid">
+
+      <!-- 01 · Signed-in: in-place resend ────────────────────────── -->
+      <div class="state-frame">
+        <div class="state-frame-label"><span class="num">01</span><span>Signed in &middot; resend in place</span></div>
+        <div class="auth-card">
+          <div class="status-badge status-badge--caution" aria-hidden="true">
+            <i data-lucide="alert-triangle"></i>
+          </div>
+          <div class="auth-eyebrow">Verification link</div>
+          <h2 class="auth-title">Expired. Let&rsquo;s send a new one.</h2>
+          <p class="auth-sub">We&rsquo;ll email a fresh link to <strong>jane@example.com</strong>. It&rsquo;ll arrive within a minute.</p>
+          <div class="auth-cta-stack">
+            <button class="btn btn--primary btn--lg auth-cta" type="button">
+              <i data-lucide="send" style="margin-right: 8px;"></i>Send a new link
+            </button>
+            <a class="btn btn--ghost btn--sm" href="./board.html">Back to your board</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 · Missing token in URL ──────────────────────────────── -->
+      <div class="state-frame">
+        <div class="state-frame-label"><span class="num">02</span><span>Missing token in URL</span></div>
+        <div class="auth-card">
+          <div class="status-badge status-badge--error" aria-hidden="true">
+            <i data-lucide="link-2-off"></i>
+          </div>
+          <div class="auth-eyebrow">Incomplete link</div>
+          <h2 class="auth-title">That URL is missing a token.</h2>
+          <p class="auth-sub">Some email clients truncate long URLs. Try the link in your inbox again, or sign in to request a fresh one.</p>
+          <div class="auth-cta-stack">
+            <a class="btn btn--primary btn--lg auth-cta" href="./login.html">Back to sign in</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>

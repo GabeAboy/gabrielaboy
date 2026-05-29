@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marketing plan · Atelier mocks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./mocks.css" />
+  <style>
+    .longform { max-width: 760px; }
+    .longform h2.t-h2 { margin-top: 56px; margin-bottom: 12px; }
+    .longform h3 { font-family: 'Source Serif 4', serif; font-size: 1.25rem; font-weight: 600; margin-top: 28px; margin-bottom: 10px; }
+    .longform h4 { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; margin-top: 24px; margin-bottom: 8px; text-transform: none; letter-spacing: 0; }
+    .longform p { line-height: 1.7; margin-bottom: 14px; }
+    .longform ul { margin: 0 0 16px 0; padding-left: 22px; line-height: 1.7; }
+    .longform ul li { margin-bottom: 6px; }
+    .longform ol { margin: 0 0 16px 0; padding-left: 22px; line-height: 1.7; }
+    .longform ol li { margin-bottom: 10px; }
+    .longform blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 4px 0 4px 18px;
+      margin: 18px 0;
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+    .longform code, .longform .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: var(--surface-elevated); padding: 1px 6px; border-radius: 4px; }
+    .longform hr { border: 0; border-top: 1px solid var(--rule); margin: 56px 0; }
+    .longform table { width: 100%; border-collapse: collapse; margin: 16px 0 24px 0; font-size: 0.92rem; }
+    .longform table th, .longform table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.55; }
+    .longform table th { font-weight: 600; color: var(--text-secondary); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .tier-label { display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 4px; background: var(--surface-elevated); color: var(--text-secondary); margin-right: 8px; }
+    .tier-1 { background: rgba(180, 130, 50, 0.12); color: var(--accent); }
+    .checklist { list-style: none; padding-left: 0; }
+    .checklist li { padding-left: 28px; position: relative; margin-bottom: 8px; line-height: 1.6; }
+    .checklist li::before { content: '☐'; position: absolute; left: 0; top: 0; color: var(--text-secondary); font-size: 1.1rem; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left">
+      <a class="wordmark" href="./index.html">GitApplied</a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="./board.html">Board</a></li>
+        <li><a class="nav-link" href="./palette.html">Palette</a></li>
+        <li><a class="nav-link is-active" href="./marketing.html">Marketing</a></li>
+      </ul>
+    </div>
+    <div class="header-tools">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <i data-lucide="sun"></i>
+        <i data-lucide="moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="longform">
+      <div style="margin-bottom: 40px;">
+        <div class="t-micro" style="color: var(--accent); margin-bottom: 12px;">06 · Go-to-market</div>
+        <h1 class="t-display">Marketing &amp; traction plan</h1>
+        <p class="muted" style="max-width: 620px; margin-top: 12px; line-height: 1.6;">A pragmatic playbook for a solo-launched job-search tool. Optimized for low-budget, high-signal channels first; paid channels later once messaging is validated.</p>
+      </div>
+
+      <hr />
+
+      <h2 class="t-h2">1. Recommended channel mix (first 90 days)</h2>
+      <p>Pick fewer channels and go deep. For a job-search tool, your audience is already gathered on Reddit and LinkedIn, meet them there.</p>
+
+      <h3><span class="tier-label tier-1">Tier 1</span> Start here, organic, high-signal</h3>
+      <table>
+        <thead>
+          <tr><th>Channel</th><th>Why it works</th><th>Time investment</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Reddit</strong><br /><span class="mono">r/cscareerquestions, r/jobs, r/resumes, r/EngineeringResumes, r/jobsearchhacks, r/recruitinghell</span></td>
+            <td>Your exact users vent here daily about the pain you solve. Founders are tolerated if they lead with the problem and a free tier.</td>
+            <td>30 min/day, 5 days/week</td>
+          </tr>
+          <tr>
+            <td><strong>LinkedIn personal posts</strong></td>
+            <td>Job seekers already live here. "Why I built this" + screenshots converts well. Post 2–3×/week.</td>
+            <td>1–2 hr/week</td>
+          </tr>
+          <tr>
+            <td><strong>Show HN (Hacker News)</strong></td>
+            <td>One-shot launch channel. Front-page hit = thousands of signups. Only fire once onboarding is bulletproof.</td>
+            <td>1 day of prep, then live-replying</td>
+          </tr>
+          <tr>
+            <td><strong>Product Hunt</strong></td>
+            <td>Pairs well with Show HN. Best on Tuesday/Wednesday. Pre-tease in maker communities.</td>
+            <td>1 week prep + launch day</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3><span class="tier-label">Tier 2</span> Layer in after week 4</h3>
+      <ul>
+        <li><strong>SEO content</strong>, Long-tail blog posts ("how to tailor a resume for a senior backend role", "what to write in a cover letter when you're switching industries"). Compounds over 3–6 months.</li>
+        <li><strong>Indie Hackers</strong>, Build-in-public posts about MRR, conversion, churn. Community is friendly to founders.</li>
+        <li><strong>Twitter/X build-in-public</strong>, Slow burn unless you already have a following; skip if you don't.</li>
+        <li><strong>YouTube screen-recording demos</strong>, One 60–90 second "tailor a resume in 30 seconds" demo will pay for itself across every channel.</li>
+      </ul>
+
+      <h3><span class="tier-label">Tier 3</span> Once you know which message converts</h3>
+      <ul>
+        <li><strong>Google Ads</strong> on "resume builder", "AI cover letter generator", "job application tracker" keywords. Expect $2–6 CPC. Don't start until you have a 5%+ landing-page signup rate.</li>
+        <li><strong>LinkedIn Ads</strong>, Expensive ($10+ CPC) but precise targeting. Only worth it if you have a clear ICP and &gt;$10 ARPU.</li>
+        <li><strong>Career-coach / bootcamp partnerships</strong>, Affiliate or co-marketing deals. Higher-touch but loyal users.</li>
+      </ul>
+
+      <h3>Skip entirely (for now)</h3>
+      <ul>
+        <li>TikTok / Instagram Reels, high effort, wrong audience demographics for paid SaaS.</li>
+        <li>Cold email to recruiters, they are not your customer.</li>
+        <li>Press / TechCrunch outreach, irrelevant at this stage; founders who chase press before traction burn months.</li>
+      </ul>
+
+      <hr />
+
+      <h2 class="t-h2">2. The tradeoff</h2>
+      <p><strong>Organic is slow but teaches you.</strong> Each Reddit comment, LinkedIn reply, and HN thread tells you which words your users actually use to describe the pain. That language becomes your landing page copy, your ad copy, and your onboarding microcopy.</p>
+      <p><strong>Paid is fast but expensive without that language.</strong> $500 in Google Ads with generic copy = 0 conversions and 0 learning. The same $500 spent <em>after</em> you've watched 50 Reddit threads = 3× the conversion rate.</p>
+      <blockquote>Rule of thumb: don't spend a dollar on paid until you have ~100 organic signups and you can recite the top 3 reasons people sign up without checking your notes.</blockquote>
+
+      <hr />
+
+      <h2 class="t-h2">3. Landing-page review (current state)</h2>
+      <p>Reviewed <span class="mono">web/src/pages/LandingPage.tsx</span>. The structural bones are good, clear hero, features, pricing, FAQ, CTA. But several elements are leaking conversion rate.</p>
+
+      <h3>Critical gaps</h3>
+      <ol>
+        <li><strong>No product screenshots or demo.</strong> The hero is text-only. Job-search tools live or die on "show me what it looks like." Users won't sign up to <em>find out</em>. <strong>Action:</strong> add a hero screenshot (Kanban board view) below the H1, or an embedded 30-second Loom/MP4 of the tailor flow.</li>
+        <li><strong>Vague social proof.</strong> "Join job seekers taking control of their search" reads as a placeholder. With no number, it implies zero users. <strong>Action:</strong> replace with either (a) a real number once you have one ("Used by 200+ job seekers"), or (b) drop the badge until you can fill it.</li>
+        <li><strong>No testimonials / quotes.</strong> Even 2–3 quotes from early users (real first names + role: "Sarah, SWE at startup") raise conversion materially. <strong>Action:</strong> ask your first 10 signups for a one-sentence quote. Offer a free month in exchange.</li>
+        <li><strong>The browser extension is invisible.</strong> There's an <span class="mono">ExtensionConnectPage.tsx</span>, meaning you ship a Chrome extension, but the landing page never mentions it. The extension is a <em>huge</em> differentiator vs. a plain SaaS. <strong>Action:</strong> add it to the features grid: "One-click capture from any job board (LinkedIn, Indeed, Greenhouse...)."</li>
+        <li><strong>The "Smart Job Import" copy says "GitApplied automatically extracts..."</strong>, referring to the product in third person on its own homepage is unusual. <strong>Action:</strong> rewrite as "Paste any job URL, we pull the title, company, salary, and requirements automatically."</li>
+        <li><strong>Hero CTA is a white button with grey border.</strong> Visually it reads as secondary, not primary. The dark "Sign Up" button in the header is more prominent than the hero CTA. <strong>Action:</strong> make the hero CTA the dark/gradient style; demote the header signup to outlined.</li>
+        <li><strong>No "above the fold" proof of the AI feature.</strong> Your highest-margin tier is Premium (AI tailoring). The page mentions it but never <em>shows</em> it. <strong>Action:</strong> the demo video should focus on the AI tailor flow, that's what justifies the $10/mo.</li>
+      </ol>
+
+      <h3>Smaller wins</h3>
+      <ul>
+        <li><strong>FAQ has only 3 items.</strong> Add: "How is this different from Teal / Huntr / Simplify?", "Do you support DOCX / Google Docs?", "What happens to my data if I cancel?", "Do you offer student / unemployed discounts?"</li>
+        <li><strong>"5 minute setup" trust badge</strong>, verify this is true. If signup-to-first-tailored-resume takes 8 minutes, change the number. Specific numbers ("3 min setup") outperform round ones.</li>
+        <li><strong>Footer has no email / contact.</strong> Add <span class="mono">support@gitapplied.com</span> or a contact form. Builds trust, especially for a tool handling resume data.</li>
+        <li><strong>"© 2025"</strong>, bump to 2026 since today is 2026-05-13.</li>
+        <li><strong>Pricing card "Base" $5/mo with no AI</strong>, this tier may be a dead zone. Consider: most people will either stay Free or jump straight to Premium. Watch the funnel; if Base has &lt;10% conversion vs. Premium, fold its features into Free or Premium and drop it.</li>
+      </ul>
+
+      <h3>What's working</h3>
+      <ul>
+        <li>Clean visual hierarchy and modern aesthetic, doesn't look like a side project.</li>
+        <li>Pricing is simple (3 tiers) and the "Save 17%" yearly toggle is well-executed.</li>
+        <li>"No credit card required" trust signals are correctly placed under both CTAs.</li>
+        <li>Mobile overrides via the <span class="mono">@media (max-width: 640px)</span> block, most landing pages skip this and lose ~40% of mobile traffic.</li>
+      </ul>
+
+      <hr />
+
+      <h2 class="t-h2">4. Onboarding flow, verify before driving traffic</h2>
+      <p>Not reviewed in detail in this doc, but check these before any launch:</p>
+      <ul>
+        <li><strong>Time-to-value &lt; 3 minutes.</strong> From clicking "Sign Up" to seeing a tailored resume should be under 3 minutes. Measure it on a fresh account with a stopwatch.</li>
+        <li><strong>Empty state has a "try it with this sample job" button.</strong> Users who land on an empty Kanban with no jobs imported often bounce.</li>
+        <li><strong>Email verification doesn't block first use.</strong> If users have to verify email before tailoring a resume, ~30% drop off. Let them try, then prompt verification on day 2.</li>
+        <li><strong>Free-tier limit is visible before they hit it.</strong> "10 active applications" should appear on the dashboard, not as a surprise paywall.</li>
+      </ul>
+
+      <hr />
+
+      <h2 class="t-h2">5. A concrete 30-day plan</h2>
+
+      <h4>Week 1, Fix the leaks</h4>
+      <ul class="checklist">
+        <li>Record a 60-second product demo (Loom or QuickTime). Embed on landing page hero.</li>
+        <li>Take 3 high-quality screenshots: Kanban board, AI tailor view, job detail page.</li>
+        <li>Rewrite the "Smart Job Import" copy (drop third-person reference).</li>
+        <li>Add the browser extension to the features grid.</li>
+        <li>Add 2–3 more FAQ items (competitor comparison, data export, cancellation).</li>
+        <li>Bump footer copyright to 2026.</li>
+      </ul>
+
+      <h4>Week 2, Soft launch</h4>
+      <ul class="checklist">
+        <li>Post to r/cscareerquestions: "I built a tool to tailor resumes per job application, would love feedback." Lead with the problem, not the product. Free tier link only.</li>
+        <li>LinkedIn post: "Why I built GitApplied, the job-search tool I wished existed." Personal story, screenshots, link in comments.</li>
+        <li>Reach out to first 10 signups individually. Ask: what almost made you not sign up? What feature is missing?</li>
+      </ul>
+
+      <h4>Week 3, Iterate</h4>
+      <ul class="checklist">
+        <li>Use the Week 2 feedback to rewrite the landing page hero copy. The phrase that gets the most "yes, this!" replies on Reddit is your new H1.</li>
+        <li>Ask the 3 most engaged users for a one-sentence testimonial. Add to landing page.</li>
+        <li>Write the first SEO post: "Resume tailoring: should you actually do it for every job?", target a keyword, share on Reddit + LinkedIn.</li>
+      </ul>
+
+      <h4>Week 4, Bigger swing</h4>
+      <ul class="checklist">
+        <li><strong>Show HN</strong>, only if onboarding is solid and you can be online all day to reply to comments. Title pattern: "Show HN: GitApplied – Tailor your resume to every job in seconds."</li>
+        <li><strong>Product Hunt</strong>, schedule for Tuesday or Wednesday. Pre-warm with a "coming soon" page.</li>
+        <li>Measure: where did this week's signups come from? Double down on the channel with the highest signup-to-activation rate, not just signup count.</li>
+      </ul>
+
+      <hr />
+
+      <h2 class="t-h2">6. Metrics to track from day 1</h2>
+      <p>Don't optimize for vanity metrics. The numbers that matter:</p>
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Target (90 days)</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Landing page → signup rate</td><td>5%+</td><td>Below this, fix copy before driving more traffic</td></tr>
+          <tr><td>Signup → activation (first tailored resume)</td><td>40%+</td><td>Below this, fix onboarding</td></tr>
+          <tr><td>Free → paid conversion</td><td>3–5%</td><td>SaaS benchmark; below this, your free tier may be too generous or paid too expensive</td></tr>
+          <tr><td>Day-7 retention</td><td>30%+</td><td>Job search is intermittent, anything above 30% is healthy</td></tr>
+          <tr><td>MRR</td><td>$500 by day 90</td><td>Roughly 50–100 paid users; achievable from Reddit + HN alone</td></tr>
+        </tbody>
+      </table>
+      <p>Set up <a href="https://posthog.com" target="_blank" rel="noopener">PostHog</a> or <a href="https://plausible.io" target="_blank" rel="noopener">Plausible</a> (privacy-friendly, lightweight) before driving any traffic. You cannot improve what you cannot measure.</p>
+
+      <hr />
+
+      <h2 class="t-h2">7. One last thing</h2>
+      <p>Your biggest competitive advantage as a solo founder is <strong>speed of iteration</strong>. Teal, Huntr, and Simplify have product teams and roadmaps. You can ship a feature the same day a user requests it. Make that part of your story:</p>
+      <blockquote>"Comment what's missing, I'll ship it this week."</blockquote>
+      <p>That single line, repeated on Reddit and LinkedIn, will out-convert any feature list.</p>
+
+      <div style="height: 96px;"></div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./mocks.js"></script>
+</body>
+</html>
