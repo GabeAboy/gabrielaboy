@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Gabriel Aboy — indie projects</title>
   <meta name="description" content="Small useful tools, shipped in public from a kitchen table." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -39,10 +40,10 @@
     .page {
       max-width: 1320px;
       margin: 0 auto;
-      padding: 56px 48px 80px;
+      padding: 32px 48px 32px;
       display: grid;
       grid-template-columns: 360px 1fr;
-      gap: 80px;
+      gap: 72px;
       align-items: start;
     }
     @media (max-width: 1000px) {
@@ -50,7 +51,7 @@
     }
 
     /* ============ LEFT COLUMN ============ */
-    .left { position: sticky; top: 56px; }
+    .left { position: sticky; top: 32px; }
     @media (max-width: 1000px) { .left { position: static; } }
 
     .avatar {
@@ -146,14 +147,14 @@
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 22px;
+      gap: 18px;
     }
     @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
 
     .card {
       background: var(--card);
       border-radius: 18px;
-      padding: 22px 22px 14px;
+      padding: 18px 20px 12px;
       box-shadow: 0 1px 0 rgba(0,0,0,0.02), 0 8px 18px -14px rgba(0,0,0,0.08);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
@@ -245,7 +246,7 @@
       scroll-behavior: smooth;
       scrollbar-width: none;
       -ms-overflow-style: none;
-      height: 220px;
+      height: 180px;
       gap: 0;
     }
     .carousel-track::-webkit-scrollbar { display: none; }
