@@ -53,7 +53,7 @@
   .frame { display: none; }
   .frame#f1 { display: flex; }                /* default */
   body:has(:target) .frame { display: none; }
-  .frame:target { display: flex; }
+  body:has(:target) .frame:target { display: flex; }
 
   .frame {
     flex-direction: column;
